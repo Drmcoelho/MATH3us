@@ -265,7 +265,10 @@ Só desigualdades de médias. A Conjectura C1 do pré-registro está confirmada 
   <p class="formula">b<sub>2n</sub> − a<sub>2n</sub> &lt; b<sub>2n</sub> − a<sub>n</sub> &lt; ½·(b<sub>n</sub> − a<sub>n</sub>).<span class="qed">∎</span></p>
 </div>
 <p>Iterando desde o hexágono, com n = 6·2<sup>k</sup>:</p>
-<p class="formula">b<sub>n</sub> − a<sub>n</sub> &lt; (b₆ − a₆)/2<sup>k</sup> = (2√3 − 3)/2<sup>k</sup>.</p>
+<p class="formula">b<sub>n</sub> − a<sub>n</sub> ≤ (b₆ − a₆)/2<sup>k</sup> = (2√3 − 3)/2<sup>k</sup>, com igualdade apenas em k = 0 (estrita para k ≥ 1).</p>
+<p style="font-size:.92rem; color:var(--ink-soft)">Nota de auditoria (28/07/2026): a primeira redação desta cota usava &lt; para todo k —
+falsa em k = 0, onde vale igualdade. O braço numérico do oráculo (invariante I6) recusou o enunciado e forçou esta correção.
+O incidente fica registrado: é o oráculo funcionando.</p>
 <p>Isto já é uma <strong>cota de erro explícita e calculável antes de qualquer experimento</strong>. Para os 96 lados
 de Arquimedes (k = 4): folga &lt; 0,4641/16 ≈ 0,029. O erro, que na seção 2 era uma coluna de números observados,
 agora tem <em>forma</em>: uma exponencial decrescente que o cerca por cima. É a primeira vez no tratado que o erro

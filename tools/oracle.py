@@ -117,11 +117,16 @@ def run_oracle():
         (C[i + 1][2] - C[i + 1][1]) < (C[i][2] - C[i][1]) / 2 for i in range(MAX_K))
     results["I5_gap_halving"] = {"passed": halving}
 
-    # I6: explicit bound gap < (2*sqrt(3) - 3) / 2^k (Decimal)
+    # I6: explicit bound gap <= (2*sqrt(3)-3)/2^k, equality ONLY at k=0,
+    # strict for k >= 1. (First statement used < for all k; refuted by this
+    # very invariant at k=0 on 2026-07-28 and corrected — see symbolic-check.)
     g0 = Decimal(2) * Decimal(3).sqrt() - Decimal(3)
-    bound_ok = all(
-        (C[k][2] - C[k][1]) < g0 / (Decimal(2) ** k) for k in range(MAX_K + 1))
-    results["I6_explicit_error_bound"] = {"passed": bound_ok}
+    eq_at_0 = (C[0][2] - C[0][1]) == g0
+    strict_rest = all(
+        (C[k][2] - C[k][1]) < g0 / (Decimal(2) ** k) for k in range(1, MAX_K + 1))
+    results["I6_explicit_error_bound"] = {
+        "equality_at_k0": eq_at_0, "strict_for_k_ge_1": strict_rest,
+        "passed": eq_at_0 and strict_rest}
 
     # I7: the trap contains the independent 50-digit pi at every step
     contains = all(a < PI_50 < b for (_, a, b) in C[: MAX_K + 1])

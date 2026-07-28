@@ -65,7 +65,11 @@ claims:
   - id: chapter-01.gap-halving
     statement: >
       At each doubling, b_{2n} - a_{2n} < (1/2)(b_n - a_n); hence for
-      n = 6 * 2^k, b_n - a_n < (2*sqrt(3) - 3) / 2^k.
+      n = 6 * 2^k, b_n - a_n <= (2*sqrt(3) - 3) / 2^k, with equality
+      only at k = 0 and strict inequality for k >= 1.
+    correction_log: >
+      2026-07-28: first statement asserted strict < for all k; refuted
+      at k = 0 by oracle invariant I6 and corrected. Recorded, not erased.
     kind: theorem
     status: proved
     provenance: classical
@@ -100,7 +104,7 @@ claims:
     statement: >
       The sequences a_n and b_n converge to a common limit; within this
       treatise, pi is defined as that limit, and
-      |a_n - pi| <= b_n - a_n < (2*sqrt(3) - 3)/2^k for n = 6 * 2^k.
+      |a_n - pi| <= b_n - a_n <= (2*sqrt(3) - 3)/2^k for n = 6 * 2^k.
     kind: theorem
     status: proved
     provenance: classical

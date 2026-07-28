@@ -49,7 +49,13 @@ Indução com base a_6 = 3 < 2√3 = b_6. Passo, supondo a_n < b_n:
     b_2n − a_2n < b_2n − a_n                  [a_2n > a_n, por S3]
                 < ½(b_n − a_n).                                           ∎
 
-Iterando desde k = 0: b_n − a_n < (2√3 − 3)/2^k para n = 6·2^k.
+Iterando desde k = 0: b_n − a_n ≤ (2√3 − 3)/2^k para n = 6·2^k, com
+igualdade apenas em k = 0 (o passo S4 só se aplica a partir da primeira
+duplicação; para k ≥ 1 a desigualdade é estrita).
+
+*Registro de correção (28/07/2026):* a primeira redação afirmava < para
+todo k — refutada pelo invariante I6 do braço numérico em k = 0. Corrigida
+aqui e no capítulo; o caso k = 0 permanece no domínio de teste do oráculo.
 
 ## S5. Convergência e limite comum
 
