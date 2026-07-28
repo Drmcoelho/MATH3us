@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Capítulo 1 — A Exaustão · Do Número ao Contínuo</title>
+<meta name="description" content="Método da exaustão: o cerco do círculo por polígonos inscritos e circunscritos e a aproximação de π por desigualdades com erro garantido.">
+<link rel="canonical" href="https://drmcoelho.github.io/MATH3us/caps/01-exaustao/">
 <style>
   :root{
     --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
@@ -80,10 +82,23 @@
   ul.compacta li{margin:.25rem 0}
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
   sub,sup{line-height:0}
+  /* — adições de retrofit pós-release (28/07/2026): E23, navegação, rodapé recolhível — */
+  .box-curio,.box-segredo{border:1px solid var(--box-edge);background:var(--box);padding:1rem 1.2rem;margin:1.6rem 0;border-radius:4px}
+  .box-curio>h3,.box-segredo>h3{margin:0 0 .5rem;font-size:1rem;font-variant:small-caps;letter-spacing:.08em;color:var(--accent)}
+  .box-segredo{border-left:4px solid var(--accent)}
+  nav.capnav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.95rem;margin:1.5rem 0;padding:.6rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  nav.capnav a{color:var(--accent);text-decoration:none}
+  nav.capnav a:hover,nav.capnav a:focus{text-decoration:underline}
+  details.meta-editorial>summary{cursor:pointer;font-variant:small-caps;letter-spacing:.08em;color:var(--ink-soft)}
+  details.meta-editorial>summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.meta-editorial[open]>summary{margin-bottom:.8rem}
+  .fig-svg{display:block;max-width:100%;height:auto;margin:0 auto}
 </style>
 </head>
 <body>
 <main>
+
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../00-inferencia/">← Capítulo 0 — A Inferência</a><a href="../../">↑ Índice</a><a href="../02-ternas/">Capítulo 2 — As Ternas do Ímpar →</a></nav>
 
 <header class="chapter">
   <span class="kicker">Do Número ao Contínuo · Parte I</span>
@@ -101,6 +116,44 @@
 Depois dobrou os lados: doze, vinte e quatro, quarenta e oito, noventa e seis. Ao final, anunciou que a razão
 entre a circunferência e o diâmetro está entre 3&nbsp;+&nbsp;10/71 e 3&nbsp;+&nbsp;1/7 — e parou, não porque o método
 tivesse acabado, mas porque a precisão lhe bastava.</p>
+
+<figure>
+  <svg class="fig-svg" viewBox="0 0 400 360" width="400" height="360" role="img"
+    aria-label="Figura estática do cerco: circunferência de raio um, em traço escuro contínuo, presa entre dois hexágonos regulares. O hexágono inscrito, em traço verde contínuo, fica por dentro e toca a circunferência nos seis vértices, um deles marcado com ponto cheio. O hexágono circunscrito, em traço vermelho tracejado, fica por fora e toca a circunferência nos pontos médios dos seus lados, um deles marcado com ponto vazado, onde também termina o raio r igual a um, desenhado desde o centro.">
+    <!-- circunferência de raio 1 (escala: 115 px) -->
+    <circle cx="200" cy="175" r="115" fill="none" style="stroke:var(--circle-color)" stroke-width="2.5"/>
+    <!-- hexágono inscrito: vértices sobre a circunferência (ângulos 30°+60°k) -->
+    <polygon points="299.6,117.5 200,60 100.4,117.5 100.4,232.5 200,290 299.6,232.5"
+      fill="none" style="stroke:var(--in-color)" stroke-width="1.8"/>
+    <!-- hexágono circunscrito: lados tangentes à circunferência (vértices a raio 1/cos 30°) -->
+    <polygon points="315,108.6 200,42.2 85,108.6 85,241.4 200,307.8 315,241.4"
+      fill="none" style="stroke:var(--out-color)" stroke-width="1.8" stroke-dasharray="7 4"/>
+    <!-- raio até a tangência de 0° -->
+    <line x1="200" y1="175" x2="315" y2="175" style="stroke:var(--ink-soft)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <text x="248" y="167" font-family="Georgia,serif" font-size="15" font-style="italic" style="fill:var(--ink)">r = 1</text>
+    <circle cx="200" cy="175" r="2.5" style="fill:var(--ink)"/>
+    <!-- contatos: vértice do inscrito (cheio) e tangência do circunscrito (vazado) -->
+    <circle cx="299.6" cy="117.5" r="4" style="fill:var(--in-color)"/>
+    <circle cx="315" cy="175" r="4" fill="#fffdf7" style="stroke:var(--out-color)" stroke-width="1.6"/>
+    <!-- rótulos -->
+    <text x="200" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="15" style="fill:var(--out-color)">circunscrito (por fora)</text>
+    <text x="200" y="86" text-anchor="middle" font-family="Georgia,serif" font-size="15" style="fill:var(--in-color)">inscrito (por dentro)</text>
+    <line x1="118" y1="257" x2="72" y2="292" style="stroke:var(--ink-soft)" stroke-width="1"/>
+    <text x="72" y="310" text-anchor="middle" font-family="Georgia,serif" font-size="15" style="fill:var(--ink)">circunferência</text>
+    <text x="200" y="348" text-anchor="middle" font-family="Georgia,serif" font-size="14" style="fill:var(--ink-soft)">● vértice do inscrito · ○ tangência do circunscrito</text>
+  </svg>
+  <figcaption>O cerco no passo inicial (n = 6): a circunferência (traço contínuo escuro) presa entre o hexágono
+  inscrito (verde, contínuo — beija a circunferência nos vértices, ●) e o circunscrito (vermelho, tracejado —
+  beija-a nas tangências, ○). Tudo o que o capítulo faz é apertar esta figura, duplicando os lados.</figcaption>
+</figure>
+
+<aside class="box-curio" aria-label="Caixa de curiosidade"><h3>Curiosidade</h3><p>A cota superior de Arquimedes,
+3&nbsp;+&nbsp;1/7, é exatamente a fração <strong>22/7</strong> — a aproximação de π que as escolas ensinam até hoje.
+Repare no estatuto que ela ganha neste capítulo: 22/7 não é π, nem “quase π” por coincidência; é o <em>teto
+demonstrado</em> do cerco de 96 lados, e π fica estritamente abaixo dele (o exercício E2.4 confere as duas cotas
+contra a tabela). Quem escreve π ≈ 22/7 está citando, talvez sem saber, o resultado de um teorema com mais de
+dois mil anos — e errando por menos de 0,002.</p></aside>
+
 <p>Este capítulo não repete o cálculo: escava a pergunta que o cálculo deixa em aberto. Toda a apresentação a seguir
 obedece a uma regra — <strong>nada será fornecido pronto</strong>. Nenhuma fórmula aparecerá antes de os números
 a sugerirem; nenhum teorema antes de a necessidade dele se impor. Primeiro o experimento; depois o padrão;
@@ -206,6 +259,32 @@ a diferença entre teorema e engano). Teste a <em>média harmônica</em>:</p>
   <p style="margin:0">com valores iniciais a₆ = 3 e b₆ = 2√3. Em palavras: <em>o circunscrito novo é a média harmônica
   do par anterior; o inscrito novo é a média geométrica entre o inscrito velho e o circunscrito novo.</em></p>
 </div>
+
+<figure>
+  <svg class="fig-svg" viewBox="0 0 600 250" width="600" height="250" role="img"
+    aria-label="Triângulo retângulo com o ângulo teta marcado no vértice esquerdo e o ângulo reto marcado com um quadradinho no vértice inferior direito. O cateto horizontal, vizinho de teta, está rotulado adjacente; o cateto vertical, do lado oposto a teta, está rotulado oposto; o lado maior, que liga teta ao topo, está rotulado hipotenusa. Ao lado, as três definições escolares em razões: seno de teta é igual a oposto sobre hipotenusa; cosseno de teta é igual a adjacente sobre hipotenusa; tangente de teta é igual a oposto sobre adjacente.">
+    <!-- triângulo retângulo: θ em A(40,200), ângulo reto em B(300,200), C(300,70) -->
+    <polygon points="40,200 300,200 300,70" fill="none" style="stroke:var(--ink)" stroke-width="2"/>
+    <!-- marca do ângulo reto em B -->
+    <path d="M 284 200 L 284 184 L 300 184" fill="none" style="stroke:var(--ink-soft)" stroke-width="1.5"/>
+    <!-- arco do ângulo θ em A -->
+    <path d="M 76 200 A 36 36 0 0 0 72.2 183.9" fill="none" style="stroke:var(--accent)" stroke-width="1.5"/>
+    <text x="88" y="193" font-family="Georgia,serif" font-size="16" font-style="italic" style="fill:var(--accent)">θ</text>
+    <!-- rótulos dos lados -->
+    <text x="170" y="224" text-anchor="middle" font-family="Georgia,serif" font-size="15" style="fill:var(--ink)">adjacente</text>
+    <text x="310" y="140" font-family="Georgia,serif" font-size="15" style="fill:var(--ink)">oposto</text>
+    <text x="150" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="15" transform="rotate(-26.6 150 118)" style="fill:var(--ink)">hipotenusa</text>
+    <!-- as razões, junto da figura -->
+    <text x="392" y="105" font-family="Georgia,serif" font-size="15" style="fill:var(--ink)">sen θ = oposto/hipotenusa</text>
+    <text x="392" y="135" font-family="Georgia,serif" font-size="15" style="fill:var(--ink)">cos θ = adjacente/hipotenusa</text>
+    <text x="392" y="165" font-family="Georgia,serif" font-size="15" style="fill:var(--ink)">tg θ = oposto/adjacente</text>
+  </svg>
+  <figcaption>Antes de qualquer seno entrar em fórmula, a fundação geométrica: num triângulo retângulo, com o
+  ângulo θ marcado, <strong>sen θ = oposto/hipotenusa</strong>, <strong>cos θ = adjacente/hipotenusa</strong> e
+  <strong>tg θ = oposto/adjacente</strong>. É com este estatuto — razões entre lados, nada mais — que sen e tg
+  aparecem na verificação abaixo: no triângulo formado pelo centro do círculo, um vértice e o pé do apótema,
+  o semiângulo central θ = π/n tem oposto = meio-lado e hipotenusa = raio.</figcaption>
+</figure>
 
 <div class="prova">
   <p><strong>Por que as recorrências valem.</strong> A geometria da duplicação: ao dobrar os lados, o novo vértice do
@@ -320,6 +399,13 @@ os dois limites coincidem. O cerco fecha sobre um único número real.</p>
   de convexidade de Arquimedes, importado e declarado.</p>
 </div>
 
+<aside class="box-segredo" aria-label="Caixa de segredo oculto"><h3>Segredo oculto</h3><p>O cerco deste capítulo
+tem uma anatomia exata: uma sequência que só sobe, outra que só desce, uma folga que vai a zero — e o número
+procurado preso entre as duas, com certificado de erro em cada passo (Enunciados B e C mais o princípio do
+supremo). Essa armação não pertence ao círculo. Ela é uma máquina geral, e num capítulo futuro será aplicada a
+<em>somas</em> em vez de semiperímetros — e então ganhará nome próprio e um teorema fundamental. Quando você
+chegar lá, já terá operado a máquina aqui, com as próprias mãos. <em>Porta: Capítulo 9.</em></p></aside>
+
 <h3>5.4 Tradução: o que significa “converge”, dito sem gestos</h3>
 <p>O capítulo prometeu traduzir o método geométrico para a linguagem moderna. A tradução já foi feita — dentro da
 prova do teorema de convergência monótona. Basta destacá-la:</p>
@@ -329,6 +415,13 @@ ou seja, k = ⌈log₂((2√3 − 3)/ε)⌉ duplicações. Quer π com erro meno
 lados — e isso é uma <em>garantia demonstrada antes de calcular</em>, não uma esperança observada depois.
 A linguagem ε-N não é formalismo decorativo: é o contrato de entrega do erro. O método de exaustão, nascido
 geométrico, é isto — a primeira máquina da história a prometer precisão arbitrária com prazo explícito.</p>
+
+<aside class="box-curio" aria-label="Caixa de curiosidade"><h3>Curiosidade</h3><p>A garantia acima — erro menor
+que 10⁻⁶ com n = 3.145.728 lados — dá para pôr em escala. Num círculo do tamanho do equador da Terra
+(cerca de 40&nbsp;075&nbsp;km), cada um desses 3.145.728 lados mediria por volta de 13 metros: a divisão dá
+40&nbsp;075&nbsp;000&nbsp;m&nbsp;/&nbsp;3.145.728&nbsp;≈&nbsp;12,7&nbsp;m. Nenhum olho, a distância nenhuma,
+distinguiria esse polígono de um círculo — mas a tabela da seção 2 ainda os separa, e a cota da seção 5.2
+diz exatamente por quanto. É o Padrão 3 (“os olhos desistem antes dos números”) em escala planetária.</p></aside>
 
 <!-- ============================================================ -->
 <h2 id="o-que-a-prova-nao-entregou">6. O que a prova não entregou — e depois entregou</h2>
@@ -713,7 +806,11 @@ impossibilidade atual e o endereço onde ela cai.</p>
   não compra.</li>
 </ul>
 
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../00-inferencia/">← Capítulo 0 — A Inferência</a><a href="../../">↑ Índice</a><a href="../02-ternas/">Capítulo 2 — As Ternas do Ímpar →</a></nav>
+
 <footer class="estado">
+<details class="meta-editorial">
+<summary>Metadados editoriais e de auditoria</summary>
   <p><strong>Estado do capítulo: fechado sob gate v0 — release cap-01-gate0-r1.</strong> Oráculo triplo executado em
   28/07/2026 com artefatos em <code>audit/</code> (8 invariantes + casos adversariais; a primeira execução refutou a
   fronteira k = 0 da cota de erro — corrigida e registrada, ver §5.2). Auditoria de gate v0 completa: interação,
@@ -733,6 +830,11 @@ impossibilidade atual e o endereço onde ela cai.</p>
   <p>MATH3us.md · Capítulo 1 · escavação · release: <strong>cap-01-gate0-r1</strong> (veredito do leitor primário
   em 28/07/2026; manifest em <code>releases/manifests/</code>; a criação da tag remota coube ao proprietário —
   o proxy desta sessão recusa push de tags, incidente declarado no manifest).</p>
+  <p><strong>28/07/2026 — Retrofit pós-release (cap-01-gate0-r1):</strong> aplicação retroativa das emendas
+  E22 (figura do triângulo retângulo, se adicionada) e E23 (figura estática do cerco, caixas de curiosidade e
+  segredo), navegação entre capítulos, metadados de head e rodapé recolhível. Nenhum caractere do conteúdo
+  matemático fechado foi alterado; esta nota é o registro exigido pela proibição de reescrita silenciosa.</p>
+</details>
 </footer>
 
 </main>

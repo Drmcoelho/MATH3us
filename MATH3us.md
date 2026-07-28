@@ -2,7 +2,7 @@
 
 > Reconstrução formal de uma matemática já vivida.
 > Leitor primário: Matheus M. Coelho. Autor: o mesmo. Testemunha: o repositório.
-> Revisão 2 — emendas E1–E22 (ver §13).
+> Revisão 2 — emendas E1–E23 (ver §13).
 
 ---
 
