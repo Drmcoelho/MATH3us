@@ -264,6 +264,14 @@ A recíproca não é ornamental. Ela determina se o resultado apenas produz exem
 
 A numeração dos capítulos é a **ordem canônica de leitura** e é topologicamente compatível com as dependências. A ordem de produção, distinta, está na §5.
 
+### Prólogo (E20)
+
+| Cap. | Título | Sítio | Teoria puxada | Obrigação canônica | Falha prevista |
+|---|---|---|---|---|---|
+| 0 | A Inferência | Duas circunferências e um polígono: a configuração dual do Cap. 1. A cunha fundamental R, r, L/2 e a pergunta inferencial — o que o par de circunferências sabe sobre o polígono? | Pitágoras → semelhança e monotonia de área → medida do ângulo por área → desigualdade da cunha → sanduíches explícitos → decisão sob erro de medição | Demonstrar que (r, R) determina o polígono a menos de rotação; quantificar por desigualdades explícitas, **sem linguagem de limite**, o limiar quadrático (excluir o círculo) e o cúbico (decidir n) | Usar linguagem de limite antes de possuí-la; confundir a constante do déficit (π²/2, quadrática) com a da folga entre razões (π², cúbica) |
+
+**Capítulo 0 — obrigação estrutural (E20).** O capítulo precede o Capítulo 1 na leitura porque precisa de **menos**: nenhuma completude, nenhum limite, nenhum postulado de convexidade — apenas Pitágoras, semelhança, monotonia de área sob inclusão e a medida do ângulo pela área varrida. Obrigações: (i) o triângulo fundamental R² = r² + (L/2)² como átomo do polígono regular; (ii) a identidade da coroa (área da coroa = área do círculo de raio L/2), independente do valor de π; (iii) a razão r/R como portadora integral da forma — inferência de n a partir do par de circunferências, com o conjunto admissível discreto; (iv) desigualdades-sanduíche explícitas para o déficit 1 − r/R e para a folga entre razões consecutivas; (v) teoria da decisão sob erro δ: garantia de identificação, possibilidade de ambiguidade e a janela crepuscular (polígono certo, identidade indecidível). O símbolo π entra como **constante da área do disco** (ângulo medido por área); sua identificação com a constante perimetral do Cap. 1 é porta fechada → Cap. 9. Toda afirmação assintótica com seta (→) é observação de tabela ou conjectura pré-registrada — a linguagem de limite pertence ao Cap. 1. O capítulo fornece a cunha que a reconstrução geométrica do Cap. 1 (pendência editorial registrada) utilizará.
+
 ### Parte I — Escavações
 
 | Cap. | Título | Sítio | Teoria puxada | Obrigação canônica | Falha prevista |
@@ -370,7 +378,7 @@ A absorção não é uma redução de importância. É controle de arquitetura.
 **Ordem canônica de leitura** — a numeração dos capítulos:
 
 ```
-1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12
+0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12
 ```
 
 Topologicamente compatível com as dependências: Fourier (11) sucede integral (9) e séries de funções (10); a porta fechada do Cap. 2 abre no 7; a exponencial complexa do 7 abre no 10.
@@ -378,11 +386,12 @@ Topologicamente compatível com as dependências: Fourier (11) sucede integral (
 **Ordem operacional de produção:**
 
 ```
-1 → 2 → 3 → 4 → 6 → 7 → 5 → 8 → 9 → 10 → 11 → 12
+1 → 0 → 2 → 3 → 4 → 6 → 7 → 5 → 8 → 9 → 10 → 11 → 12
 ```
 
 As justificativas abaixo são **exclusivamente de produção** — descrevem a ordem em que o autor constrói, não a ordem em que o leitor recebe:
 
+- **Capítulo 0 depois do 1 (E20):** o prólogo nasceu da crítica do leitor primário ao Capítulo 1 já produzido — a configuração dual (duas circunferências, um polígono) e a cunha fundamental surgiram como o que faltava *antes*. A leitura recebe o prólogo primeiro; a produção o recebeu depois. Registrar isso é mais honesto que fingir planejamento prévio.
 - **Capítulo 3 cedo:** o menor sítio valida o formato mínimo com custo baixo. Deve provar que o projeto consegue produzir densidade sem gigantismo.
 - **Capítulo 6 produzido antes do 5:** o autor endurece primeiro sua própria desconfiança de gráficos e regularidade visual, e escreve o Cap. 5 já vacinado. Na leitura, o 5 vem antes do 6 sem dependência lógica: frações contínuas não exigem ε-δ.
 - **Capítulo 7 produzido antes do 5:** disponibiliza ao autor a linguagem de rotação e fase enquanto redige a ponte musical. Não é pré-requisito de leitura.
@@ -718,3 +727,4 @@ Regras: emendas são **atômicas** — uma decisão por emenda; emendas nunca s�
 | E17 | 28/07/2026 | — | §11 | — | Fora de escopo reformulado: adiamento por ausência de sítio, não por competência presumida |
 | E18 | 28/07/2026 | — | §13 | — | Governança de emendas: atomicidade; imutabilidade; colunas de commit, seções e substituição |
 | E19 | 28/07/2026 | — | §3 (Cap. 10) | — | a⁰/0⁰ como interlúdio do Cap. 10; núcleo protegido: séries de potências como definição de função |
+| E20 | 28/07/2026 | — | §3, §5 | — | Capítulo 0 (A Inferência) criado como Prólogo: duas circunferências e um polígono; cunha fundamental; inferência sob erro por desigualdades, sem linguagem de limite; π entra como constante de área (identificação perimetral: porta → Cap. 9); numeração 1–12 inalterada; reconstrução geométrica do Cap. 1 sobre a cunha registrada como pendência editorial |
