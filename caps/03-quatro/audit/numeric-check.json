@@ -1,0 +1,118 @@
+{
+  "chapter": 3,
+  "script": "caps/03-quatro/oracle.py",
+  "code_commit": "e2cb3ef",
+  "date": "2026-07-28",
+  "environment": "python 3.11.15, stdlib only, linux",
+  "implementations": {
+    "A": "exact-integer scan 1..10000 with documented exact short-circuit",
+    "B": "symbolic-by-construction root sets from the factorizations",
+    "C": "Decimal-50 bisection for the small root of 2x = x^x"
+  },
+  "tested_domain": {
+    "integer_scan": {
+      "min": 1,
+      "max": 10000
+    },
+    "bisection_interval": [
+      0.3,
+      0.4
+    ],
+    "adversarial_refused": [
+      0,
+      -1,
+      -4
+    ]
+  },
+  "invariants": {
+    "I1_integer_scan_sets": {
+      "scan_max": 10000,
+      "x_plus_x_eq_x2": [
+        2
+      ],
+      "x2_eq_xx": [
+        1,
+        2
+      ],
+      "2x_eq_xx": [
+        2
+      ],
+      "triple": [
+        2
+      ],
+      "short_circuit": "for x>=3: x^x = x^2 * x^(x-2), x^(x-2) >= x >= 3 > 1; x^2 - 2x = x(x-2) > 0 \u2014 exact integer comparisons only",
+      "passed": true
+    },
+    "I2_construction_vs_scan": {
+      "constructed_add_sq": [
+        2
+      ],
+      "constructed_sq_pow": [
+        1,
+        2
+      ],
+      "passed": true
+    },
+    "I3_value_four": {
+      "k": [
+        2
+      ],
+      "values": [
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "passed": true
+    },
+    "I4_small_root_bisection": {
+      "root_20_digits": "0.34632336227858092206",
+      "certificate": {
+        "bracket_lo": "0.346323362278",
+        "bracket_hi": "0.346323362279",
+        "f_lo": "1.18614041021306592109225174340503295292E-12",
+        "f_hi": "-8.5568323872290161100487969627970224186E-13",
+        "sign_change": true,
+        "h_lo_minus_ln2": "1.71247530401936042936903141993086804113E-12",
+        "h_hi_minus_ln2": "-1.23538191748393665808913770528109876041E-12"
+      },
+      "passed": true
+    },
+    "I5_h_at_2_equals_ln2": {
+      "h_2": "0.69314718055994530941723212145817656807550013436026",
+      "ln2": "0.69314718055994530941723212145817656807550013436026",
+      "passed": true
+    },
+    "I6_h_monotonicity_witness": {
+      "samples_0_1": 99,
+      "samples_1_7": 60,
+      "note": "numeric WITNESS of symbolic S3 (derivative-free proof); sampling supports, does not prove",
+      "passed": true
+    },
+    "I7_interval_orderings": {
+      "x=0.2": [
+        "x2",
+        "2x",
+        "xx"
+      ],
+      "x=0.5": [
+        "x2",
+        "xx",
+        "2x"
+      ],
+      "x=1.5": [
+        "xx",
+        "x2",
+        "2x"
+      ],
+      "x=3": [
+        "2x",
+        "x2",
+        "xx"
+      ],
+      "passed": true
+    }
+  },
+  "all_passed": true
+}

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 3 — A Singularidade do Quatro · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --in-color:#1c5e3c; --out-color:#8a3318; --circle-color:#26221a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  figure{margin:1.6rem 0}
+  figcaption{font-size:.92rem; color:var(--ink-soft); margin-top:.5rem}
+  .painel{
+    border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0;
+  }
+  canvas{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto; display:block; margin:0 auto}
+  .controles{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.9rem 0}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  label{font-size:.95rem}
+  input[type=range]{vertical-align:middle}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.98rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge);
+  }
+  .legenda-cores{font-size:.92rem; margin:.4rem 0}
+  .sw{display:inline-block; width:.85em; height:.85em; margin-right:.3em; vertical-align:baseline; border:1px solid var(--ink)}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  tr.linha-2{background:var(--box)}
+  .exercicio{margin:1.4rem 0; padding-left:1.1rem; border-left:3px solid var(--box-edge)}
+  .exercicio .nivel{font-variant:small-caps; letter-spacing:.08em; font-size:.82rem; color:var(--accent)}
+  details.gab{margin:.6rem 0 0; background:var(--box); border:1px solid var(--box-edge); padding:.55rem .9rem}
+  details.gab summary{cursor:pointer; font-variant:small-caps; letter-spacing:.06em; color:var(--accent)}
+  details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.gab[open]{padding-bottom:.8rem}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Parte I</span>
+  <h1>Capítulo 3 — A Singularidade do Quatro</h1>
+  <p><span class="tipo">escavação</span></p>
+  <p class="pergunta">Para quais números positivos x as três regras — somar consigo (x+x), multiplicar por si (x·x),
+  elevar a si (x<sup>x</sup>) — produzem <strong>o mesmo resultado</strong>? A coincidência 2+2 = 2·2 = 2² = 4 é
+  acidente de notação ou singularidade estrutural?
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2>1. O sítio</h2>
+<p>O sítio cabe numa linha: <strong>2+2 = 2·2 = 2² = 4</strong>. Três operações de força crescente — somar,
+multiplicar, exponenciar — aplicadas de um número a si mesmo, dando o mesmo resultado. O dossiê pessoal desta
+observação ainda não foi minerado (<code>sources.md</code>); o que se escava aqui não é a lembrança, é a pergunta que
+a observação esconde: isso acontece <em>só</em> com o 2? E este capítulo tem uma segunda obrigação, editorial: ser o
+capítulo-modelo do formato mínimo. Se três páginas bastarem, serão três páginas.</p>
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<!-- ============================================================ -->
+<h2>2. O experimento</h2>
+<p>Primeiro, os inteiros pequenos — os menores casos, como manda o protocolo:</p>
+<div class="tabela-scroll">
+<table>
+  <caption>As três regras aplicadas aos inteiros k = 1 a 5 (valores exatos, aritmética inteira).</caption>
+  <thead>
+    <tr><th scope="col">k</th><th scope="col">k+k</th><th scope="col">k·k</th><th scope="col">k<sup>k</sup></th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td><td>1</td><td>1</td></tr>
+    <tr class="linha-2"><td>2</td><td class="destaque">4</td><td class="destaque">4</td><td class="destaque">4</td></tr>
+    <tr><td>3</td><td>6</td><td>9</td><td>27</td></tr>
+    <tr><td>4</td><td>8</td><td>16</td><td>256</td></tr>
+    <tr><td>5</td><td>10</td><td>25</td><td>3125</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Na linha k = 2, as três colunas colidem em 4 — e em nenhuma outra. Mas a tabela também mostra uma colisão
+<em>parcial</em>: em k = 1, as colunas k·k e k<sup>k</sup> coincidem (ambas 1) enquanto k+k foge (dá 2). Os inteiros
+já avisam: coincidência de <em>duas</em> regras e coincidência de <em>três</em> não são o mesmo fenômeno.</p>
+<p>Agora o contínuo. Abaixo, os gráficos de y = x+x, y = x·x e y = x<sup>x</sup> sobre os reais positivos. Mova a
+sonda e leia os três valores; ajuste a janela para caçar os cruzamentos. Quantos pontos de encontro <em>dois a dois</em>
+você acha? E em quantos deles as <em>três</em> curvas passam juntas?</p>
+
+<div class="painel">
+  <figure style="margin:0">
+    <canvas id="cv-plot" width="640" height="420"
+      aria-label="Gráfico das três curvas sobre os reais positivos: y igual a x mais x (traço verde), y igual a x vezes x (traço vermelho) e y igual a x elevado a x (traço preto). Uma sonda vertical, controlada pelo cursor e pelos botões abaixo, marca um ponto em cada curva; os três valores correspondentes são lidos na linha de status. As curvas se cruzam duas a duas em pontos distintos e as três só se encontram juntas em x igual a 2."></canvas>
+    <figcaption>O campo das três regras. A sonda (linha vertical) lê as três alturas; a linha de status repete os
+    valores em texto. O que sai do campo por cima é anotado no canto.</figcaption>
+  </figure>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#1c5e3c"></span>x+x (soma) ·
+    <span class="sw" style="background:#8a3318"></span>x·x (produto) ·
+    <span class="sw" style="background:#26221a"></span>x<sup>x</sup> (potência)
+  </div>
+  <div class="controles">
+    <button id="btn-left" type="button">◀ sonda −0,01</button>
+    <button id="btn-right" type="button">sonda +0,01 ▶</button>
+    <button id="btn-reset" type="button">Recomeçar</button>
+    <label for="probe">Sonda x:
+      <input type="range" id="probe" min="2" max="400" value="100" step="1" aria-describedby="probe-desc">
+    </label>
+    <span id="probe-desc" class="visually-hidden">Posição da sonda no eixo x, de 0,02 a 4,00, em passos de 0,01.</span>
+    <label for="xmax">Janela:
+      <input type="range" id="xmax" min="120" max="400" value="250" step="10" aria-describedby="xmax-desc">
+      <span id="xmax-val">0 ≤ x ≤ 2,5</span>
+    </label>
+    <span id="xmax-desc" class="visually-hidden">Limite direito da janela de visualização, de 1,2 a 4,0.</span>
+  </div>
+  <p class="leitura" id="leitura" role="status" aria-live="polite"></p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Nada (§2.1 do manual): pixels e ponto flutuante são <em>observações</em>. Quando a linha de
+  status disser “as três coincidem na precisão exibida”, isso vale na precisão exibida — o experimento não distingue
+  igualdade de proximidade 10⁻¹⁶. Ele serve para sugerir enunciados; enunciado se prova ou se refuta.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="padroes">3. Os padrões</h2>
+<p><strong>Padrão 1 — os encontros dois a dois são vários e desencontrados.</strong> A soma e o produto se cruzam
+uma vez (perto de x = 2). O produto e a potência se tocam <em>duas</em> vezes (perto de x = 1 e de x = 2). A soma e
+a potência também duas — uma perto de x = 2 e outra, bem escondida, abaixo de x = 0,4.</p>
+<p><strong>Padrão 2 — o encontro triplo parece único.</strong> Só em x = 2 as três curvas passam juntas — altura 4.</p>
+<p><strong>Padrão 3 — perto de zero, a potência não desce.</strong> A soma e o produto morrem em 0; a curva de
+x<sup>x</sup> encosta em <em>1</em>. O canto inferior esquerdo do gráfico guarda uma porta (seção 6).</p>
+<p>Os padrões 1 e 2 falam de <em>todos</em> os reais positivos — infinitos pontos que nenhuma sonda percorre.
+É aqui que a teoria deixa de ser opcional.</p>
+
+<!-- ============================================================ -->
+<h2 id="enunciados">4. Os enunciados</h2>
+<p>Domínio declarado: <strong>ℝ⁺ = {x real, x &gt; 0}</strong>. Para x &gt; 0, x<sup>x</sup> é definido como
+e<sup>x·ln x</sup> — definição que importa duas ferramentas clássicas, declaradas na caixa abaixo. O zero fica fora
+do domínio: em x = 0 a expressão x<sup>x</sup> é exatamente a disputa 0⁰ (porta fechada, seção 6).</p>
+<div class="caixa">
+  <span class="rotulo">Ferramentas importadas (proveniência clássica, portas declaradas)</span>
+  <p style="margin:0"><strong>Logaritmo natural:</strong> ln : ℝ⁺ → ℝ é bijeção estritamente crescente e contínua,
+  com ln(uv) = ln u + ln v e ln 1 = 0; sua construção rigorosa (e a de e<sup>x</sup>) pertence ao
+  <strong>Capítulo 10</strong>. <strong>Teorema do valor intermediário:</strong> função contínua num intervalo
+  assume todo valor entre dois valores assumidos; demonstração no <strong>Capítulo 6</strong> (depende da completude
+  de ℝ, princípio do supremo importado no Capítulo 1). Nenhum dos dois é provado aqui; ambos entram citados.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado A (soma = produto)</span>
+  <p style="margin:0">Em ℝ⁺, x + x = x² tem exatamente uma solução: x = 2.</p>
+</div>
+<div class="caixa">
+  <span class="rotulo">Enunciado B (produto = potência)</span>
+  <p style="margin:0">Em ℝ⁺, x² = x<sup>x</sup> tem exatamente duas soluções: x = 1 e x = 2.</p>
+</div>
+<div class="caixa">
+  <span class="rotulo">Enunciado C (soma = potência)</span>
+  <p style="margin:0">Em ℝ⁺, 2x = x<sup>x</sup> tem exatamente duas soluções: x = 2 e uma raiz r ∈ (0, 1),
+  localizada numericamente em r ≈ 0,346323362279 — existência demonstrada, forma fechada porta fechada (seção 6).</p>
+</div>
+<div class="caixa">
+  <span class="rotulo">Enunciado D (a singularidade)</span>
+  <p style="margin:0">Em ℝ⁺, x + x = x² = x<sup>x</sup> tem exatamente uma solução: x = 2, com valor comum 4.
+  Corolário: 4 é o único número expressável como k + k = k·k = k<sup>k</sup> com k inteiro positivo.</p>
+</div>
+<p>Repare: A, B e C têm conjuntos solução <em>diferentes</em> — {2}, {1, 2}, {r, 2}. As coincidências duplas são
+comuns e desarrumadas. O que D afirma é que a interseção das três é o que resta quando a desarrumação se cancela.</p>
+
+<!-- ============================================================ -->
+<h2 id="provas">5. As provas</h2>
+
+<h3 id="prova-a">5.1 Soma = produto (prova do Enunciado A)</h3>
+<div class="prova">
+  <p>Sem logaritmo — álgebra pura. Em ℝ (por enquanto sem restrição de sinal):</p>
+  <p class="formula">x + x = x² &nbsp;⟺&nbsp; x² − 2x = 0 &nbsp;⟺&nbsp; x·(x − 2) = 0 &nbsp;⟺&nbsp; x = 0 ou x = 2.</p>
+  <p>Um produto é zero exatamente quando um dos fatores é zero — é isso, e só isso, que a fatoração usa. No domínio
+  declarado ℝ⁺, a raiz x = 0 é excluída; sobra x = 2.<span class="qed">∎</span></p>
+</div>
+<p>Note o método: <em>fatorar, nunca dividir</em>. Quem divide os dois lados por x “para simplificar” perde a raiz
+x = 0 sem perceber — aqui ela seria descartada pelo domínio de qualquer forma, mas o hábito cobra caro já na
+próxima prova.</p>
+
+<h3 id="prova-b">5.2 Produto = potência (prova do Enunciado B)</h3>
+<div class="prova">
+  <p>Hipótese: x &gt; 0 (para x<sup>x</sup> = e<sup>x·ln x</sup> estar definido). Como ln é bijeção, aplicá-lo aos
+  dois lados preserva a equivalência:</p>
+  <p class="formula">x² = x<sup>x</sup> &nbsp;⟺&nbsp; 2·ln x = x·ln x &nbsp;⟺&nbsp; (x − 2)·ln x = 0
+  &nbsp;⟺&nbsp; x = 2 ou ln x = 0 &nbsp;⟺&nbsp; x ∈ {1, 2}.</p>
+  <p>De novo o produto nulo: um fator é (x − 2), o outro é ln x, que se anula exatamente em x = 1 (ln é injetivo e
+  ln 1 = 0).<span class="qed">∎</span></p>
+</div>
+<p>A sutileza prometida: a tentação é “dividir por ln x” e concluir x = 2 — <em>solução única</em>. Falso. Dividir
+por ln x pressupõe ln x ≠ 0, e a hipótese silenciosa engole a solução x = 1. A curva de x<sup>x</sup> toca a
+parábola em <em>dois</em> pontos, e um deles morre num descuido de álgebra. O experimento da seção 2 mostra o toque
+em x = 1 a olho nu; a prova explica por que ele existe — porque 1 é o zero do logaritmo, não porque 1 tenha algo de
+especial nas outras equações.</p>
+
+<h3 id="prova-c">5.3 Soma = potência (prova do Enunciado C)</h3>
+<div class="prova">
+  <p>Hipótese: x &gt; 0. Aplicando ln aos dois lados e usando ln(2x) = ln 2 + ln x:</p>
+  <p class="formula">2x = x<sup>x</sup> &nbsp;⟺&nbsp; ln 2 + ln x = x·ln x &nbsp;⟺&nbsp; (x − 1)·ln x = ln 2.</p>
+  <p>Chame <strong>h(x) = (x − 1)·ln x</strong>. A equação virou h(x) = ln 2, e tudo se decide pela forma de h.</p>
+  <p><strong>Em [1, ∞):</strong> h(1) = 0 e os dois fatores, (x − 1) e ln x, são positivos e estritamente crescentes
+  para x &gt; 1; logo h é estritamente crescente em [1, ∞). Como h(2) = (2 − 1)·ln 2 = ln 2 <em>exatamente</em>,
+  x = 2 é solução — e a monotonia estrita proíbe qualquer outra neste ramo.</p>
+  <p><strong>Em (0, 1):</strong> reescreva h(x) = (1 − x)·ln(1/x): produto de dois fatores <em>positivos</em> e
+  <em>estritamente decrescentes</em> em (0, 1) — quando x cresce, 1 − x cai, e 1/x cai, logo ln(1/x) cai (ln é
+  crescente). Produto de positivos estritamente decrescentes é estritamente decrescente. Nos extremos: h(1) = 0
+  &lt; ln 2, e perto de 0 a função explode (o fator ln(1/x) cresce sem limite enquanto 1 − x → 1). Valores
+  concretos, com a troca de sinal exibida:</p>
+  <p class="formula">h(0,3) = 0,7 · ln(10/3) ≈ 0,84278 &gt; ln 2 ≈ 0,69315 &gt; 0,54977 ≈ 0,6 · ln(5/2) = h(0,4).</p>
+  <p>Pelo teorema do valor intermediário (importado, seção 4), h assume o valor ln 2 em algum r ∈ (0,3; 0,4); pela
+  monotonia estrita, exatamente uma vez em todo o (0, 1). Conjunto solução: {r, 2}.<span class="qed">∎</span></p>
+</div>
+<p>Onde está r? A bissecção do oráculo (certificado em <code>audit/numeric-check.json</code>) aperta a troca de
+sinal até doze casas:</p>
+<p class="formula">r ≈ 0,346323362279, &nbsp;com&nbsp; h(0,346323362278) &gt; ln 2 &gt; h(0,346323362279).</p>
+<p>Isso é uma <em>localização numérica certificada</em>, não uma forma fechada. Escrever r com as ferramentas deste
+capítulo — aritmética, raízes, o ln importado — não será feito aqui, e o motivo é honesto: a equação
+(x − 1)·ln x = ln 2 mistura x dentro e fora do logaritmo, e desfazer essa mistura exige a função W de Lambert,
+construída sobre a exponencial do <strong>Capítulo 10</strong>. Porta fechada, não derrota disfarçada.</p>
+
+<h3 id="prova-d">5.4 A interseção (prova do Enunciado D)</h3>
+<div class="prova">
+  <p>A coincidência tripla exige as três igualdades ao mesmo tempo, logo seu conjunto solução é a interseção dos
+  três conjuntos já classificados:</p>
+  <p class="formula">{2} ∩ {1, 2} ∩ {r, 2} = {2}.</p>
+  <p>Vale conferir os candidatos que caem: x = 1 satisfaz B mas falha A (1 + 1 = 2 ≠ 1 = 1²); r satisfaz C mas
+  falha A (r ≠ 2 e r ≠ 0). Resta x = 2, que satisfaz as três: 2+2 = 2·2 = 2² = 4. E o corolário inteiro é imediato:
+  se k + k = k·k = k<sup>k</sup> com k inteiro positivo, então k ∈ {2} pelo teorema real (inteiro positivo é real
+  positivo), e o valor comum é 4.<span class="qed">∎</span></p>
+</div>
+<p>Rigorosamente falando, bastava A para isolar o 2 — a primeira equação já não deixa ninguém vivo além dele. O que
+as provas B e C compram é outra coisa: a <strong>variação de regras</strong>. Cada par de regras coincide num
+conjunto próprio, pequeno e bagunçado — {2}, {1, 2}, {r, 2} — e três bagunças diferentes têm um único ponto comum.
+A coincidência dupla é barata; a tripla é a singularidade.</p>
+
+<!-- ============================================================ -->
+<h2 id="o-quatro">6. O quatro — e as portas fechadas</h2>
+<p>O que exatamente é singular? Separando as camadas (§2.1 do manual): o <em>objeto</em> é o número quatro — o valor
+comum k+k = k·k = k<sup>k</sup> em k = 2, único com essa propriedade. A <em>representação</em> é o algarismo “4”,
+figurino da base dez: em base dois o mesmo objeto se escreve 100₂, em algarismos romanos IV, e a igualdade
+10₂ + 10₂ = 10₂ · 10₂ = 10₂<sup>10₂</sup> = 100₂ continua verdadeira, símbolo a símbolo diferente, estrutura
+idêntica. A singularidade é das <strong>equações</strong>, não do glifo. Quem responde “2+2 = 4 é só notação”
+confunde as camadas na direção oposta — e essa era a falha prevista do capítulo: a coincidência é estrutural;
+apenas o seu figurino é notacional.</p>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — 0⁰ e o colapso em zero</span>
+  <p style="margin:0">Com 0 no domínio, a soma e o produto coincidiriam de novo: 0+0 = 0·0 = 0. A tripla dependeria
+  de 0⁰ — expressão que é convenção combinatória num contexto, limite dependente do caminho noutro, e erro de
+  implementação num terceiro. O experimento observa que x<sup>x</sup> → 1 quando x → 0⁺ (o traço preto encosta em 1,
+  não em 0): mesmo o limite recusa a coincidência. A autópsia completa de 0⁰ é o interlúdio do
+  <strong>Capítulo 10</strong> (E19).</p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — a forma fechada de r (Lambert W)</span>
+  <p style="margin:0">A raiz r ≈ 0,3463 de 2x = x<sup>x</sup> fica, neste capítulo, como raiz numericamente
+  localizada com certificado. Sua expressão exata exige a função W de Lambert — inversa de w·e<sup>w</sup> —
+  que pressupõe a exponencial construída por séries: <strong>Capítulo 10</strong>.</p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — as soluções complexas de x² = x<sup>x</sup></span>
+  <p style="margin:0">Em ℂ, a expressão x<sup>x</sup> deixa de ter um valor só: depende do ramo do logaritmo, e o
+  conjunto solução muda de natureza. Multivaloração e escolha de ramo são o <strong>Capítulo 7</strong>; a
+  exponencial complexa, o 10.</p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — a torre continua (tetração)</span>
+  <p style="margin:0">Depois de x+x, x·x, x<sup>x</sup>, a próxima regra da escada é x^(x^x). A unicidade
+  sobrevive? Em quais domínios a torre sequer converge? Segundo ciclo.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="exercicios">7. Exercícios</h2>
+<p>Cinco níveis (E20 do manual). Tente antes de abrir o gabarito — mas abra sempre: ele é a segunda metade do
+exercício. Os N4 não têm solução: têm a razão exata pela qual ainda não têm, e o endereço de onde terão.</p>
+
+<h3>Nível 0 — Socráticos</h3>
+<div class="exercicio">
+  <span class="nivel">N0 · E0.1</span>
+  <p>Antes de qualquer conta: 2+2 = 2·2 é um fato sobre o <em>símbolo</em> “2” ou sobre o <em>número</em> dois?
+  Proponha um teste que decida — e execute-o.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>O teste: trocar de figurino e ver se o fato sobrevive. Escreva a mesma afirmação em base dois: o número dois
+    vira 10₂, e a igualdade 10₂ + 10₂ = 10₂ · 10₂ = 100₂ continua valendo — confira somando e multiplicando em
+    binário. Em romanos: II + II = II · II = IV. Os símbolos mudaram todos; a igualdade, não. Logo o fato é do
+    número (o objeto), não do algarismo (a representação, §2.1 do manual).</p>
+    <p>Compare com um fato que <em>não</em> sobrevive ao teste: “o numeral de quatro tem um dígito só”. Em base dois
+    ele tem três (100₂). Esse é notacional. O exercício inteiro do capítulo é não confundir os dois tipos — e agora
+    você tem um detector que funciona: mude a base; o que sobreviver é estrutura.</p>
+  </details>
+</div>
+<div class="exercicio">
+  <span class="nivel">N0 · E0.2</span>
+  <p>1·1 = 1 = 1¹: o número um também exibe uma coincidência. Por que ela não conta como “singularidade” no sentido
+  deste capítulo? O que o 1 ensina sobre a diferença entre duas regras concordarem e todas concordarem?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>A coincidência do 1 é <em>dupla</em>, não tripla: produto e potência concordam (1·1 = 1 = 1¹), mas a soma
+    foge — 1+1 = 2 ≠ 1. E há um motivo estrutural: 1 é o elemento neutro da <em>multiplicação</em>, então
+    multiplicar e exponenciar por 1 “não fazem nada”; mas somar 1 faz. O neutro da soma é outro número (o zero),
+    e é por isso que as regras desalinham em 1.</p>
+    <p>A lição: cada coincidência dupla tem uma explicação local e barata — um neutro aqui, um zero de logaritmo
+    ali (seção 5.2). A coincidência tripla não tem desconto: exige que três estruturas diferentes concordem de uma
+    vez, e a seção 5.4 mostra que só o 2 paga esse preço. Conjuntos: {2}, {1, 2}, {r, 2} — o 1 mora num deles;
+    o 2 mora nos três.</p>
+  </details>
+</div>
+
+<h3>Nível 1 — Básicos</h3>
+<div class="exercicio">
+  <span class="nivel">N1 · E1.1</span>
+  <p>Refaça a tabela da seção 2 à mão (k = 1 a 5) e localize <em>todas</em> as coincidências par a par entre as
+  colunas. Depois explique, olhando o crescimento das colunas, por que nenhuma coincidência nova pode aparecer para
+  k ≥ 3.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>A tabela: (2, 1, 1), (4, 4, 4), (6, 9, 27), (8, 16, 256), (10, 25, 3125). Coincidências: k = 1 tem
+    k·k = k<sup>k</sup> = 1 (dupla); k = 2 tem as três iguais a 4 (tripla). Mais nenhuma.</p>
+    <p>Por que acabou: para k ≥ 3, as três colunas se <em>separam em ordem estrita</em> — k+k &lt; k·k &lt;
+    k<sup>k</sup>. As duas primeiras: k·k − k·2 = k·(k − 2) &gt; 0 quando k &gt; 2. As duas últimas:
+    k<sup>k</sup> = k²·k<sup>k−2</sup>, e o fator extra k<sup>k−2</sup> vale pelo menos 3 quando k ≥ 3. Cada regra
+    mais forte dispara mais rápido, e quem dispara não volta a se encontrar. Coincidência, aqui, é fenômeno de
+    números pequenos — é onde as forças das operações ainda são comparáveis.</p>
+  </details>
+</div>
+<div class="exercicio">
+  <span class="nivel">N1 · E1.2</span>
+  <p>Resolva x + x = x² sem chutar: fatore. Depois responda: o que muda se o domínio for ℝ inteiro em vez de ℝ⁺?
+  E por que este capítulo deixou o 0 de fora?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>x + x = x² ⟺ x² − 2x = 0 ⟺ x(x − 2) = 0. Produto zero exige fator zero: x = 0 ou x = 2. Em ℝ o conjunto
+    solução é {0, 2}; em ℝ⁺, só {2}.</p>
+    <p>O 0 ficou de fora por causa da <em>terceira</em> regra, não desta: em x = 0, soma e produto coincidem
+    (0+0 = 0·0 = 0), mas x<sup>x</sup> vira 0⁰ — expressão sem valor único acordado (porta fechada da seção 6; a
+    autópsia pertence ao Capítulo 10). Para comparar as três regras no mesmo domínio, o domínio tem de ser onde as
+    três estão definidas: ℝ⁺. Moral de método: declarar domínio não é burocracia — é o que decide quantas soluções
+    existem. A mesma equação tem uma, duas ou nenhuma solução conforme o palco.</p>
+  </details>
+</div>
+
+<h3>Nível 2 — Intermediários</h3>
+<div class="exercicio">
+  <span class="nivel">N2 · E2.1</span>
+  <p>Resolva x² = x<sup>x</sup> em ℝ⁺ com todo o cuidado, e depois <em>erre de propósito</em>: refaça a conta
+  dividindo por ln x em vez de fatorar. Onde exatamente a solução x = 1 morre?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>O caminho certo: ln nos dois lados (equivalência preservada — ln é bijeção em ℝ⁺) dá 2·ln x = x·ln x, ou
+    seja (x − 2)·ln x = 0. Produto nulo: x = 2 ou ln x = 0, isto é x = 1. Conjunto: {1, 2}.</p>
+    <p>O erro proposital: de 2·ln x = x·ln x, “cancele” ln x e obtenha x = 2. A morte ocorre no cancelamento:
+    dividir por ln x só é legítimo quando ln x ≠ 0 — a divisão embute a hipótese “x ≠ 1” sem anunciá-la, e a
+    resposta sai com uma solução a menos <em>e nenhum sinal de erro</em>. É o pior tipo de bug: o que não quebra
+    nada visível. Regra prática deste tratado: diante de A·C = B·C, escreva (A − B)·C = 0 e leia os dois fatores.
+    Fatorar preserva; dividir amputa.</p>
+  </details>
+</div>
+<div class="exercicio">
+  <span class="nivel">N2 · E2.2</span>
+  <p>Com h(x) = (x − 1)·ln x e os dados ln(10/3) ≈ 1,20397 e ln(5/2) ≈ 0,91629: mostre que h é positiva em (0, 1),
+  calcule h(0,3) e h(0,4) e conclua que 2x = x<sup>x</sup> tem uma solução entre 0,3 e 0,4.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Positividade: em (0, 1), x − 1 &lt; 0 e ln x &lt; 0 (ln é crescente com ln 1 = 0); produto de dois negativos
+    é positivo. Os valores: h(0,3) = (−0,7)·ln(0,3) = 0,7·ln(10/3) ≈ 0,7 · 1,20397 ≈ 0,84278;
+    h(0,4) = 0,6·ln(5/2) ≈ 0,6 · 0,91629 ≈ 0,54977.</p>
+    <p>Como ln 2 ≈ 0,69315 fica <em>entre</em> os dois — h(0,3) &gt; ln 2 &gt; h(0,4) — e h é contínua, o teorema
+    do valor intermediário garante um r ∈ (0,3; 0,4) com h(r) = ln 2, que pela seção 5.3 equivale a
+    2r = r<sup>r</sup>. Repare no formato do argumento: dois números calculados + um teorema de continuidade =
+    uma existência demonstrada. É o mesmo esqueleto do certificado de doze casas do oráculo — só muda o aperto do
+    intervalo. Certificar não é calcular muito: é calcular <em>dos dois lados</em>.</p>
+  </details>
+</div>
+
+<h3>Nível 3 — Difíceis</h3>
+<div class="exercicio">
+  <span class="nivel">N3 · E3.1</span>
+  <p>Prove, <em>sem derivadas</em>, que h(x) = (x − 1)·ln x é estritamente decrescente em (0, 1) e estritamente
+  crescente em (1, ∞). Conclua a classificação completa de 2x = x<sup>x</sup> em ℝ⁺.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Em (1, ∞):</em> os fatores x − 1 e ln x são ambos positivos e estritamente crescentes. Para positivos,
+    crescer fator a fator faz o produto crescer: se 1 &lt; u &lt; v, então (u−1)·ln u &lt; (v−1)·ln u &lt;
+    (v−1)·ln v. Estritamente crescente.</p>
+    <p><em>Em (0, 1):</em> o truque é reescrever h(x) = (1 − x)·ln(1/x) — confira: (1−x)·ln(1/x) =
+    (−(x−1))·(−ln x) = (x−1)·ln x. Agora os dois fatores são <em>positivos</em>: 1 − x &gt; 0 e ln(1/x) &gt; 0
+    (pois 1/x &gt; 1). E ambos estritamente decrescem quando x cresce: 1 − x obviamente; e 1/x cai, logo ln(1/x)
+    cai (ln crescente). Produto de positivos estritamente decrescentes decresce estritamente — mesmo argumento de
+    cima, espelhado.</p>
+    <p><em>Classificação:</em> em [1, ∞), h sobe estritamente de h(1) = 0; assume ln 2 no máximo uma vez, e assume:
+    h(2) = ln 2. Em (0, 1), h desce estritamente até h(1) = 0, vindo de valores arbitrariamente grandes perto de 0
+    (E2.2 já deu h(0,3) &gt; ln 2); cruza ln 2 exatamente uma vez — o r. Total: {r, 2}, e nada mais. Note o que o
+    exercício comprou: unicidade <em>sem cálculo diferencial</em>, só com a definição de “crescente” e a
+    monotonia do ln. As derivadas do Capítulo 9 em diante farão isso em uma linha — mas saber fazer sem elas é
+    saber o que elas estão resumindo.</p>
+  </details>
+</div>
+<div class="exercicio">
+  <span class="nivel">N3 · E3.2</span>
+  <p>A variação de regras completa: nos quatro intervalos (0, r), (r, 1), (1, 2) e (2, ∞), determine a ordem
+  completa das três quantidades 2x, x² e x<sup>x</sup> — e prove cada comparação.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Três comparações, cada uma com seu instrumento. <em>(a) x² contra 2x:</em> x² − 2x = x(x − 2), negativo em
+    (0, 2), positivo depois: x² &lt; 2x até 2, depois inverte. <em>(b) x<sup>x</sup> contra x²:</em> pela seção 5.2,
+    x<sup>x</sup>/x² = e<sup>(x−2)·ln x</sup> &gt; 1 exatamente quando (x − 2)·ln x &gt; 0: verdadeiro em (0, 1)
+    (dois fatores negativos) e em (2, ∞) (dois positivos); falso em (1, 2). <em>(c) x<sup>x</sup> contra 2x:</em>
+    pela seção 5.3, x<sup>x</sup> &gt; 2x exatamente quando h(x) &gt; ln 2: verdadeiro em (0, r) (h desce até ln 2
+    em r) e em (2, ∞) (h sobe além de ln 2); falso em (r, 2).</p>
+    <p>Montando: <strong>(0, r):</strong> x² &lt; 2x &lt; x<sup>x</sup>. <strong>(r, 1):</strong> x² &lt;
+    x<sup>x</sup> &lt; 2x. <strong>(1, 2):</strong> x<sup>x</sup> &lt; x² &lt; 2x. <strong>(2, ∞):</strong>
+    2x &lt; x² &lt; x<sup>x</sup>. Confira na sonda: x = 0,2 dá (0,4; 0,04; 0,725); x = 0,5 dá (1; 0,25; 0,707);
+    x = 1,5 dá (3; 2,25; 1,837); x = 3 dá (6; 9; 27).</p>
+    <p>O desenho que emerge: a potência, “a mais forte das regras”, é a <em>menor</em> das três em (1, 2) — a
+    hierarquia ingênua soma &lt; produto &lt; potência só vale de 2 em diante. Cada fronteira da ordenação é
+    exatamente uma solução das seções 5.1–5.3: as equações do capítulo são o esqueleto do campo de curvas que a
+    sonda percorre. Classificar soluções e ordenar funções são o mesmo teorema visto de dois lados.</p>
+  </details>
+</div>
+
+<h3>Nível 4 — Impossíveis por enquanto</h3>
+<div class="exercicio">
+  <span class="nivel">N4 · E4.1</span>
+  <p>Escreva a raiz r de 2x = x<sup>x</sup> em forma fechada.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>A equação (x − 1)·ln x = ln 2 tem x dentro do logaritmo e fora dele ao mesmo tempo. Nenhuma sequência finita
+    de somas, produtos, raízes e logaritmos desfaz esse abraço: é preciso <em>inventar uma inversa nova</em> — a
+    função W de Lambert, definida como inversa de w ↦ w·e<sup>w</sup>. Com ela, 2x = x<sup>x</sup> se resolve; sem
+    a exponencial construída rigorosamente (séries de potências, convergência, inversão), W é um nome, não uma
+    função. O maquinário inteiro é o <strong>Capítulo 10</strong>. Até lá, r vive como este capítulo o deixou:
+    cercado por um certificado de doze casas — que é, aliás, como o computador que calcularia W também o conhece.</p>
+  </details>
+</div>
+<div class="exercicio">
+  <span class="nivel">N4 · E4.2</span>
+  <p>Resolva x² = x<sup>x</sup> em ℂ.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Em ℝ⁺, x<sup>x</sup> tem um valor; em ℂ, a definição z<sup>z</sup> = e<sup>z·log z</sup> tropeça em
+    “<em>qual</em> log?” — o logaritmo complexo tem infinitos valores, um por volta em torno da origem, e cada
+    escolha de ramo muda o conjunto solução. A pergunta nem sequer está bem posta antes de se construir: argumento
+    multivalorado e escolha de ramo (<strong>Capítulo 7</strong>), exponencial complexa
+    (<strong>Capítulo 10</strong>). Guarde a suspeita correta: o conjunto solução deixará de ser finito — a
+    aritmética de expoentes em ℂ é periódica, e periodicidade fabrica famílias inteiras onde ℝ tinha pontos.</p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> a coincidência tripla isolou o 2 porque três regras bastaram para
+  cancelar as coincidências baratas. Quantas regras uma coincidência precisa vencer para deixar de ser acidente?
+  A escada continua (tetração, segundo ciclo) — a singularidade sobrevive à subida?</li>
+  <li><strong>Porta fechada → Cap. 6:</strong> o teorema do valor intermediário, aqui importado, será demonstrado
+  — e testado contra funções que o violam sem completude.</li>
+  <li><strong>Porta fechada → Cap. 7:</strong> x<sup>x</sup> em ℂ; multivaloração e ramo.</li>
+  <li><strong>Porta fechada → Cap. 10:</strong> construção de ln e exp; Lambert W e a forma fechada de r;
+  interlúdio 0⁰ (E19).</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Oráculo triplo executado em
+  28/07/2026 com artefatos em <code>audit/</code> (varredura inteira 1..10000 com curto-circuito exato documentado,
+  bissecção certificada de r a doze casas, casos adversariais 0, 1 e negativos). Auditoria de gate v0: interação,
+  teclado, overflow, autocontenção sem rede, screenshots desktop e iPhone inspecionados. Pendências declaradas:
+  mineração do sítio pessoal (<code>sources.md</code>); decisão de tag <code>cap-03-gate0-r1</code> pelo leitor
+  primário. Formato mínimo cumprido por contrato: nenhuma seção histórica ou filosófica sem função demonstrativa.</p>
+  <p>MATH3us.md · Capítulo 3 · escavação · release: nenhuma (pronto para tag).</p>
+</footer>
+
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 3 — The Singularity of Four. Field of the three rules.
+ *
+ * Layer discipline (manual §2.1):
+ *  - The INTEGER table in section 2 is static exact arithmetic.
+ *  - This canvas is the observation layer: float64 samples of
+ *    2x, x^2, x^x = pow(x,x), drawn in DEVICE coordinates
+ *    (no giant ctx transforms — chapter 1 render incident).
+ * ============================================================ */
+
+const cv = document.getElementById("cv-plot");
+const ctx = cv.getContext("2d");
+const probeInput = document.getElementById("probe");
+const xmaxInput = document.getElementById("xmax");
+const xmaxVal = document.getElementById("xmax-val");
+const leitura = document.getElementById("leitura");
+
+const COL_SUM = "#1c5e3c", COL_PROD = "#8a3318", COL_POW = "#26221a";
+const ML = 46, MR = 14, MT = 12, MB = 32; // margins in device px
+
+function fmt(x, d) { return x.toFixed(d).replace(".", ","); }
+
+function getXmax() { return Number(xmaxInput.value) / 100; }
+function getProbe() { return Number(probeInput.value) / 100; }
+
+const fSum = x => 2 * x;
+const fProd = x => x * x;
+const fPow = x => Math.pow(x, x); // defined for x > 0
+
+function render() {
+  const xmax = getXmax();
+  const ymax = xmax * xmax;      // parabola reaches the top-right corner
+  const W = cv.width, H = cv.height;
+  const pw = W - ML - MR, ph = H - MT - MB;
+  const dx = x => ML + (x / xmax) * pw;
+  const dy = y => MT + ph - (y / ymax) * ph;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // axes + ticks (device coordinates throughout)
+  ctx.strokeStyle = "#c9bda3"; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(ML, MT); ctx.lineTo(ML, MT + ph); ctx.lineTo(ML + pw, MT + ph);
+  ctx.stroke();
+  ctx.fillStyle = "#4c443a"; ctx.font = "12px Georgia, serif";
+  const xstep = 0.5, ystep = ymax > 8 ? 2 : 1;
+  ctx.textAlign = "center";
+  for (let x = xstep; x <= xmax + 1e-9; x += xstep) {
+    const px = dx(x);
+    ctx.beginPath(); ctx.moveTo(px, MT + ph); ctx.lineTo(px, MT + ph + 4); ctx.stroke();
+    ctx.fillText(fmt(x, 1), px, MT + ph + 16);
+  }
+  ctx.textAlign = "right";
+  for (let y = ystep; y <= ymax + 1e-9; y += ystep) {
+    const py = dy(y);
+    ctx.beginPath(); ctx.moveTo(ML - 4, py); ctx.lineTo(ML, py); ctx.stroke();
+    ctx.fillText(String(y), ML - 7, py + 4);
+  }
+
+  // curves: sample left-to-right, break the path when leaving the field
+  const drawCurve = (f, color) => {
+    ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.beginPath();
+    let pen = false;
+    const N = 900;
+    for (let i = 1; i <= N; i++) {
+      const x = (i / N) * xmax;
+      const y = f(x);
+      if (y >= 0 && y <= ymax * 1.002) {
+        const px = dx(x), py = dy(Math.min(y, ymax));
+        pen ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        pen = true;
+      } else { pen = false; }
+    }
+    ctx.stroke();
+  };
+  drawCurve(fPow, COL_POW);
+  drawCurve(fProd, COL_PROD);
+  drawCurve(fSum, COL_SUM);
+
+  // probe: vertical line + one dot per curve (clamped info if off-field)
+  const xp = Math.min(getProbe(), xmax);
+  const vs = fSum(xp), vp = fProd(xp), vx = fPow(xp);
+  ctx.strokeStyle = "#b9ab8a"; ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]);
+  ctx.beginPath(); ctx.moveTo(dx(xp), MT); ctx.lineTo(dx(xp), MT + ph); ctx.stroke();
+  ctx.setLineDash([]);
+  const offField = [];
+  [[vx, COL_POW, "x^x"], [vp, COL_PROD, "x·x"], [vs, COL_SUM, "x+x"]].forEach(([v, c, nm]) => {
+    if (v <= ymax) {
+      ctx.beginPath(); ctx.arc(dx(xp), dy(v), 4, 0, 2 * Math.PI);
+      ctx.fillStyle = c; ctx.fill();
+      ctx.strokeStyle = "#fffdf7"; ctx.lineWidth = 1; ctx.stroke();
+    } else { offField.push(nm + " = " + fmt(v, 2)); }
+  });
+  if (offField.length) { // out-of-field annotation (chapter 1 lesson)
+    const msg = "fora do campo: " + offField.join(" · ");
+    ctx.font = "12px Georgia, serif";
+    const w = ctx.measureText(msg).width + 12;
+    ctx.fillStyle = "rgba(239,231,211,.92)"; ctx.fillRect(W - w, MT, w, 20);
+    ctx.fillStyle = "#4c443a"; ctx.textAlign = "left";
+    ctx.fillText(msg, W - w + 6, MT + 14);
+  }
+  ctx.textAlign = "left";
+
+  // status line (aria-live): the three values in text
+  xmaxVal.textContent = "0 ≤ x ≤ " + fmt(xmax, 1);
+  let msg = "sonda x = " + fmt(xp, 2) +
+    "  |  x+x = " + fmt(vs, 4) +
+    "  |  x·x = " + fmt(vp, 4) +
+    "  |  x^x = " + fmt(vx, 4);
+  const close = (u, v) => Math.abs(u - v) < 5e-5;
+  if (close(vs, vp) && close(vp, vx)) {
+    msg += "  |  as três coincidem na precisão exibida (observação, não prova)";
+  } else if (close(vs, vp) || close(vp, vx) || close(vs, vx)) {
+    msg += "  |  duas coincidem na precisão exibida";
+  }
+  if (offField.length) msg += "  |  " + offField.join(" e ") + " acima do campo";
+  leitura.textContent = msg;
+}
+
+// controls: slider, nudge buttons (keyboard-first), reset
+function nudge(steps) {
+  const v = Math.min(400, Math.max(2, Number(probeInput.value) + steps));
+  probeInput.value = String(v);
+  render();
+}
+document.getElementById("btn-left").addEventListener("click", () => nudge(-1));
+document.getElementById("btn-right").addEventListener("click", () => nudge(1));
+document.getElementById("btn-reset").addEventListener("click", () => {
+  probeInput.value = "100"; xmaxInput.value = "250"; render();
+});
+probeInput.addEventListener("input", render);
+xmaxInput.addEventListener("input", render);
+
+render();
+</script>
+</body>
+</html>

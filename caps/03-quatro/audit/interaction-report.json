@@ -1,0 +1,120 @@
+{
+  "chapter_dir": "/home/user/MATH3us/.claude/worktrees/agent-a4d839b9764a264cb/caps/03-quatro",
+  "script": "caps/03-quatro/audit.mjs",
+  "code_commit": "e2cb3ef",
+  "date": "2026-07-28",
+  "gate": "v0",
+  "checks": {
+    "desktop.probe_triple_at_x2": {
+      "passed": true,
+      "detail": "\"sonda x = 2,00  |  x+x = 4,0000  |  x·x = 4,0000  |  x^x = 4,0000  |  as três coincidem na precisão exibida (o…\""
+    },
+    "desktop.probe_pairwise_at_x1": {
+      "passed": true
+    },
+    "desktop.nudge_buttons": {
+      "passed": true
+    },
+    "desktop.keyboard_activation": {
+      "passed": true
+    },
+    "desktop.window_control": {
+      "passed": true
+    },
+    "desktop.small_root_region_readable": {
+      "passed": true,
+      "detail": "\"sonda x = 0,30  |  x+x = 0,6000  |  x·x = 0,0900  |  x^x = 0,6968…\""
+    },
+    "desktop.no_horizontal_overflow": {
+      "passed": true
+    },
+    "desktop.canvas_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0331"
+    },
+    "desktop.canvas_painted_across_window_range": {
+      "passed": true,
+      "detail": "share xmax=1,2: 0.0399, xmax=4,0: 0.0331"
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=6, imgs=0"
+    },
+    "desktop.aria_live_region_present": {
+      "passed": true
+    },
+    "desktop.integer_table_rows": {
+      "passed": true,
+      "detail": "rows=5 (k = 1..5)"
+    },
+    "desktop.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=10, gabaritos=10"
+    },
+    "desktop.gabarito_keyboard_toggle": {
+      "passed": true
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.probe_triple_at_x2": {
+      "passed": true,
+      "detail": "\"sonda x = 2,00  |  x+x = 4,0000  |  x·x = 4,0000  |  x^x = 4,0000  |  as três coincidem na precisão exibida (o…\""
+    },
+    "iphone.probe_pairwise_at_x1": {
+      "passed": true
+    },
+    "iphone.nudge_buttons": {
+      "passed": true
+    },
+    "iphone.keyboard_activation": {
+      "passed": true
+    },
+    "iphone.window_control": {
+      "passed": true
+    },
+    "iphone.small_root_region_readable": {
+      "passed": true,
+      "detail": "\"sonda x = 0,30  |  x+x = 0,6000  |  x·x = 0,0900  |  x^x = 0,6968…\""
+    },
+    "iphone.no_horizontal_overflow": {
+      "passed": true
+    },
+    "iphone.canvas_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0331"
+    },
+    "iphone.canvas_painted_across_window_range": {
+      "passed": true,
+      "detail": "share xmax=1,2: 0.0399, xmax=4,0: 0.0331"
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=6, imgs=0"
+    },
+    "iphone.aria_live_region_present": {
+      "passed": true
+    },
+    "iphone.integer_table_rows": {
+      "passed": true,
+      "detail": "rows=5 (k = 1..5)"
+    },
+    "iphone.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=10, gabaritos=10"
+    },
+    "iphone.gabarito_keyboard_toggle": {
+      "passed": true
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}
