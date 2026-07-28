@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do Número ao Contínuo — reconstrução formal de uma matemática já vivida</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:50rem; margin:0 auto; padding:3rem 1.25rem 5rem}
+  header.obra{border-bottom:3px double var(--rule); padding-bottom:1.8rem; margin-bottom:2.2rem; text-align:center}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.3rem; margin:.4rem 0 .3rem; font-weight:normal}
+  .subtitulo{font-style:italic; color:var(--ink-soft)}
+  h2{font-size:1.35rem; margin:2.6rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  a{color:var(--accent)}
+  a:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.97rem}
+  th,td{border:1px solid var(--rule); padding:.45rem .7rem; text-align:left}
+  th{background:var(--box); font-weight:normal; font-variant:small-caps; letter-spacing:.06em}
+  td.num{text-align:center; font-family:'Courier New',monospace; width:3.2rem}
+  .estado{font-size:.85rem; font-variant:small-caps; letter-spacing:.08em; white-space:nowrap}
+  .aberto{color:var(--accent)}
+  .previsto{color:var(--ink-soft)}
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .divisa{text-align:center; font-variant:small-caps; letter-spacing:.12em; margin:2rem 0; color:var(--accent)}
+  footer{border-top:3px double var(--rule); margin-top:3rem; padding-top:1.4rem; font-size:.92rem; color:var(--ink-soft)}
+  .parte{font-variant:small-caps; letter-spacing:.1em; color:var(--ink-soft); font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+
+<header class="obra">
+  <span class="kicker">Tratado · repositório vivo</span>
+  <h1>Do Número ao Contínuo</h1>
+  <p class="subtitulo">reconstrução formal de uma matemática já vivida</p>
+</header>
+
+<p>Este não é um curso, nem uma enciclopédia, nem um currículo. É uma biografia intelectual em andamento:
+o registro da distância entre o que foi intuído, o que foi afirmado, o que era demonstrável e o que precisou
+ser reconstruído. Cada capítulo declara seu tipo — <strong>escavação</strong> de uma descoberta anterior ou
+<strong>território virgem</strong> — e nenhum resultado entra sem que sua proveniência, sua prova e seus
+limites estejam no ledger.</p>
+
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<h2>Capítulos</h2>
+<table>
+  <thead><tr><th scope="col">№</th><th scope="col">Capítulo</th><th scope="col">Estado</th></tr></thead>
+  <tbody>
+    <tr><td colspan="3" class="parte">Parte I — Escavações</td></tr>
+    <tr><td class="num">1</td><td><a href="caps/01-exaustao/">A Exaustão</a> — por que o cerco de Arquimedes converge, e com que velocidade</td><td class="estado aberto">aberto</td></tr>
+    <tr><td class="num">2</td><td>As Ternas do Ímpar</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">3</td><td>A Singularidade do Quatro</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">4</td><td>Os Algarismos Repetidos</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">5</td><td>A Consonância</td><td class="estado previsto">previsto</td></tr>
+    <tr><td colspan="3" class="parte">Parte II — Territórios virgens</td></tr>
+    <tr><td class="num">6</td><td>As Patologias</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">7</td><td>ℂ</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">8</td><td>Álgebra Linear como Estrutura</td><td class="estado previsto">previsto</td></tr>
+    <tr><td colspan="3" class="parte">Parte III — O contínuo e a síntese</td></tr>
+    <tr><td class="num">9</td><td>A Integral como Erro Somado</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">10</td><td>A Fábrica de Funções</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">11</td><td>Fourier</td><td class="estado previsto">previsto</td></tr>
+    <tr><td class="num">12</td><td>Síntese: e<sup>iπ</sup> + 1 = 0</td><td class="estado previsto">previsto</td></tr>
+  </tbody>
+</table>
+
+<div class="caixa">
+  <p style="margin:0"><strong>Estados.</strong> <em>Aberto</em>: o capítulo existe e é legível, mas ainda não
+  cumpriu a definição de capítulo fechado do manual (oráculo triplo com artefatos, auditoria de gate, release
+  taggeada). <em>Previsto</em>: contrato editorial fixado no manual; desenvolvimento não iniciado.
+  Não existe capítulo “terminado” fora de release verificável — e não existe obra terminada.</p>
+</div>
+
+<h2>Constituição</h2>
+<p>A doutrina completa — critério de corte, ledger epistemológico, gates de verificação, oráculo triplo,
+governança de emendas — está em
+<a href="https://github.com/Drmcoelho/MATH3us/blob/main/MATH3us.md">MATH3us.md</a>,
+o manual operacional do tratado (revisão 2, emendas E1–E19).</p>
+
+<footer>
+  <p>Matheus M. Coelho · repositório <a href="https://github.com/Drmcoelho/MATH3us">Drmcoelho/MATH3us</a> ·
+  linhagem atlas-artefato · cada release de capítulo é um HTML autocontido que funciona sem rede.</p>
+</footer>
+
+</main>
+</body>
+</html>
