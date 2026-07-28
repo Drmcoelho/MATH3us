@@ -1,7 +1,7 @@
 {
   "chapter_dir": "/home/user/MATH3us/caps/00-inferencia",
   "script": "tools/audit-ch00.mjs",
-  "code_commit": "31bc78c",
+  "code_commit": "a7a41c1",
   "date": "2026-07-28",
   "gate": "v0",
   "checks": {
