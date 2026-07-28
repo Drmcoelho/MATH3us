@@ -1,0 +1,32 @@
+release: cap-00-gate0-r1
+chapter: 0
+content_revision: 1
+gate_version: 1
+commit: 73caa07
+previous_release: null
+date: 2026-07-28
+primary_reader_verdict: given 2026-07-28 ("Ok" to the D1 execution plan; AUDIT.md D1)
+notes: >
+  Second chapter to close, which activates gate v1 (manual section 1.7):
+  claims.yml validated by tools/verify-claims.mjs (16 claims, zero
+  findings) in addition to the gate v0 audit. The frozen state is the
+  post-integration re-audit (PR #10 merge): oracle 12/12, gate v0
+  31/31, artifacts matching content byte-for-byte.
+audit:
+  oracle_report: caps/00-inferencia/audit/numeric-check.json
+  interaction_report: caps/00-inferencia/audit/interaction-report.json
+  symbolic_check: caps/00-inferencia/audit/symbolic-check.md
+  edge_cases: caps/00-inferencia/audit/edge-cases.md
+  screenshots:
+    - caps/00-inferencia/audit/desktop.png
+    - caps/00-inferencia/audit/iphone.png
+tag_status: >
+  Annotated tag cap-00-gate0-r1 -> 73caa07 was created locally in the
+  working session; pushing tags is refused by this session's git proxy
+  (branch pushes only) - same limitation recorded in the r1 manifest of
+  chapter 1. The remote tag must be created by the repository owner:
+    git fetch origin main
+    git tag -a cap-00-gate0-r1 73caa07 -m "chapter 0 release: gate v1, content revision 1"
+    git push origin cap-00-gate0-r1
+  (or GitHub UI: Releases -> Draft new release -> tag cap-00-gate0-r1,
+  target commit 73caa07). This manifest is the durable release record.

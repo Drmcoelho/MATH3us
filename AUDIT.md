@@ -7,9 +7,11 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 28/07/2026 · pós-merge dos PRs #8 (prólogo), #9 (Caps. 2–4) e
-#10 (reauditoria do Cap. 0 sobre o estado integrado, `73caa07`) ·
-reconciliação da sessão-coordenadora: tabela completa 0–4 e Decisão D4.
+**Fotografia:** 28/07/2026 · decisões D1 e D2′ exercidas ("Ok" do leitor
+primário) sobre `73caa07`; manifests commitados; tags locais criadas —
+**tags remotas pendentes do proprietário** (o proxy dos agentes recusa push
+de tags): `cap-01-gate0-r1` → `f049091`, `cap-00-gate0-r1` → `73caa07`,
+`cap-01-gate0-r2` → `73caa07`.
 
 ---
 
@@ -17,21 +19,38 @@ reconciliação da sessão-coordenadora: tabela completa 0–4 e Decisão D4.
 
 | Cap. | Título | Pré-registro | Oráculo triplo | Gate v0 | Ledger | Release |
 |---|---|---|---|---|---|---|
-| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **nenhuma — aguarda Decisão D1** |
-| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido; `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r1** (`085e494`); correções pós-release neste merge — **aguarda Decisão D2′ (r2)** |
+| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **cap-00-gate0-r1** (`73caa07`, D1 exercida 28/07; tag remota pendente do proprietário) |
+| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido; `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r2** (`73caa07`, D2′ exercida 28/07; tags remotas r1 e r2 pendentes do proprietário) |
 | 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
 | 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
 | 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
 | 5–12 | — | contrato editorial no manual | — | — | — | previstos |
 
-Nenhum item vigente do §10 está pendente para os Capítulos 0–4 **exceto as
-tags de release** — que o manual reserva, deliberadamente, a um ato humano.
+Nenhum item vigente do §10 está pendente para os Capítulos 0–4 exceto:
+**as três tags remotas** (0 e 1: decisões já exercidas, falta só o push do
+proprietário — comandos nas seções D1/D2/D2′) e **as decisões D4** (Caps.
+2–4, travadas até o gate v2 existir e rodar).
+
+```
+# push das tags remotas (proprietário; uma vez só):
+git fetch origin main
+git tag -a cap-01-gate0-r1 f049091 -m "chapter 1 release: gate v0, content revision 1" 2>/dev/null || true
+git tag -a cap-00-gate0-r1 73caa07 -m "chapter 0 release: gate v1, content revision 1" 2>/dev/null || true
+git tag -a cap-01-gate0-r2 73caa07 -m "chapter 1 release: content revision 2" 2>/dev/null || true
+git push origin cap-01-gate0-r1 cap-00-gate0-r1 cap-01-gate0-r2
+```
 
 ---
 
 ## 2. Decisões pendentes do leitor primário
 
-### D1 — Tag de release do Capítulo 0: `cap-00-gate0-r1`
+### D1 — Tag de release do Capítulo 0: `cap-00-gate0-r1` — **EXERCIDA** (28/07/2026)
+
+**Registro da execução.** "Ok" do leitor primário ao plano; tag local
+anotada `cap-00-gate0-r1` → `73caa07`; manifest em
+`releases/manifests/cap-00-gate0-r1.yml`; rodapé do capítulo e índice do
+tratado atualizados. **Pendente apenas a tag remota** (ato do proprietário —
+comando abaixo; o proxy dos agentes recusa push de tags).
 
 **O que é.** O ato que fecha o capítulo (§1.7, §10): uma tag Git **imutável**
 apontando para o commit auditado. Depois dela, qualquer correção de conteúdo
@@ -72,7 +91,12 @@ A tag `cap-01-gate0-r1` foi criada no main (`085e494`, manifest em
 teorema, a refutação de C5 (autópsia em `conjecturas.md`) e o tooling de
 gate v1. Decisão registrada; nada mais pendente sob este número.
 
-### D2′ — Revisão r2 do Capítulo 1: `cap-01-gate0-r2`
+### D2′ — Revisão r2 do Capítulo 1: `cap-01-gate0-r2` — **EXERCIDA** (28/07/2026)
+
+**Registro da execução.** Mesmo ato ("Ok"): tag local anotada
+`cap-01-gate0-r2` → `73caa07`; manifest em
+`releases/manifests/cap-01-gate0-r2.yml`; rodapé e índice atualizados.
+**Pendente apenas a tag remota** (proprietário).
 
 **Por que existe.** A integração do merge (PR #8) trouxe ao Capítulo 1
 correções de conteúdo **posteriores à tag r1**: a constante da folga de

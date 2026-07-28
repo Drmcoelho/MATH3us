@@ -1,0 +1,35 @@
+release: cap-01-gate0-r2
+chapter: 1
+content_revision: 2
+gate_version: 1
+commit: 73caa07
+previous_release: cap-01-gate0-r1
+date: 2026-07-28
+primary_reader_verdict: given 2026-07-28 ("Ok" to the D2-prime execution plan; AUDIT.md D2')
+notes: >
+  Content revision per amendment E9: post-r1 corrections integrated in
+  the PR #8 merge - the semiperimeter-gap asymptotic constant corrected
+  from pi^3/n^2 to pi^3/(2 n^2) in the promoted quarter-ratio section,
+  in exercise E4.2's answer and in the ledger (the swap had reappeared
+  in the parallel promotion wording; incident recorded in AUDIT.md
+  section 4 and in the claim's correction_log). Oracle and gate v0
+  audit re-run over the integrated content; gate v1 (verify-claims)
+  passed with 9 claims, zero findings.
+audit:
+  oracle_report: caps/01-exaustao/audit/numeric-check.json
+  interaction_report: caps/01-exaustao/audit/interaction-report.json
+  symbolic_check: caps/01-exaustao/audit/symbolic-check.md
+  edge_cases: caps/01-exaustao/audit/edge-cases.md
+  screenshots:
+    - caps/01-exaustao/audit/desktop.png
+    - caps/01-exaustao/audit/iphone.png
+tag_status: >
+  Annotated tag cap-01-gate0-r2 -> 73caa07 was created locally in the
+  working session; pushing tags is refused by this session's git proxy
+  (branch pushes only). The remote tag must be created by the
+  repository owner:
+    git fetch origin main
+    git tag -a cap-01-gate0-r2 73caa07 -m "chapter 1 release: content revision 2 (pi^3/2 constant correction)"
+    git push origin cap-01-gate0-r2
+  Note: the remote tag for cap-01-gate0-r1 (-> f049091) is also still
+  pending the owner's push, per that manifest's own tag_status.
