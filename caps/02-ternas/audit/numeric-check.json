@@ -1,0 +1,190 @@
+{
+  "chapter": 2,
+  "script": "caps/02-ternas/oracle.py",
+  "code_commit": "3c8942d",
+  "date": "2026-07-28",
+  "environment": "python 3.11.15, stdlib only, linux",
+  "implementations": {
+    "A": "direct closed formulas (exact ints): L, R, P, s, K, r, r_n",
+    "B": "Euclid reconstruction u=(n+1)/2, v=(n-1)/2 -> (u^2-v^2, 2uv, u^2+v^2); s by literal summation; radii from K/s and K/(s-n)"
+  },
+  "tested_domain": {
+    "odd_n": {
+      "min": 3,
+      "max": 20001,
+      "step": 2
+    },
+    "adversarial_even": [
+      2,
+      4,
+      100
+    ],
+    "degenerate": [
+      1,
+      0,
+      -5
+    ],
+    "huge_exact": 1000001,
+    "euclid_scan_u_max": 60,
+    "diff2_scan_m_max": 2000
+  },
+  "invariants": {
+    "I1_pythagoras_gap_one": {
+      "passed": true
+    },
+    "I2_euclid_reconstruction_independent": {
+      "passed": true
+    },
+    "I3_pairwise_coprimality_C1": {
+      "passed": true
+    },
+    "I4_modular_structure_mod8_mod4": {
+      "passed": true
+    },
+    "I5_measures_P_s_K_C4": {
+      "passed": true,
+      "s_by_literal_summation_hits": 10000,
+      "expected": 10000
+    },
+    "I6_radii_identities": {
+      "passed": true
+    },
+    "I7_exradii_and_C5_in_family": {
+      "passed": true
+    },
+    "I8_second_differences_C2": {
+      "passed": true
+    },
+    "I9_C5_general_right_triangles": {
+      "passed": true,
+      "triangles_scanned": 737
+    },
+    "I10_diff2_family_C3": {
+      "passed": true,
+      "m_scanned": 1999
+    }
+  },
+  "all_passed": true,
+  "sample_values": [
+    {
+      "n": 3,
+      "L": 4,
+      "R": 5,
+      "P": 12,
+      "s": 6,
+      "K": 6,
+      "r": 1,
+      "rn": 2
+    },
+    {
+      "n": 5,
+      "L": 12,
+      "R": 13,
+      "P": 30,
+      "s": 15,
+      "K": 30,
+      "r": 2,
+      "rn": 3
+    },
+    {
+      "n": 7,
+      "L": 24,
+      "R": 25,
+      "P": 56,
+      "s": 28,
+      "K": 84,
+      "r": 3,
+      "rn": 4
+    },
+    {
+      "n": 9,
+      "L": 40,
+      "R": 41,
+      "P": 90,
+      "s": 45,
+      "K": 180,
+      "r": 4,
+      "rn": 5
+    },
+    {
+      "n": 11,
+      "L": 60,
+      "R": 61,
+      "P": 132,
+      "s": 66,
+      "K": 330,
+      "r": 5,
+      "rn": 6
+    },
+    {
+      "n": 13,
+      "L": 84,
+      "R": 85,
+      "P": 182,
+      "s": 91,
+      "K": 546,
+      "r": 6,
+      "rn": 7
+    },
+    {
+      "n": 15,
+      "L": 112,
+      "R": 113,
+      "P": 240,
+      "s": 120,
+      "K": 840,
+      "r": 7,
+      "rn": 8
+    },
+    {
+      "n": 17,
+      "L": 144,
+      "R": 145,
+      "P": 306,
+      "s": 153,
+      "K": 1224,
+      "r": 8,
+      "rn": 9
+    },
+    {
+      "n": 19,
+      "L": 180,
+      "R": 181,
+      "P": 380,
+      "s": 190,
+      "K": 1710,
+      "r": 9,
+      "rn": 10
+    },
+    {
+      "n": 21,
+      "L": 220,
+      "R": 221,
+      "P": 462,
+      "s": 231,
+      "K": 2310,
+      "r": 10,
+      "rn": 11
+    },
+    {
+      "n": 1001,
+      "L": 501000,
+      "R": 501001,
+      "P": 1003002,
+      "s": 501501,
+      "K": 250750500,
+      "r": 500,
+      "rn": 501
+    },
+    {
+      "n": 20001,
+      "L": 200020000,
+      "R": 200020001,
+      "P": 400060002,
+      "s": 200030001,
+      "K": 2000300010000,
+      "r": 10000,
+      "rn": 10001
+    }
+  ]
+}

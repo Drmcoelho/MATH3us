@@ -1,0 +1,347 @@
+# Chapter 2 — The Odd Triples. Epistemological ledger (MATH3us.md §1.4, §8).
+# NOTE (E12): verification statuses below are backed by artifacts in audit/,
+# produced by the oracle and audit runs registered at the end of this file.
+# The exploratory (non-canonical) verification of 2026-07-28 recorded in the
+# manual is NOT a witness for anything here; it remains downgraded per E12.
+
+chapter: 2
+claims:
+  - id: chapter-02.parity-lemma
+    statement: >
+      For every odd integer n, n^2 == 1 (mod 8); hence L = (n^2-1)/2 and
+      R = (n^2+1)/2 are integers with L == 0 (mod 4) and R == 1 (mod 4).
+      For even n, n^2 +- 1 is odd and L, R are not integers (the family
+      refuses even n by integrality, not by convention).
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#estrutura-modular"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S4" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I4" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "even n refused with non-integer witness" }
+
+  - id: chapter-02.primitivity
+    statement: >
+      In the family, the three sides are pairwise coprime:
+      gcd(L, R) = gcd(n, L) = gcd(n, R) = 1 (consecutiveness R - L = 1
+      forces gcd(L, R) = 1; 2L = n^2 - 1 and 2R = n^2 + 1 force the rest).
+      Hence every family triple is primitive. Pairwise coprimality is the
+      preregistered conjecture C1, stronger than the contract's gcd(n,L)=1.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#primitividade"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S3" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I3 (math.gcd, independent)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.odd-triple-forward
+    statement: >
+      For every odd integer n >= 3, (n, (n^2 - 1)/2, (n^2 + 1)/2) is a
+      primitive Pythagorean triple with R - L = 1 and L > n (L is the
+      larger leg). n = 1 is degenerate (L = 0) and excluded by hypothesis.
+    kind: theorem
+    status: proved
+    provenance: rediscovered
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-02.parity-lemma"
+      - claim: "chapter-02.primitivity"
+    proof_location: "#demonstracao-direta"
+    notes: >
+      Personal rediscovery of a classical family (site: 3-4-5, 5-12-13,
+      7-24-25 and the intuition "every odd number generates a triple").
+      The identity proof is one line via difference of squares of
+      consecutive integers: R^2 - L^2 = R + L = n^2.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S1" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I1 + I2 (independent Euclid reconstruction)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "n=1 refused; huge n = 10^6+1 exact" }
+
+  - id: chapter-02.consecutive-classification
+    statement: >
+      Every integer right triangle whose larger leg and hypotenuse differ
+      by one belongs to the odd family, and the map n -> (n, L, R) is a
+      bijection between odd n >= 3 and such triples. No primitivity
+      hypothesis is needed: consecutiveness determines everything.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-02.odd-triple-forward"
+    proof_location: "#reciproca"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S2" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I2 (reconstruction round-trip)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "degenerate a=1 -> b=0 excluded" }
+
+  - id: chapter-02.measures
+    statement: >
+      In the family: perimeter P = n(n+1); semiperimeter s = n(n+1)/2 is
+      the n-th triangular number (equal to 1+2+...+n); area
+      K = n(n^2-1)/4 is an integer and even.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    dependencies:
+      - claim: "chapter-02.odd-triple-forward"
+      - claim: "chapter-02.parity-lemma"
+    proof_location: "#medidas"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S5" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I5 (s checked by formula AND by literal summation)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.inradius-exradius-identity
+    statement: >
+      In the odd family, the inradius is r = (n-1)/2 and the exradius
+      opposite the odd leg is r_n = (n+1)/2; hence r_n - r = 1. Control
+      identities K = r*s and K = r_n*(s-n) hold exactly.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-02.odd-triple-forward"
+      - claim: "chapter-02.measures"
+    proof_location: "#geometria-interna"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I6" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.euclid-parameterization
+    statement: >
+      For integers u > v >= 1, coprime and of opposite parity,
+      (u^2 - v^2, 2uv, u^2 + v^2) is a primitive Pythagorean triple, and
+      every primitive Pythagorean triple has this form up to swapping the
+      legs. Imported as classical material (Euclid, Elements, lemma to
+      X.28-29 in the modern reading); not proved in this chapter.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    notes: >
+      Only the statement is used, and only for the "conversely" half of
+      the Euclidean reading. The chapter's own proofs (direct, reciprocal,
+      primitivity) do not depend on it. Reference edition to be fixed at
+      release (sources.md pending item).
+
+  - id: chapter-02.euclid-inverse-reading
+    statement: >
+      With u = (n+1)/2 and v = (n-1)/2 (integers, consecutive, coprime,
+      opposite parity), u^2 - v^2 = n, 2uv = L, u^2 + v^2 = R: the family
+      is exactly the u - v = 1 slice of Euclid's parameterization.
+      Moreover, in any Euclid triple the hypotenuse minus the even leg is
+      (u - v)^2, a perfect square; it equals 1 iff u - v = 1.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-02.odd-triple-forward"
+      - claim: "chapter-02.euclid-parameterization"
+    proof_location: "#leitura-euclidiana"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S7" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I2" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.second-differences
+    statement: >
+      Along consecutive odd n, L(n+2) - L(n) = 2(n+1); the second
+      differences of L (and R) are constantly 4 -- the discrete signature
+      of the parabolas L(n), R(n). (Preregistered conjecture C2, confirmed.)
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-02.odd-triple-forward"
+    proof_location: "#exercicios"
+    notes: "Proved in exercise E2.1 with full gabarito."
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "C2 block" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I8" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.area-divisible-by-six
+    statement: >
+      K = n(n^2-1)/4 is divisible by 6 for every odd n >= 3.
+      (Preregistered conjecture C4, confirmed.)
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-02.measures"
+      - claim: "chapter-02.parity-lemma"
+    proof_location: "#exercicios"
+    notes: "Proved in exercise E2.3 (window-of-three-consecutives argument)."
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S5, C4 part" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I5" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.exradius-hypotenuse-semiperimeter
+    statement: >
+      In the family, s - L = (n+1)/2 and s - R = (n-1)/2; the remaining
+      exradii are r_L = n(n-1)/2 = s - n and r_R = n(n+1)/2 = s. The
+      identity r_c = s (exradius opposite the hypotenuse equals the
+      semiperimeter) holds in EVERY right triangle, via r = s - c and
+      K = r*s. (Preregistered conjecture C5, confirmed.)
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-02.inradius-exradius-identity"
+      - claim: "chapter-02.measures"
+    proof_location: "#exercicios"
+    notes: >
+      Proved in exercise E3.1. Numeric witness I9 scans Euclid right
+      triangles far outside the family (u <= 60), confirming generality.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6, exradii part" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I7 (family) + I9 (general scan)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.diff2-family
+    statement: >
+      The Pythagorean triples in which the hypotenuse exceeds a leg by 2
+      are exactly (2m, m^2 - 1, m^2 + 1) for m >= 2, and such a triple is
+      primitive iff m is even. In Euclid parameters this is the v = 1
+      slice, mirror of the family's u - v = 1 slice.
+      (Preregistered conjecture C3, confirmed.)
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-02.euclid-inverse-reading"
+    proof_location: "#exercicios"
+    notes: "Proved in exercise E3.2 with full gabarito."
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "C3 block" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/02-ternas/oracle.py", note: "I10 (m <= 2000)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-02.consecutive-integers-triple-role
+    statement: >
+      The same consecutive integers v = (n-1)/2 and u = (n+1)/2 appear as
+      Euclid parameters of the triple, as inradius and exradius opposite
+      the odd leg, and as the family's second structural consecutiveness
+      (R - L = 1 reincarnated as r_n - r = 1 and u - v = 1).
+    kind: synthesis
+    status: supported
+    provenance: authorial
+    proof_mode: not_applicable
+    priority_note: >
+      Authorial synthesis within this treatise; historical priority not
+      established. ("Síntese autoral no âmbito deste tratado; prioridade
+      histórica não estabelecida.")
+    dependencies:
+      - claim: "chapter-02.inradius-exradius-identity"
+      - claim: "chapter-02.euclid-inverse-reading"
+      - claim: "chapter-02.odd-triple-forward"
+    proof_location: "#sintese-consecutivos"
+    notes: >
+      The component identities are proved theorems (see dependencies);
+      the organizational coincidence itself is not a provable statement
+      and is typed accordingly (E6 separation).
+
+  - id: chapter-02.sum-of-two-squares-door
+    statement: >
+      Which primes are sums of two squares? The chapter proves the cheap
+      half for its hypotenuses (R = u^2 + v^2 and R == 1 mod 4); the
+      converse (Fermat) requires arithmetic in Z[i].
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    dependencies:
+      - claim: "chapter-02.parity-lemma"
+      - claim: "chapter-02.euclid-inverse-reading"
+    notes: >
+      Locked door, reopened in Chapter 7 (future chapter, explicitly
+      marked as such per E13; no claim of that chapter is referenced).
+
+  - id: chapter-02.consecutive-legs-question
+    statement: >
+      Classify the Pythagorean triples with consecutive legs (3-4-5,
+      20-21-29, 119-120-169, ...). Leads to 2a^2 + 2a + 1 = c^2, a Pell
+      relative, requiring continued fractions of sqrt(2).
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    notes: >
+      Exercise E4.1 (N4). Locked door, reopened in Chapter 5 (future
+      chapter, explicitly marked as such per E13).
+
+# --- execution registry (E12): who witnessed what, when -------------------
+oracle_run:
+  script: caps/02-ternas/oracle.py
+  report: caps/02-ternas/audit/numeric-check.json
+  edge_report: caps/02-ternas/audit/edge-cases.md
+  code_commit: 3c8942d
+  environment: "python 3.11.15, stdlib only, linux"
+  date: 2026-07-28
+  tested_domain:
+    odd_n: { min: 3, max: 20001, step: 2 }
+    adversarial_even: [2, 4, 100]
+    degenerate_refused: [1, 0, -5]
+    huge_exact: 1000001
+    euclid_scan_u_max: 60
+    diff2_scan_m_max: 2000
+  implementations:
+    - "direct closed formulas, exact Python ints (L, R, P, s, K, r, r_n)"
+    - "independent Euclid reconstruction u=(n+1)/2, v=(n-1)/2 -> (u^2-v^2, 2uv, u^2+v^2); s by literal summation; radii from K/s, K/(s-n); primitivity via math.gcd"
+  result: all_passed
+  invariants: 10
+  notes: >
+    First canonical run passed 10/10 invariants and all edge cases on the
+    first execution; no statement needed correction. The float64 trap at
+    n = 10^6 + 1 (edge case E5) was found while WRITING section 6 of the
+    chapter: the first draft claimed float64 "would approve by rounding";
+    the actual computation shows it REFUTES the true identity
+    (test = -33554432.0). The prose was corrected before publication and
+    the corrected behaviour is what the artifact records.
+
+audit_run:
+  script: caps/02-ternas/audit.mjs
+  report: caps/02-ternas/audit/interaction-report.json
+  screenshots: [caps/02-ternas/audit/desktop.png, caps/02-ternas/audit/iphone.png]
+  code_commit: 3c8942d
+  gate: v0
+  date: 2026-07-28
+  result: all_passed
+  render_seen: true
+  notes: >
+    Gate v0 checks per viewport (1440x900 desktop, 390x844 iPhone):
+    interaction values verified against an in-test independent
+    computation, keyboard activation, prev/reset round trip, slider,
+    no horizontal overflow, canvases labeled and painted (every pixel
+    read -- Chapter 1's aliasing lesson), formulas textual (no <img>),
+    aria-live present, table highlight follows state, exercises >= 13
+    with gabaritos >= exercises, first gabarito toggles, zero non-file
+    network requests. Screenshots inspected by the responsible agent.

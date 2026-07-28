@@ -111,10 +111,17 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 | Cap. | Estado | Branch | Última auditoria |
 |---|---|---|---|
 | 1 | **fechado** — release cap-01-gate0-r1 (manifest em `releases/manifests/`; tag remota a criar pelo proprietário) | coordenadora | 28/07/2026 — oráculo 8/8, auditoria 25/25 por viewport |
-| 2 | em produção — Onda 1 (agent-cap-02, worktree) | wave1/cap-02 | — |
-| 3 | em produção — Onda 1 (agent-cap-03, worktree) | wave1/cap-03 | — |
-| 4 | em produção — Onda 1 (agent-cap-04, worktree) | wave1/cap-04 | — |
+| 2 | **integrado** — auditado v0 (oráculo 10/10, auditoria 29/29); aguarda veredito do leitor primário para tag | wave1/cap-02 → coordenadora | 28/07/2026 |
+| 3 | **integrado** — auditado v0 (oráculo 7/7, auditoria 31/31); formato mínimo comprovado; aguarda veredito | wave1/cap-03 → coordenadora | 28/07/2026 |
+| 4 | **integrado** — auditado v0 (oráculo 9/9 com 27.986 expansões, auditoria 41/41); aguarda veredito | wave1/cap-04 → coordenadora | 28/07/2026 |
 | 5–12 | previstos | — | — |
+
+**Onda 1 concluída em 28/07/2026:** três agentes paralelos em worktrees,
+dois commits por capítulo (pré-registro isolado antes do build, §1.3),
+integração por cherry-pick na coordenadora, cada ledger validado pelo
+`verify-claims.mjs` (gate v1 antecipado) com zero achados. Incidentes dos
+agentes registrados nos próprios capítulos, não apagados. Próxima onda
+(Caps. 6 e 7) pode disparar após o fechamento formal de 2–4.
 
 **Gate v1 pronto (antecipado):** `schemas/claims.schema.json` e
 `tools/verify-claims.mjs` já existem e validam o Cap. 1; tornam-se

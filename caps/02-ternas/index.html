@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 2 — As Ternas do Ímpar · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --in-color:#1c5e3c; --out-color:#8a3318; --circle-color:#26221a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  figure{margin:1.6rem 0}
+  figcaption{font-size:.92rem; color:var(--ink-soft); margin-top:.5rem}
+  .painel{
+    border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0;
+  }
+  .canvases{display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:flex-start}
+  canvas{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto}
+  .controles{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.9rem 0}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  label{font-size:.95rem}
+  input[type=range]{vertical-align:middle}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.98rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge);
+  }
+  .legenda-cores{font-size:.92rem; margin:.4rem 0}
+  .sw{display:inline-block; width:.85em; height:.85em; margin-right:.3em; vertical-align:baseline; border:1px solid var(--ink)}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  tr.atual td{background:var(--box); font-weight:bold}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  .exercicio{margin:1.4rem 0; padding-left:1.1rem; border-left:3px solid var(--box-edge)}
+  .exercicio .nivel{font-variant:small-caps; letter-spacing:.08em; font-size:.82rem; color:var(--accent)}
+  details.gab{margin:.6rem 0 0; background:var(--box); border:1px solid var(--box-edge); padding:.55rem .9rem}
+  details.gab summary{cursor:pointer; font-variant:small-caps; letter-spacing:.06em; color:var(--accent)}
+  details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.gab[open]{padding-bottom:.8rem}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Parte I</span>
+  <h1>Capítulo 2 — As Ternas do Ímpar</h1>
+  <p><span class="tipo">escavação</span></p>
+  <p class="pergunta">Todo ímpar gera uma terna — mas gera <strong>a</strong> terna? A regra que fabrica
+  3-4-5, 5-12-13, 7-24-25 produz exemplos ou <strong>classifica</strong> um fenômeno? O que exatamente a
+  consecutividade de cateto e hipotenusa <strong>força</strong>?
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2>1. O sítio</h2>
+<p>Três ternas de inteiros, conhecidas desde os agrimensores: 3-4-5, 5-12-13, 7-24-25. Cada uma forma um
+triângulo retângulo — 9&nbsp;+&nbsp;16&nbsp;=&nbsp;25; 25&nbsp;+&nbsp;144&nbsp;=&nbsp;169;
+49&nbsp;+&nbsp;576&nbsp;=&nbsp;625 — e as três exibem a mesma assinatura: um cateto <em>ímpar</em>, e os
+outros dois lados <em>consecutivos</em>: 4 e 5; 12 e 13; 24 e 25. Daí a intuição do sítio, na sua
+formulação original: <em>todo ímpar gera uma terna</em>.</p>
+<p>O estado documental do sítio está declarado em <code>sources.md</code>: a mineração dos registros
+pessoais ainda não ocorreu, e nada aqui será apresentado como memória recuperada. O que este capítulo
+escava é a própria intuição — e a falha prevista pelo manual é precisa: <strong>reconhecer o padrão sem
+provar universalidade, unicidade ou primitividade</strong>. Um padrão que produz exemplos é um truque;
+um padrão que classifica é um teorema. A distância entre os dois é o assunto do capítulo.</p>
+<p>Antes de qualquer fórmula, olhe de novo para as três ternas. Há um segredo aritmético à vista de todos:</p>
+<p class="formula">4 + 5 = 9 = 3² &nbsp;&nbsp;·&nbsp;&nbsp; 12 + 13 = 25 = 5² &nbsp;&nbsp;·&nbsp;&nbsp; 24 + 25 = 49 = 7².</p>
+<p>Os dois lados consecutivos <em>somam o quadrado do ímpar</em>. Se isso for lei, ela dita a máquina:
+dado o ímpar n, tome n², parta-o em duas metades consecutivas — a de baixo e a de cima — e aposte que
+elas fecham um triângulo retângulo com n. É essa aposta que o experimento a seguir testa.</p>
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<!-- ============================================================ -->
+<h2 id="experimento">2. O experimento</h2>
+<p>A máquina abaixo recebe um ímpar n e constrói a candidata: L = (n²−1)/2 e R = (n²+1)/2 — as duas
+metades consecutivas de n², pois L + R = n² e R − L = 1. Em seguida ela faz três coisas: <em>testa</em>
+(computa n² + L² − R², que deveria dar zero); <em>desenha</em> o triângulo em escala, com a circunferência
+inscrita e a ex-inscrita oposta ao cateto ímpar; e <em>traça as parábolas</em> L(n) e R(n), onde a família
+inteira mora de uma vez. Percorra os ímpares e observe a figura <em>e</em> os números — como no Capítulo 1,
+eles não contam exatamente a mesma história.</p>
+
+<div class="painel">
+  <div class="canvases">
+    <figure style="margin:0">
+      <canvas id="cv-tri" width="520" height="300"
+        aria-label="Triângulo retângulo da terna atual, desenhado em escala: cateto ímpar n na vertical à esquerda, cateto maior L na horizontal, hipotenusa R. Dentro do triângulo, a circunferência inscrita, de raio r; à esquerda do cateto ímpar, fora do triângulo, a circunferência ex-inscrita oposta a esse cateto, de raio r subscrito n, tangente ao mesmo cateto e aos prolongamentos dos outros dois lados. Os valores exatos aparecem na linha de status e na tabela adiante."></canvas>
+      <figcaption>A terna em escala. O círculo de dentro (raio r) e o de fora (raio r<sub>n</sub>)
+      beijam o mesmo cateto ímpar, um de cada lado. Repare como o triângulo se <em>achata</em> quando n cresce.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <canvas id="cv-par" width="420" height="300"
+        aria-label="Gráfico das parábolas L de n igual a n ao quadrado menos um sobre dois e R de n igual a n ao quadrado mais um sobre dois, para n entre zero e vinte e dois. Pontos cheios marcam os valores inteiros nos ímpares n maior ou igual a três; pontos vazados marcam os ímpares n nos valores de L, que nunca são inteiros — caem sempre a meio caminho entre dois inteiros. Uma reta vertical destaca o n atual. A tabela adiante contém os mesmos dados em forma numérica."></canvas>
+      <figcaption>As parábolas L(n) e R(n). Nos ímpares (●), a família pousa em inteiros; nos pares (○),
+      L(n) cai a meio caminho entre dois inteiros — a máquina <em>recusa</em> os pares.</figcaption>
+    </figure>
+  </div>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#1c5e3c"></span>inscrita (raio r) e curva L ·
+    <span class="sw" style="background:#8a3318"></span>ex-inscrita (raio r<sub>n</sub>) e curva R ·
+    <span class="sw" style="background:#26221a"></span>triângulo ·
+    <span style="color:#1c5e3c">●</span> ímpar: inteiro ·
+    <span style="color:#8a3318">○</span> par: L não inteiro
+  </div>
+  <div class="controles">
+    <button id="btn-next" type="button">Próximo ímpar</button>
+    <button id="btn-prev" type="button">Ímpar anterior</button>
+    <button id="btn-reset" type="button">Recomeçar (n = 3)</button>
+    <label for="n-slider">n:
+      <input type="range" id="n-slider" min="3" max="21" step="2" value="3"
+             aria-describedby="n-desc">
+      <span id="n-val">3</span>
+    </label>
+    <span id="n-desc" class="visually-hidden">Escolhe o ímpar n, de 3 a 21, de dois em dois.</span>
+  </div>
+  <p class="leitura" id="leitura" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela">
+  <caption>A família nos dez primeiros ímpares. L = (n²−1)/2 e R = (n²+1)/2; a coluna do teste computa
+  n² + L² − R² com aritmética exata de inteiros (todos os valores desta tabela são pequenos o bastante
+  para o inteiro de máquina ser exato — a seção 6 volta a esse ponto). P = perímetro; s = semiperímetro;
+  K = área; r = raio inscrito; r<sub>n</sub> = ex-raio oposto ao cateto ímpar; a última coluna é o
+  mdc(n, L). A linha destacada é o n atual do experimento.</caption>
+  <thead>
+    <tr><th scope="col">n</th><th scope="col">L</th><th scope="col">R</th>
+    <th scope="col">n²+L²−R²</th><th scope="col">P</th><th scope="col">s</th>
+    <th scope="col">K</th><th scope="col">r</th><th scope="col">r<sub>n</sub></th>
+    <th scope="col">mdc(n,L)</th></tr>
+  </thead>
+  <tbody id="tabela-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Nada — e desta vez a tentação é maior, porque a coluna do teste é uma fileira de
+  zeros <em>exatos</em>, não de aproximações. Mas dez zeros (ou dez mil: o oráculo do capítulo testa até
+  n = 20001) são <em>observações</em> sobre casos particulares. A intuição do sítio afirma algo sobre
+  <em>todos</em> os ímpares; e a pergunta do capítulo — a recíproca — afirma algo sobre <em>todas</em> as
+  ternas de lados consecutivos, inclusive as que nenhum experimento visitará. Nenhuma tabela fecha essa
+  distância. O papel do experimento é outro: sugerir enunciados precisos o bastante para serem provados
+  ou refutados.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Os padrões</h2>
+<p>Percorra os ímpares antes de continuar. A tabela devia ter mostrado mais do que a aposta pedia —
+seis regularidades, cada uma com nome próprio:</p>
+<p><strong>Padrão 1 — o teste zera sempre.</strong> n² + L² − R² = 0 em todas as linhas. A aposta da
+partilha de n² parece funcionar para todo ímpar.</p>
+<p><strong>Padrão 2 — a folga é sempre 1, e o mdc é sempre 1.</strong> R − L = 1 por construção; mas a
+última coluna diz mais: n e L nunca têm fator comum. Nenhuma dessas ternas é uma terna menor disfarçada
+(6-8-10 é 3-4-5 dobrada; nada aqui é nada dobrado).</p>
+<p><strong>Padrão 3 — L é sempre múltiplo de 4.</strong> 4, 12, 24, 40, 60… — e R deixa sempre resto 1
+na divisão por 4. Os restos não variam: parecem <em>proibidos</em> de variar.</p>
+<p><strong>Padrão 4 — o perímetro é n(n+1) e o semiperímetro é triangular.</strong> P = 12, 30, 56, 90 —
+sempre o ímpar vezes seu sucessor. E s = 6, 15, 28, 45 — a coluna dos números triangulares:
+s = 1 + 2 + … + n.</p>
+<p><strong>Padrão 5 — os dois raios são os vizinhos do ímpar, divididos por 2.</strong> r = 1, 2, 3, 4… e
+r<sub>n</sub> = 2, 3, 4, 5…: em toda linha, r = (n−1)/2, r<sub>n</sub> = (n+1)/2, e r<sub>n</sub> − r = 1.
+A consecutividade dos lados reaparece, em miniatura, nos raios.</p>
+<p><strong>Padrão 6 — nos pares, a máquina emperra.</strong> Nas parábolas, os pontos de n par caem fora
+da grade inteira: L(2) = 1,5; L(4) = 7,5; L(100) = 4999,5. Não é azar do desenho — é a divisão por 2
+cobrando paridade de n² − 1.</p>
+<p>Cada padrão é uma afirmação sobre infinitos casos lida em dez linhas. A partir daqui, a teoria
+deixa de ser opcional.</p>
+
+<!-- ============================================================ -->
+<h2 id="do-padrao-ao-enunciado">4. Do padrão ao enunciado</h2>
+<p>Para provar é preciso primeiro enunciar com domínio explícito. A máquina inteira depende de duas
+definições e de uma restrição que o degenerado n = 1 impõe (n = 1 daria L = 0: um “triângulo” sem um
+cateto — a máquina o recusa junto com os pares).</p>
+
+<div class="caixa">
+  <span class="rotulo">Definição (a família do ímpar)</span>
+  <p style="margin:0">Para cada inteiro ímpar n ≥ 3, definem-se
+  <span class="formula" style="display:block">L = (n² − 1)/2 &nbsp;&nbsp;e&nbsp;&nbsp; R = (n² + 1)/2,</span>
+  e chama-se <em>terna do ímpar n</em> a tripla (n, L, R). Por construção, L + R = n² e R − L = 1.</p>
+</div>
+
+<p>Os padrões viram sete obrigações — as sete que o contrato editorial do capítulo fixa, nesta ordem
+lógica: a <strong>direta</strong> (o teste zera para todo ímpar); a <strong>recíproca com
+classificação</strong> (toda terna de cateto maior e hipotenusa consecutivos é desta família — e uma só
+vez); a <strong>primitividade</strong>; a <strong>estrutura modular</strong> (os restos proibidos do
+Padrão 3); as <strong>medidas</strong> (perímetro, semiperímetro triangular, área); os
+<strong>raios</strong> (Padrão 5); e a <strong>leitura euclidiana</strong>, que revela de onde a família
+inteira vem. As provas ocupam a seção seguinte, uma a uma.</p>
+
+<!-- ============================================================ -->
+<h2 id="as-provas">5. As provas</h2>
+<p>Hipóteses globais: n inteiro ímpar, n ≥ 3; L e R como na definição. Nota de proveniência (E12): os
+sete enunciados passaram pelo oráculo triplo <em>deste</em> capítulo — derivação simbólica em
+<code>audit/symbolic-check.md</code>, verificação numérica independente em
+<code>audit/numeric-check.json</code> (ímpares 3 ≤ n ≤ 20001), casos adversariais em
+<code>audit/edge-cases.md</code>. A verificação exploratória de 28/07/2026 mencionada no manual foi
+rebaixada por E12 e <em>não</em> é testemunha de nada aqui; a testemunha é o artefato versionado.</p>
+
+<h3 id="demonstracao-direta">5.1 A direta: todo ímpar gera a sua terna</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 1 (direta)</span>
+  <p style="margin:0">Para todo ímpar n ≥ 3, L e R são inteiros positivos, L &gt; n, e
+  n² + L² = R², com R − L = 1.</p>
+</div>
+<div class="prova">
+  <p><strong>Inteireza.</strong> n é ímpar, logo n² é ímpar, logo n² − 1 e n² + 1 são pares: as duas
+  metades L e R são inteiras. (É o único lugar em que a imparidade é <em>necessária</em> — e a seção 5.4
+  mostrará que ela é exatamente o que os pares violam.)</p>
+  <p><strong>O teste zera.</strong> Não é preciso expandir quadrado nenhum: como R − L = 1,</p>
+  <p class="formula">R² − L² = (R − L)(R + L) = 1 · (R + L) = L + R = n²,</p>
+  <p>e portanto n² + L² = R². A prova inteira é a observação do sítio — “os consecutivos somam o
+  quadrado” — lida ao contrário: a diferença de quadrados de consecutivos <em>é</em> a soma deles.</p>
+  <p><strong>L é o cateto maior.</strong> L − n = (n² − 2n − 1)/2 = ((n − 1)² − 2)/2 &gt; 0 para n ≥ 3
+  (pois (n−1)² ≥ 4 &gt; 2). Em n = 1 a desigualdade falha (L = 0 &lt; 1): o degenerado fica fora por
+  hipótese, e a máquina o recusa.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="reciproca">5.2 A recíproca: a família classifica</h3>
+<p>Aqui mora a diferença entre truque e teorema. A direta diz que a regra <em>produz</em> ternas; falta
+saber se alguma terna de lados consecutivos <em>escapa</em> dela. Nenhuma escapa:</p>
+<div class="caixa">
+  <span class="rotulo">Teorema 2 (recíproca e classificação)</span>
+  <p style="margin:0">Seja (a, b, c) qualquer terna de inteiros positivos com a² + b² = c², em que o
+  cateto maior b e a hipotenusa c são consecutivos (c = b + 1). Então a é ímpar, a ≥ 3, e
+  (a, b, c) = (a, (a²−1)/2, (a²+1)/2) — a terna do ímpar a. A correspondência
+  n ↦ (n, L, R) é uma bijeção entre os ímpares n ≥ 3 e as ternas de cateto maior e hipotenusa
+  consecutivos.</p>
+</div>
+<div class="prova">
+  <p><strong>Existência da forma.</strong> De c = b + 1:</p>
+  <p class="formula">a² = c² − b² = (c − b)(c + b) = b + c = 2b + 1.</p>
+  <p>Logo a² é ímpar, logo a é ímpar (o quadrado de um par é par). Isolando b: b = (a² − 1)/2, e então
+  c = b + 1 = (a² + 1)/2. A terna tem exatamente a forma da definição, com n = a.</p>
+  <p><strong>a ≥ 3.</strong> Se a = 1, então b = 0 — não é terna de inteiros positivos. E a é ímpar,
+  logo a ≥ 3. Nesse caso b &gt; a (Teorema 1), confirmando que b era mesmo o cateto maior — a hipótese
+  não escondia caso nenhum.</p>
+  <p><strong>Bijeção.</strong> A regra n ↦ (n, L, R) e a leitura (a, b, c) ↦ a são inversas uma da
+  outra: partindo de n, a terna produzida tem cateto ímpar n e a leitura devolve n; partindo de uma
+  terna de lados consecutivos, a leitura dá a, e a regra reconstrói (a, b, c) — como acabamos de
+  calcular, b e c ficam <em>determinados</em> por a. Cada ímpar gera uma única terna; cada terna dessas
+  vem de um único ímpar.<span class="qed">∎</span></p>
+</div>
+<p>Repare no que a prova <em>não</em> pediu: primitividade. A consecutividade sozinha determinou tudo —
+até 6-8-10, se tivesse hipotenusa e cateto maior consecutivos, teria que ser terna do ímpar (não tem:
+10 − 8 = 2; a família da folga 2 é outra, e é o exercício E3.2). A intuição do sítio dizia “todo ímpar
+gera uma terna”; o que ficou provado é mais forte e mais fino: <strong>os ímpares ≥ 3 são exatamente os
+nomes próprios das ternas de lados consecutivos</strong>.</p>
+
+<h3 id="primitividade">5.3 Primitividade: a folga 1 não deixa herança</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 3 (primitividade)</span>
+  <p style="margin:0">Toda terna do ímpar é primitiva — nenhum inteiro d &gt; 1 divide os três lados.
+  Mais: os lados são coprimos <em>dois a dois</em>: mdc(L, R) = mdc(n, L) = mdc(n, R) = 1.</p>
+</div>
+<div class="prova">
+  <p><strong>mdc(L, R) = 1.</strong> Se d divide L e R, então d divide R − L = 1. Consecutivos não têm
+  herança comum — é o argumento mais curto do tratado, e é ele que torna a família especial: a
+  consecutividade <em>força</em> a primitividade, sem cálculo nenhum.</p>
+  <p><strong>mdc(n, L) = 1.</strong> Se d divide n e L, então d divide n² e divide 2L = n² − 1; logo
+  divide a diferença n² − (n² − 1) = 1.</p>
+  <p><strong>mdc(n, R) = 1.</strong> Igualzinho: d dividiria n² e 2R = n² + 1, logo dividiria 1.</p>
+  <p>E qualquer divisor comum dos <em>três</em> lados dividiria em particular L e R — logo é 1: a terna
+  é primitiva.<span class="qed">∎</span></p>
+</div>
+<p>A conjectura C1 do pré-registro (coprimalidade dois a dois, mais forte que o contrato) está
+confirmada — pela prova acima e, independentemente, pelo oráculo em todo o domínio testado.</p>
+
+<h3 id="estrutura-modular">5.4 Estrutura modular: os restos proibidos</h3>
+<div class="caixa">
+  <span class="rotulo">Lema de paridade (o Padrão 3 é lei)</span>
+  <p style="margin:0">Para todo n ímpar, n² ≡ 1 (mod 8). Consequentemente L ≡ 0 (mod 4) e
+  R ≡ 1 (mod 4). E para todo n par, n² ± 1 é ímpar — a máquina recusa os pares porque L e R
+  não seriam inteiros.</p>
+</div>
+<div class="prova">
+  <p>Escreva n = 2k + 1. Então:</p>
+  <p class="formula">n² = 4k² + 4k + 1 = 4k(k + 1) + 1.</p>
+  <p>Entre k e k + 1, um é par: k(k + 1) é par, logo 4k(k + 1) é múltiplo de 8, logo n² ≡ 1 (mod 8).
+  Daí n² − 1 é múltiplo de 8, e L = (n² − 1)/2 é múltiplo de 4; e R = L + 1 ≡ 1 (mod 4).</p>
+  <p>Para n par, n² é par e n² ± 1 é ímpar: a divisão por 2 não devolve inteiro. O Padrão 6 — os pontos
+  pares caindo a meio caminho da grade — é este lema visto no gráfico: L(n par) termina sempre
+  em ,5.<span class="qed">∎</span></p>
+</div>
+<p>Este lema é pequeno e trabalhador: ele explica por que <em>todo</em> L da tabela é 4, 12, 24, 40…
+(múltiplos de 4, sem exceção possível), por que R nunca é múltiplo de 2 nem deixa resto 3 por 4 — e ele
+voltará na seção 5.5 para entregar a paridade da área. Nos capítulos à frente, restos módulo 4 decidirão
+quem é hipotenusa e quem é soma de dois quadrados (a porta trancada, adiante).</p>
+
+<h3 id="medidas">5.5 Medidas: perímetro, semiperímetro triangular, área</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 4 (medidas)</span>
+  <p style="margin:0">Na terna do ímpar n: o perímetro é P = n(n + 1); o semiperímetro é o n-ésimo
+  número triangular, s = n(n + 1)/2 = 1 + 2 + … + n; e a área é K = n(n² − 1)/4, um inteiro par.</p>
+</div>
+<div class="prova">
+  <p><strong>Perímetro.</strong> P = n + L + R = n + (L + R) = n + n² = n(n + 1). A observação do sítio
+  (L + R = n²) faz todo o trabalho.</p>
+  <p><strong>Semiperímetro.</strong> s = P/2 = n(n + 1)/2 — inteiro, porque n e n + 1 são consecutivos e
+  um deles é par. E n(n + 1)/2 é a soma 1 + 2 + … + n: somando a lista com ela mesma invertida,
+  (1 + n) + (2 + (n−1)) + … = n parcelas iguais a n + 1, total n(n + 1), metade para cada cópia. O
+  semiperímetro do triângulo da terna é, literalmente, o triângulo aritmético de n.</p>
+  <p><strong>Área.</strong> Os catetos são n e L, então K = n·L/2 = n(n² − 1)/4. Inteiro e par: pelo
+  lema de 5.4, n² − 1 é múltiplo de 8, logo (n² − 1)/4 é inteiro <em>par</em>, e K = n · (n² − 1)/4 é
+  par. (O oráculo confirma ainda a conjectura C4 do pré-registro: 6 divide K sempre — o exercício E2.3
+  pede a prova, que usa 5.4 e o fator 3 dos três consecutivos (n−1)n(n+1).)<span class="qed">∎</span></p>
+</div>
+
+<h3 id="geometria-interna">5.6 Os raios: a consecutividade em miniatura</h3>
+<p>O Padrão 5 é o mais bonito da tabela: os raios inscrito e ex-inscrito repetem, dentro do triângulo,
+a folga 1 dos lados. Para prová-lo, coordenadas — o ângulo reto na origem, o cateto ímpar no eixo
+vertical, o cateto L no horizontal. A hipotenusa é a reta que liga (L, 0) a (0, n):</p>
+<p class="formula">n·x + L·y − n·L = 0, &nbsp; com &nbsp; √(n² + L²) = R.</p>
+<div class="caixa">
+  <span class="rotulo">Teorema 5 (raios)</span>
+  <p style="margin:0">O raio da circunferência inscrita é r = (n − 1)/2. O ex-raio oposto ao cateto
+  ímpar é r<sub>n</sub> = (n + 1)/2. Portanto r<sub>n</sub> − r = 1.</p>
+</div>
+<div class="prova">
+  <p><strong>Inscrita.</strong> O centro está a distância igual dos dois eixos: é (ρ, ρ), raio ρ. A
+  distância do centro à hipotenusa deve ser o mesmo ρ:</p>
+  <p class="formula">(n·L − ρ(n + L))/R = ρ &nbsp;⟺&nbsp; ρ·(n + L + R) = n·L &nbsp;⟺&nbsp; ρ = n·L/P.</p>
+  <p>Com P = n(n + 1) (Teorema 4): ρ = L/(n + 1) = (n² − 1)/(2(n + 1)) = <strong>(n − 1)/2</strong>.
+  (O numerador n·L − ρ(n + L) é positivo: o centro está do lado da origem.)</p>
+  <p><strong>Ex-inscrita oposta ao cateto ímpar.</strong> Por definição, é a circunferência tangente ao
+  cateto ímpar (a reta x = 0) e aos <em>prolongamentos</em> dos outros dois lados — ela vive à esquerda,
+  fora do triângulo. Centro (−ρ, ρ): as distâncias às retas x = 0 e y = 0 já valem ρ; falta a
+  hipotenusa:</p>
+  <p class="formula">(n·L + ρ(n − L))/R = ρ &nbsp;⟺&nbsp; ρ·(R + L − n) = n·L,</p>
+  <p>e R + L − n = n² − n = n(n − 1), logo ρ = L/(n − 1) = (n² − 1)/(2(n − 1)) = <strong>(n + 1)/2</strong>.</p>
+  <p>Subtraindo: r<sub>n</sub> − r = (n + 1)/2 − (n − 1)/2 = 1.<span class="qed">∎</span></p>
+</div>
+<p>Duas identidades de controle, que o oráculo verifica em separado: K = r·s e K = r<sub>n</sub>·(s − n)
+— nas fórmulas, (n−1)/2 · n(n+1)/2 = n(n²−1)/4 = (n+1)/2 · n(n−1)/2. São as fórmulas clássicas
+“área = raio × semiperímetro (ou seu pedaço)”, e aqui fecham exatas, sem resto. No desenho do
+experimento, os dois círculos beijam o mesmo cateto ímpar por lados opostos: a folga 1 dos lados,
+encolhida, mora entre eles.</p>
+
+<h3 id="leitura-euclidiana">5.7 A leitura euclidiana: de onde a família vem</h3>
+<p>Euclides (o lema dos <em>Elementos</em> X.28–29, na leitura moderna) parametriza as ternas primitivas:
+para inteiros u &gt; v ≥ 1, coprimos e de paridades opostas,</p>
+<p class="formula">(u² − v², &nbsp;2uv, &nbsp;u² + v²)</p>
+<p>é uma terna pitagórica primitiva — e toda primitiva tem essa forma, a menos de trocar os catetos.
+Este resultado entra <em>citado</em>, como material clássico do dossiê (<code>sources.md</code>); o que o
+capítulo demonstra é o caminho inverso: a família do ímpar é exatamente uma fatia da máquina de
+Euclides.</p>
+<div class="caixa">
+  <span class="rotulo">Teorema 6 (leitura euclidiana inversa)</span>
+  <p style="margin:0">Sejam u = (n + 1)/2 e v = (n − 1)/2 — inteiros porque n é ímpar, consecutivos
+  (u − v = 1), logo coprimos e de paridades opostas. Então
+  u² − v² = n, &nbsp;2uv = L, &nbsp;u² + v² = R: a terna do ímpar n é a terna de Euclides do par (u, v).
+  Reciprocamente, uma terna primitiva de Euclides tem cateto par e hipotenusa consecutivos se e somente
+  se u − v = 1.</p>
+</div>
+<div class="prova">
+  <p><strong>As três identidades.</strong> Com u + v = n e u − v = 1:</p>
+  <p class="formula">u² − v² = (u − v)(u + v) = 1 · n = n;</p>
+  <p class="formula">2uv = ((u + v)² − (u − v)²)/2 = (n² − 1)/2 = L;</p>
+  <p class="formula">u² + v² = ((u+v)² + (u−v)²)/2 = (n² + 1)/2 = R.</p>
+  <p>Consecutivos são coprimos (seção 5.3) e têm paridades opostas: (u, v) é um par legítimo de
+  Euclides, e a fatia u − v = 1 da parametrização é precisamente a família deste capítulo.</p>
+  <p><strong>A recíproca euclidiana.</strong> Na terna geral de Euclides, hipotenusa menos cateto par é</p>
+  <p class="formula">(u² + v²) − 2uv = (u − v)².</p>
+  <p>— um quadrado perfeito, sempre. A folga vale 1 se e somente se (u − v)² = 1, isto é, u − v = 1
+  (u &gt; v). E vale a pena guardar o subproduto: <em>em toda terna primitiva, a diferença entre a
+  hipotenusa e o cateto par é um quadrado perfeito ímpar</em> — folga 2 é impossível entre primitivas
+  por esse lado, folga 9 acontece (8-15-17), folga 1 é o nosso caso.<span class="qed">∎</span></p>
+</div>
+
+<div class="caixa" id="sintese-consecutivos">
+  <span class="rotulo">Síntese — os mesmos dois vizinhos, três vezes</span>
+  <p>Olhe para o par de inteiros consecutivos v = (n − 1)/2 e u = (n + 1)/2. Eles acabaram de aparecer
+  <strong>três vezes</strong>, em papéis que nada obrigava a coincidir:</p>
+  <ul class="compacta">
+    <li>como <strong>parâmetros de Euclides</strong> da terna (seção 5.7);</li>
+    <li>como <strong>inraio</strong> r = v e <strong>ex-raio</strong> r<sub>n</sub> = u (seção 5.6);</li>
+    <li>como a segunda consecutividade estrutural da família — a folga 1 dos lados (R − L = 1)
+    reencarnada nos raios (r<sub>n</sub> − r = 1) e na origem paramétrica (u − v = 1).</li>
+  </ul>
+  <p style="margin:0"><em>Síntese autoral no âmbito deste tratado; prioridade histórica não
+  estabelecida.</em> As identidades componentes são teoremas demonstrados acima; a coincidência
+  organizacional é observação de arquitetura, tipada como <code>synthesis</code> no ledger — o que é
+  demonstrável está demonstrado, o que é arrumação está declarado como arrumação.</p>
+</div>
+
+<div class="caixa porta">
+  <span class="rotulo">Porta trancada — as hipotenusas e a soma de dois quadrados</span>
+  <p style="margin:0">A seção 5.7 escreveu R = u² + v², e a 5.4 provou R ≡ 1 (mod 4). Olhe a coluna R
+  da tabela: 5, 13, 25, 41, 61, 85, 113… As primas dessa lista — 5, 13, 41, 61, 113 — são todas
+  ≡ 1 (mod 4), e as compostas (25 = 5², 85 = 5·17) fatoram em primos que também são ≡ 1 (mod 4) ou
+  se organizam para isso. Pergunta inevitável: <strong>quais primos são soma de dois quadrados?</strong>
+  A resposta (p = 2 e exatamente os primos p ≡ 1 mod 4 — Fermat) e a razão dela exigem aritmética em
+  ℤ[i], os inteiros gaussianos: <strong>porta reaberta no Capítulo 7</strong>. Até lá, a congruência
+  R ≡ 1 (mod 4) fica como a metade fácil — a necessidade — de um teorema cuja suficiência este capítulo
+  não tem ferramentas para tocar.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="camadas">6. As três camadas, revisitadas</h2>
+<p><strong>Objeto:</strong> a família — o conjunto das ternas de cateto maior e hipotenusa consecutivos,
+que existe e está classificado independentemente de qualquer notação. <strong>Representação:</strong>
+as fórmulas (n, (n²−1)/2, (n²+1)/2); as parábolas do experimento; o triângulo em escala — três escritas
+do mesmo objeto. <strong>Observação:</strong> os pixels. E aqui as observações quase mentem duas vezes.
+Primeiro, no desenho: o triângulo de n = 21 é tão achatado (220 de base por 21 de altura) que na tela
+ele encosta num segmento — mas o objeto não degenera nunca: o ângulo agudo apenas míngua. Segundo, na
+aritmética: a tabela desta página é exata porque seus inteiros são pequenos; o inteiro de máquina
+(float64) só é exato até 2⁵³, e o oráculo do capítulo, ao testar n = 10⁶ + 1, manuseia
+L² ≈ 2,5·10²³ — muito além. Se o oráculo usasse a aritmética da página nesse n, o teste
+n² + L² − R², que vale zero de verdade, sairia <strong>−33.554.432</strong>: o arredondamento
+<em>refutaria um teorema verdadeiro</em>. (E em outros valores poderia fazer o oposto — aprovar uma
+falsidade.) Ele usa inteiros de precisão arbitrária do Python precisamente para que a camada de
+observação não contamine a de objeto (caso registrado em <code>audit/edge-cases.md</code>).</p>
+
+<!-- ============================================================ -->
+<h2 id="exercicios">7. Exercícios</h2>
+<p>Cinco níveis, do socrático ao impossível-por-enquanto (E20 do manual). Regra de uso: tente antes de
+abrir o gabarito — mas <em>abra sempre</em>, mesmo quando acertar. O gabarito é a segunda metade do
+exercício. Os N4 não têm solução aqui — têm a razão exata pela qual ainda não têm, e o endereço de onde
+terão.</p>
+
+<h3>Nível 0 — Socráticos</h3>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.1</span>
+  <p>Por que o quadrado de um ímpar é ímpar? E — pergunta mais importante — <em>o que você está
+  usando</em> como definição de “ímpar” ao responder?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Um ímpar é um número da forma 2k + 1: “um a mais que um par”. Essa é a definição — e sem ela a
+    pergunta nem começa. Multiplicando: (2k + 1)² = 4k² + 4k + 1 = 2·(2k² + 2k) + 1 — de novo “um a
+    mais que um par”. Ímpar vezes ímpar dá ímpar; em particular, o quadrado.</p>
+    <p>Repare no que aconteceu: a resposta não usou nenhum exemplo. Ela usou a <em>forma</em> do número.
+    Todo o capítulo repete esse gesto em escala: n = 2k + 1 entra na máquina, e as propriedades saem da
+    forma, não da tabela. Quando o Lema de 5.4 escreve n² = 4k(k+1) + 1, ele está fazendo exatamente
+    esta conta — só que lendo mais dentro dela: k(k+1) é par, e o resto módulo 8 fica preso em 1.
+    A definição certa é metade da prova.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.2</span>
+  <p>“3-4-5 é um triângulo retângulo porque 9 + 16 = 25.” Essa frase usa o teorema de Pitágoras — ou
+  usa outra coisa?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Outra coisa: usa a <em>recíproca</em> de Pitágoras. O teorema diz: <em>se</em> o triângulo é
+    retângulo, <em>então</em> a² + b² = c². A frase caminha ao contrário: da equação para o ângulo
+    reto. E a recíproca é um teorema separado, com prova própria (Euclides a demonstra em I.48, logo
+    depois de I.47): se a² + b² = c², compare o triângulo dado com um triângulo retângulo de catetos
+    a e b — a hipotenusa dele mede √(a²+b²) = c, os três lados coincidem, e triângulos de lados iguais
+    são congruentes; o ângulo reto vem junto.</p>
+    <p>A lição vale para o capítulo inteiro: direta e recíproca são afirmações diferentes, com provas
+    diferentes — o coração da seção 5.2 é exatamente não confundir “a regra produz ternas” com “toda
+    terna vem da regra”. Quem só prova a direta produziu exemplos; quem prova as duas classificou o
+    fenômeno. (O manual chama isso de método canônico: … → prova → <em>recíproca</em> → …)</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.3</span>
+  <p>6-8-10 é uma terna pitagórica (36 + 64 = 100) e não está na tabela. 8-15-17 também não. A intuição
+  “todo ímpar gera uma terna” foi refutada por elas?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Não — e o motivo é a direção do quantificador. “Todo ímpar gera uma terna” promete: <em>para cada
+    ímpar, existe</em> uma terna. Ela não promete o contrário: <em>toda terna vem de um ímpar</em>. São
+    frases diferentes; a segunda é falsa mesmo, e 6-8-10 e 8-15-17 são as testemunhas.</p>
+    <p>O que o capítulo provou (seção 5.2) é uma recíproca <em>restrita</em>, com a hipótese certa: toda
+    terna <em>cujo cateto maior e hipotenusa são consecutivos</em> vem de um ímpar. 6-8-10 tem folga
+    10 − 8 = 2; 8-15-17 tem folga 17 − 15 = 2 também — nenhuma satisfaz a hipótese, nenhuma ameaça o
+    teorema. Elas moram em outra família (E3.2 as classifica). Enunciar com o domínio explícito não é
+    burocracia: é o que decide quem pode ser contraexemplo de quê.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.4</span>
+  <p>Sem usar nada da seção 5.3: por que dois inteiros <em>consecutivos</em> nunca têm um divisor comum
+  maior que 1? Responda como quem explica a uma criança que já sabe dividir.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Pense nos múltiplos de um número d &gt; 1: eles vêm espaçados de d em d — múltiplos de 3 pulam de
+    3 em 3, múltiplos de 7 pulam de 7 em 7. Para d dividir dois números ao mesmo tempo, os dois
+    precisam estar na mesma escada — e os degraus da escada distam d ≥ 2. Dois consecutivos distam 1:
+    não cabem na mesma escada de ninguém, exceto na de d = 1, cujos degraus distam 1.</p>
+    <p>Em símbolos, é a prova da seção 5.3: d | L e d | (L+1) obrigam d | (L+1) − L = 1. E é por isso
+    que a folga 1 da família é tão poderosa: primitividade, que em ternas gerais precisa ser verificada,
+    aqui vem <em>de graça</em>, herdada da consecutividade. Quando um teorema sai de graça, quase sempre
+    é porque a hipótese já era cara — o preço foi pago ao exigir c = b + 1.</p>
+  </details>
+</div>
+
+<h3>Nível 1 — Básicos, com as mãos na tabela</h3>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.1</span>
+  <p>Construa, à mão, a terna do ímpar n = 9 e todas as suas medidas: L, R, o teste n² + L² − R², P, s,
+  K, r e r<sub>n</sub>. Confira com a tabela do experimento.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>n² = 81. As metades consecutivas: L = (81 − 1)/2 = 40 e R = (81 + 1)/2 = 41. O teste:
+    81 + 1600 = 1681 = 41² ✓ (e pelo atalho da seção 5.1 nem precisava da conta: 41² − 40² = 41 + 40
+    = 81). Perímetro: P = 9 + 40 + 41 = 90 = 9·10 ✓. Semiperímetro: s = 45 — e 1 + 2 + … + 9 = 45,
+    o nono triangular ✓. Área: K = 9·40/2 = 180, par ✓ (e múltipla de 6: 180 = 6·30). Raios:
+    r = (9−1)/2 = 4 e r<sub>n</sub> = (9+1)/2 = 5, com r<sub>n</sub> − r = 1 ✓.</p>
+    <p>Vale conferir também a primitividade: mdc(9, 40) = 1 (40 = 4·9 + 4; 9 = 2·4 + 1; 4 = 4·1) — o
+    algoritmo de Euclides em três linhas. Nenhum número deste gabarito veio de fé: cada um saiu de uma
+    conta que você pode refazer. É o hábito que o capítulo quer instalar — a tabela não é oráculo, é
+    consequência.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.2</span>
+  <p>Em papel quadriculado, desenhe o triângulo 3-4-5 com o ângulo reto na origem, o cateto 4 no eixo
+  horizontal e o cateto 3 no vertical. Marque o centro (1, 1) e desenhe a circunferência de raio 1.
+  Verifique, medindo na figura, que ela tangencia os três lados. Depois marque (−2, 2) com raio 2 e
+  verifique a tangência ao cateto vertical e aos prolongamentos dos outros dois.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Com o ângulo reto em (0,0), vértices em (4,0) e (0,3). A inscrita de centro (1,1), raio 1: dista
+    1 do eixo x, 1 do eixo y — duas tangências imediatas. A hipotenusa é a reta 3x + 4y = 12; a
+    distância de (1,1) a ela é |3 + 4 − 12|/5 = 5/5 = 1 ✓ — terceira tangência. E r = (3−1)/2 = 1,
+    como o Teorema 5 manda.</p>
+    <p>A ex-inscrita de centro (−2, 2), raio 2: dista 2 do cateto vertical (a reta x = 0) e 2 do
+    prolongamento do cateto horizontal (a reta y = 0). Da hipotenusa: |−6 + 8 − 12|/5 = 10/5 = 2 ✓.
+    E r<sub>n</sub> = (3+1)/2 = 2 ✓. Você acabou de conferir, com régua e uma divisão, o caso n = 3 do
+    Teorema 5 — e de ver por que o desenho do experimento põe o círculo grande à esquerda: ele beija o
+    mesmo cateto ímpar que o pequeno, do lado de fora.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.3</span>
+  <p>A terna de n = 13 é 13-84-85. Sem refazer tudo: obtenha P e s pelo Teorema 4, verifique que s é o
+  13º triangular, e decida se K = 546 é múltiplo de 6.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>P = 13·14 = 182 e s = 91. O 13º triangular: 1 + 2 + … + 13 = 13·14/2 = 91 ✓ (ou some mesmo:
+    (1+13) + (2+12) + … — seis pares de 14 mais o 7 do meio: 84 + 7 = 91). Área: K = 13·84/2 = 546.
+    Múltiplo de 6? 546 = 6·91 ✓ — e note a coincidência elegante: K = 6·91 = 6·s neste caso. (Não é
+    lei geral da família: em n = 9, K = 180 e s = 45, e 180 = 4·45. O que <em>é</em> lei — K = r·s —
+    dá 546 = 6·91 porque aqui r = 6. A “coincidência” era o Teorema 5 disfarçado.)</p>
+    <p>Moral: uma fórmula boa transforma três multiplicações no que antes seriam três quadrados e uma
+    raiz. E uma “coincidência” numérica quase sempre é uma identidade que você ainda não nomeou —
+    persiga-a até ela confessar qual.</p>
+  </details>
+</div>
+
+<h3>Nível 2 — Intermediários</h3>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.1</span>
+  <p>Prove que, entre ímpares consecutivos, L(n + 2) − L(n) = 2(n + 1). Conclua que as segundas
+  diferenças de L ao longo dos ímpares valem sempre 4 — e explique o que isso tem a ver com o desenho
+  das parábolas no experimento.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Conta direta: L(n+2) − L(n) = [(n+2)² − 1]/2 − [n² − 1]/2 = [(n² + 4n + 4) − n²]/2 =
+    (4n + 4)/2 = 2(n + 1). Na tabela: de L(3) = 4 para L(5) = 12 o salto é 8 = 2·4; de 12 para 24 é
+    12 = 2·6; de 24 para 40 é 16 = 2·8. Os saltos crescem 4 por vez: a segunda diferença é
+    2(n+2+1) − 2(n+1) = 4, constante.</p>
+    <p>Segundas diferenças constantes são a assinatura aritmética das parábolas — um polinômio de grau 2
+    amostrado em passos iguais acelera a taxa fixa, como um corpo em queda livre visto de segundo em
+    segundo. O gráfico do experimento mostra a parábola <em>contínua</em>; esta conta mostra que os
+    pontos da família já eram parábola antes de qualquer desenho: o gráfico é representação, a segunda
+    diferença é estrutura. (Era a conjectura C2 do pré-registro — confirmada aqui e pelo oráculo.)</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.2</span>
+  <p>A seção 5.3 provou mdc(n, L) = 1 usando 2L = n² − 1. Há um detalhe escondido: de “d divide 2L”
+  para “d divide 1” é preciso cuidar do fator 2. Refaça a prova fechando esse buraco.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Suponha d | n e d | L. Então d | n² (divisor de n divide o quadrado) e d | 2L = n² − 1; logo
+    d | n² − (n² − 1) = 1… — só que o passo usou d | 2L, não d | L. Está certo mesmo assim, mas o
+    argumento limpo nota antes: <strong>d é ímpar</strong>, porque d divide n e n é ímpar (divisor de
+    ímpar é ímpar: um fator par forçaria n par). Para d ímpar, d | 2L equivale a d | L — o 2 não tem
+    onde se esconder. Alternativa que dispensa a paridade: d | L e d | n dão d | n² e d | (2L + 1) −
+    2L = 1 via n² = 2L + 1: d divide n² e divide n² − 2L = 1 diretamente, pois d | 2L segue de d | L
+    sem precisar voltar.</p>
+    <p>O exercício parece pedante e não é: metade dos erros de aritmética modular nasce de dividir por 2
+    sem licença. Verificar onde cada fator entra — e se ele pode ser cancelado — é o mesmo cuidado que a
+    seção 5.4 teve ao extrair L ≡ 0 (mod 4) de n² ≡ 1 (mod 8): dividir uma congruência por 2 troca o
+    módulo, e quem não troca o módulo prova coisas falsas.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.3</span>
+  <p>Prove a conjectura C4 do pré-registro: a área K = n(n² − 1)/4 é sempre múltipla de 6.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Escreva 4K = n(n² − 1) = (n − 1)·n·(n + 1): três inteiros consecutivos. Entre três consecutivos
+    há sempre um múltiplo de 3 (os múltiplos de 3 pulam de 3 em 3 — em qualquer janela de largura 3 cai
+    exatamente um). Logo 3 | 4K; e como mdc(3, 4) = 1, o 3 divide K.</p>
+    <p>Falta o 2 — e ele já foi provado no Teorema 4: n ímpar faz n − 1 e n + 1 pares consecutivos, um
+    deles múltiplo de 4; o produto (n−1)(n+1) é múltiplo de 8, logo K = n(n²−1)/4 é par. Par e múltiplo
+    de 3, com mdc(2,3) = 1: múltiplo de 6. ∎</p>
+    <p>Duas observações de método. Primeiro, o padrão “janela de consecutivos engole um múltiplo” é uma
+    das ferramentas mais rentáveis da aritmética elementar — aqui rendeu o 3, na seção 5.4 rendeu o 2 de
+    k(k+1). Segundo: o resultado vale além da família — a área de <em>qualquer</em> terna pitagórica é
+    múltipla de 6 —, mas a prova geral exige a parametrização completa de Euclides e mais casos; a da
+    família coube em um parágrafo porque a forma n(n²−1)/4 já entrega os consecutivos prontos.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.4</span>
+  <p>No triângulo da terna, a que distância do vértice do ângulo reto a circunferência inscrita toca
+  cada cateto? Prove a fórmula geral e avalie-a na família.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Com o ângulo reto na origem e o centro da inscrita em (r, r): a tangência no cateto horizontal é
+    o pé da perpendicular baixada do centro — o ponto (r, 0); no cateto vertical, (0, r). As duas
+    distâncias ao vértice valem <strong>r</strong>. (É um privilégio do ângulo reto: as duas tangentes
+    saídas dele têm comprimento igual ao raio, porque o quadrilátero vértice–tangência–centro–tangência
+    é um quadrado de lado r.)</p>
+    <p>Na família, r = (n − 1)/2: a inscrita toca o cateto ímpar n na altura (n−1)/2 — meio degrau
+    abaixo do meio do cateto, pois o meio é n/2 e n é ímpar. Já a ex-inscrita toca o mesmo cateto (pela
+    mesma conta, agora com centro (−r<sub>n</sub>, r<sub>n</sub>)) na altura r<sub>n</sub> = (n+1)/2 —
+    meio degrau <em>acima</em> do meio. Os dois pontos de tangência no cateto ímpar são vizinhos de
+    altura, separados por exatamente 1: a consecutividade da família desenhada no próprio cateto. O
+    desenho do experimento mostra os dois círculos; agora você sabe onde, exatamente, cada um beija.</p>
+  </details>
+</div>
+
+<h3>Nível 3 — Difíceis</h3>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.1</span>
+  <p>Todo triângulo tem <em>quatro</em> circunferências tangentes aos três lados: a inscrita e três
+  ex-inscritas. O capítulo calculou duas. Calcule as outras duas da família — o ex-raio r<sub>L</sub>
+  oposto ao cateto L e o ex-raio r<sub>R</sub> oposto à hipotenusa — e prove a identidade que a
+  conjectura C5 do pré-registro apostou: r<sub>R</sub> = s, <em>em todo triângulo retângulo</em>.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Ferramenta.</em> Para ex-círculos vale o análogo de K = r·s: a área é o ex-raio vezes o
+    semiperímetro <em>diminuído do lado oposto</em>, K = ρ·(s − lado). (Aceite-a aqui pela mesma rota de
+    coordenadas da seção 5.6, aplicada aos outros dois lados; a conta é idêntica, mudando o eixo.)</p>
+    <p><em>Na família.</em> s − L = n(n+1)/2 − (n²−1)/2 = (n+1)/2 e s − R = n(n+1)/2 − (n²+1)/2 =
+    (n−1)/2. Então r<sub>L</sub> = K/(s−L) = [n(n²−1)/4]/[(n+1)/2] = n(n−1)/2 e r<sub>R</sub> =
+    K/(s−R) = [n(n²−1)/4]/[(n−1)/2] = n(n+1)/2 = <strong>s</strong>. Confira em n = 3: K = 6, s = 6;
+    r<sub>L</sub> = 6/2 = 3, r<sub>R</sub> = 6/1 = 6 = s ✓. Os quatro raios de n = 3 são 1, 2, 3, 6.</p>
+    <p><em>O caso geral.</em> Em qualquer triângulo retângulo de catetos a, b e hipotenusa c:
+    r = s − c (a tangente saída do ângulo reto mede r — E2.4 — e as tangências repartem os lados em
+    s−a, s−b, s−c, com o pedaço do ângulo reto valendo s − c). Então K = r·s = (s − c)·s, e
+    r<sub>c</sub> = K/(s − c) = s. ∎ — A aposta de C5 confirmada: a identidade não era privilégio da
+    família, era privilégio do ângulo reto; a família só a torna visível com inteiros. (O oráculo a
+    testou também fora da família, em ternas de Euclides quaisquer.)</p>
+    <p><em>Bônus verificado:</em> r<sub>n</sub> + r<sub>L</sub> + r<sub>R</sub> = (n+1)/2 + n(n−1)/2 +
+    n(n+1)/2 = r + 2R — caso particular da identidade clássica “soma dos ex-raios = inraio + 4 vezes o
+    circunraio”, pois o circunraio do triângulo retângulo é R/2 (a hipotenusa é diâmetro do
+    circuncírculo). Em n = 3: 2 + 3 + 6 = 1 + 10 ✓.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.2</span>
+  <p>Classifique a família vizinha: as ternas em que a hipotenusa excede um cateto em <strong>2</strong>
+  (como 6-8-10 e 8-15-17). Mostre que são exatamente (2m, m² − 1, m² + 1) para m ≥ 2, e que a terna é
+  primitiva se e somente se m é par. (Conjectura C3 do pré-registro.)</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Forma.</em> Se a² + b² = c² com c = b + 2, então a² = (c − b)(c + b) = 2(2b + 2) = 4(b + 1):
+    a² é múltiplo de 4, logo a é par, a = 2m, e b = a²/4 − 1 = m² − 1, c = m² + 1. Reciprocamente,
+    (2m)² + (m² − 1)² = 4m² + m⁴ − 2m² + 1 = m⁴ + 2m² + 1 = (m² + 1)² — sempre terna, para todo
+    m ≥ 2 (m = 1 degenera: b = 0). Bijeção com os m ≥ 2, como na seção 5.2.</p>
+    <p><em>Primitividade.</em> Se m é ímpar, m² − 1 e m² + 1 são pares: o 2 divide os três lados — não
+    primitiva (6-8-10, m = 3: é 3-4-5 dobrada). Se m é par, m² − 1 e m² + 1 são ímpares (que diferem
+    de 2, não de 1 — a escada de E0.4 ainda deixaria passar o 2, mas só ele). Um divisor comum d dos
+    três lados dividiria (m²+1) − (m²−1) = 2; sendo divisor do ímpar m² − 1, d é ímpar: d = 1.
+    Primitiva. (8-15-17, m = 4 ✓; 12-35-37, m = 6 ✓.)</p>
+    <p><em>Leitura euclidiana, fechando o círculo:</em> na parametrização, hipotenusa menos cateto
+    <em>ímpar</em> é (u² + v²) − (u² − v²) = 2v². Folga 2 ⟺ v = 1 ⟺ o par de Euclides é (u, 1) com u
+    par — e (2u, u² − 1, u² + 1) é exatamente a família acima com m = u. A folga 1 era a fatia
+    u − v = 1 (seção 5.7); a folga 2 primitiva é a fatia v = 1. As duas famílias do sítio são as duas
+    bordas da máquina de Euclides. C3 confirmada — pela prova e pelo oráculo, que varreu as duas
+    condições no domínio testado.</p>
+  </details>
+</div>
+
+<h3>Nível 4 — Impossíveis por enquanto</h3>
+<p>Sem gabarito — de propósito. Cada enunciado é honesto, tem resposta conhecida pela matemática, e
+<em>não pode</em> ser resolvido com o que este capítulo construiu. O que segue em cada caixa é a razão
+exata da impossibilidade atual e o endereço onde ela cai.</p>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.1</span>
+  <p>Classifique as ternas de <em>catetos</em> consecutivos: 3-4-5, 20-21-29, 119-120-169, … Elas são
+  infinitas? Há uma fórmula que as gere todas?</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>A pergunta parece gêmea da recíproca da seção 5.2 — e não é. Lá, c = b + 1 colapsou em
+    <em>uma equação linear</em> resolvida em uma linha (a² = 2b + 1). Aqui, b = a + 1 leva a
+    a² + (a+1)² = c², isto é, 2a² + 2a + 1 = c² — uma <em>equação quadrática em duas incógnitas</em>
+    que não se fatora: é parente de x² − 2y² = −1, a equação de Pell. Suas soluções existem aos
+    infinitos e obedecem a uma recorrência (20 = 6·3 + 2·1…, 119 = 6·20 − 3 + 2…), mas provar que a
+    recorrência as dá <em>todas</em> exige a teoria das frações contínuas de √2 — exatamente o
+    maquinário que o <strong>Capítulo 5</strong> constrói pelo algoritmo. Guarde o contraste: folga 1
+    entre cateto e hipotenusa = uma família por ímpar, fechada em uma página; folga 1 entre catetos =
+    aritmética de √2. A posição da folga muda o continente.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.2</span>
+  <p>A porta trancada, empurrada: prove que todo primo p ≡ 1 (mod 4) é soma de dois quadrados — e
+  conclua quais números aparecem como hipotenusa de alguma terna pitagórica.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Este capítulo provou a metade barata: hipotenusas primitivas são u² + v² e satisfazem
+    ≡ 1 (mod 4) (seções 5.4 e 5.7). A volta — todo primo ≡ 1 (mod 4) <em>é</em> u² + v² — resiste a
+    tudo o que temos: é um teorema de <em>existência</em>, e nossa caixa atual só fabrica identidades e
+    recíprocas por manipulação direta. A prova natural fatora p em ℤ[i], o anel dos inteiros
+    gaussianos, onde p ≡ 1 (mod 4) deixa de ser primo e se parte em (u + vi)(u − vi) — mas “fatorar”,
+    “primo” e “único” precisam ser reconstruídos nesse anel antes de significar qualquer coisa.
+    É o programa do <strong>Capítulo 7</strong>, que reabre esta porta pelo lado de dentro. Até lá,
+    5, 13, 41, 61, 113 ficam como fileira de testemunhas à espera do julgamento.</p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> a folga 1 classificou-se em uma página; a folga 2, em um
+  exercício; a folga entre <em>catetos</em> exigiu Pell. Que outras “consecutividades” em ternas são
+  lineares disfarçadas, e quais são Pell disfarçadas? A fronteira entre as duas é o primeiro mapa do
+  custo aritmético de uma pergunta.</li>
+  <li><strong>Porta fechada → Cap. 7:</strong> primos como soma de dois quadrados; as hipotenusas
+  R = u² + v² julgadas em ℤ[i]; a congruência R ≡ 1 (mod 4) promovida de necessidade a caracterização.</li>
+  <li><strong>Porta fechada → Cap. 5:</strong> catetos consecutivos, Pell e as frações contínuas de √2
+  (exercício E4.1).</li>
+  <li><strong>Herança imediata:</strong> a disciplina direta → recíproca → primitividade usada aqui é o
+  molde que o Capítulo 4 aplicará a bases e expansões — e o lema n² ≡ 1 (mod 8) é o primeiro teorema de
+  congruência do tratado, ferramenta permanente.</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Oráculo triplo
+  executado em 28/07/2026 com artefatos em <code>audit/</code>: derivação simbólica S1–S7
+  (<code>symbolic-check.md</code>), verificação numérica independente por duas implementações (fórmulas
+  diretas × reconstrução de Euclides) sobre os ímpares 3 ≤ n ≤ 20001 e n = 10⁶ + 1 exato
+  (<code>numeric-check.json</code>), casos adversariais recusados — pares n ∈ {2, 4, 100}, degenerado
+  n = 1, negativos (<code>edge-cases.md</code>). Auditoria de gate v0 completa: interação, teclado,
+  overflow, autocontenção sem rede, screenshots desktop e iPhone inspecionados.</p>
+  <p><strong>Nota de proveniência (E12).</strong> A verificação exploratória de 28/07/2026 registrada no
+  manual (implementação única, sem artefato) foi rebaixada a não canônica e assim permanece — declarada,
+  não apagada. O oráculo canônico prometido pelo manual na abertura deste diretório é o desta página,
+  com script, hash de commit, domínio e ambiente registrados em <code>claims.yml</code>.</p>
+  <p><strong>Conjecturas do pré-registro.</strong> C1 (coprimalidade dois a dois), C2 (segundas
+  diferenças 4), C3 (família da folga 2), C4 (6 | K) e C5 (r<sub>R</sub> = s) foram todas confirmadas —
+  C1 provada na seção 5.3, C2 em E2.1, C3 em E3.2, C4 em E2.3, C5 em E3.1, cada uma com testemunha
+  numérica independente no oráculo. Nenhuma autópsia foi necessária nesta rodada; o registro
+  prospectivo permanece em <code>conjecturas.md</code>.</p>
+  <p><strong>Pendências declaradas:</strong> mineração do sítio pessoal (<code>sources.md</code> registra
+  a lacuna); fixação da edição de referência dos <em>Elementos</em> para o lema de X.28–29; decisão de
+  tag <code>cap-02-gate0-r1</code> pelo leitor primário via sessão-coordenadora.</p>
+  <p>MATH3us.md · Capítulo 2 · escavação · release: nenhuma (pronto para tag).</p>
+</footer>
+
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 2 — The Odd Triples. Interactive family explorer.
+ *
+ * Layer discipline (manual §2.1):
+ *  - TABLE and STATUS values: exact integer arithmetic. Every value
+ *    on this page is far below 2^53, so float64 integer arithmetic
+ *    is EXACT here. The chapter text (section 6) records why the
+ *    oracle cannot rely on this for huge n — Python bignums there.
+ *  - CANVAS drawing: scales and projects for display only; drawing
+ *    never feeds numbers back into the table.
+ * Rendering in DEVICE coordinates (no giant ctx transforms) —
+ * lesson inherited from Chapter 1's render incident.
+ * ============================================================ */
+
+const N_MIN = 3, N_MAX = 21;
+let curN = 3;
+
+// --- exact family formulas (all integers, < 2^53 in this range) ---
+function fam(n) {
+  const L = (n * n - 1) / 2, R = (n * n + 1) / 2;
+  return {
+    n, L, R,
+    test: n * n + L * L - R * R,      // exact: max operand 221^2 = 48841
+    P: n * (n + 1), s: n * (n + 1) / 2,
+    K: n * L / 2,
+    r: (n - 1) / 2, rn: (n + 1) / 2,
+    gcdNL: gcd(n, L)
+  };
+}
+function gcd(a, b) { while (b) { [a, b] = [b, a % b]; } return a; }
+function fmtInt(x) { return x.toLocaleString("pt-BR"); }
+
+// --- table (static: all odd n in range; current row highlighted) ---
+const tbody = document.getElementById("tabela-corpo");
+function buildTable() {
+  tbody.innerHTML = "";
+  for (let n = N_MIN; n <= N_MAX; n += 2) {
+    const f = fam(n);
+    const tr = document.createElement("tr");
+    tr.dataset.n = n;
+    tr.innerHTML =
+      "<td>" + f.n + "</td><td>" + f.L + "</td><td>" + f.R + "</td>" +
+      "<td>" + f.test + "</td><td>" + f.P + "</td><td>" + f.s + "</td>" +
+      "<td>" + f.K + "</td><td>" + f.r + "</td><td>" + f.rn + "</td>" +
+      "<td>" + f.gcdNL + "</td>";
+    tbody.appendChild(tr);
+  }
+}
+function highlightRow() {
+  for (const tr of tbody.children)
+    tr.className = Number(tr.dataset.n) === curN ? "atual" : "";
+}
+
+// --- canvas 1: the triangle to scale, with incircle and excircle ---
+const cvT = document.getElementById("cv-tri");
+const ctxT = cvT.getContext("2d");
+const COL_IN = "#1c5e3c", COL_OUT = "#8a3318", COL_TRI = "#26221a";
+
+function drawTriangle(f) {
+  const W = cvT.width, H = cvT.height;
+  ctxT.clearRect(0, 0, W, H);
+  // world: triangle C=(0,0) A=(L,0) B=(0,n); incircle (r,r);
+  // excircle opposite the odd leg at (-rn, rn).
+  const wx0 = -2 * f.rn - 1, wx1 = f.L + 1;       // world x-range
+  const wy0 = -1, wy1 = Math.max(f.n, 2 * f.rn) + 1;
+  const M = 16; // device margin
+  const sc = Math.min((W - 2 * M) / (wx1 - wx0), (H - 2 * M) / (wy1 - wy0));
+  // center the drawing on both axes (flat triangles would otherwise
+  // leave the canvas mostly empty — render inspection, 28/07/2026)
+  const offX = (W - 2 * M - (wx1 - wx0) * sc) / 2;
+  const offY = (H - 2 * M - (wy1 - wy0) * sc) / 2;
+  const dx = (x) => M + offX + (x - wx0) * sc;
+  const dy = (y) => H - M - offY - (y - wy0) * sc;
+
+  // dashed extensions the excircle is tangent to (drawn first, underneath)
+  ctxT.save();
+  ctxT.setLineDash([4, 4]);
+  ctxT.strokeStyle = "#b9ab8a";
+  ctxT.lineWidth = 1;
+  ctxT.beginPath(); // extension of leg CA beyond C (negative x axis)
+  ctxT.moveTo(dx(0), dy(0)); ctxT.lineTo(dx(-2 * f.rn - 1), dy(0));
+  ctxT.stroke();
+  // extension of hypotenuse beyond B toward negative x: param the AB line
+  // point on line: x = L(1 - t), y = n t ; t>1 goes past B
+  const tExt = 1 + (2.2 * f.rn) / f.L; // enough to pass the excircle
+  ctxT.beginPath();
+  ctxT.moveTo(dx(0), dy(f.n));
+  ctxT.lineTo(dx(f.L * (1 - tExt)), dy(f.n * tExt));
+  ctxT.stroke();
+  ctxT.restore();
+
+  // triangle
+  ctxT.beginPath();
+  ctxT.moveTo(dx(0), dy(0)); ctxT.lineTo(dx(f.L), dy(0));
+  ctxT.lineTo(dx(0), dy(f.n)); ctxT.closePath();
+  ctxT.strokeStyle = COL_TRI; ctxT.lineWidth = 2; ctxT.stroke();
+  // right-angle mark
+  const q = Math.min(9, f.n * sc * 0.3);
+  ctxT.strokeStyle = COL_TRI; ctxT.lineWidth = 1;
+  ctxT.strokeRect(dx(0), dy(q / sc), q, q);
+
+  // incircle
+  ctxT.beginPath();
+  ctxT.arc(dx(f.r), dy(f.r), f.r * sc, 0, 2 * Math.PI);
+  ctxT.strokeStyle = COL_IN; ctxT.lineWidth = 2; ctxT.stroke();
+  // excircle
+  ctxT.beginPath();
+  ctxT.arc(dx(-f.rn), dy(f.rn), f.rn * sc, 0, 2 * Math.PI);
+  ctxT.strokeStyle = COL_OUT; ctxT.lineWidth = 2; ctxT.stroke();
+
+  // labels — adaptive placement: when the circles shrink on screen
+  // (flat triangles, large n), move their labels above instead of
+  // inside, and keep the n label above the top vertex (render
+  // inspection, 28/07/2026: at n = 21 all three collided).
+  ctxT.font = "13px Georgia, serif";
+  ctxT.fillStyle = COL_TRI;
+  ctxT.fillText("n = " + f.n, dx(0) + 4, dy(f.n) - 8);
+  ctxT.fillText("L = " + f.L, dx(f.L / 2) - 20, dy(0) + 14);
+  ctxT.fillText("R = " + f.R, dx(f.L / 2) - 10, dy(f.n / 2) - 8);
+  const rPix = f.r * sc, rnPix = f.rn * sc;
+  ctxT.fillStyle = COL_IN;
+  if (rPix > 26) ctxT.fillText("r = " + f.r, dx(f.r) - 12, dy(f.r) + 4);
+  else ctxT.fillText("r = " + f.r, dx(2 * f.r) + 5, dy(f.r) + 4);
+  ctxT.fillStyle = COL_OUT;
+  if (rnPix > 26) ctxT.fillText("rₙ = " + f.rn, dx(-f.rn) - 16, dy(f.rn) + 4);
+  else ctxT.fillText("rₙ = " + f.rn, dx(-2 * f.rn) - 8, dy(2 * f.rn) - 6);
+}
+
+// --- canvas 2: the parabolas L(n), R(n) with lattice behaviour ---
+const cvP = document.getElementById("cv-par");
+const ctxP = cvP.getContext("2d");
+
+function drawParabolas(f) {
+  const W = cvP.width, H = cvP.height;
+  ctxP.clearRect(0, 0, W, H);
+  const nMaxPlot = N_MAX + 1.5;                   // world n-range 0..22.5
+  const yMax = (nMaxPlot * nMaxPlot + 1) / 2;     // fits R at right edge
+  const Mx = 30, My = 24;
+  const dx = (n) => Mx + (n / nMaxPlot) * (W - Mx - 8);
+  const dy = (y) => H - My - (y / yMax) * (H - My - 8);
+
+  // axes
+  ctxP.strokeStyle = "#b9ab8a"; ctxP.lineWidth = 1;
+  ctxP.beginPath();
+  ctxP.moveTo(dx(0), dy(0)); ctxP.lineTo(dx(nMaxPlot), dy(0));
+  ctxP.moveTo(dx(0), dy(0)); ctxP.lineTo(dx(0), dy(yMax));
+  ctxP.stroke();
+  ctxP.fillStyle = "#4c443a"; ctxP.font = "11px Georgia, serif";
+  for (let n = 0; n <= N_MAX + 1; n += 3)
+    ctxP.fillText(String(n), dx(n) - 3, H - My + 14);
+  for (const yv of [50, 100, 150, 200])
+    ctxP.fillText(String(yv), 2, dy(yv) + 4);
+  ctxP.fillText("n", W - 12, H - My + 14);
+
+  // current-n marker (vertical line, under the curves)
+  ctxP.strokeStyle = "#c9bda3"; ctxP.lineWidth = 1.5;
+  ctxP.beginPath();
+  ctxP.moveTo(dx(f.n), dy(0)); ctxP.lineTo(dx(f.n), dy(yMax));
+  ctxP.stroke();
+
+  // continuous curves L(n) and R(n)
+  const curve = (fn, color) => {
+    ctxP.beginPath();
+    for (let i = 0; i <= 300; i++) {
+      const n = (i / 300) * nMaxPlot;
+      const px = dx(n), py = dy(Math.max(0, fn(n)));
+      i === 0 ? ctxP.moveTo(px, py) : ctxP.lineTo(px, py);
+    }
+    ctxP.strokeStyle = color; ctxP.lineWidth = 1.7; ctxP.stroke();
+  };
+  curve((n) => (n * n - 1) / 2, COL_IN);
+  curve((n) => (n * n + 1) / 2, COL_OUT);
+
+  // lattice points: odd n -> integers (filled); even n -> L half-integer (open)
+  for (let n = N_MIN; n <= N_MAX; n += 2) {
+    const y = (n * n - 1) / 2;
+    ctxP.beginPath(); ctxP.arc(dx(n), dy(y), n === f.n ? 5 : 3.2, 0, 2 * Math.PI);
+    ctxP.fillStyle = COL_IN; ctxP.fill();
+  }
+  for (let n = 4; n <= N_MAX + 1; n += 2) {
+    const y = (n * n - 1) / 2;
+    ctxP.beginPath(); ctxP.arc(dx(n), dy(y), 3.2, 0, 2 * Math.PI);
+    ctxP.fillStyle = "#fffdf7"; ctxP.fill();
+    ctxP.strokeStyle = COL_OUT; ctxP.lineWidth = 1.4; ctxP.stroke();
+  }
+  // annotate the refusal at the current even neighbour
+  ctxP.fillStyle = "#8a3318"; ctxP.font = "11px Georgia, serif";
+  ctxP.fillText("L(par) = …,5 — recusado", dx(2), dy(yMax * 0.94));
+}
+
+// --- status line (aria-live) ---
+function announce(f) {
+  const msg = "n = " + f.n +
+    "  |  L = " + f.L + "  |  R = " + f.R +
+    "  |  teste n²+L²−R² = " + f.test +
+    "  |  P = " + f.P + "  |  s = " + f.s + "  |  K = " + f.K +
+    "  |  r = " + f.r + "  |  rₙ = " + f.rn +
+    "  |  mdc(n,L) = " + f.gcdNL;
+  document.getElementById("leitura").textContent = msg;
+}
+
+// --- render ---
+const slider = document.getElementById("n-slider");
+const nVal = document.getElementById("n-val");
+function render() {
+  const f = fam(curN);
+  drawTriangle(f);
+  drawParabolas(f);
+  highlightRow();
+  announce(f);
+  slider.value = String(curN);
+  nVal.textContent = String(curN);
+  document.getElementById("btn-next").disabled = curN >= N_MAX;
+  document.getElementById("btn-prev").disabled = curN <= N_MIN;
+}
+
+// --- controls ---
+document.getElementById("btn-next").addEventListener("click", () => {
+  if (curN < N_MAX) { curN += 2; render(); }
+});
+document.getElementById("btn-prev").addEventListener("click", () => {
+  if (curN > N_MIN) { curN -= 2; render(); }
+});
+document.getElementById("btn-reset").addEventListener("click", () => {
+  curN = N_MIN; render();
+});
+slider.addEventListener("input", () => {
+  let v = Number(slider.value);
+  if (v % 2 === 0) v += 1;                 // guard: slider step keeps v odd anyway
+  curN = Math.min(N_MAX, Math.max(N_MIN, v));
+  render();
+});
+
+buildTable();
+render();
+</script>
+</body>
+</html>

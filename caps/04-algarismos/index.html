@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 4 — Os Algarismos Repetidos · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --pre-color:#1c5e3c; --per-color:#8a3318;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  .painel{border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0}
+  .controles{display:flex; flex-wrap:wrap; gap:.9rem; align-items:flex-end; margin:.4rem 0 .9rem}
+  .controles .campo{display:flex; flex-direction:column; gap:.15rem}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible, select:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  label{font-size:.95rem}
+  input[type=number]{
+    font-family:'Courier New',monospace; font-size:1.02rem; padding:.35rem .5rem;
+    border:1px solid var(--box-edge); background:#fffdf7; color:var(--ink); width:7.5rem;
+  }
+  select{
+    font-family:'Courier New',monospace; font-size:1.02rem; padding:.35rem .5rem;
+    border:1px solid var(--box-edge); background:#fffdf7; color:var(--ink); width:auto; max-width:100%;
+  }
+  .presets{display:flex; flex-wrap:wrap; gap:.5rem; margin:.6rem 0}
+  .presets button{font-size:.88rem; padding:.28rem .6rem; background:var(--box); color:var(--ink); border:1px solid var(--box-edge)}
+  .presets button:hover{background:var(--rule)}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.98rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge);
+    overflow-wrap:anywhere;
+  }
+  .stream{
+    font-family:'Courier New',monospace; font-size:1.15rem; background:#fffdf7;
+    border:1px solid var(--box-edge); padding:.8rem 1rem; margin:.8rem 0;
+    overflow-wrap:anywhere; line-height:2;
+  }
+  .stream .pre-d{color:var(--pre-color); border-bottom:2px dotted var(--pre-color)}
+  .stream .per-d{color:var(--per-color); border-top:2px solid var(--per-color); font-weight:bold}
+  .marcadores{font-size:.9rem; color:var(--ink-soft); margin:.3rem 0 .8rem}
+  .marcadores .pre-d{color:var(--pre-color); border-bottom:2px dotted var(--pre-color)}
+  .marcadores .per-d{color:var(--per-color); border-top:2px solid var(--per-color); font-weight:bold}
+  .veredito{margin:.8rem 0; padding:.6rem .8rem; border:1px solid var(--box-edge); background:var(--box); font-size:.98rem; overflow-wrap:anywhere}
+  .restos{font-family:'Courier New',monospace; font-size:.95rem; overflow-wrap:anywhere; margin:.6rem 0}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  td.txt{text-align:left; font-family:Georgia,serif}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  .exercicio{margin:1.4rem 0; padding-left:1.1rem; border-left:3px solid var(--box-edge)}
+  .exercicio .nivel{font-variant:small-caps; letter-spacing:.08em; font-size:.82rem; color:var(--accent)}
+  details.gab{margin:.6rem 0 0; background:var(--box); border:1px solid var(--box-edge); padding:.55rem .9rem}
+  details.gab summary{cursor:pointer; font-variant:small-caps; letter-spacing:.06em; color:var(--accent)}
+  details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.gab[open]{padding-bottom:.8rem}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+  code{font-family:'Courier New',monospace; font-size:.95em}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Parte I</span>
+  <h1>Capítulo 4 — Os Algarismos Repetidos</h1>
+  <p><span class="tipo">escavação</span></p>
+  <p class="pergunta">Por que 1/7 vira 0,142857142857… — para sempre — enquanto 1/8 acaba em três casas?
+  A culpa é do sete, do dez, ou da nossa maneira de escrever? E existe base em que <strong>nenhuma</strong>
+  fração precise repetir algarismos?
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2>1. O sítio</h2>
+<p>O sítio deste capítulo não é um teorema perdido: é um fascínio. Algarismos que se repetem — o 8 fechado
+sobre si, o 80, o 44 espelhado — e, acima de todos, a dízima do sete: 0,142857 142857 142857…, o mesmo bloco
+de seis algarismos girando sem fim. Números "bonitos" pela cara que fazem quando escritos.</p>
+<p><strong>Declaração honesta do estado documental:</strong> este sítio ainda <em>não foi minerado</em>. Nenhuma
+anotação original, conversa ou tentativa de prova foi localizada e commitada até 28/07/2026; a lacuna está
+registrada em <code>sources.md</code> e não será preenchida com memória apresentada como fato (§1.3, E2 do manual).
+O que o capítulo escava, portanto, não é um documento — é a própria pergunta que o fascínio esconde: os algarismos
+repetidos são uma propriedade <em>dos números</em>… ou de outra coisa?</p>
+<p>A resposta curta, que o capítulo inteiro vai demonstrar: <em>de outra coisa</em>. O 8, o 80 e o 44 são bonitos
+como <strong>numerais</strong> — figuras da escrita decimal. E a dízima do sete não é um defeito do sete: é um
+atrito entre o sete e o dez. Provar isso exige teoria de verdade — valor posicional, congruências, ordem
+multiplicativa — e a teoria entrará apenas quando os experimentos a tornarem inevitável.</p>
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<!-- ============================================================ -->
+<h2>2. O experimento</h2>
+<p>Abaixo, um laboratório de expansões. Escolha um numerador a, um denominador d e uma base b — e a máquina faz
+o que a escola fazia: <strong>divisão longa</strong>, um algarismo por vez. Mas mostrando o que a escola escondia:
+a coluna dos <em>restos</em>. Cada passo pega o resto atual, multiplica por b, tira o quociente (o próximo
+algarismo) e guarda o novo resto. Observe três coisas: quando a expansão <em>termina</em>; quando ela entra em
+<em>ciclo</em>; e o que os restos fazem no momento exato em que o ciclo fecha.</p>
+
+<div class="painel">
+  <div class="controles">
+    <div class="campo">
+      <label for="inp-a">numerador a</label>
+      <input type="number" id="inp-a" value="1" min="0" max="999999" step="1">
+    </div>
+    <div class="campo">
+      <label for="inp-d">denominador d</label>
+      <input type="number" id="inp-d" value="7" min="1" max="9999" step="1">
+    </div>
+    <div class="campo">
+      <label for="sel-b">base b</label>
+      <select id="sel-b">
+        <option value="2">2 (binária)</option>
+        <option value="3">3</option>
+        <option value="7">7</option>
+        <option value="10" selected>10 (decimal)</option>
+        <option value="12">12 (duodecimal)</option>
+        <option value="16">16 (hexadecimal)</option>
+        <option value="60">60 (sexagesimal)</option>
+      </select>
+    </div>
+    <button id="btn-run" type="button">Expandir</button>
+  </div>
+  <div class="presets" aria-label="Exemplos prontos">
+    <button type="button" data-a="1" data-d="7" data-b="10">1/7 na base 10</button>
+    <button type="button" data-a="1" data-d="7" data-b="7">1/7 na base 7</button>
+    <button type="button" data-a="2" data-d="6" data-b="10">2/6 na base 10</button>
+    <button type="button" data-a="3" data-d="6" data-b="10">3/6 na base 10</button>
+    <button type="button" data-a="5" data-d="12" data-b="10">5/12 na base 10</button>
+    <button type="button" data-a="1" data-d="3" data-b="3">1/3 na base 3</button>
+    <button type="button" data-a="1" data-d="10" data-b="2">1/10 na base 2</button>
+    <button type="button" data-a="1" data-d="13" data-b="10">1/13 na base 10</button>
+    <button type="button" data-a="1" data-d="7" data-b="60">1/7 na base 60</button>
+  </div>
+  <p class="leitura" id="leitura" role="status" aria-live="polite"></p>
+  <p id="reducao" class="marcadores"></p>
+  <div class="stream" id="stream" aria-label="Fluxo de algarismos da expansão"></div>
+  <p class="marcadores">Marcação (cor <em>e</em> traço, nunca só cor): <span class="pre-d">pré-período sublinhado
+  pontilhado em verde</span> · <span class="per-d">período com barra superior em vermelho e negrito</span> ·
+  os rótulos textuais abaixo repetem a mesma informação por extenso.</p>
+  <div class="veredito" id="veredito"></div>
+  <p class="restos" id="restos"></p>
+  <p class="marcadores" id="tabela-descricao">A máquina de estados da divisão longa: cada linha é um passo.
+  O estado é o resto; o algarismo é subproduto. A tabela é o equivalente textual do fluxo de algarismos acima
+  (em telas estreitas, ela rola horizontalmente dentro da própria moldura).</p>
+  <div class="tabela-scroll">
+  <table id="tabela-maquina" aria-describedby="tabela-descricao">
+    <caption id="tabela-caption">Máquina de estados da divisão longa</caption>
+    <thead>
+      <tr><th scope="col">passo k</th><th scope="col">resto r<sub>k−1</sub></th><th scope="col">b·r<sub>k−1</sub></th>
+      <th scope="col">algarismo u<sub>k</sub></th><th scope="col">novo resto r<sub>k</sub></th><th scope="col">observação</th></tr>
+    </thead>
+    <tbody id="tabela-corpo"></tbody>
+  </table>
+  </div>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Nada — como sempre. Ele produz <em>observações</em> (§2.1 do manual): passos finitos de uma
+  máquina. "O período de 1/7 é 6" é, aqui, uma observação sobre uma execução; "o período de 1/d é sempre a ordem
+  de b módulo d" é uma afirmação sobre <em>infinitos</em> casos, e nenhuma quantidade de execuções a alcança. O
+  experimento também exibe, ao lado do período observado, a ordem multiplicativa calculada por outro caminho
+  (potências sucessivas) — quando os dois coincidem, isso é <em>consistência</em>, não demonstração. A demonstração
+  é o assunto da seção 5.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Os padrões</h2>
+<p>Rode o laboratório antes de continuar — os botões de exemplos prontos percorrem o essencial. Cinco padrões
+devem ter aparecido; se não apareceram, desconfie do texto e volte à máquina.</p>
+<p><strong>Padrão 1 — terminar ou repetir, sem terceira opção.</strong> Nenhuma fração produz um fluxo caótico
+sem fim: ou a máquina para (resto 0), ou entra num ciclo que se repete exatamente. E o ciclo fecha sempre em
+menos de d passos.</p>
+<p><strong>Padrão 2 — quem termina na base 10 tem denominador "limpo".</strong> 1/2, 1/4, 1/5, 1/8, 1/10, 7/40
+terminam; 1/3, 1/6, 1/7, 1/9, 1/11 não. Os denominadores que terminam fatoram-se só em 2 e 5 — os primos do
+próprio 10.</p>
+<p><strong>Padrão 3 — a fronteira muda com a base.</strong> 1/3 é infinita na base 10 e exata na base 3 (0,1).
+1/7 é infinita na base 10 e exata na base 7 (0,1). E na base 3 até 1/2 — a fração mais simples que existe —
+vira dízima: 0,111… A "culpa" claramente não é do número.</p>
+<p><strong>Padrão 4 — o período é o tempo de retorno dos restos.</strong> Quando gcd(d, b) = 1, não há
+pré-período: o primeiro resto já pertence ao ciclo. O comprimento do período de 1/7 na base 10 é 6; os restos
+visitam 1 → 3 → 2 → 6 → 4 → 5 → 1 — <em>todos</em> os resíduos não nulos. O painel "ordem multiplicativa"
+coincide com o período observado em todos os casos testados.</p>
+<p><strong>Padrão 5 — o pré-período vem dos fatores comuns.</strong> 5/12 na base 10 tem pré-período 2 e período
+1 (0,41666…): o 12 = 2²·3 tem uma parte (4 = 2²) feita dos primos do 10 e uma parte (3) estranha a ele. A parte
+comum parece pagar o pré-período; a parte estranha, o período.</p>
+<p>Cada padrão é uma afirmação sobre infinitos casos. A máquina os sugeriu; falta transformá-los em enunciados —
+e enunciado é coisa que se prova ou se refuta.</p>
+
+<!-- ============================================================ -->
+<h2 id="do-padrao-ao-enunciado">4. Do padrão ao enunciado</h2>
+<p>Primeiro, fixar com precisão o objeto "expansão". A escola ensinou o algoritmo; o capítulo o enuncia como
+máquina — porque é a estrutura de máquina (estados finitos, transição determinística) que carrega todas as provas
+da seção 5.</p>
+
+<div class="caixa" id="definicao-expansao">
+  <span class="rotulo">Enunciado A (a expansão posicional como máquina de restos)</span>
+  <p>Sejam a ≥ 0 e d ≥ 1 inteiros e b ≥ 2 uma base inteira. A <em>expansão de a/d na base b</em> é produzida por:
+  parte inteira q = ⌊a/d⌋ e resto inicial r₀ = a mod d; em seguida, para k = 1, 2, 3, …:</p>
+  <p class="formula">u<sub>k</sub> = ⌊b·r<sub>k−1</sub>/d⌋ &nbsp;&nbsp;(o k-ésimo algarismo),&nbsp;&nbsp;
+  r<sub>k</sub> = b·r<sub>k−1</sub> − d·u<sub>k</sub> = b·r<sub>k−1</sub> mod d.</p>
+  <p>Cada u<sub>k</sub> está em {0, 1, …, b−1}. A expansão <em>termina</em> quando algum r<sub>k</sub> = 0
+  (daí em diante só sairiam zeros). Invariante da máquina, por indução imediata:</p>
+  <p class="formula">a·b<sup>k</sup> = d·(q·b<sup>k</sup> + u₁·b<sup>k−1</sup> + ⋯ + u<sub>k</sub>) + r<sub>k</sub>,
+  &nbsp;&nbsp;ou seja,&nbsp;&nbsp; r<sub>k</sub> = a·b<sup>k</sup> mod d.</p>
+  <p style="margin:0">A segunda forma é a chave do capítulo: <strong>o k-ésimo resto é a·b<sup>k</sup> reduzido
+  módulo d</strong>. Toda a aritmética das dízimas é a aritmética das potências de b módulo d.</p>
+</div>
+
+<p>Note desde já duas consequências gratuitas do Enunciado A. Primeira: os restos moram no conjunto finito
+{0, 1, …, d−1}; se a máquina não para, o <em>princípio das casas de pombo</em> obriga algum resto a repetir —
+e como a transição r ↦ b·r mod d é determinística, do primeiro resto repetido em diante tudo se repete
+identicamente. Eis o Padrão 1 já demonstrado: <strong>terminar ou entrar em ciclo, sem terceira opção, em no
+máximo d passos</strong>. Segunda: a expansão depende só do <em>valor</em> a/d? Ainda não sabemos — a máquina
+recebe o par (a, d), não o valor. Essa pergunta vai se revelar central.</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado B (critério de terminação)</span>
+  <p style="margin:0">Seja a/d <strong>reduzida</strong> (gcd(a, d) = 1, d ≥ 1) e b ≥ 2. São equivalentes:
+  (i) a expansão de a/d na base b é finita; (ii) existe k ∈ ℕ com d | b<sup>k</sup>;
+  (iii) todo fator primo de d divide b.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado C (a hipótese de redução carrega peso)</span>
+  <p style="margin:0">A expansão produzida pela máquina depende apenas do valor a/d — pares (a, d) e (a′, d′)
+  com a/d = a′/d′ geram os mesmos algarismos. Em consequência, o critério do Enunciado B lê o denominador
+  <em>reduzido</em>, e só ele: aplicado ao denominador bruto, é falso.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado D (caso coprimo: período = ordem multiplicativa)</span>
+  <p style="margin:0">Se gcd(d, b) = 1, d &gt; 1 e gcd(a, d) = 1, a expansão de a/d na base b é <em>puramente
+  periódica</em> (pré-período zero) e o comprimento mínimo do período é exatamente
+  <strong>ord<sub>d</sub>(b)</strong> — o menor t ≥ 1 com b<sup>t</sup> ≡ 1 (mod d) —, o mesmo para todo a.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado E (caso geral: a cisão d = d<sub>b</sub>·d′)</span>
+  <p style="margin:0">Escreva d = d<sub>b</sub>·d′, onde d<sub>b</sub> reúne os fatores primos de d que dividem b
+  e gcd(d′, b) = 1. Para a/d reduzida: o pré-período mínimo é ν = menor k com d<sub>b</sub> | b<sup>k</sup>
+  (explicitamente ν = max<sub>p | d<sub>b</sub></sub> ⌈v<sub>p</sub>(d)/v<sub>p</sub>(b)⌉, onde v<sub>p</sub> é o
+  expoente de p na fatoração), e o período mínimo é ord<sub>d′</sub>(b) — com expansão finita exatamente quando
+  d′ = 1. Ambos independem de a.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="as-provas">5. As provas</h2>
+
+<h3 id="reducao-necessaria">5.1 Primeiro o aviso: sem redução, não há critério (prova do Enunciado C)</h3>
+<p>Antes do teorema, o contraexemplo que o protege. Rode na máquina: <strong>3/6</strong> na base 10 dá 0,5 —
+finita. <strong>2/6</strong> na base 10 dá 0,333… — infinita. Mesmo denominador 6; comportamentos opostos.
+Qualquer "critério" que leia o denominador bruto 6 está morto antes de nascer: 6 tem o fator primo 3, que não
+divide 10, e ainda assim 3/6 termina.</p>
+<div class="prova">
+  <p><strong>Prova do Enunciado C.</strong> Sejam (a, d) e (a′, d′) com a/d = a′/d′ como números racionais, isto
+  é, a·d′ = a′·d. As partes inteiras coincidem (⌊a/d⌋ = ⌊a′/d′⌋, pois a/d e a′/d′ são o mesmo número). Para os
+  algarismos, o invariante do Enunciado A dá, no passo k, u₁…u<sub>k</sub> lidos como número inteiro
+  U<sub>k</sub> = ⌊(a mod d)·b<sup>k</sup>/d⌋ — uma expressão que só usa o <em>valor</em> (a mod d)/d =
+  (a/d − ⌊a/d⌋), o mesmo para os dois pares. Logo U<sub>k</sub> = U′<sub>k</sub> para todo k, e os algarismos
+  (diferenças sucessivas u<sub>k</sub> = U<sub>k</sub> − b·U<sub>k−1</sub>) coincidem um a um.
+  <span class="qed">∎</span></p>
+</div>
+<p>Moral: a máquina recebe um par, mas só enxerga o valor — e o representante canônico do valor é a fração
+reduzida (o denominador reduzido divide qualquer outro denominador do mesmo valor). Por isso o Enunciado B
+exige gcd(a, d) = 1: 3/6 <em>é</em> 1/2, e o critério, aplicado ao denominador verdadeiro 2, acerta. A hipótese
+de redução não é pedantismo — é o que impede o enunciado de mentir. O par de exemplos 3/6 (finita) e
+2/6 = 1/3 (infinita) fica como testemunha permanente.</p>
+
+<h3 id="criterio-terminacao">5.2 O critério de terminação, nas duas direções (prova do Enunciado B)</h3>
+<div class="prova">
+  <p><strong>(ii) ⟹ (i).</strong> Suponha d | b<sup>k</sup>, digamos b<sup>k</sup> = d·m. Então</p>
+  <p class="formula">a/d = a·m/(d·m) = a·m/b<sup>k</sup>,</p>
+  <p>um inteiro dividido por uma potência da base. Escreva N = a·m na base b e desloque a vírgula k casas: isso
+  exibe uma expansão com no máximo k algarismos após a vírgula. (Na máquina: r<sub>k</sub> = a·b<sup>k</sup> mod d
+  = a·d·m mod d = 0 — a máquina para até o passo k.)</p>
+  <p><strong>(i) ⟹ (ii).</strong> Suponha a expansão finita, terminando no passo k: r<sub>k</sub> = 0, ou seja,
+  d | a·b<sup>k</sup> (invariante do Enunciado A). Como gcd(a, d) = 1, o lema de Euclides–Gauss abaixo dá
+  d | b<sup>k</sup>.</p>
+  <p><strong>Lema (Euclides–Gauss; clássico, prova curta).</strong> Se d | a·m e gcd(a, d) = 1, então d | m.
+  <em>Prova pela fatoração única (TFA):</em> para cada primo p, v<sub>p</sub>(d) ≤ v<sub>p</sub>(a) +
+  v<sub>p</sub>(m); mas gcd(a, d) = 1 força v<sub>p</sub>(a) = 0 sempre que v<sub>p</sub>(d) &gt; 0; logo
+  v<sub>p</sub>(d) ≤ v<sub>p</sub>(m) para todo p, isto é, d | m.</p>
+  <p><strong>(ii) ⟺ (iii).</strong> Se d | b<sup>k</sup> e p é primo com p | d, então p | b<sup>k</sup>, e por
+  primalidade p | b: todo fator primo de d divide b. Reciprocamente, se todo fator primo de d divide b, escreva
+  d = p₁<sup>e₁</sup>⋯p<sub>s</sub><sup>e<sub>s</sub></sup> (TFA) e tome E = max eᵢ: cada
+  pᵢ<sup>eᵢ</sup> divide pᵢ<sup>E</sup>, que divide b<sup>E</sup>; como os pᵢ<sup>eᵢ</sup> são coprimos dois a
+  dois, o produto d divide b<sup>E</sup>.<span class="qed">∎</span></p>
+</div>
+<p>As duas direções custaram preços diferentes — e isso é informação, não acidente. A ida (ii) ⟹ (i) é uma conta
+de deslocar vírgula. A volta (i) ⟹ (ii) precisou do lema de Euclides–Gauss, isto é, da <strong>fatoração
+única</strong>: é ela que impede um denominador "sujo" de terminar por sorte. Quem só conhece a ida sabe produzir
+exemplos; quem tem a volta <em>classificou o fenômeno</em> (§2.4 do manual: a recíproca não é ornamental).</p>
+
+<h3 id="consequencias-bases">5.3 Consequências: cada base incorpora seus primos — e nenhuma incorpora todos</h3>
+<div class="prova">
+  <p><strong>Corolário 1 (as três bases do contrato).</strong> Pelo critério (iii), os denominadores reduzidos
+  de expansão finita são exatamente os que só têm fatores primos da base:</p>
+  <p class="formula">base 10 = 2·5: &nbsp;d = 2<sup>i</sup>·5<sup>j</sup> &nbsp;·&nbsp;
+  base 12 = 2²·3: &nbsp;d = 2<sup>i</sup>·3<sup>j</sup> &nbsp;·&nbsp;
+  base 60 = 2²·3·5: &nbsp;d = 2<sup>i</sup>·3<sup>j</sup>·5<sup>k</sup>.</p>
+  <p>A base 10 incorpora apenas {2, 5}; a 12, apenas {2, 3}; a 60, apenas {2, 3, 5}. Em cada caso a lista de
+  primos incorporados é a fatoração da própria base — nada mais.<span class="qed">∎</span></p>
+</div>
+<div class="prova" id="euclides">
+  <p><strong>Teorema (Euclides, séc. III a.C.; clássico, prova curta).</strong> Existem infinitos primos.</p>
+  <p><strong>Prova.</strong> Dada qualquer lista finita p₁, …, p<sub>n</sub> de primos, considere
+  N = p₁·p₂⋯p<sub>n</sub> + 1. N &gt; 1, logo N tem algum fator primo q (TFA). Se q fosse um dos pᵢ, então q
+  dividiria N e dividiria p₁⋯p<sub>n</sub>, logo dividiria a diferença 1 — absurdo. Então q é um primo fora da
+  lista: nenhuma lista finita esgota os primos.<span class="qed">∎</span></p>
+</div>
+<div class="prova">
+  <p><strong>Corolário 2 (a fuga dos primos).</strong> Nenhuma base finita incorpora todos os primos. De fato,
+  b ≥ 2 tem um número <em>finito</em> de fatores primos (TFA); por Euclides, existe um primo p que não divide b;
+  pelo critério, 1/p tem expansão infinita na base b. Pior: infinitos primos escapam de cada base, e para cada um
+  deles 1/p é infinita.<span class="qed">∎</span></p>
+</div>
+<div class="prova">
+  <p><strong>Corolário 3 (a fronteira se desloca, nunca some).</strong> Para toda fração reduzida a/d existe base
+  em que a expansão é finita — por exemplo b = d (pois d | d¹) quando d ≥ 2, ou qualquer múltiplo de d; e para
+  toda base b existem infinitas frações de expansão infinita (os 1/p do Corolário 2). Trocar de base
+  <em>move</em> a fronteira entre o finito e o periódico — 1/7 sai da lista negra ao mudarmos para a base 7 —
+  mas nenhuma troca a elimina: sempre sobra (e sobra infinitamente).<span class="qed">∎</span></p>
+</div>
+<p>Este é o teorema que o fascínio do sítio não sabia estar pedindo. A pergunta ingênua — "existe base em que
+nenhuma fração repita algarismos?" — tem resposta <strong>não</strong>, e a razão é a infinitude dos primos:
+uma base é um objeto finito tentando conter um estoque infinito. As dízimas não são acidente da base 10; são o
+preço estrutural de qualquer escrita posicional finita.</p>
+
+<h3 id="maquina-de-restos">5.4 Um lema de honestidade: os algarismos herdam exatamente a periodicidade dos restos</h3>
+<p>As provas seguintes lêem o período <em>nos restos</em>. Mas o período que interessa é o dos
+<em>algarismos</em>. Um cuidado é obrigatório: algarismos são funções dos restos (u<sub>k</sub> =
+⌊b·r<sub>k−1</sub>/d⌋), então herdam qualquer periodicidade dos restos — mas poderiam, em princípio, ter período
+<em>menor</em> (funções às vezes colam estados distintos). O lema fecha essa porta.</p>
+<div class="prova">
+  <p><strong>Lema.</strong> Se u<sub>k+t</sub> = u<sub>k</sub> para todo k &gt; i (algarismos eventualmente
+  t-periódicos), então r<sub>i+t</sub> = r<sub>i</sub>. Consequentemente os períodos e pré-períodos mínimos dos
+  algarismos e dos restos coincidem.</p>
+  <p><strong>Prova.</strong> Do invariante do Enunciado A aplicado a partir do passo i, para todo k ≥ 0:
+  r<sub>i+k</sub> = b<sup>k</sup>·r<sub>i</sub> − d·(u<sub>i+1</sub>b<sup>k−1</sup> + ⋯ + u<sub>i+k</sub>), e a
+  expressão análoga vale para r<sub>i+t+k</sub> com os algarismos u<sub>i+t+1</sub>, …, u<sub>i+t+k</sub> — que
+  por hipótese são <em>os mesmos</em>. Subtraindo, a soma de algarismos cancela:</p>
+  <p class="formula">r<sub>i+k</sub> − r<sub>i+t+k</sub> = b<sup>k</sup>·(r<sub>i</sub> − r<sub>i+t</sub>) para todo k ≥ 0.</p>
+  <p>O lado esquerdo está preso em módulo menor que d (dois restos); o direito cresce como b<sup>k</sup> — sem
+  limite — a menos que r<sub>i</sub> = r<sub>i+t</sub>. Logo r<sub>i</sub> = r<sub>i+t</sub>.
+  <span class="qed">∎</span></p>
+</div>
+<p>Nenhuma série infinita foi usada — só o invariante e uma desigualdade de crescimento. A partir daqui,
+"período da expansão" e "período da sequência de restos" são, demonstradamente, o mesmo número.</p>
+
+<h3 id="periodo-ordem">5.5 Caso coprimo: o período é a ordem multiplicativa (prova do Enunciado D)</h3>
+<div class="prova">
+  <p><strong>Hipóteses:</strong> gcd(d, b) = 1, d &gt; 1, gcd(a, d) = 1. Todos os restos são
+  r<sub>k</sub> = a·b<sup>k</sup> mod d — produto de invertíveis módulo d, logo invertível, logo <strong>nunca
+  zero</strong>: a expansão não termina (consistente com o Enunciado B: d &gt; 1 tem um fator primo, que não
+  divide b).</p>
+  <p><strong>Retorno dos restos.</strong> Os restos vivem em {1, …, d−1} (conjunto finito): por casas de pombo,
+  existem i &lt; j ≤ d com r<sub>i</sub> = r<sub>j</sub>. E a equação do retorno se resolve por cancelamento:</p>
+  <p class="formula">r<sub>i</sub> = r<sub>j</sub> ⟺ a·b<sup>i</sup> ≡ a·b<sup>j</sup> (mod d)
+  ⟺ b<sup>j−i</sup> ≡ 1 (mod d),</p>
+  <p>onde cancelamos a e b<sup>i</sup> — legítimo porque ambos são invertíveis módulo d (é exatamente aqui que
+  as duas hipóteses de coprimalidade trabalham). Ou seja: <em>o retorno não depende de onde se está, só do
+  intervalo percorrido</em>.</p>
+  <p><strong>Conclusão.</strong> O menor intervalo de retorno é o menor t ≥ 1 com b<sup>t</sup> ≡ 1 (mod d) —
+  por definição, a ordem multiplicativa ord<sub>d</sub>(b) (que existe: acabamos de exibir um t que funciona).
+  Tomando i = 0: r<sub>t</sub> = r<sub>0</sub> já no início — <em>pré-período zero</em>, expansão puramente
+  periódica. Pelo lema 5.4, o período mínimo dos algarismos é o mesmo dos restos: ord<sub>d</sub>(b). E como o
+  argumento cancelou a logo na primeira linha, o resultado independe de a.<span class="qed">∎</span></p>
+</div>
+<p>Releia o Padrão 4 com esses olhos: a coluna de restos do laboratório não é ilustração — é o grupo
+multiplicativo módulo d girando sob multiplicação por b, e o período da dízima é o <strong>tempo de retorno</strong>
+dessa rotação. A pergunta "por que 1/7 tem período 6?" tem agora resposta exata: porque 10 precisa de 6
+multiplicações para voltar a 1 módulo 7. O fenômeno visual (algarismos repetidos) era a sombra de um invariante
+algébrico (ordem de um elemento num grupo finito).</p>
+
+<h3 id="cisao">5.6 Caso geral: a cisão d = d<sub>b</sub>·d′ (prova do Enunciado E)</h3>
+<div class="prova">
+  <p><strong>A cisão.</strong> Pela fatoração única, d se parte de modo único como d = d<sub>b</sub>·d′, onde
+  d<sub>b</sub> agrupa os primos de d que dividem b, e d′ os que não dividem; gcd(d<sub>b</sub>, d′) = 1 e
+  gcd(d′, b) = 1.</p>
+  <p><strong>Duas coprimalidades estruturais.</strong> Para quaisquer i, t ≥ 1:
+  gcd(d<sub>b</sub>, b<sup>t</sup> − 1) = 1 (um primo p que dividisse ambos dividiria b, logo b<sup>t</sup>,
+  logo a diferença b<sup>t</sup> − (b<sup>t</sup> − 1) = 1 — absurdo) e gcd(d′, b<sup>i</sup>) = 1 (os primos de
+  d′ não dividem b).</p>
+  <p><strong>A equação do retorno, agora sem cancelar tudo.</strong> Com r<sub>k</sub> = a·b<sup>k</sup> mod d e
+  gcd(a, d) = 1:</p>
+  <p class="formula">r<sub>i</sub> = r<sub>i+t</sub> ⟺ d | a·b<sup>i</sup>(b<sup>t</sup> − 1)
+  ⟺ d | b<sup>i</sup>(b<sup>t</sup> − 1) ⟺ d<sub>b</sub> | b<sup>i</sup> &nbsp;e&nbsp; d′ | b<sup>t</sup> − 1,</p>
+  <p>usando Euclides–Gauss (5.2) para remover a, e as duas coprimalidades para <em>separar</em>: d<sub>b</sub>
+  não tem nada a extrair de b<sup>t</sup> − 1, e d′ nada a extrair de b<sup>i</sup>. O retorno se decompôs em
+  duas condições independentes — uma só sobre i, outra só sobre t.</p>
+  <p><strong>Leitura.</strong> O menor i admissível é ν = min{k : d<sub>b</sub> | b<sup>k</sup>}: como
+  d<sub>b</sub> | b<sup>k</sup> ⟺ v<sub>p</sub>(d) ≤ k·v<sub>p</sub>(b) para todo primo p | d<sub>b</sub>,
+  vale ν = max<sub>p</sub> ⌈v<sub>p</sub>(d)/v<sub>p</sub>(b)⌉. O menor t admissível é ord<sub>d′</sub>(b)
+  (se d′ &gt; 1; se d′ = 1 a condição sobre t é vazia e r<sub>ν</sub> = 0: a expansão termina em exatamente ν
+  algarismos, pois d<sub>b</sub> ∤ b<sup>ν−1</sup> impede parada antes). Logo: pré-período mínimo ν, período
+  mínimo ord<sub>d′</sub>(b) — nos restos e, pelo lema 5.4, nos algarismos. Nada dependeu de a.
+  <span class="qed">∎</span></p>
+</div>
+<p>O Padrão 5 virou teorema com contabilidade exata: em 5/12 na base 10, d<sub>b</sub> = 4 = 2² paga o
+pré-período ν = ⌈2/1⌉ = 2, e d′ = 3 paga o período ord₃(10) = 1 — confira 0,41<span class="destaque">6̄</span>
+na máquina. O Enunciado B é o caso particular d′ = 1 deste teorema; o Enunciado D, o caso d<sub>b</sub> = 1.
+A cisão é o mapa completo do território: <strong>a parte de d que a base digere paga pré-período e morre; a
+parte indigesta gira para sempre, com período igual à ordem</strong>.</p>
+
+<!-- ============================================================ -->
+<h2 id="o-sete">6. O sete — primeiro grande caso de estudo</h2>
+<p>Agora o exilado ilustre do sítio, com a teoria inteira nas mãos. A divisão de 1/7 na base 10, passo a passo
+(rode na máquina para conferir):</p>
+<div class="tabela-scroll">
+<table>
+  <caption>1/7 na base 10: seis passos, seis restos, e o sétimo resto repete o primeiro.</caption>
+  <thead><tr><th scope="col">passo</th><th scope="col">resto</th><th scope="col">×10</th><th scope="col">algarismo</th><th scope="col">novo resto</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>1</td><td>10</td><td>1</td><td>3</td></tr>
+    <tr><td>2</td><td>3</td><td>30</td><td>4</td><td>2</td></tr>
+    <tr><td>3</td><td>2</td><td>20</td><td>2</td><td>6</td></tr>
+    <tr><td>4</td><td>6</td><td>60</td><td>8</td><td>4</td></tr>
+    <tr><td>5</td><td>4</td><td>40</td><td>5</td><td>5</td></tr>
+    <tr><td>6</td><td>5</td><td>50</td><td>7</td><td>1 <span class="destaque">← r₆ = r₀: ciclo fechado</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p>O período é 6 = ord₇(10): as potências de 10 módulo 7 são 10 ≡ 3, 10² ≡ 2, 10³ ≡ 6, 10⁴ ≡ 4, 10⁵ ≡ 5,
+10⁶ ≡ 1 — seis passos para voltar. Mas há mais: 6 = 7 − 1, o <strong>máximo possível</strong> para o módulo 7
+(os restos não nulos são só seis). Quando ord<sub>p</sub>(b) = p − 1, o primo p chama-se
+<em>full-reptend</em> na base b (termo clássico da literatura): o ciclo de restos de 1/p visita <em>todos</em>
+os resíduos 1, …, p − 1. Na base 10, os full-reptend menores que 100 são 7, 17, 19, 23, 29, 47, 59, 61, 97 —
+e 7 é o primeiro.</p>
+
+<h3 id="permutacoes-ciclicas">6.1 As permutações cíclicas de 142857 — consequência estrutural, não truque de salão</h3>
+<p class="formula">1·142857 = 142857 · 2·142857 = 285714 · 3·142857 = 428571<br>
+4·142857 = 571428 · 5·142857 = 714285 · 6·142857 = 857142</p>
+<p>Seis múltiplos, os mesmos seis algarismos girando. A numerologia para aqui; a estrutura começa agora.</p>
+<div class="prova">
+  <p><strong>Teorema.</strong> Seja p primo full-reptend na base b, com bloco fundamental
+  B = (b<sup>p−1</sup> − 1)/p (o bloco de algarismos de 1/p, lido como inteiro de p − 1 algarismos na base b,
+  zeros à esquerda incluídos). Então os múltiplos m·B, para m = 1, …, p − 1, são exatamente as p − 1 rotações
+  cíclicas do bloco B — cada uma uma vez.</p>
+  <p><strong>Prova.</strong> Primeiro, B é inteiro e é o bloco de 1/p: a expansão de 1/p é puramente periódica
+  com período p − 1 (Enunciado D + full-reptend), e o invariante do Enunciado A no passo p − 1 dá
+  1·b<sup>p−1</sup> = p·U<sub>p−1</sub> + r<sub>p−1</sub> com r<sub>p−1</sub> = r₀ = 1; logo
+  U<sub>p−1</sub> = (b<sup>p−1</sup> − 1)/p = B.</p>
+  <p>Agora tome m ∈ {1, …, p − 1}. Como p é full-reptend, o ciclo de restos de 1/p percorre <em>todos</em> os
+  resíduos não nulos; seja k a posição em que ele passa por m, isto é, r<sub>k</sub> = b<sup>k</sup> mod p = m.
+  A máquina é determinística: a partir do resto m, os algarismos produzidos por m/p são os algarismos de 1/p
+  <em>a partir da posição k</em> — o mesmo ciclo, lido com defasagem k. Logo o bloco de m/p é a rotação de B
+  por k posições. E o bloco de m/p, lido como inteiro, é m·B: pelo invariante aplicado a m/p no passo p − 1,
+  m·b<sup>p−1</sup> = p·U + m, ou seja, U = m·(b<sup>p−1</sup> − 1)/p = m·B. Rotações distintas para m distintos
+  (a defasagem k é única para cada m, pois o ciclo visita cada resíduo uma vez por volta) — são p − 1 múltiplos
+  e p − 1 rotações, uma bijeção.<span class="qed">∎</span></p>
+</div>
+<p>Com p = 7, b = 10: B = 999999/7 = 142857, e as seis contas exibidas acima são o teorema, não uma coincidência.
+O "truque de salão" era a sombra visível de três fatos empilhados: período = ordem (5.5), ordem máxima
+(full-reptend) e determinismo da máquina. Sem qualquer um dos três, o truque desaba — 13 <em>não</em> é
+full-reptend na base 10 (ord₁₃(10) = 6 &lt; 12), e de fato os múltiplos de 076923 se repartem em <em>dois</em>
+ciclos disjuntos (exercício E3.2).</p>
+
+<h3>6.2 O mesmo sete, outras bases — a patologia é representacional</h3>
+<div class="tabela-scroll">
+<table>
+  <caption>1/7 escrito em cinco bases. O número é o mesmo; o comportamento é do par (número, base).</caption>
+  <thead><tr><th scope="col">base b</th><th scope="col">expansão de 1/7</th><th scope="col">pré-período</th><th scope="col">período</th><th scope="col">ord₇(b)</th></tr></thead>
+  <tbody>
+    <tr><td>10</td><td class="txt">0,<span class="destaque">142857</span> 142857…</td><td>0</td><td>6</td><td>6 (full-reptend)</td></tr>
+    <tr><td>12</td><td class="txt">0,<span class="destaque">186A35</span> 186A35…</td><td>0</td><td>6</td><td>6 (full-reptend)</td></tr>
+    <tr><td>16</td><td class="txt">0,<span class="destaque">249</span> 249 249…</td><td>0</td><td>3</td><td>3</td></tr>
+    <tr><td>60</td><td class="txt">0, <span class="destaque">8:34:17</span> 8:34:17…</td><td>0</td><td>3</td><td>3</td></tr>
+    <tr><td>7</td><td class="txt">0,1 — <strong>exata</strong></td><td>1 algarismo, fim</td><td>—</td><td>— (7 | 7)</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Na base 7, 1/7 = 0,1 — tão exato quanto 1/10 = 0,1 na base dez. O número 1/7 não mudou nada: é o mesmo ponto
+da reta racional, com as mesmas propriedades aritméticas. O que mudou foi o <em>instrumento de escrita</em>. Na
+taxonomia do manual (§2.3), a dízima de 1/7 é imperfeição <strong>representacional</strong> — categoria 1 — e
+não estrutural: o objeto está perfeitamente definido; sua escrita em certas bases é que não fecha. Confundir as
+duas categorias é o erro que o capítulo existe para impedir.</p>
+
+<!-- ============================================================ -->
+<h2>7. As camadas — número, numeral e os parentes de cada um</h2>
+<p>O contrato deste capítulo exige distinguir explicitamente seis termos. Ei-los, com o sete de exemplo em todos:</p>
+<ul class="compacta">
+  <li><strong>Número</strong> — o objeto: a quantidade sete; o racional 1/7. Existe sem escrita alguma.</li>
+  <li><strong>Numeral</strong> — a figura que o denota: "7", "VII", "111₂" são três numerais do mesmo número.
+  O 8 do sítio é redondo <em>como numeral</em>; o número oito não tem forma.</li>
+  <li><strong>Base</strong> — a convenção que dá significado posicional a uma fileira de numerais: em
+  "142857" na base 10, cada posição vale dez vezes a seguinte.</li>
+  <li><strong>Expansão</strong> — o resultado (finito ou não) de escrever um número na convenção posicional de
+  uma base: 0,142857142857… é a expansão de 1/7 na base 10; 0,1 é a expansão do mesmo número na base 7.</li>
+  <li><strong>Propriedade aritmética</strong> — o que pertence ao número e sobrevive a qualquer troca de base:
+  ser primo, ser racional, o valor de gcd(a, d), a ordem ord₇(10). Nenhuma base a cria ou destrói.</li>
+  <li><strong>Artefato representacional</strong> — o que pertence ao par (número, base) e muda quando a base
+  muda: terminar, repetir, o comprimento do período, "ter todos os algarismos iguais". A dízima do sete é
+  artefato; a primalidade do sete, não.</li>
+</ul>
+<p>O fascínio do sítio era legítimo — mas mirava a camada errada. "44 tem dois algarismos iguais" é fato sobre
+um numeral na base 10 (na base 7, 44 escreve-se 62; na base 2, 101100 — a graça evapora). Já "o período de 1/7
+na base b é a ordem de b módulo 7" é fato aritmético sobre o número — e vale em todas as bases de uma vez.
+A escavação deste capítulo foi exatamente essa mudança de camada: do numeral que encanta ao invariante que
+explica. Note a sutileza fina: <em>o comprimento do período</em> é artefato (depende de b), mas <em>a função</em>
+b ↦ ord₇(b) é aritmética. O artefato é a sombra; a função é o objeto que a projeta.</p>
+
+<!-- ============================================================ -->
+<h2>8. Portas fechadas</h2>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — a conjectura de Artin (fora do primeiro ciclo; problema aberto)</span>
+  <p style="margin:0">Vimos que 7, 17, 19, 23, … são full-reptend na base 10. A lista continua para sempre?
+  Isto é: <em>10 é raiz primitiva de infinitos primos?</em> Ninguém sabe. É a conjectura de Artin (1927) — não
+  se conhece <strong>nenhum</strong> inteiro sequer (10, 2, 3…) do qual se saiba ser raiz primitiva de infinitos
+  primos, embora se saiba condicionalmente (Hooley, 1967, sob a Hipótese Generalizada de Riemann) que quase
+  todos funcionam. O problema é genuinamente aberto e sua tecnologia (densidades de primos, teoria algébrica
+  fina) está fora do primeiro ciclo deste tratado. Fica como o "impossível por enquanto" mais honesto do
+  capítulo — ver exercício E4.1.</p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — 1/998001 e os contadores automáticos (→ Capítulo 10)</span>
+  <p style="margin:0">1/998001 = 0,000001002003004005… — a dízima <em>conta</em>: 000, 001, 002, …, pulando
+  exatamente o 998 e fechando ciclo em 999·3 algarismos. O 998001 é 999². A explicação limpa exige elevar uma
+  série geométrica ao quadrado — maquinário da fábrica de funções do <strong>Capítulo 10</strong>. Ver
+  exercício E4.2.</p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — normalidade (segundo ciclo)</span>
+  <p style="margin:0">Racionais têm expansão eventualmente periódica (provado aqui). Irracionais, não — e sobre
+  eles nasce a pergunta oposta: os algarismos de π, e, √2 se distribuem <em>uniformemente</em> (números
+  "normais")? Sabe-se que quase todo real é normal (Borel), constrói-se um normal artificial
+  (0,123456789101112…, Champernowne) — mas para π, e, √2 a pergunta está aberta. Exige teoria da medida:
+  segundo ciclo. Ver exercício E4.3.</p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — bases não inteiras (segundo ciclo)</span>
+  <p style="margin:0">Toda a teoria deste capítulo assumiu b inteiro, b ≥ 2 — a hipótese trabalhou em cada prova
+  (algarismos em {0, …, b−1}; restos inteiros; TFA sobre b). Existe escrita posicional de base φ (áurea), onde
+  "100" = "011" e as expansões obedecem outra gramática. O que sobrevive do critério e da ordem multiplicativa
+  sem a aritmética dos inteiros? Segundo ciclo.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="exercicios">9. Exercícios</h2>
+<p>Cinco níveis, do socrático ao impossível-por-enquanto (E20 do manual). Regra de uso: tente antes de abrir o
+gabarito — mas <em>abra sempre</em>, mesmo quando acertar. O gabarito é a segunda metade do exercício. Os N4
+não têm solução aqui — têm a razão exata pela qual ainda não têm, e o endereço de onde terão.</p>
+
+<h3>Nível 0 — Socráticos</h3>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.1</span>
+  <p>O 44 "tem dois algarismos iguais". O 7 "é primo". Essas duas frases falam do mesmo tipo de coisa? Se você
+  trocar de base, qual das duas pode deixar de valer — e por quê?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Não falam do mesmo tipo de coisa. "44 tem dois algarismos iguais" é uma frase sobre a <em>escrita</em> do
+    número quarenta e quatro na base 10 — sobre o numeral. Troque de base e a frase morre: na base 7, quarenta e
+    quatro escreve-se 62 (6·7 + 2 = 44); na base 2, 101100. Nenhum algarismo repetido — e o número não mudou
+    coisa nenhuma.</p>
+    <p>"7 é primo" é uma frase sobre o <em>número</em>: sete objetos não se arranjam em retângulo com mais de uma
+    fileira, escreva-se o sete como "7", "VII" ou "111₂". Nenhuma base a afeta.</p>
+    <p>Este é o par de camadas que o capítulo inteiro separa (seção 7): propriedade aritmética (do número)
+    versus artefato representacional (do par número–base). Teste rápido para qualquer frase: <em>sobrevive à
+    troca de base?</em> Se sim, fala do número. Se não, fala da escrita. O fascínio do sítio — 8, 80, 44 — era
+    todo da segunda espécie; a teoria que o explicou é toda da primeira.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.2</span>
+  <p>Antes de qualquer conta: por que a divisão longa de 1/7 <em>tem</em> que acabar repetindo? Não "porque a
+  gente observa que repete" — por que não poderia sair uma sequência de algarismos que nunca entra em ciclo?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Porque a máquina tem memória minúscula. A cada passo, tudo o que a divisão longa "sabe" é o resto atual —
+    e restos de divisão por 7 só podem ser 0, 1, 2, 3, 4, 5 ou 6. Sete gavetas. Se o resto 0 aparece, a conta
+    termina. Se nunca aparece, sobram <em>seis</em> gavetas para infinitos passos: em no máximo sete passos algum
+    resto volta a aparecer (princípio das casas de pombo — mais pombos que casas, alguma casa repete).</p>
+    <p>E aqui entra o determinismo: o passo seguinte depende <em>só</em> do resto atual (multiplica por 10,
+    divide por 7). Então, do resto repetido em diante, a máquina refaz exatamente o que já fez — mesmo algarismo,
+    mesmo resto novo, para sempre. Repetição não é hábito da conta: é destino de qualquer máquina determinística
+    com estados finitos. É o Padrão 1 da seção 3, e a primeira metade de todas as provas da seção 5. O que a
+    teoria acrescentou depois foi <em>quando</em> o ciclo fecha (a ordem multiplicativa) — mas <em>que</em> fecha,
+    as casas de pombo já garantiam.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.3</span>
+  <p>"1/3 é um número infinito." A frase é comum — e errada. O que exatamente é infinito em 1/3 = 0,333…?
+  E o que não é?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>O número 1/3 é rigorosamente finito: está entre 0 e 1, mais perto de zero do que de um. Cabe numa régua.
+    O que é infinita é a <em>expansão decimal</em> dele — a tentativa de escrevê-lo com as peças da base 10.
+    A frase confunde o objeto com a escrita do objeto (seção 7: número ≠ numeral ≠ expansão).</p>
+    <p>Prova de que a infinitude é da escrita, não do número: mude a ferramenta. Na base 3, o mesmo 1/3
+    escreve-se 0,1 — um algarismo, fim. Na base 12, escreve-se 0,4. O critério da seção 5.2 diz exatamente
+    quando a ferramenta serve: a expansão de 1/3 na base b termina se e só se 3 divide b. A base 10 não tem o
+    fator 3 — a "infinitude" era só o 10 não tendo troco para o 3.</p>
+    <p>Guarde a distinção para o Capítulo 9, onde ela vira urgente: lá, "0,999… = 1" e somas infinitas exigirão
+    saber com precisão o que é o número e o que é a representação. Quem chama 1/3 de "número infinito" hoje vai
+    chamar limite de "número que nunca chega" amanhã — e os dois erros são o mesmo erro.</p>
+  </details>
+</div>
+
+<h3>Nível 1 — Básicos, brincando com a máquina</h3>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.1</span>
+  <p>Faça à mão a divisão longa de 1/6 na base 10, anotando os restos. Identifique pré-período e período, e
+  explique-os pela cisão 6 = 2·3 (seção 5.6). Confira na máquina.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Restos: r₀ = 1. Passo 1: 10·1 = 10 = 6·1 + 4 → algarismo 1, resto 4. Passo 2: 10·4 = 40 = 6·6 + 4 →
+    algarismo 6, resto 4. O resto 4 repetiu imediatamente: 1/6 = 0,1666… = 0,1<span style="border-top:2px solid var(--per-color)">6</span>̄.
+    Pré-período 1 (o algarismo 1), período 1 (o algarismo 6).</p>
+    <p>Pela cisão: 6 = 2·3 com b = 10. A parte digerível é d<sub>b</sub> = 2 (o 2 divide 10); a indigesta é
+    d′ = 3. Pré-período previsto: ν = menor k com 2 | 10ᵏ = 1. Período previsto: ord₃(10) — e 10 ≡ 1 (mod 3),
+    então a ordem é 1. Previsão: pré-período 1, período 1 ✓.</p>
+    <p>Repare no detalhe fino: o pré-período não é "os algarismos antes da repetição visível" por acaso — é o
+    tempo que a máquina leva para <em>matar o fator 2</em> do denominador. Depois do primeiro passo, o resto 4
+    e o módulo restante se comportam como a divisão por 3, que é puramente periódica. A cisão d = d_b·d′ não é
+    truque de contabilidade: é a descrição do que a máquina realmente faz, em duas fases.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.2</span>
+  <p>Expanda 1/3 e 1/5 na base 2, à mão (dobra-se o resto em vez de multiplicar por 10). Verifique que os
+  períodos são ord₃(2) e ord₅(2), calculando as ordens por potências sucessivas.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>1/3 na base 2:</em> r₀ = 1. Passo 1: 2·1 = 2 = 3·0 + 2 → algarismo 0, resto 2. Passo 2: 2·2 = 4 =
+    3·1 + 1 → algarismo 1, resto 1 = r₀: ciclo fechado. 1/3 = 0,010101…₂, período 2.</p>
+    <p><em>Ordem:</em> 2¹ = 2 ≡ 2 (mod 3), 2² = 4 ≡ 1 (mod 3) → ord₃(2) = 2 ✓.</p>
+    <p><em>1/5 na base 2:</em> r₀ = 1 → restos 2, 4, 3, 1: quatro passos (algarismos 0, 0, 1, 1).
+    1/5 = 0,00110011…₂, período 4.</p>
+    <p><em>Ordem:</em> 2¹ ≡ 2, 2² ≡ 4, 2³ ≡ 3, 2⁴ ≡ 1 (mod 5) → ord₅(2) = 4 ✓.</p>
+    <p>Moral de calibração: o teorema período = ordem (5.5) não é sobre a base 10 — é sobre <em>qualquer</em>
+    base. O computador, que vive na base 2, sofre do mesmo mal que o papel decimal: 1/5 — o "0,2" mais inocente
+    da base 10 — é dízima infinita na base 2, e é por isso que somar 0,2 dez vezes em ponto flutuante não dá
+    exatamente 2. A imperfeição computacional (§2.3, categoria 4) do seu computador é, no fundo, um caso deste
+    capítulo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.3</span>
+  <p>Liste todos os d entre 1 e 20 tais que 1/d termina na base 10. Confira cada um pelo critério (fatores primos
+  de d ⊆ {2, 5}) e, se quiser, pela máquina. Depois responda sem calcular: 1/1024 termina? E 1/1030?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Terminam: d = 1, 2, 4, 5, 8, 10, 16, 20. São exatamente os d ≤ 20 da forma 2<sup>i</sup>·5<sup>j</sup>:
+    1 = 2⁰5⁰, 2, 4 = 2², 5, 8 = 2³, 10 = 2·5, 16 = 2⁴, 20 = 2²·5. Os demais (3, 6, 7, 9, 11, 12, 13, 14, 15,
+    17, 18, 19) contêm algum primo fora de {2, 5} — cada um deles produz dízima, com pré-período dado pela parte
+    2-5 e período dado pela ordem de 10 módulo a parte restante (seção 5.6).</p>
+    <p>1/1024: 1024 = 2¹⁰, só fatores 2 → <strong>termina</strong> (em exatamente 10 casas, pois ν = ⌈10/1⌉ = 10:
+    0,0009765625). 1/1030: 1030 = 2·5·103, e 103 é primo (não divisível por 2, 3, 5, 7; 11² já passa de 103) →
+    <strong>não termina</strong>: pré-período 1, e o período é ord₁₀₃(10), que o exercício não pede — mas a
+    máquina calcula.</p>
+    <p>O ganho do critério é este: você respondeu sobre 1/1024 e 1/1030 <em>sem dividir nada</em>. O teorema
+    transformou uma pergunta sobre infinitos algarismos numa pergunta finita sobre fatores primos. É o que um
+    critério é: a troca de um processo infinito por uma inspeção finita.</p>
+  </details>
+</div>
+
+<h3>Nível 2 — Intermediários</h3>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.1</span>
+  <p>Calcule ord₁₃(10) por potências sucessivas e verifique com a máquina que 1/13 e 5/13 têm ambas período 6 —
+  embora com algarismos diferentes. Por que o período não depende do numerador, mas os algarismos sim?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Potências de 10 módulo 13:</em> 10¹ ≡ 10; 10² = 100 = 7·13 + 9 ≡ 9; 10³ ≡ 90 ≡ 90 − 78 = 12;
+    10⁴ ≡ 120 ≡ 120 − 117 = 3; 10⁵ ≡ 30 ≡ 4; 10⁶ ≡ 40 ≡ 1. Logo ord₁₃(10) = 6.</p>
+    <p><em>Máquina:</em> 1/13 = 0,076923 076923… e 5/13 = 0,384615 384615… — períodos 6 e 6, blocos diferentes ✓.</p>
+    <p><em>Por quê:</em> na prova da seção 5.5, a condição de retorno r<sub>i</sub> = r<sub>j</sub> virou
+    b<sup>j−i</sup> ≡ 1 (mod d) <em>depois de cancelar o a</em> — o numerador saiu da equação porque é invertível
+    módulo 13. O comprimento do ciclo é do grupo (quanto tempo 10 leva para voltar a 1), não do ponto de partida.
+    Já os algarismos são a trajetória vista de onde se entrou: 5/13 entra no espaço de restos pelo 5, não pelo 1,
+    e 5 não está no ciclo de restos de 1/13 ({1, 10, 9, 12, 3, 4}) — está no outro ciclo ({2, 7, 5, 11, 6, 8}).
+    Mesmo relógio, ponteiro largado noutra posição — ou, aqui, noutro <em>anel</em> do relógio (E3.2 conta os
+    anéis).</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.2</span>
+  <p>Sem dividir, preveja o pré-período e o período de 1/56 na base 10 (56 = 2³·7). Depois confirme pela máquina
+  ou à mão. Generalize: qual é o pré-período de 1/(2<sup>i</sup>·5<sup>j</sup>·m) com gcd(m, 10) = 1?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Previsão pela cisão (5.6):</em> d = 56 = 2³·7. Parte digerível d<sub>b</sub> = 2³ = 8; parte indigesta
+    d′ = 7. Pré-período ν = menor k com 8 | 10ᵏ: como v₂(10) = 1, ν = ⌈3/1⌉ = 3. Período: ord₇(10) = 6 (seção 6).
+    Previsão: pré-período 3, período 6.</p>
+    <p><em>Confirmação:</em> 1/56 = 0,017 857142 857142… — três algarismos de pré-período (017), depois o bloco
+    857142 girando: exatamente uma rotação do bloco do sete, como devia ser, pois o período de 1/56 é governado
+    pelo mesmo d′ = 7 ✓.</p>
+    <p><em>Generalização:</em> para d = 2<sup>i</sup>·5<sup>j</sup>·m com gcd(m, 10) = 1: d<sub>b</sub> =
+    2<sup>i</sup>·5<sup>j</sup>, e ν = menor k com 2<sup>i</sup>5<sup>j</sup> | 2<sup>k</sup>5<sup>k</sup> =
+    max(i, j). Pré-período <strong>max(i, j)</strong>; período ord<sub>m</sub>(10) (zero se m = 1). O pré-período
+    mede o pior dos dois expoentes — é a fórmula ν = max ⌈v<sub>p</sub>(d)/v<sub>p</sub>(b)⌉ do Enunciado E com
+    v₂(10) = v₅(10) = 1. Teste-se: 1/40 = 1/(2³·5) → pré max(3,1) = 3: 0,025 ✓.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.3</span>
+  <p>Quais denominadores d entre 2 e 12 têm 1/d finita na base 12? Compare com a lista da base 10 (E1.3) e
+  explique, pelo critério, por que um sistema de contagem em dúzias "erra menos" nas frações do dia a dia.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Base 12 = 2²·3: terminam os d cujos primos estão em {2, 3}: d = 2, 3, 4, 6, 8, 9, 12 — sete dos onze.
+    Ficam de fora 5, 7, 10, 11. (Máquina: 1/6 na base 12 é 0,2 exato; 1/9 é 0,14 exato — pois 9 | 12².)</p>
+    <p>Base 10 = 2·5: terminam d = 2, 4, 5, 8, 10 — cinco dos onze. Ficam de fora 3, 6, 7, 9, 11, 12.</p>
+    <p>A comparação estrutural: as frações mais usadas na prática — metades, terços, quartos — pedem os primos
+    2 e 3. A base 12 incorpora exatamente {2, 3}; a base 10 incorpora {2, 5}, e o 5 rende menos (quintos são
+    raros; terços são cotidianos). Por isso 1/3 de hora são 20 minutos exatos (o 60 = 2²·3·5 dos babilônios
+    incorpora 2, 3 <em>e</em> 5 — o critério explica a escolha sexagesimal para tempo e ângulo).</p>
+    <p>Mas — e este é o ponto do capítulo — nenhuma dessas escolhas <em>resolve</em>: a seção 5.3 provou que toda
+    base deixa infinitos primos de fora. 1/7 é dízima nas bases 10, 12 <em>e</em> 60. Escolher base é escolher
+    <em>quais</em> frações sofrem, nunca <em>se</em> alguma sofre. Engenharia de representação administra o
+    problema; só a teoria diz que ele não tem cura.</p>
+  </details>
+</div>
+
+<h3>Nível 3 — Difíceis</h3>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.1</span>
+  <p>Prove que se a expansão de x ∈ (0, 1) na base b é puramente periódica com período t e bloco B (lido como
+  inteiro na base b), então x = B/(b<sup>t</sup> − 1) — <em>sem usar séries infinitas</em>, só o invariante da
+  máquina. Conclua que os racionais de expansão puramente periódica na base 10 são exatamente os a/d reduzidos
+  com gcd(d, 10) = 1, d &gt; 1 — e onde entra 0,999… = 1 nessa história?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Passo 1.</em> Seja x = a/d reduzida (todo x periódico é racional: os restos determinam a expansão, e
+    uma expansão periódica é gerada pela máquina de algum a/d — tome a = B, d = b<sup>t</sup> − 1 e confira que
+    a máquina de B/(b<sup>t</sup> − 1) reproduz o bloco B: no passo t o invariante dá
+    B·b<sup>t</sup> = (b<sup>t</sup> − 1)·U<sub>t</sub> + r<sub>t</sub>; com U<sub>t</sub> = B vem r<sub>t</sub>
+    = B = r₀ ✓ — a máquina fecha ciclo em t passos com bloco B).</p>
+    <p><em>Passo 2 (a identidade, sem séries).</em> Se x = a/d tem expansão puramente periódica de período t e
+    bloco B, o invariante no passo t dá a·b<sup>t</sup> = d·U<sub>t</sub> + r<sub>t</sub> com U<sub>t</sub> = B
+    (os t primeiros algarismos) e r<sub>t</sub> = r₀ = a (periodicidade pura + lema 5.4). Então
+    a·b<sup>t</sup> − a = d·B, isto é, <strong>x = a/d = B/(b<sup>t</sup> − 1)</strong>. Nenhum limite foi
+    invocado: só o invariante finito.</p>
+    <p><em>Passo 3 (classificação).</em> Se gcd(d, b) = 1, d &gt; 1: a seção 5.5 já provou pré-período zero.
+    Reciprocamente, se x = B/(b<sup>t</sup> − 1), o denominador reduzido de x divide b<sup>t</sup> − 1, que é
+    coprimo com b (qualquer primo comum dividiria 1); logo gcd(d, b) = 1. Os puramente periódicos são exatamente
+    os denominadores coprimos com a base ✓.</p>
+    <p><em>Passo 4 (0,999…).</em> O bloco B = 9 com t = 1 dá x = 9/(10 − 1) = 1. Mas atenção à camada: a máquina
+    deste capítulo <em>nunca produz</em> a expansão 0,999… (a divisão de 1/1 dá parte inteira 1 e expansão
+    vazia). O que o Passo 2 mostra é que <em>se</em> uma escrita puramente periódica de bloco 9 denota algum
+    número — questão de convergência, que pertence ao Capítulo 9 —, esse número só pode ser 1. Aqui, 0,999… é
+    uma escrita órfã de máquina; lá, será uma série convergente com soma 1. Duas camadas, duas perguntas — o
+    capítulo responde a algébrica e deixa a analítica, declaradamente, na porta do 9.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.2</span>
+  <p>O 13 não é full-reptend na base 10 (ord₁₃(10) = 6 &lt; 12). Mostre que os restos não nulos módulo 13 se
+  partem em exatamente (13 − 1)/6 = 2 ciclos disjuntos sob r ↦ 10r mod 13, exiba os dois, e explique o que isso
+  faz com os múltiplos de 076923 (o "truque do 142857" quebra — como, exatamente?). Generalize: para p primo com
+  p ∤ b, os restos {1, …, p − 1} partem-se em (p − 1)/ord<sub>p</sub>(b) ciclos, todos do mesmo comprimento.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Os dois ciclos do 13:</em> partindo de 1: 1 → 10 → 9 → 12 → 3 → 4 → 1 (seis restos). Partindo de 2
+    (o menor ausente): 2 → 7 → 5 → 11 → 6 → 8 → 2 (os outros seis). {1, 10, 9, 12, 3, 4} ∪ {2, 7, 5, 11, 6, 8}
+    = {1, …, 12}, disjuntos ✓.</p>
+    <p><em>Comprimento igual:</em> o ciclo de r é {r·10<sup>k</sup> mod 13}; ele fecha no menor t com
+    r·10<sup>t</sup> ≡ r, e cancelando r (invertível), t = ord₁₃(10) = 6 — o mesmo para todo r. Cada ciclo tem
+    6 elementos; 12/6 = 2 ciclos. No caso geral, idêntico: cada ciclo tem comprimento ord<sub>p</sub>(b), e os
+    ciclos particionam os p − 1 restos em (p − 1)/ord<sub>p</sub>(b) classes. (Em linguagem que o Capítulo 8
+    tornará oficial: são as órbitas da multiplicação por b no grupo dos invertíveis.)</p>
+    <p><em>O truque quebra assim:</em> 1/13 = 0,0̄7̄6̄9̄2̄3̄ e seus "parentes de ciclo" m ∈ {1, 10, 9, 12, 3, 4}
+    dão m·076923 = rotações de 076923 (mesma prova da seção 6.1, restrita ao ciclo de 1). Mas m = 2 está no
+    outro ciclo: 2·076923 = 153846, que <em>não</em> é rotação de 076923 — é o bloco do outro ciclo (2/13 =
+    0,1̄5̄3̄8̄4̄6̄), e seus parentes {2, 7, 5, 11, 6, 8} giram entre si. Os doze múltiplos m·076923 repartem-se em
+    duas famílias de seis rotações. O "truque do 142857" não é um teorema sobre blocos de dízima: é um teorema
+    sobre <em>transitividade</em> — funciona se e só se o ciclo é único, isto é, se p é full-reptend. O 7 tem o
+    truque porque ord₇(10) = 6 esgota os restos; o 13 tem meia mágica porque 6 &lt; 12 divide o público em dois
+    salões.</p>
+  </details>
+</div>
+
+<h3>Nível 4 — Impossíveis por enquanto</h3>
+<p>Sem gabarito — de propósito. Cada enunciado é honesto; o que segue em cada caixa é a razão exata da
+impossibilidade atual e o endereço onde ela mora.</p>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.1</span>
+  <p>Prove (ou refute): existem infinitos primos p para os quais o período de 1/p na base 10 é exatamente
+  p − 1 — isto é, infinitos primos full-reptend.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Este é um problema <strong>genuinamente aberto</strong> — a conjectura de Artin sobre raízes primitivas
+    (1927). Não é aberto por falta de esforço: sabe-se (Hooley, 1967) que ele segue da Hipótese Generalizada de
+    Riemann; sabe-se (Heath-Brown, 1986) que no máximo dois primos "excepcionais" poderiam falhar a conjectura
+    em sua forma geral — mas para <em>nenhum</em> inteiro específico, nem 10, nem 2, se sabe dar a resposta
+    incondicional. O obstáculo é de natureza: "infinitos primos com tal propriedade" pede as ferramentas de
+    densidade e distribuição de primos — teoria analítica dos números — que o manual declara explicitamente
+    <strong>fora do primeiro ciclo</strong> (§11). Este capítulo fez sua parte: transformou "a dízima de 1/p usa
+    todos os restos" num enunciado exato sobre ord<sub>p</sub>(10). A pergunta pela infinitude fica aberta — no
+    tratado e na matemática.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.2</span>
+  <p>Explique completamente por que 1/998001 = 0,000001002003004… conta de 000 a 999 (pulando o 998), e
+  generalize para 1/9801, 1/(b<sup>n</sup> − 1)².</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>O fenômeno é real e verificável na máquina: 998001 = 999², e a dízima enumera 000, 001, 002, …, 997, 999
+    (o 998 falta, engolido por um "vai-um" vindo do infinito). Com as ferramentas deste capítulo você consegue
+    <em>verificar</em> o período (é um divisor de ord — o comprimento aqui é 2997 algarismos) — mas não consegue
+    a <em>explicação estrutural</em>, que é: 1/999 = 0,001001001… é uma "série geométrica disfarçada", e
+    1/999² é essa série <strong>ao quadrado</strong>; elevar uma série ao quadrado produz os coeficientes
+    1, 2, 3, 4, … (é a derivada da geométrica, em roupa de multiplicação) — daí a contagem. Manipular séries
+    como objetos algébricos — somar, multiplicar, derivar termo a termo, e <em>provar que isso é lícito</em> —
+    é exatamente o maquinário de convergência do <strong>Capítulo 10</strong> (a fábrica de funções). A porta
+    fica fechada com a fresta à mostra: rode 1/9801 na máquina (bloco de 198 algarismos, contando 00 a 99 sem o
+    98) e guarde a pergunta até a fábrica abrir.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.3</span>
+  <p>Os algarismos de √2 = 1,41421356… contêm cada dígito com frequência 1/10? E os de π?</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Ninguém sabe — nem para √2, nem para π, nem para e. Este capítulo provou que <em>racionais</em> têm
+    expansão eventualmente periódica (logo frequências de dígitos eventualmente fixadas pelo bloco); a recíproca
+    (periódica ⟹ racional, E3.1) mostra que os irracionais têm expansões que <em>nunca</em> se repetem — mas
+    "não repetir" está a um oceano de distância de "distribuir uniformemente". A propriedade em questão chama-se
+    <em>normalidade</em>: sabe-se desde Borel (1909) que quase todo número real é normal (a exceção tem medida
+    nula), e constroem-se exemplos artificiais (0,123456789101112…, de Champernowne, é normal na base 10) — mas
+    não se conhece <em>um único</em> número "natural" (√2, π, e) cuja normalidade esteja provada. Já o
+    ferramental mínimo para enunciar isso com rigor — medida, "quase todo", frequência limite — é teoria da
+    medida: <strong>segundo ciclo</strong> do tratado, declarado fora deste (§11 do manual). O capítulo entrega
+    a fronteira exata: aquém dela, período e ordem; além dela, estatística de dígitos — outra matemática.</p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2>10. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> o período de 1/p divide p − 1 (os ciclos partem o grupo em órbitas
+  iguais, E3.2) — mas <em>quando</em> ele é máximo? A pergunta "como a ordem de b se distribui módulo os primos"
+  é a fronteira exata onde este capítulo encosta na teoria analítica dos números — e para (Artin, E4.1).</li>
+  <li><strong>Porta fechada → Cap. 8:</strong> a palavra "base" voltará em "mudança de base" de espaços
+  vetoriais — homonímia perigosa; lá se compara com cuidado o que cada "base" preserva. Os ciclos de E3.2 são
+  órbitas de um grupo agindo — linguagem que o Cap. 8 oficializa.</li>
+  <li><strong>Porta fechada → Cap. 9:</strong> o estatuto analítico das expansões infinitas — em que sentido
+  0,333… <em>é</em> 1/3, e por que 0,999… = 1 — exige limite e série; aqui só a álgebra dos blocos foi provada
+  (E3.1).</li>
+  <li><strong>Porta fechada → Cap. 10:</strong> 1/998001 e a multiplicação de séries (E4.2).</li>
+  <li><strong>Fora do primeiro ciclo:</strong> Artin (E4.1); normalidade e medida (E4.3); teoria analítica dos
+  números (§11 do manual).</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: desenvolvido e auditado sob gate v0, aguardando release.</strong> Oráculo triplo
+  executado em 28/07/2026 com artefatos em <code>audit/</code>: braço simbólico (S1–S8,
+  <code>symbolic-check.md</code>), braço numérico com duas implementações independentes (máquina de divisão
+  longa versus previsão teórica pela cisão e pela ordem; todos os a/d reduzidos com d ≤ 2000, sete bases,
+  <code>numeric-check.json</code>) e casos adversariais (d = 0, negativos, bases 0 e 1 recusados; d = 1;
+  frações não reduzidas reduzidas e registradas; primo grande 9973 — <code>edge-cases.md</code>). Auditoria de
+  gate v0 completa: interação, teclado, overflow, autocontenção sem rede, screenshots desktop e iPhone
+  inspecionados.</p>
+  <p><strong>Pendências declaradas:</strong> (1) mineração do sítio pessoal — o dossiê de 8, 80, 44 e do fascínio
+  original pela dízima do sete permanece não minerado; <code>sources.md</code> registra a lacuna, que não foi
+  preenchida com memória (§1.3, E2); (2) decisão de tag de release (<code>cap-04-gate0-r1</code>) pelo leitor
+  primário; (3) conjecturas C1–C6 do pré-registro: nenhuma refutada durante o desenvolvimento — C1–C5
+  confirmadas por prova (seções 5–6), C6 confirmada nas seções 5.3 e 6.2; sem autópsias a lavrar nesta data.</p>
+  <p>MATH3us.md · Capítulo 4 · escavação · release: nenhuma (pronto para tag).</p>
+</footer>
+
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 4 — Repeated digits. Base-expansion laboratory.
+ *
+ * Layer discipline (manual §2.1):
+ *  - The DIGIT STREAM is computed ONLY by the long-division state
+ *    machine of Enunciado A (integer arithmetic; exact).
+ *  - The PREDICTION panel (pre-period via the d = d_b·d' split,
+ *    period via multiplicative order by successive powers) is an
+ *    INDEPENDENT computation shown next to the observation. When
+ *    they agree that is consistency, not proof (see section 2 box).
+ * ============================================================ */
+
+const MAX_D = 9999, MAX_A = 999999;
+const STREAM_CAP = 120;   // digits of pre/period displayed before eliding
+const TABLE_CAP = 40;     // state-machine rows displayed
+
+const $ = id => document.getElementById(id);
+const inpA = $("inp-a"), inpD = $("inp-d"), selB = $("sel-b");
+
+function gcd(x, y) { while (y) { [x, y] = [y, x % y]; } return x; }
+
+/* --- long-division state machine (observation leg) ------------- */
+function machine(a, d, b) {
+  const q = Math.floor(a / d);
+  let r = a % d;
+  const seen = new Map(), digits = [], rems = [], steps = [];
+  while (r !== 0 && !seen.has(r)) {
+    seen.set(r, digits.length);
+    rems.push(r);
+    const t = b * r;
+    const u = Math.floor(t / d);
+    const r2 = t - d * u;
+    steps.push({ k: digits.length + 1, rin: r, mult: t, u, rout: r2 });
+    digits.push(u);
+    r = r2;
+  }
+  if (r === 0) return { q, pre: digits, per: [], rems, steps, cycleAt: null };
+  const i = seen.get(r);
+  return { q, pre: digits.slice(0, i), per: digits.slice(i), rems, steps, cycleAt: i };
+}
+
+/* --- independent theory leg ------------------------------------ */
+function factorize(n) { // trial division; n <= 9999
+  const f = new Map();
+  let m = n;
+  for (let p = 2; p * p <= m; p++) while (m % p === 0) { f.set(p, (f.get(p) || 0) + 1); m /= p; }
+  if (m > 1) f.set(m, (f.get(m) || 0) + 1);
+  return f;
+}
+function multOrder(b, d) { // ord_d(b), gcd(b,d)=1, d>1; successive powers
+  let k = 1, x = b % d;
+  while (x !== 1) { x = (x * b) % d; k++; }
+  return k;
+}
+function predict(d, b) {
+  const fd = factorize(d), fb = factorize(b);
+  let db = 1, dp = 1, nu = 0;
+  const primesIn = [], primesOut = [];
+  for (const [p, e] of fd) {
+    if (fb.has(p)) { db *= p ** e; nu = Math.max(nu, Math.ceil(e / fb.get(p))); primesIn.push(p); }
+    else { dp *= p ** e; primesOut.push(p); }
+  }
+  const ord = dp > 1 ? multOrder(b % dp, dp) : 0;
+  return { db, dp, nu, ord, primesIn, primesOut, factors: fd };
+}
+
+/* --- rendering -------------------------------------------------- */
+const CHARS = "0123456789ABCDEF";
+function digitStr(v, b) { return b <= 16 ? CHARS[v] : String(v); }
+function joinDigits(arr, b) { return arr.map(v => digitStr(v, b)).join(b === 60 ? ":" : ""); }
+function intStr(q, b) {
+  if (q === 0) return "0";
+  const ds = [];
+  let n = q;
+  while (n > 0) { ds.unshift(n % b); n = Math.floor(n / b); }
+  return joinDigits(ds, b);
+}
+function cap(arr) { return arr.length > STREAM_CAP ? { shown: arr.slice(0, STREAM_CAP), cut: arr.length - STREAM_CAP } : { shown: arr, cut: 0 }; }
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+function factorsStr(f) {
+  return [...f.entries()].map(([p, e]) => e > 1 ? p + "^" + e : String(p)).join("·") || "1";
+}
+
+function run() {
+  const rawA = inpA.value.trim(), rawD = inpD.value.trim(), b = Number(selB.value);
+  const leitura = $("leitura");
+  const fail = msg => {
+    leitura.textContent = "Entrada recusada: " + msg;
+    $("stream").textContent = "—";
+    $("reducao").textContent = "";
+    $("veredito").textContent = "";
+    $("restos").textContent = "";
+    $("tabela-corpo").innerHTML = "";
+  };
+  const a0 = Number(rawA), d0 = Number(rawD);
+  if (rawA === "" || rawD === "" || !Number.isInteger(a0) || !Number.isInteger(d0))
+    return fail("a e d devem ser inteiros.");
+  if (a0 < 0 || d0 < 0) return fail("negativos não pertencem ao domínio do laboratório (a ≥ 0, d ≥ 1).");
+  if (d0 === 0) return fail("d = 0 — divisão por zero não é uma expansão, é uma não-pergunta.");
+  if (a0 > MAX_A || d0 > MAX_D) return fail("limites do laboratório: a ≤ " + MAX_A + ", d ≤ " + MAX_D + ".");
+
+  // automatic reduction, displayed (Enunciado C in action)
+  const g = gcd(a0 === 0 ? d0 : a0, d0);
+  const a = a0 / g, d = d0 / g;
+  $("reducao").innerHTML = g > 1
+    ? "Fração recebida: " + a0 + "/" + d0 + " → <strong>reduzida automaticamente para " + a + "/" + d +
+      "</strong> (÷" + g + "). A expansão é do valor, não do par — Enunciado C, seção 5.1."
+    : "Fração " + a + "/" + d + " já reduzida (gcd = 1).";
+
+  const m = machine(a, d, b);
+  const th = predict(d, b);
+
+  // digit stream
+  const preC = cap(m.pre), perC = cap(m.per);
+  const preHtml = preC.shown.map(v => '<span class="pre-d">' + esc(digitStr(v, b)) + "</span>")
+    .join(b === 60 ? '<span class="pre-d">:</span>' : "");
+  const perHtml = perC.shown.map(v => '<span class="per-d">' + esc(digitStr(v, b)) + "</span>")
+    .join(b === 60 ? '<span class="per-d">:</span>' : "");
+  let stream = "<strong>" + esc(intStr(m.q, b)) + "</strong>,";
+  if (m.pre.length === 0 && m.per.length === 0) stream = "<strong>" + esc(intStr(m.q, b)) + "</strong> (inteiro; expansão fracionária vazia)";
+  else {
+    stream += preHtml + (preC.cut ? "…" : "");
+    if (m.per.length) stream += " " + perHtml + (perC.cut ? "…" : "") + " " + perHtml + (perC.cut ? "…" : "") + " …";
+  }
+  $("stream").innerHTML = stream + '<br><small>base ' + b + (b === 60 ? " (algarismos sexagesimais separados por dois-pontos)" : "") + "</small>";
+
+  // verdict + independent check
+  const perLenTxt = m.per.length ? String(m.per.length) : "0 (termina)";
+  const ordTxt = th.dp > 1 ? "ord_" + th.dp + "(" + b + ") = " + th.ord : "d′ = 1 (sem parte periódica)";
+  const match = (m.pre.length === th.nu) && (m.per.length === th.ord);
+  $("veredito").innerHTML =
+    "<strong>Observado (máquina):</strong> pré-período " + m.pre.length + ", período " + perLenTxt + "." +
+    "<br><strong>Previsto (teoria, cálculo independente):</strong> d = " + factorsStr(th.factors) +
+    " → d<sub>b</sub> = " + th.db + ", d′ = " + th.dp +
+    "; pré-período ν = " + th.nu + "; período " + ordTxt + "." +
+    "<br><strong>Critério de terminação:</strong> primos de d que dividem b: {" + th.primesIn.join(", ") +
+    "}; que não dividem: {" + th.primesOut.join(", ") + "} → " +
+    (th.dp === 1 ? "todos os primos de d dividem b: <strong>termina</strong>." :
+      "há primo fora de b: <strong>não termina</strong> (período = ordem).") +
+    "<br><strong>Confronto observação × teoria:</strong> " +
+    (match ? "coincidem ✓ (consistência, não prova — seção 2)." : '<span class="destaque">DIVERGEM — investigar!</span>') +
+    (m.pre.length + m.per.length >= d ? "" : "");
+  const perBlockTxt = m.per.length ? joinDigits(m.per.slice(0, STREAM_CAP), b) + (m.per.length > STREAM_CAP ? "… (bloco completo: " + m.per.length + " algarismos)" : "") : "—";
+  const preBlockTxt = m.pre.length ? joinDigits(m.pre.slice(0, STREAM_CAP), b) + (m.pre.length > STREAM_CAP ? "…" : "") : "—";
+  $("veredito").innerHTML += "<br><strong>Por extenso:</strong> pré-período = " + esc(preBlockTxt) +
+    " · período = " + esc(perBlockTxt);
+
+  // remainder cycle
+  const rShow = m.rems.slice(0, 60);
+  let rTxt = "Restos visitados: " + rShow.join(" → ") + (m.rems.length > 60 ? " → … (" + m.rems.length + " restos ao todo)" : "");
+  if (m.cycleAt !== null) {
+    rTxt += " → [volta ao resto " + m.rems[m.cycleAt] + ", visto no passo " + (m.cycleAt + 1) +
+      " — ciclo de comprimento " + m.per.length + "]";
+  } else {
+    rTxt += " → 0 (a máquina para).";
+  }
+  $("restos").textContent = rTxt;
+
+  // state-machine table
+  const tb = $("tabela-corpo");
+  tb.innerHTML = "";
+  const shown = m.steps.slice(0, TABLE_CAP);
+  shown.forEach(s => {
+    const tr = document.createElement("tr");
+    let obs = "";
+    if (m.cycleAt !== null && s.k === m.steps.length)
+      obs = "novo resto " + s.rout + " já visto no passo " + (m.cycleAt + 1) + " → ciclo fecha";
+    else if (m.cycleAt !== null && s.k === m.cycleAt + 1 && m.cycleAt > 0)
+      obs = "aqui termina o pré-período";
+    else if (m.cycleAt !== null && s.k === m.cycleAt + 1 && m.cycleAt === 0)
+      obs = "primeiro resto do ciclo";
+    else if (s.rout === 0) obs = "resto 0: expansão termina";
+    tr.innerHTML = "<td>" + s.k + "</td><td>" + s.rin + "</td><td>" + s.mult + "</td><td>" +
+      esc(digitStr(s.u, b)) + "</td><td>" + s.rout + "</td><td class=\"txt\">" + obs + "</td>";
+    tb.appendChild(tr);
+  });
+  if (m.steps.length > TABLE_CAP) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = '<td colspan="6" class="txt">… ' + (m.steps.length - TABLE_CAP) +
+      " passos omitidos; o ciclo fecha no passo " + m.steps.length +
+      (m.cycleAt !== null ? " (novo resto " + m.rems[m.cycleAt] + ", visto no passo " + (m.cycleAt + 1) + ")" : "") + ".</td>";
+    tb.appendChild(tr);
+  }
+
+  // aria-live status
+  const digitsPreview = (m.pre.length || m.per.length)
+    ? (m.pre.length ? "pré " + joinDigits(m.pre.slice(0, 20), b) + (m.pre.length > 20 ? "…" : "") + ", " : "") +
+      (m.per.length ? "período " + joinDigits(m.per.slice(0, 20), b) + (m.per.length > 20 ? "…" : "") : "sem parte periódica")
+    : "inteiro " + intStr(m.q, b);
+  leitura.textContent = "expansão de " + a + "/" + d + " na base " + b +
+    ": pré-período " + m.pre.length + ", período " + m.per.length +
+    ", dígitos " + digitsPreview +
+    (g > 1 ? " (entrada " + a0 + "/" + d0 + " reduzida)" : "");
+}
+
+/* --- controls ---------------------------------------------------- */
+$("btn-run").addEventListener("click", run);
+[inpA, inpD].forEach(el => {
+  el.addEventListener("change", run);
+  el.addEventListener("keydown", e => { if (e.key === "Enter") run(); });
+});
+selB.addEventListener("change", run);
+document.querySelectorAll(".presets button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    inpA.value = btn.dataset.a; inpD.value = btn.dataset.d; selB.value = btn.dataset.b;
+    run();
+  });
+});
+
+run();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+# Chapter 3 — The Singularity of Four. Epistemological ledger (MATH3us.md §1.4, §8).
+# NOTE (E12): verification statuses below are backed by artifacts in audit/,
+# produced by the oracle and audit runs registered at the end of this file.
+
+chapter: 3
+claims:
+  - id: chapter-03.log-toolkit
+    statement: >
+      ln : R+ -> R is a strictly increasing continuous bijection with
+      ln(uv) = ln u + ln v and ln 1 = 0; for x > 0, x^x is defined as
+      exp(x * ln x). Imported as classical toolkit; the rigorous
+      construction of ln and exp belongs to Chapter 10.
+    kind: definition
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    notes: >
+      Declared in chapter section 4. Closed door: Chapter 10 (power
+      series construction of exp/ln).
+
+  - id: chapter-03.ivt-import
+    statement: >
+      Intermediate value theorem: a continuous function on an interval
+      attains every value between two attained values. Imported; its
+      proof (depending on the completeness of R, supremum principle of
+      Chapter 1) belongs to Chapter 6.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+
+  - id: chapter-03.additive-quadratic-set
+    statement: >
+      Over R+, x + x = x^2 has exactly one solution: x = 2. (Over R the
+      root set of the factorization x(x-2) = 0 is {0, 2}; positivity
+      excludes 0.)
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#prova-a"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S1" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/03-quatro/oracle.py", note: "I1, I2" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-03.quadratic-exponential-set
+    statement: >
+      Over R+, x^2 = x^x has exactly two solutions: x = 1 and x = 2,
+      via the factorization (x - 2) * ln x = 0. The x = 1 solution is
+      lost by dividing by ln x (silent hypothesis ln x != 0) — the
+      predicted failure the chapter makes visible.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    dependencies:
+      - claim: "chapter-03.log-toolkit"
+    proof_location: "#prova-b"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S2" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/03-quatro/oracle.py", note: "I1, I2" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "x=1 pairwise-vs-triple case" }
+
+  - id: chapter-03.additive-exponential-classification
+    statement: >
+      Over R+, 2x = x^x has exactly two solutions: x = 2 and one root
+      r in (0, 1). Equivalent form: h(x) = (x - 1) * ln x = ln 2, with
+      h strictly increasing on [1, inf) (h(2) = ln 2 exactly) and
+      strictly decreasing on (0, 1) (derivative-free proof by monotone
+      positive factors), existence in (0.3, 0.4) by the intermediate
+      value theorem with the sign change exhibited.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-03.log-toolkit"
+      - claim: "chapter-03.ivt-import"
+    proof_location: "#prova-c"
+    notes: >
+      Content is classical (the equation is folklore; the root is
+      standard Lambert W material). What is reconstructed here is the
+      derivative-free classification route.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S3" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/03-quatro/oracle.py", note: "I5 (h(2) = ln 2 exact in Decimal-50), I6 (monotonicity witness)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-03.small-root-location
+    statement: >
+      The small root r of 2x = x^x satisfies
+      r = 0.346323362278... (bisection to > 12 decimals), with the
+      certificate f(0.346323362278) > 0 > f(0.346323362279) for
+      f(x) = x^x - 2x, in 50-digit Decimal arithmetic. No closed form
+      is claimed: expressing r requires the Lambert W function
+      (closed door to Chapter 10).
+    kind: estimate
+    status: supported
+    provenance: derived_in_treatise
+    proof_mode: computational_only
+    dependencies:
+      - claim: "chapter-03.additive-exponential-classification"
+    proof_location: "#prova-c"
+    verification:
+      symbolic: { status: not_applicable, note: "numeric location; existence and uniqueness are the theorem above" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/03-quatro/oracle.py", note: "I4: sign-change certificate at the 12-decimal bracket" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "float64 reproduces the Decimal sign change" }
+
+  - id: chapter-03.triple-coincidence
+    statement: >
+      Over R+, x + x = x^2 = x^x has exactly one solution, x = 2, with
+      common value 4: the intersection {2} & {1, 2} & {r, 2} = {2}.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-03.additive-quadratic-set"
+      - claim: "chapter-03.quadratic-exponential-set"
+      - claim: "chapter-03.additive-exponential-classification"
+    proof_location: "#prova-d"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S4" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/03-quatro/oracle.py", note: "I1 (triple set), I3 (value four)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "x=2 exact triple in integers" }
+
+  - id: chapter-03.four-uniqueness-integers
+    statement: >
+      4 is the only number expressible as k + k = k * k = k^k with k a
+      positive integer (corollary of the real classification, witnessed
+      exhaustively for k = 1..10000 with an exact documented
+      short-circuit for k >= 3).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    dependencies:
+      - claim: "chapter-03.triple-coincidence"
+    proof_location: "#prova-d"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S4 corollary, S5 strict separation for x >= 3" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/03-quatro/oracle.py", note: "I1 exhaustive scan" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-03.xx-limit-one
+    statement: >
+      x^x -> 1 as x -> 0+. Cited classical fact: even the limit refuses
+      the triple coincidence at 0 (sum and product give 0, the power
+      tends to 1). The proof belongs to the 0^0 interlude of
+      Chapter 10 (E19).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    dependencies:
+      - claim: "chapter-03.log-toolkit"
+    notes: >
+      The float behaviour of x^x near 0+ is recorded in edge-cases.md
+      as an observation-layer note (manual §2.1), not as proof.
+    verification:
+      symbolic: { status: not_applicable, note: "cited; proof deferred to Chapter 10" }
+      numeric: { status: not_applicable, note: "edge-cases.md records a float observation consistent with, not proof of, the limit" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "float x^x as x->0+" }
+
+  - id: chapter-03.pairwise-vs-triple-lesson
+    statement: >
+      The three pairwise solution sets are distinct and untidy —
+      {2}, {1, 2}, {r, 2} — each pairwise coincidence having a cheap
+      local explanation (a factored root, the zero of ln, a monotone
+      crossing), while the triple coincidence isolates 2 structurally:
+      the singularity of four survives change of base and notation;
+      only its costume "4" is decimal.
+    kind: synthesis
+    status: supported
+    provenance: authorial
+    proof_mode: not_applicable
+    priority_note: >
+      Authorial synthesis within this treatise; historical priority not
+      established. The site observation 2+2 = 2*2 = 2^2 itself is
+      classical folklore.
+    dependencies:
+      - claim: "chapter-03.additive-quadratic-set"
+      - claim: "chapter-03.quadratic-exponential-set"
+      - claim: "chapter-03.additive-exponential-classification"
+      - claim: "chapter-03.triple-coincidence"
+
+# --- execution registry (E12): who witnessed what, when -------------------
+oracle_run:
+  script: caps/03-quatro/oracle.py
+  report: caps/03-quatro/audit/numeric-check.json
+  edge_report: caps/03-quatro/audit/edge-cases.md
+  code_commit: e2cb3ef
+  environment: "python 3.11.15, stdlib only, linux"
+  date: 2026-07-28
+  tested_domain:
+    integer_scan: { min: 1, max: 10000 }
+    bisection_interval: [0.3, 0.4]
+    adversarial_refused: [0, -1, -4]
+  implementations:
+    - "exact-integer scan 1..10000 with documented exact short-circuit (S5)"
+    - "symbolic-by-construction root sets from the factorizations"
+    - "Decimal-50 bisection for the small root of 2x = x^x"
+  result: all_passed
+  invariants_passed: 7
+  edge_cases_passed: 7
+
+audit_run:
+  script: caps/03-quatro/audit.mjs
+  report: caps/03-quatro/audit/interaction-report.json
+  screenshots: [caps/03-quatro/audit/desktop.png, caps/03-quatro/audit/iphone.png]
+  code_commit: e2cb3ef
+  gate: v0
+  date: 2026-07-28
+  result: all_passed
+  checks_passed: 31
+  render_seen: true
+  notes: >
+    Full-page screenshots plus close-ups (small window 0..1.2 around the
+    hidden root region, iPhone canvas viewport) inspected by the chapter
+    agent. Canvas drawn in device coordinates with field-exit annotation,
+    per the chapter 1 render incident lessons; audit reads every canvas
+    pixel (no sparse strides).
