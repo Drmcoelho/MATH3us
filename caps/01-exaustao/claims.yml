@@ -199,7 +199,7 @@ oracle_run:
   script: tools/oracle.py
   report: caps/01-exaustao/audit/numeric-check.json
   edge_report: caps/01-exaustao/audit/edge-cases.md
-  code_commit: d8dc136
+  code_commit: f770cc9
   environment: "python 3.12, stdlib only, linux"
   date: 2026-07-28
   tested_domain:
@@ -222,7 +222,7 @@ audit_run:
   script: tools/audit.mjs
   report: caps/01-exaustao/audit/interaction-report.json
   screenshots: [caps/01-exaustao/audit/desktop.png, caps/01-exaustao/audit/iphone.png]
-  code_commit: 34d28c4
+  code_commit: f770cc9
   gate: v0
   date: 2026-07-28
   result: all_passed
