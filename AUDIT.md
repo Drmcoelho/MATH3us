@@ -125,7 +125,7 @@ ordem de produção (§5: o Capítulo 2 é o próximo previsto).
 | Mineração do sítio pessoal do Cap. 1 (fragmentos verbatim) | `caps/01-exaustao/sources.md` | Não (lacuna declarada, E2) |
 | Dedução euclidiana pura das recorrências (dossiê) | `caps/01-exaustao/sources.md` | Não |
 | Edição de referência de *A Medida do Círculo* | `caps/01-exaustao/sources.md` | A fixar na release |
-| Busca bibliográfica de prioridade dos sanduíches G–H e da formulação inferencial | `caps/00-inferencia/sources.md` | Não (declarada como prioridade não estabelecida, §1.12) |
+| Busca bibliográfica de prioridade dos sanduíches G–H e da formulação inferencial | `caps/00-inferencia/sources.md` → **parcialmente executada**, análise em `caps/00-inferencia/prioridade.md` (28/07/2026): substância clássica confirmada onde já declarada; nenhum equivalente localizado para o limiar cúbico e a janela crepuscular; permanece "prioridade não estabelecida" | Não (§1.12) |
 
 ---
 

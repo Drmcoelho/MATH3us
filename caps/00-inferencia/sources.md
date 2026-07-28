@@ -68,7 +68,13 @@ histórica não estabelecida.*
 ## Pendências
 
 1. Busca bibliográfica de prioridade para os sanduíches G e H e para a
-   formulação inferencial (candidatos óbvios: literatura de metrologia e de
-   geometria elementar).
+   formulação inferencial — **parcialmente executada em 28/07/2026**, ver
+   `prioridade.md`: família Jordan–Kober–Cusa-Huygens identificada como
+   vizinhança dos sanduíches; Mamikon confirmado como fonte canônica da
+   identidade da coroa; precedente de Apostol localizado para a medida do
+   ângulo por área; nenhum tratamento equivalente encontrado para o limiar
+   cúbico e a janela crepuscular. Permanece aberta para bases fechadas e
+   literatura de metrologia antes de qualquer reivindicação de ineditismo.
 2. Fixar referência para o varrido de Mamikon se a prova sem palavras for
-   promovida a figura.
+   promovida a figura — fonte canônica registrada em `prioridade.md`
+   (Visual Calculus, Caltech).
