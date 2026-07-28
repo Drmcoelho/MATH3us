@@ -1,7 +1,9 @@
 # Chapter 1 — The Exhaustion. Epistemological ledger (MATH3us.md §1.4, §8).
-# NOTE (E12): no claim below asserts a passed oracle. All verification blocks
-# are `pending` until the canonical triple oracle runs and writes artifacts
-# into audit/. The in-page table is exploratory evidence, not an oracle run.
+# NOTE (E12): verification statuses below are backed by artifacts in audit/,
+# produced by the oracle and audit runs registered at the end of this file.
+# History: all blocks were `pending` until the canonical run of 2026-07-28;
+# that run REFUTED the k=0 boundary of the error bound (invariant I6), which
+# was corrected in commit d8dc136 before the passing run.
 
 chapter: 1
 claims:
@@ -39,9 +41,9 @@ claims:
       the circle), not as series. A purely Euclidean derivation is a
       declared pending item.
     verification:
-      symbolic: { status: pending }
-      numeric: { status: pending }
-      edge_cases: { status: pending }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.monotone-trapping
     statement: >
@@ -58,14 +60,18 @@ claims:
       Proved by induction from the recurrences alone, via mean
       inequalities; no inclusion-of-figures argument is used.
     verification:
-      symbolic: { status: pending }
-      numeric: { status: pending }
-      edge_cases: { status: pending }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.gap-halving
     statement: >
       At each doubling, b_{2n} - a_{2n} < (1/2)(b_n - a_n); hence for
-      n = 6 * 2^k, b_n - a_n < (2*sqrt(3) - 3) / 2^k.
+      n = 6 * 2^k, b_n - a_n <= (2*sqrt(3) - 3) / 2^k, with equality
+      only at k = 0 and strict inequality for k >= 1.
+    correction_log: >
+      2026-07-28: first statement asserted strict < for all k; refuted
+      at k = 0 by oracle invariant I6 and corrected. Recorded, not erased.
     kind: theorem
     status: proved
     provenance: classical
@@ -76,9 +82,9 @@ claims:
       - claim: "chapter-01.archimedes-recurrences"
       - claim: "chapter-01.monotone-trapping"
     verification:
-      symbolic: { status: pending }
-      numeric: { status: pending }
-      edge_cases: { status: pending }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.monotone-convergence
     statement: >
@@ -92,15 +98,15 @@ claims:
     dependencies:
       - claim: "chapter-01.supremum-principle"
     verification:
-      symbolic: { status: pending }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
       numeric: { status: not_applicable }
-      edge_cases: { status: pending }
+      edge_cases: { status: not_applicable, note: "abstract theorem; no numeric edge domain" }
 
   - id: chapter-01.pi-common-limit
     statement: >
       The sequences a_n and b_n converge to a common limit; within this
       treatise, pi is defined as that limit, and
-      |a_n - pi| <= b_n - a_n < (2*sqrt(3) - 3)/2^k for n = 6 * 2^k.
+      |a_n - pi| <= b_n - a_n <= (2*sqrt(3) - 3)/2^k for n = 6 * 2^k.
     kind: theorem
     status: proved
     provenance: classical
@@ -112,9 +118,9 @@ claims:
       - claim: "chapter-01.gap-halving"
       - claim: "chapter-01.monotone-convergence"
     verification:
-      symbolic: { status: pending }
-      numeric: { status: pending }
-      edge_cases: { status: pending }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.circle-identification
     statement: >
@@ -133,9 +139,9 @@ claims:
       declared as a closed door. Reopened in Chapter 9 via arc length
       as an integral.
     verification:
-      symbolic: { status: pending }
-      numeric: { status: pending }
-      edge_cases: { status: pending }
+      symbolic: { status: not_applicable, note: "conditional on imported postulate; see symbolic-check.md 'what this does NOT establish'" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I7: trap contains 50-digit pi reference — consistent with, not proof of, identification" }
+      edge_cases: { status: not_applicable }
 
   - id: chapter-01.gap-ratio-quarter
     statement: >
@@ -153,9 +159,9 @@ claims:
       Classical asymptotics (gap ~ pi^3 / n^2) predict it; the local
       expansions needed for proof belong to Chapter 10.
     verification:
-      symbolic: { status: pending }
-      numeric: { status: pending }
-      edge_cases: { status: pending }
+      symbolic: { status: not_applicable, note: "conjecture; no proof claimed in this chapter" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: support only, ratio within 1e-4 of 0.25 at k=16" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.elementary-apparatus-limit
     statement: >
@@ -172,3 +178,37 @@ claims:
     dependencies:
       - claim: "chapter-01.gap-halving"
       - claim: "chapter-01.gap-ratio-quarter"
+
+# --- execution registry (E12): who witnessed what, when -------------------
+oracle_run:
+  script: tools/oracle.py
+  report: caps/01-exaustao/audit/numeric-check.json
+  edge_report: caps/01-exaustao/audit/edge-cases.md
+  code_commit: d8dc136
+  environment: "python 3.12, stdlib only, linux"
+  date: 2026-07-28
+  tested_domain:
+    n: "6 * 2^k"
+    k: { min: 0, max: 16 }
+    decimal_deep_k: 40
+    adversarial_n_refused: [7, 100]
+  implementations:
+    - "float64 mean recurrences (mirrors in-page JS)"
+    - "float64 closed trig forms n*sin(pi/n), n*tan(pi/n)"
+    - "Decimal 60-digit mean recurrences"
+  result: all_passed
+  incident: >
+    First run (same date) FAILED invariant I6: the error bound as first
+    stated was false at k=0 (equality, not strict inequality). Statement
+    corrected in chapter, symbolic check and ledger (commit d8dc136);
+    second run passed. Recorded per the honesty clause.
+
+audit_run:
+  script: tools/audit.mjs
+  report: caps/01-exaustao/audit/interaction-report.json
+  screenshots: [caps/01-exaustao/audit/desktop.png, caps/01-exaustao/audit/iphone.png]
+  code_commit: d8dc136
+  gate: v0
+  date: 2026-07-28
+  result: all_passed
+  render_seen: true
