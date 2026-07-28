@@ -101,10 +101,20 @@ async function auditViewport(name, viewport) {
     imgCount: document.querySelectorAll('img').length,
     liveRegion: !!document.querySelector('[aria-live]'),
     tableRows: document.querySelectorAll('#tabela-corpo tr').length,
+    exCount: document.querySelectorAll('.exercicio').length,
+    gabCount: document.querySelectorAll('details.gab').length,
   }));
   check(`${name}.formulas_textual_no_images`, dom.formulaCount >= 8 && dom.imgCount === 0);
   check(`${name}.aria_live_region_present`, dom.liveRegion);
   check(`${name}.table_mirrors_state`, dom.tableRows === 2, `rows=${dom.tableRows} (after reset+1 doubling)`);
+
+  // -- exercises (E20): present in tiers, every one with a details/summary
+  check(`${name}.exercises_with_gabaritos`, dom.exCount >= 12 && dom.gabCount >= dom.exCount,
+    `exercicios=${dom.exCount}, gabaritos=${dom.gabCount}`);
+  await page.click('details.gab summary >> nth=0');
+  const gabOpens = await page.evaluate(() => document.querySelector('details.gab').open);
+  await page.click('details.gab summary >> nth=0');
+  check(`${name}.gabarito_keyboard_toggle`, gabOpens);
 
   // -- self-containment: zero non-file requests
   check(`${name}.self_contained_no_network`, external.length === 0,

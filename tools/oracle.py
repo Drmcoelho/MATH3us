@@ -141,7 +141,9 @@ def run_oracle():
         "final_ratio": ratios[-1],
         "abs_dev_from_0.25": abs(ratios[-1] - 0.25),
         "passed": abs(ratios[-1] - 0.25) < 1e-4,
-        "note": "supports conjecture chapter-01.gap-ratio-quarter; NOT a proof"}
+        "note": ("independent numeric witness for chapter-01.gap-ratio-quarter "
+                 "(proved in-chapter on 2026-07-28 via exact factorization, "
+                 "symbolic-check S6; originally preregistered as conjecture C4)")}
 
     for i, (n, a, b) in enumerate(C[: MAX_K + 1]):
         rows.append({

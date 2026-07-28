@@ -65,6 +65,26 @@ princípio do supremo, importado e declarado), ambas convergem. Por S4 a
 diferença tende a zero, logo o limite é comum; π é *definido* como esse
 limite. Cota de erro: |a_n − π| ≤ b_n − a_n < (2√3 − 3)/2^k.              ∎
 
+## S6. Fatoração exata da folga e razão-limite 1/4 (adicionada em 28/07/2026)
+
+Por diferença de quadrados sobre a_2n = √(a_n·b_2n):
+
+    b_2n − a_2n = b_2n − √(a_n·b_2n) = √b_2n·(√b_2n − √a_n)
+                = √b_2n·(b_2n − a_n)/(√a_n + √b_2n).
+
+Com b_2n − a_n = a_n(b_n − a_n)/(a_n + b_n) (S4, primeira linha):
+
+    (b_2n − a_2n)/(b_n − a_n) = [a_n/(a_n + b_n)] · [√b_2n/(√a_n + √b_2n)]   — identidade exata.
+
+Domínio conferido: todos os termos positivos; nenhuma divisão por zero
+(a_n + b_n > 0; √a_n + √b_2n > 0). Por S5, a_n → π, b_n → π e b_2n → π;
+logo o primeiro colchete → 1/2, o segundo → 1/2, e a razão → **1/4**.  ∎
+
+*Registro:* esta identidade refutou a conjectura C5 do pré-registro e
+promoveu C4 a teorema (`chapter-01.gap-ratio-quarter`). Autópsia em
+`conjecturas.md`. O invariante numérico I8 permanece como testemunha
+independente da mesma afirmação.
+
 ## Simplificação simbólica independente
 
 As cadeias S1–S2 foram conferidas passo a passo por manipulação algébrica
@@ -76,8 +96,9 @@ apareceria ali como desvio. As verificações são independentes: esta é
 
 ## O que este documento NÃO estabelece
 
-- A razão de contração 1/4 (conjectura `chapter-01.gap-ratio-quarter`):
-  aqui só está provado o fator 1/2 (S4).
+- A forma fina da folga (∼ π³/n², constante exata): exige as expansões
+  do Cap. 10. (A razão-limite 1/4, antes listada aqui como não
+  estabelecida, passou a teorema em S6 — registro mantido, não apagado.)
 - A identificação de π com o semiperímetro do círculo: condicional ao
   postulado de convexidade de Arquimedes (`chapter-01.circle-identification`,
   porta para o Cap. 9).

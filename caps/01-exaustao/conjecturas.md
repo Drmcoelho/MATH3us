@@ -61,3 +61,47 @@ Qualquer contraexemplo numérico reprodutível no experimento do capítulo, ou f
 ## O que este pré-registro não é
 
 Não é reivindicação de prioridade: C1–C3 são resultados clássicos cuja *escavação* (o caminho de reconstrução) é o objeto do capítulo. A tipagem no `claims.yml` seguirá §1.4: proveniência `classical` onde couber, síntese apenas onde for síntese.
+
+---
+
+## Autópsia de C5 (28/07/2026)
+
+C5 afirmava: *"a demonstração elementar via recorrências entregará apenas o
+fator 1/2 por duplicação; fechar o 1/4 exigirá análise local (expansões),
+que pertence a capítulo posterior."* **Refutada em 28/07/2026**, no mesmo
+dia do pré-registro, durante o desenho do exercício E3.1.
+
+1. **Qual passo parecia plausível?** As desigualdades de médias pareciam
+   esgotar o aparato: a/(a+b) < 1/2 saía natural, e nada ali sugeria 1/4.
+   A justificativa registrada foi literal: "nada no argumento parece render
+   1/4 sem expansão fina".
+2. **Onde ocorreu a falha lógica?** Em tratar "elementar" como sinônimo de
+   "grosseiro". A conjectura avaliou o *método conhecido* (estimar por
+   desigualdades) e concluiu sobre o *aparato inteiro*. Mas a folga admite
+   fatoração exata — b_2n − a_2n = √b_2n·(b_2n − a_n)/(√a_n + √b_2n) — que
+   não estima nada: reescreve. Combinada com b_2n − a_n = a_n(b_n − a_n)/(a_n + b_n),
+   dá (b_2n − a_2n)/(b_n − a_n) = [a_n/(a_n+b_n)]·[√b_2n/(√a_n+√b_2n)],
+   e a convergência comum a π (já provada no capítulo) leva cada colchete
+   a 1/2 e o produto a 1/4.
+3. **Qual contraexemplo ou teorema expôs a falha?** A própria identidade
+   acima, encontrada ao redigir o gabarito de E3.1 (diferença de quadrados
+   sobre a_2n = √(a_n·b_2n)).
+4. **O que havia de aproveitável na intuição?** A distinção entre cota
+   uniforme e comportamento assintótico, que era o núcleo da conjectura,
+   sobrevive intacta: 1/2 vale desde o primeiro passo; 1/4 é limite.
+   E a parte da intuição sobre a *constante fina* estava certa: π³/n²
+   continua exigindo as expansões do Cap. 10.
+5. **Qual reformulação sobreviveu?** "O aparato elementar entrega o 1/4
+   como limite (teorema, seção 6 do capítulo); a cota uniforme simples
+   permanece 1/2; a forma exata da folga (∼ π³/n²) permanece porta fechada
+   para o Cap. 10."
+
+**Consequências no ledger:** `chapter-01.gap-ratio-quarter` promovida de
+conjectura sustentada a teorema (`status: proved`, prova na seção 6 e
+exercício E3.1); `chapter-01.elementary-apparatus-limit` marcada
+`status: refuted` com referência a esta autópsia.
+
+**Nota de método:** a refutação nasceu do desenho de exercícios (emenda
+E20) — escrever gabarito "como para uma criança" obrigou a reescrever a
+expressão em vez de estimá-la. O leitor didático é um instrumento de
+descoberta.

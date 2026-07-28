@@ -70,6 +70,12 @@
   th{background:var(--box); font-family:Georgia,serif; text-align:center}
   .tabela-scroll{overflow-x:auto}
   .destaque{color:var(--accent); font-weight:bold}
+  .exercicio{margin:1.4rem 0; padding-left:1.1rem; border-left:3px solid var(--box-edge)}
+  .exercicio .nivel{font-variant:small-caps; letter-spacing:.08em; font-size:.82rem; color:var(--accent)}
+  details.gab{margin:.6rem 0 0; background:var(--box); border:1px solid var(--box-edge); padding:.55rem .9rem}
+  details.gab summary{cursor:pointer; font-variant:small-caps; letter-spacing:.06em; color:var(--accent)}
+  details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.gab[open]{padding-bottom:.8rem}
   footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
   ul.compacta li{margin:.25rem 0}
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
@@ -325,21 +331,31 @@ A linguagem ε-N não é formalismo decorativo: é o contrato de entrega do erro
 geométrico, é isto — a primeira máquina da história a prometer precisão arbitrária com prazo explícito.</p>
 
 <!-- ============================================================ -->
-<h2 id="o-que-a-prova-nao-entregou">6. O que a prova não entregou</h2>
-<p>O experimento sugeriu contração de <strong>¼</strong> por duplicação (Padrão 2). A prova entregou <strong>½</strong>
-(seção 5.2). As duas afirmações são compatíveis — ½ é cota, ¼ é comportamento — mas a distância entre elas é real
-e fica registrada, conforme o pré-registro:</p>
+<h2 id="o-que-a-prova-nao-entregou">6. O que a prova não entregou — e depois entregou</h2>
+<p>O experimento sugeriu contração de <strong>¼</strong> por duplicação (Padrão 2). A prova da seção 5.2 entregou
+<strong>½</strong>. No pré-registro, a conjectura C5 apostou que o aparato elementar deste capítulo não alcançaria
+o ¼ — que seriam necessárias as expansões locais do Capítulo 10.</p>
+<p><strong>C5 estava errada, e o registro fica.</strong> Em 28/07/2026, durante o desenho dos exercícios deste
+capítulo (E3.1, seção 8), a folga revelou uma fatoração exata que as desigualdades de médias haviam escondido.
+Por diferença de quadrados, b<sub>2n</sub> − a<sub>n</sub> = (√b<sub>2n</sub> − √a<sub>n</sub>)(√b<sub>2n</sub> + √a<sub>n</sub>), logo:</p>
+<p class="formula">b<sub>2n</sub> − a<sub>2n</sub> = b<sub>2n</sub> − √(a<sub>n</sub>b<sub>2n</sub>) = √b<sub>2n</sub>·(√b<sub>2n</sub> − √a<sub>n</sub>)
+= √b<sub>2n</sub> · (b<sub>2n</sub> − a<sub>n</sub>)/(√a<sub>n</sub> + √b<sub>2n</sub>),</p>
+<p>e, usando b<sub>2n</sub> − a<sub>n</sub> = a<sub>n</sub>(b<sub>n</sub> − a<sub>n</sub>)/(a<sub>n</sub> + b<sub>n</sub>) (seção 5.2):</p>
+<p class="formula">(b<sub>2n</sub> − a<sub>2n</sub>)/(b<sub>n</sub> − a<sub>n</sub>) =
+<span class="destaque">[a<sub>n</sub>/(a<sub>n</sub> + b<sub>n</sub>)] · [√b<sub>2n</sub>/(√a<sub>n</sub> + √b<sub>2n</sub>)]</span> — exatamente, sem aproximação.</p>
 <div class="caixa">
-  <span class="rotulo">Conjectura C4 (pré-registrada em 28/07/2026 · status: sustentada, não demonstrada aqui)</span>
-  <p style="margin:0">(b<sub>2n</sub> − a<sub>2n</sub>)/(b<sub>n</sub> − a<sub>n</sub>) → 1/4. A evidência é a coluna
-  “razão” da tabela — verificação computacional, camada de observação, <em>não prova</em>. A assintótica fina
-  (folga ∼ π³/n², que implica o ¼) requer expansões locais de sen e tg, ferramentas que este tratado só constrói
-  no <strong>Capítulo 10</strong>. A conjectura C5 do pré-registro — de que o aparato elementar deste capítulo
-  não alcançaria o ¼ — permanece de pé até aquele capítulo decidir seu destino.</p>
+  <span class="rotulo">Teorema (razão de contração — era a Conjectura C4)</span>
+  <p style="margin:0">Como a<sub>n</sub>, b<sub>n</sub> e b<sub>2n</sub> convergem todos para π (seção 5.3), cada colchete
+  converge para ½, e portanto (b<sub>2n</sub> − a<sub>2n</sub>)/(b<sub>n</sub> − a<sub>n</sub>) → <strong>1/4</strong>.
+  Nenhuma expansão de série foi necessária: só a fatoração e a convergência comum já demonstrada.</p>
 </div>
-<p>Este é o desenho epistemológico que o tratado quer tornar visível: <em>a mesma tabela</em> sustenta um teorema
-(a cota ½, provada) e uma conjectura (o limite ¼, aguardando). Sem o ledger, as duas afirmações pareceriam
-igualmente sólidas. Não são.</p>
+<p>A autópsia de C5 está em <code>conjecturas.md</code>, como manda a §1.3 do manual. O erro: tratar “elementar”
+como sinônimo de “grosseiro”. A intuição que sobreviveu: o ½ é cota <em>uniforme</em>, válida desde o primeiro
+passo; o ¼ é <em>assintótico</em>. E uma porta permanece honesta e fechada: a forma exata da folga
+(∼ π³/n², a constante que contém o próprio π) continua exigindo o <strong>Capítulo 10</strong> — exercício E4.2.</p>
+<p>Este é o desenho epistemológico que o tratado quer tornar visível: a mesma tabela sustentou, num único dia,
+um teorema (a cota ½), uma conjectura (o ¼), a refutação de uma metaconjectura (C5) e a promoção da conjectura
+a teorema. Sem o ledger, tudo isso teria parecido igualmente sólido desde o início. Não era.</p>
 
 <!-- ============================================================ -->
 <h2>7. As três camadas, revisitadas</h2>
@@ -351,14 +367,339 @@ trunca a torre. A convergência <em>visual</em> (n ≈ 48, na lupa em 1×) e a c
 patologia de estimação: lá, funções inteiras serão construídas para enganar exatamente o olho que aqui já titubeou.</p>
 
 <!-- ============================================================ -->
-<h2>8. Horizonte</h2>
+<h2 id="exercicios">8. Exercícios</h2>
+<p>Cinco níveis, do socrático ao impossível-por-enquanto (E20 do manual). Regra de uso: tente antes de abrir o
+gabarito — mas <em>abra sempre</em>, mesmo quando acertar. O gabarito não é conferência: é a segunda metade do
+exercício, e às vezes diz algo que a sua solução correta não disse. Os N4 não têm solução aqui — têm a razão
+exata pela qual ainda não têm, e o endereço de onde terão.</p>
+
+<h3>Nível 0 — Socráticos</h3>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.1</span>
+  <p>Um lado do polígono inscrito é uma corda: um segmento de reta entre dois pontos do círculo. Por que a corda é
+  sempre mais curta que o arco que ela subtende? E — pergunta mais importante — <em>o que você está assumindo</em>
+  ao responder isso?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Pegue um barbante e ligue dois pontos. Esticado, ele é reto: essa é a menor distância. Frouxo, ele sobra —
+    e o arco do círculo é um barbante frouxo entre os mesmos dois pontos. Logo, corda &lt; arco.</p>
+    <p>Agora a parte importante: você assumiu que <em>“a reta é o caminho mais curto entre dois pontos”</em>. Isso
+    parece óbvio, mas não é teorema deste capítulo — é um princípio importado, e o próprio Arquimedes o tomou como
+    postulado. Repare no que aconteceu: sua resposta “óbvia” tem uma hipótese escondida. Encontrá-la é o exercício.
+    O capítulo faz o mesmo na seção 5.3 quando declara o princípio do supremo, e na porta fechada do Cap. 9 quando
+    declara o postulado de convexidade. Matemática honesta não é não ter hipóteses: é sabê-las.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.2</span>
+  <p>Você conhece o número π — ou conhece aproximações dele? Qual é a diferença? “3,14159…” é o quê, exatamente?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>“3,14159” não é π. É uma <em>representação</em> truncada de π em base dez — cinco casas de uma escrita que
+    não termina. O número π é o <em>objeto</em>: o limite comum do cerco, definido na seção 5.3, que existe e é
+    único independentemente de como o escrevemos. E os dígitos que uma calculadora mostra são uma
+    <em>observação</em>: o resultado de um instrumento com precisão finita.</p>
+    <p>Três camadas (§2.1 do manual): objeto, representação, observação. Confundi-las produz erros reais — quem
+    diz “π = 3,14” confundiu objeto com representação truncada; quem acha que o gráfico “mostra” a convergência
+    confundiu objeto com observação. Você conhece π no sentido mais forte que existe: sabe <em>defini-lo</em> e
+    sabe <em>cercá-lo com erro garantido</em>. Os dígitos são só o figurino.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.3</span>
+  <p>Dobrar o número de lados poderia, em princípio, <em>piorar</em> a aproximação inscrita? Responda sem álgebra,
+  só com uma desigualdade de barbante.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Não — e a razão cabe num triângulo. Ao dobrar os lados, cada corda AB é substituída por duas cordas AV e VB,
+    onde V é o ponto novo no meio do arco. Mas A, V e B formam um triângulo, e em todo triângulo um lado é menor
+    que a soma dos outros dois: AB &lt; AV + VB. O caminho novo é mais longo que o velho — em <em>cada</em> lado.
+    Somando sobre todos os lados: o perímetro só cresce.</p>
+    <p>Compare com a prova da seção 5.1, que obteve o mesmo fato por médias, sem geometria nenhuma. Duas provas do
+    mesmo teorema, uma geométrica e uma algébrica, cada uma com suas hipóteses. Quando duas rotas independentes
+    chegam ao mesmo lugar, a confiança que você ganha não é o dobro — é de outra natureza: um erro teria que
+    acontecer duas vezes, de dois jeitos diferentes.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.4</span>
+  <p>Por que cercar por dentro <em>e</em> por fora, se só o inscrito já se aproxima de π? O que o cerco duplo
+  compra que o simples não compra?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Compra a única coisa que importa: <strong>saber o tamanho do próprio erro</strong>. Com só o inscrito, você
+    tem 3,141032… e nenhuma ideia de quão longe está: falta um dígito? Faltam mil? Você sabe que está <em>abaixo</em>,
+    e nada mais. Com o cerco duplo, π está preso entre a<sub>n</sub> e b<sub>n</sub> — então o erro de a<sub>n</sub> é no
+    máximo a folga b<sub>n</sub> − a<sub>n</sub>, um número que você calcula.</p>
+    <p>Isso se chama <em>certificado</em>: a resposta vem com a garantia junto. É a diferença entre “estou perto”
+    e “estou a menos de 0,0017, e posso provar”. Todo o capítulo — e boa parte da análise — é a arte de transformar
+    aproximações em aproximações certificadas. Guarde a palavra: ela volta em todos os capítulos seguintes.</p>
+  </details>
+</div>
+
+<h3>Nível 1 — Básicos, brincando de geometria</h3>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.1</span>
+  <p>Mostre que o lado do hexágono regular inscrito no círculo de raio 1 vale exatamente 1 — e conclua, sem
+  calculadora, que π &gt; 3.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Ligue o centro O aos seis vértices: o hexágono se parte em seis triângulos iguais. O ângulo em volta do
+    centro é 360°, dividido por 6: cada triângulo tem 60° no centro. Seus dois lados que saem de O são raios,
+    ambos de comprimento 1 — triângulo isósceles com ângulo de 60° entre lados iguais. Os outros dois ângulos
+    somam 120° e são iguais: 60° cada. Três ângulos de 60° = triângulo equilátero. Logo o terceiro lado — que é o
+    lado do hexágono — também vale 1.</p>
+    <p>Perímetro do hexágono: 6. Semiperímetro: 3. Mas o hexágono está <em>dentro</em> do círculo, e seu perímetro
+    é menor que o do círculo (E0.1): 6 &lt; 2π, ou seja, <strong>π &gt; 3</strong>. Você acabou de provar uma
+    desigualdade sobre π usando só “360 dividido por 6” e um triângulo. É o valor a₆ = 3 da primeira linha da
+    tabela — a tabela inteira começa neste triângulo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.2</span>
+  <p>Derive b₆ = 2√3: o semiperímetro do hexágono circunscrito ao círculo de raio 1.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>No hexágono circunscrito, cada lado <em>tangencia</em> o círculo no seu ponto médio. Ligue o centro O ao
+    ponto de tangência T (comprimento 1, perpendicular ao lado) e ao vértice V vizinho. O ângulo em O, entre OT e
+    OV, é metade do ângulo central de 60°: 30°. No triângulo retângulo OTV: o cateto TV (metade do lado do
+    hexágono) satisfaz TV/OT = tg 30° = 1/√3. Logo TV = 1/√3 e o lado inteiro vale 2/√3.</p>
+    <p>Perímetro: 6 · 2/√3 = 12/√3 = 12√3/3 = 4√3. Semiperímetro: <strong>2√3 ≈ 3,4641</strong> — o b₆ da tabela.
+    E como o círculo está dentro deste hexágono, 2π &lt; 4√3, ou seja, π &lt; 2√3. Junto com E1.1:
+    3 &lt; π &lt; 3,4642 — o cerco de Arquimedes no seu passo zero, feito por você com um triângulo retângulo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.3</span>
+  <p>Esqueça o hexágono: cerque o círculo com <em>quadrados</em>. Calcule os semiperímetros do quadrado inscrito e
+  do circunscrito e escreva a desigualdade que eles provam.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Inscrito:</em> os quatro vértices no círculo, diagonais = diâmetro = 2. Num quadrado de lado L a
+    diagonal vale L√2 (Pitágoras: L² + L² = diag²). Então L√2 = 2, L = √2. Perímetro 4√2, semiperímetro
+    2√2 ≈ 2,8284.</p>
+    <p><em>Circunscrito:</em> cada lado tangencia o círculo, então a distância do centro a cada lado é 1 — o
+    quadrado tem “largura” 2, lado 2, perímetro 8, semiperímetro 4.</p>
+    <p>Cerco: <strong>2√2 &lt; π &lt; 4</strong>, isto é, 2,83 &lt; π &lt; 4. Repare como é <em>pior</em> que o
+    cerco do hexágono (3 &lt; π &lt; 3,47): menos lados, cerco mais frouxo. Você acabou de sentir na mão a
+    monotonia da seção 5.1 — e de entender por que Arquimedes começou do hexágono, não do quadrado. (Mas veja
+    E3.3: começar do quadrado também funciona. A máquina não depende do ponto de partida.)</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.4</span>
+  <p>E com o triângulo equilátero inscrito (n = 3)? Calcule o semiperímetro e explique por que a cota é a pior
+  das três que você já tem.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Vértices a 120° um do outro. O lado subtende um ângulo central de 120°; a corda correspondente vale
+    2·sen(60°) = 2·(√3/2) = √3. (Se preferir sem seno: o triângulo equilátero inscrito tem altura 3/2 e lado
+    √3 — dá para tirar de Pitágoras com paciência; o gabarito aceita as duas rotas.) Perímetro 3√3, semiperímetro
+    <strong>(3√3)/2 ≈ 2,598</strong>.</p>
+    <p>Então π &gt; 2,598 — verdade, porém fraca: E1.1 já dava π &gt; 3. A ordem das cotas inferiores é
+    2,598 (n=3) &lt; 2,828 (n=4) &lt; 3 (n=6) &lt; … : cada lado a mais aperta o cerco por dentro. É a sequência
+    crescente a<sub>n</sub> vista pelos seus três menores casos — o “procurar os menores casos” do protocolo §9 do
+    manual, feito à mão.</p>
+  </details>
+</div>
+
+<h3>Nível 2 — Intermediários</h3>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.1</span>
+  <p>Confira a mecânica da tabela à mão: a partir de a₁₂ = 3,1058285 e b₁₂ = 3,2153903, calcule b₂₄ e a₂₄ pelas
+  recorrências e compare com a linha n = 24 do experimento.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Média harmônica: b₂₄ = 2·a₁₂·b₁₂/(a₁₂ + b₁₂) = 2·(3,1058285·3,2153903)/(6,3212188)
+    = 19,9727045/6,3212188 = <strong>3,1596599…</strong> ✓ (tabela: 3,1596599).</p>
+    <p>Média geométrica: a₂₄ = √(a₁₂·b₂₄) = √(3,1058285·3,1596599) = √9,8133545 = <strong>3,1326289…</strong> ✓
+    (tabela: 3,1326286 — a diferença na sétima casa é o arredondamento das entradas que usamos, não da máquina).</p>
+    <p>O que este exercício estabelece: a tabela não é uma caixa-preta. Qualquer linha se reconstrói com uma
+    divisão, uma multiplicação e uma raiz — as mesmas operações de 250 a.C. Se um dia você desconfiar do
+    experimento, é assim que se audita: recalculando uma linha. Desconfiar e auditar é exatamente o que o
+    oráculo do capítulo faz em escala (invariante I1 de <code>audit/numeric-check.json</code>).</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.2</span>
+  <p>Prove o lema que sustenta a seção 5.1: a média harmônica H = 2ab/(a+b) de dois positivos distintos a &lt; b
+  fica estritamente entre eles.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Duas subtrações resolvem tudo. Primeiro: H − a = 2ab/(a+b) − a = (2ab − a² − ab)/(a+b) = a(b − a)/(a+b).
+    Como a &gt; 0, b − a &gt; 0 e a + b &gt; 0, esse número é positivo: H &gt; a. Segundo:
+    b − H = b − 2ab/(a+b) = (b² + ab − 2ab)/(a+b) = b(b − a)/(a+b) &gt; 0 pelos mesmos motivos: H &lt; b.</p>
+    <p>Logo a &lt; H &lt; b. E olhe de novo para a primeira subtração: H − a = a(b−a)/(a+b) &lt; ½(b−a), porque
+    a/(a+b) &lt; ½ quando a &lt; b. Essa linha — exatamente essa — é a prova inteira da seção 5.2. O lema que
+    parecia um aquecimento <em>é</em> o motor da cota de erro do capítulo. Em matemática, os lemas pequenos não
+    são degraus para o teorema: muitas vezes são o teorema, ainda sem a roupa.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.3</span>
+  <p>Quantas duplicações a <em>cota provada</em> (½ por passo) exige para garantir erro menor que 10⁻³? E em que
+  linha a tabela <em>observa</em> esse erro pela primeira vez? Explique a diferença entre as duas respostas.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Pela cota:</em> precisamos de (2√3 − 3)/2ᵏ &lt; 0,001, isto é, 2ᵏ &gt; 464,1. Como 2⁸ = 256 e 2⁹ = 512,
+    a garantia chega em k = 9: n = 6·2⁹ = 3072 lados.</p>
+    <p><em>Pela tabela:</em> a folga fura 0,001 já em n = 192 (folga 0,00042), ou seja, k = 5.</p>
+    <p>A cota pede k = 9; a realidade entrega em k = 5. Nenhuma das duas está errada: a cota é uma <em>promessa
+    demonstrada</em> — vale para sempre, sem olhar a tabela — e por isso é conservadora (usa ½ quando o
+    comportamento real é ≈ ¼ por passo). A observação é mais justa e não prova nada sozinha. Engenheiro usa a
+    tabela; a garantia usa a cota; o capítulo exige as duas e proíbe confundi-las. Essa distância cota-observação
+    é medida exata do que a seção 6 recuperou ao promover o ¼ a teorema.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.4</span>
+  <p>Arquimedes parou em 96 lados e anunciou 3 + 10/71 &lt; π &lt; 3 + 1/7. Converta as frações e confira contra
+  a linha n = 96 da tabela. Ele apertou o máximo que os 96 lados permitem?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>3 + 10/71 = 3,140845…; 3 + 1/7 = 3,142857…. A tabela dá a₉₆ = 3,141032 e b₉₆ = 3,142715. Confere:
+    3,140845 &lt; 3,141032 &lt; π &lt; 3,142715 &lt; 3,142857 ✓ — as cotas dele são <em>verdadeiras</em>, e um
+    pouco mais frouxas que as nossas.</p>
+    <p>Por quê mais frouxas? Arquimedes não tinha casas decimais: trabalhava com frações e precisava arredondar
+    raízes quadradas (√3, por exemplo) <em>na direção segura</em> — para baixo no cerco de dentro, para cima no de
+    fora — para que o resultado final continuasse sendo uma garantia. Cada arredondamento seguro sacrifica um
+    pouco de aperto. A lição é atual: em aritmética de precisão finita (a sua, a dele, a do computador), quem quer
+    certificado precisa arredondar com direção, não com carinho. O Padrão IEEE de ponto flutuante chama isso de
+    <em>rounding mode</em>; Arquimedes chamava de cuidado.</p>
+  </details>
+</div>
+
+<h3>Nível 3 — Difíceis</h3>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.1</span>
+  <p>O exercício que derrubou uma conjectura deste capítulo. Prove a fatoração exata
+  (b<sub>2n</sub> − a<sub>2n</sub>)/(b<sub>n</sub> − a<sub>n</sub>) = [a<sub>n</sub>/(a<sub>n</sub>+b<sub>n</sub>)]·[√b<sub>2n</sub>/(√a<sub>n</sub>+√b<sub>2n</sub>)]
+  e conclua que a razão das folgas converge para 1/4.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Passo 1.</em> a₂ₙ = √(aₙb₂ₙ), então b₂ₙ − a₂ₙ = b₂ₙ − √(aₙb₂ₙ) = √b₂ₙ(√b₂ₙ − √aₙ) — pusemos √b₂ₙ em
+    evidência.</p>
+    <p><em>Passo 2.</em> Diferença de quadrados ao contrário: √b₂ₙ − √aₙ = (b₂ₙ − aₙ)/(√b₂ₙ + √aₙ). (Multiplique
+    em cima e embaixo por √b₂ₙ + √aₙ para ver.) Substituindo:
+    b₂ₙ − a₂ₙ = √b₂ₙ·(b₂ₙ − aₙ)/(√aₙ + √b₂ₙ).</p>
+    <p><em>Passo 3.</em> A seção 5.2 já calculou b₂ₙ − aₙ = aₙ(bₙ − aₙ)/(aₙ + bₙ). Substituindo e dividindo por
+    (bₙ − aₙ), sobra exatamente a fatoração enunciada. Nenhuma desigualdade foi usada — só álgebra.</p>
+    <p><em>Passo 4.</em> Agora, e só agora, entra a análise: aₙ → π, bₙ → π e b₂ₙ → π (seção 5.3). O primeiro
+    colchete tende a π/(π+π) = ½. O segundo tende a √π/(√π+√π) = ½. Produto: <strong>¼</strong>. ∎</p>
+    <p><em>Moral, contada com franqueza:</em> o pré-registro deste capítulo (C5) apostava que isto era impossível
+    sem as séries do Capítulo 10 — o autor da conjectura escreveu “nada no argumento parece render ¼ sem expansão
+    fina” e estava errado. A desigualdade da seção 5.2 <em>estimava</em> a folga; a fatoração <em>não estima
+    nada</em> — reescreve. Quando uma estimativa parece ser o teto, tente antes reescrever a expressão exatamente.
+    A autópsia completa de C5 está em <code>conjecturas.md</code>.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.2</span>
+  <p>A tabela sugere mais que o limite: as razões parecem ficar <em>sempre abaixo</em> de ¼, subindo em direção a
+  ele. Prove ou refute: (b<sub>2n</sub> − a<sub>2n</sub>)/(b<sub>n</sub> − a<sub>n</sub>) &lt; 1/4 em todos os passos.</p>
+  <details class="gab"><summary>Gabarito (guiado — termine você)</summary>
+    <p>É verdadeiro, e eis um caminho. Chame t = bₙ/aₙ &gt; 1 (a “desproporção” do cerco). Da fatoração de E3.1,
+    a razão vira uma função só de t: o primeiro colchete é 1/(1+t); para o segundo, note que
+    b₂ₙ/aₙ = 2t/(1+t), então √b₂ₙ/√aₙ = s com s = √(2t/(1+t)), e o colchete é s/(1+s). Razão:
+    f(t) = s/[(1+t)(1+s)].</p>
+    <p>Verifique os postos-chave: quando t → 1⁺ (cerco quase fechado), s → 1 e f → 1/(2·2) = ¼. No primeiro passo
+    real, t = 2√3/3 ≈ 1,1547: s ≈ 1,0353 e f ≈ 0,2361 — exatamente a razão da linha n = 12 da tabela.</p>
+    <p>Falta o coração: mostrar que f(t) &lt; ¼ para todo t &gt; 1 — por exemplo mostrando que f é estritamente
+    decrescente em t (derivada, ou monotonia de s(t) combinada com o crescimento de (1+t)(1+s)). Como t desce em
+    direção a 1 a cada duplicação (o cerco se fecha), as razões sobem para ¼ por baixo — que é precisamente o
+    desenho da tabela. Complete a monotonia e o resultado é seu; é trabalhoso, não profundo. E note o bônus: isto
+    reprova a cota ½ da seção 5.2 com folga — mas a ½ continua tendo o mérito de caber em duas linhas.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.3</span>
+  <p>Arquimedes começou do hexágono. Rode você a máquina começando do <em>quadrado</em>: a₄ = 2√2, b₄ = 4. Aplique
+  as recorrências duas vezes e compare o cerco de 16 lados com o de 12 da rota hexagonal. A escolha do ponto de
+  partida importa?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Primeira duplicação (4 → 8):</em> b₈ = 2·a₄·b₄/(a₄+b₄) = 2·(2√2·4)/(2√2+4) = 16√2/(2√2+4).
+    Racionalizando (multiplique por (4 − 2√2)/(4 − 2√2)): b₈ = 8√2 − 8 ≈ 3,3137. E
+    a₈ = √(a₄·b₈) = √(2√2·(8√2−8)) = √(32 − 16√2) ≈ 3,0615.</p>
+    <p><em>Segunda (8 → 16):</em> b₁₆ = 2·a₈·b₈/(a₈+b₈) ≈ 2·10,1441/6,3752 ≈ 3,1826;
+    a₁₆ = √(a₈·b₁₆) ≈ √9,7444 ≈ 3,1216. Cerco: 3,1216 &lt; π &lt; 3,1826, folga ≈ 0,061.</p>
+    <p><em>Comparação:</em> a rota hexagonal em n = 12 dá folga 0,1096 e em n = 24 dá 0,0270. A rota quadrada em
+    n = 16 (folga 0,061) está, como devia, entre as duas — mais lados, cerco mais justo, seja qual for a origem.
+    A resposta conceitual: <strong>o ponto de partida muda os números, não muda a máquina nem o destino</strong>.
+    Qualquer par inicial a &lt; b com o círculo entre eles converge para o mesmo π, à mesma taxa assintótica de ¼.
+    O limite é do processo, não do chute inicial — ideia que voltará com força na iteração de funções (Cap. 10).</p>
+  </details>
+</div>
+
+<h3>Nível 4 — Impossíveis por enquanto</h3>
+<p>Sem gabarito — de propósito. Cada um destes enunciados é honesto, tem resposta conhecida pela matemática, e
+<em>não pode</em> ser resolvido com o que este capítulo construiu. O que segue em cada caixa é a razão exata da
+impossibilidade atual e o endereço onde ela cai.</p>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.1</span>
+  <p>Prove que π é irracional — que nenhuma fração p/q, por maior que seja o fôlego, o alcança exatamente.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Nem Arquimedes sabia disso: a irracionalidade de π só caiu em 1761 (Lambert), vinte séculos depois do cerco.
+    O obstáculo: cercar π diz onde ele <em>está</em>, não o que ele <em>é</em> — para excluir todas as frações de
+    uma vez é preciso uma máquina que converta “ser fração” em contradição, e as duas máquinas clássicas são as
+    frações contínuas (<strong>Cap. 5</strong>) e as integrais com análise fina (<strong>Cap. 9/10</strong>, prova
+    de Niven). Guarde a pergunta: quando as frações contínuas chegarem, pergunte-se por que a de π não termina.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.2</span>
+  <p>A folga se comporta como C/n². Encontre a constante C exata.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Resposta (sem prova, como provocação): C = π³. O erro de cercar π conhece π melhor do que você — a
+    constante do erro contém o próprio número sendo cercado, ao cubo. Para provar isso é preciso saber <em>quanto</em>
+    uma corda perde para seu arco no limite — as expansões locais de seno e tangente, que são exatamente o
+    maquinário do <strong>Capítulo 10</strong>. Este capítulo provou a razão ¼ (seção 6) sem séries; a constante
+    π³ é o degrau seguinte, e ele exige a fábrica.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.3</span>
+  <p>O comprimento do círculo <em>existe</em>? Defina rigorosamente “comprimento de uma curva” e mostre que o do
+  círculo é um número bem determinado.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Este capítulo definiu π como limite das recorrências e usou o postulado de convexidade de Arquimedes para
+    identificá-lo com o semiperímetro do círculo — <em>postulado</em>, não teorema (seção 5.3). A pergunta “o que
+    é o comprimento de uma curva?” é mais funda do que parece: há curvas contínuas sem comprimento nenhum
+    (Cap. 6 mostrará monstros aparentados). A resposta rigorosa — supremo dos comprimentos das poligonais
+    inscritas, e sua versão integral — é construída no <strong>Capítulo 9</strong>, onde o postulado deste
+    capítulo finalmente vira teorema e a porta se fecha por dentro.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.4</span>
+  <p>As médias deste capítulo calculam π com erro ∼ 1/4ᵏ. Existe método que <em>dobre o número de dígitos
+  corretos</em> a cada passo?</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Existe — e a parte espantosa é que ele usa quase os mesmos ingredientes. Trocando a média harmônica pela
+    <em>aritmética</em> e mantendo a geométrica, nasce a média aritmético-geométrica (AGM) de Gauss; acoplada à
+    exponencial e à integral certas, ela produz algoritmos (Brent–Salamin) em que cada iteração <em>dobra</em> a
+    quantidade de dígitos corretos de π — convergência quadrática, milhões de casas. Por que não podemos fazer
+    isso agora? Porque a ponte entre a AGM e π atravessa integrais (<strong>Cap. 9</strong>) e a fábrica de
+    funções (<strong>Cap. 10</strong>). Fica a provocação: você já tem as duas médias na mão. Está a uma troca de
+    distância de um dos algoritmos mais rápidos da história — e a séculos de entender por quê.</p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2>9. Horizonte</h2>
 <ul class="compacta">
   <li><strong>Pergunta inevitável:</strong> o erro deste capítulo tem forma exponencial na duplicação (1/2<sup>k</sup>)
   e aparente forma quadrática nos lados (1/n²). Erros têm <em>taxonomia</em>? Ordens de convergência são
   comparáveis, somáveis, compostas? — o tratado inteiro é, num sentido, essa pergunta.</li>
   <li><strong>Porta fechada → Cap. 9:</strong> comprimento do círculo como integral; o postulado de convexidade
   de Arquimedes deixa de ser postulado.</li>
-  <li><strong>Porta fechada → Cap. 10:</strong> expansões locais; julgamento das conjecturas C4 e C5 (o ¼).</li>
+  <li><strong>Porta fechada → Cap. 10:</strong> expansões locais; a constante exata da folga (π³/n², exercício
+  E4.2) — o ¼ já caiu aqui (seção 6), a forma fina não.</li>
   <li><strong>Porta fechada → Cap. 6:</strong> o princípio do supremo posto à prova: o que a densidade de ℚ
   não compra.</li>
 </ul>
@@ -376,6 +717,10 @@ patologia de estimação: lá, funções inteiras serão construídas para engan
   e se lerem como trançado. Desenho refeito em coordenadas de dispositivo com amostragem adaptativa; famílias de
   contato separadas e marcadas; anotação de fora-de-campo na lupa. Auditoria re-executada com novo invariante
   (lupa jamais em branco no intervalo de zoom). Registrado, não apagado.</p>
+  <p><strong>Exercícios e queda de C5 (28/07/2026, E20).</strong> Seção de exercícios adicionada em cinco níveis
+  (socrático → impossível-por-enquanto), conforme a emenda E20 do manual. Durante o desenho de E3.1, a fatoração
+  exata da folga refutou a conjectura C5 do pré-registro e promoveu C4 (razão → ¼) a teorema do capítulo —
+  autópsia em <code>conjecturas.md</code>, ledger atualizado.</p>
   <p>MATH3us.md · Capítulo 1 · escavação · release: nenhuma (pronto para tag).</p>
 </footer>
 

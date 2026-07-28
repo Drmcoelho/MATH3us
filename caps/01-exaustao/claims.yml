@@ -146,21 +146,29 @@ claims:
   - id: chapter-01.gap-ratio-quarter
     statement: >
       The ratio (b_{2n} - a_{2n}) / (b_n - a_n) converges to 1/4.
-    kind: conjecture
-    status: supported
-    provenance: classical
-    proof_mode: computational_only
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
     proof_location: "#o-que-a-prova-nao-entregou"
     dependencies:
       - claim: "chapter-01.archimedes-recurrences"
+      - claim: "chapter-01.gap-halving"
+      - claim: "chapter-01.pi-common-limit"
+    correction_log: >
+      2026-07-28: preregistered as conjecture C4; first recorded as
+      supported-only with proof deferred to Chapter 10. Promoted to
+      theorem the same day via the exact gap factorization
+      (b_2n - a_2n)/(b_n - a_n) = [a_n/(a_n+b_n)]*[sqrt(b_2n)/(sqrt(a_n)+sqrt(b_2n))],
+      each bracket -> 1/2 by common convergence to pi. Found while
+      designing exercise E3.1. Recorded, not erased.
     notes: >
-      Preregistered as C4 (conjecturas.md, 2026-07-28). Supported by the
-      in-page table (exploratory, non-canonical evidence per E12).
-      Classical asymptotics (gap ~ pi^3 / n^2) predict it; the local
-      expansions needed for proof belong to Chapter 10.
+      The sharp asymptotic form gap ~ pi^3/n^2 (exact constant) is NOT
+      claimed here; it remains a closed door to Chapter 10 (E4.2).
     verification:
-      symbolic: { status: not_applicable, note: "conjecture; no proof claimed in this chapter" }
-      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: support only, ratio within 1e-4 of 0.25 at k=16" }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6: exact factorization and limit" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: independent numeric witness, ratio within 1e-4 of 0.25 at k=16" }
       edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.elementary-apparatus-limit
@@ -169,12 +177,19 @@ claims:
       recurrences) cannot deliver the 1/4 contraction factor; 1/2 is
       what it proves.
     kind: conjecture
-    status: conjectured
+    status: refuted
     provenance: authorial
     proof_mode: not_applicable
+    autopsy: >
+      Refuted 2026-07-28, the same day it was preregistered (C5), while
+      designing exercise E3.1: the gap admits an exact factorization —
+      no estimation needed — and common convergence closes the 1/4
+      limit elementarily. Full five-question autopsy in conjecturas.md.
+      The surviving kernel: 1/2 is a uniform per-step bound, 1/4 is
+      asymptotic, and the exact constant pi^3 still needs Chapter 10.
     priority_note: >
       Authorial meta-conjecture within this treatise about provability
-      with declared tools; to be settled (or autopsied) by Chapter 10.
+      with declared tools; settled by refutation in-chapter.
     dependencies:
       - claim: "chapter-01.gap-halving"
       - claim: "chapter-01.gap-ratio-quarter"

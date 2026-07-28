@@ -405,6 +405,7 @@ Quando um capítulo antecipar uma ideia futura, deverá marcá-la como porta fec
 7. **Experimento computacional inline** — controles; valores legíveis; código determinístico quando possível; capacidade de procurar contraexemplos; explicação do que o experimento não prova.
 8. **Gate de verificação** — na versão vigente (§1.7).
 9. **Horizonte** — pergunta que o capítulo torna inevitável; porta que permanece fechada; capítulo em que será reaberta.
+10. **Exercícios (E20)** — em cinco níveis: **N0 socrático** (revisão intuitiva e dedutiva do conceito, por perguntas); **N1 básico** (jogo geométrico ou computacional, relacionado ou não ao eixo do capítulo); **N2 intermediário** (opera o aparato do capítulo); **N3 difícil** (estende ou tensiona o aparato); **N4 "impossível por enquanto"** (enunciado honesto cuja solução pertence a capítulo ou ciclo futuro, com a porta indicada). N0–N3 exigem gabarito robusto e detalhado, escrito com a paciência de quem explica a uma criança inteligente — o gabarito é parte do argumento, não apêndice. N4 não recebe solução: recebe a razão precisa pela qual ainda não é possível, gerando a curiosidade que o capítulo futuro cobrará. Exercícios podem refutar ou estender conjecturas do capítulo; quando isso ocorrer, aplica-se o fluxo da §1.3 (autópsia e registro).
 
 ### 6.2 Elementos opcionais
 
@@ -718,3 +719,4 @@ Regras: emendas são **atômicas** — uma decisão por emenda; emendas nunca s�
 | E17 | 28/07/2026 | — | §11 | — | Fora de escopo reformulado: adiamento por ausência de sítio, não por competência presumida |
 | E18 | 28/07/2026 | — | §13 | — | Governança de emendas: atomicidade; imutabilidade; colunas de commit, seções e substituição |
 | E19 | 28/07/2026 | — | §3 (Cap. 10) | — | a⁰/0⁰ como interlúdio do Cap. 10; núcleo protegido: séries de potências como definição de função |
+| E20 | 28/07/2026 | pr-05 | §6.1 | — | Exercícios como elemento obrigatório do template, em cinco níveis (N0 socrático → N4 porta-fechada); gabarito robusto obrigatório em N0–N3; N4 sem solução, com a porta e a razão da impossibilidade atual declaradas |
