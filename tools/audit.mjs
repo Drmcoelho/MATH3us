@@ -92,8 +92,34 @@ async function auditViewport(name, viewport) {
     });
   });
   check(`${name}.canvases_labeled_and_painted`,
-    canvasInfo.length === 2 && canvasInfo.every(c => c.label.length > 20 && c.paintedShare > 0.001),
+    canvasInfo.length === 3 && canvasInfo.every(c => c.label.length > 20 && c.paintedShare > 0.001),
     canvasInfo.map(c => c.paintedShare.toFixed(4)).join(', '));
+
+  // -- double-siege lab (section 7, rebuild D3): tables mirror state,
+  //    inheritance visible in DOM, plot painted in both modes
+  const siege = await page.evaluate(() => ({
+    areasRows: document.querySelectorAll('#tabela-areas-corpo tr').length,
+    normRows: document.querySelectorAll('#tabela-normal-corpo tr').length,
+    firstAin: document.querySelector('#tabela-areas-corpo tr:nth-child(2) td:nth-child(2)')?.textContent,
+    firstA: document.querySelector('#tabela-corpo tr:nth-child(1) td:nth-child(2)')?.textContent,
+  }));
+  check(`${name}.areas_table_mirrors_state`, siege.areasRows === 2, `rows=${siege.areasRows}`);
+  check(`${name}.normalized_table_full_range`, siege.normRows === 17, `rows=${siege.normRows}`);
+  check(`${name}.inheritance_visible_in_tables`, siege.firstAin === siege.firstA,
+    `A-_{2n} cell "${siege.firstAin}" vs a_n cell "${siege.firstA}" (Enunciado F)`);
+  const plotPainted = () => page.evaluate(() => {
+    const c = document.getElementById('cv-plot');
+    const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+    let p = 0;
+    for (let i = 3; i < d.length; i += 4) if (d[i] !== 0) p++;
+    return p / (d.length / 4);
+  });
+  const pv = await plotPainted();
+  await page.click('#btn-plot-errs');
+  const pe = await plotPainted();
+  await page.click('#btn-plot-vals');
+  check(`${name}.plot_painted_both_modes`, pv > 0.001 && pe > 0.001,
+    `vals: ${pv.toFixed(4)}, errs: ${pe.toFixed(4)}`);
 
   // -- formulas are text (no images), live region present, table has data
   const dom = await page.evaluate(() => ({

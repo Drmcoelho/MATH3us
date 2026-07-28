@@ -89,12 +89,18 @@ dia do pré-registro, durante o desenho do exercício E3.1.
 4. **O que havia de aproveitável na intuição?** A distinção entre cota
    uniforme e comportamento assintótico, que era o núcleo da conjectura,
    sobrevive intacta: 1/2 vale desde o primeiro passo; 1/4 é limite.
-   E a parte da intuição sobre a *constante fina* estava certa: π³/n²
+   E a parte da intuição sobre a *constante fina* estava certa: π³/(2n²)
    continua exigindo as expansões do Cap. 10.
 5. **Qual reformulação sobreviveu?** "O aparato elementar entrega o 1/4
    como limite (teorema, seção 6 do capítulo); a cota uniforme simples
-   permanece 1/2; a forma exata da folga (∼ π³/n²) permanece porta fechada
+   permanece 1/2; a forma exata da folga (∼ π³/(2n²)) permanece porta fechada
    para o Cap. 10."
+
+*(Correção de 28/07/2026, pós-r2: os dois itens acima escreviam π³/n² —
+a mesma troca de constante corrigida no capítulo e no ledger; esta
+ocorrência escapou da varredura do merge e foi corrigida no pré-registro
+da reconstrução D3. A folga de semiperímetros é ∼ π³/(2n²); π³/n² pertence
+à folga de áreas. Registrado, não apagado.)*
 
 **Consequências no ledger:** `chapter-01.gap-ratio-quarter` promovida de
 conjectura sustentada a teorema (`status: proved`, prova na seção 6 e
@@ -105,3 +111,66 @@ exercício E3.1); `chapter-01.elementary-apparatus-limit` marcada
 E20) — escrever gabarito "como para uma criança" obrigou a reescrever a
 expressão em vez de estimá-la. O leitor didático é um instrumento de
 descoberta.
+
+---
+
+## Pré-registro R — a reconstrução geométrica (D3), 28/07/2026
+
+**Estatuto.** Extensão do capítulo decidida pelo leitor primário (decisão D3,
+`AUDIT.md`), com sítio documental próprio: o documento fundador de 28/07/2026
+(crítica do leitor primário ao capítulo implementado, verbatim em
+`caps/00-inferencia/sources.md`), que contém as derivações originais do
+autor para as afirmações abaixo. O pré-registro vale com força plena para o
+que ainda não foi verificado: **nenhuma das identidades R1–R4 foi conferida
+simbólica ou numericamente antes deste commit**, e as constantes de R5 vêm
+do documento fundador, não de cálculo do tratado.
+
+### R1 — As identidades de área
+**Enunciado:** no círculo unitário, as áreas dos polígonos regulares
+inscrito e circunscrito de n lados satisfazem A⁻ₙ = aₙ²/bₙ e A⁺ₙ = bₙ.
+A segunda é a observação de que o "semiperímetro externo" É a área externa,
+porque o apótema do circunscrito é o raio 1.
+**Confiança:** alta (derivação do documento fundador: A⁻ₙ = n·sen θ·cos θ e
+cos θ = aₙ/bₙ).
+**Refutadores:** discrepância numérica em qualquer n entre as fórmulas e a
+área computada por geometria direta (shoelace).
+
+### R2 — A área herda o semiperímetro
+**Enunciado:** A⁻₂ₙ = aₙ exatamente — a área do inscrito de 2n lados é o
+semiperímetro do inscrito de n lados. Via recorrência: A⁻₂ₙ = a₂ₙ²/b₂ₙ =
+aₙ·b₂ₙ/b₂ₙ = aₙ.
+**Confiança:** alta.
+**Refutadores:** qualquer n com A⁻₂ₙ ≠ aₙ além do erro de máquina.
+
+### R3 — A cadeia do duplo cerco
+**Enunciado:** A⁻ₙ < A⁻₂ₙ = aₙ < π < b₂ₙ = A⁺₂ₙ < A⁺ₙ, para todo n da
+sequência de duplicação. As desigualdades novas custam uma linha cada sobre
+os teoremas já provados (A⁻ₙ = aₙ·(aₙ/bₙ) < aₙ; o resto é monotonia já
+demonstrada).
+**Confiança:** alta.
+**Refutadores:** violação de qualquer elo em qualquer k.
+
+### R4 — A razão das duas folgas
+**Enunciado:** ΔAₙ = A⁺ₙ − A⁻ₙ = (bₙ − aₙ)(bₙ + aₙ)/bₙ (identidade exata), e
+ΔAₙ/(bₙ − aₙ) → 2, demonstrável com o aparato do capítulo (sem expansões):
+(aₙ+bₙ)/bₙ = 1 + aₙ/bₙ e aₙ/bₙ → 1 com cota explícita pela folga já provada.
+**Confiança:** alta.
+**Refutadores:** razão estabilizando em valor ≠ 2; a prova elementar falhar.
+
+### R5 — A dualidade das quatro constantes
+**Enunciado:** n²(π − aₙ) → π³/6, n²(bₙ − π) → π³/3, n²(π − A⁻ₙ) → 2π³/3,
+n²(A⁺ₙ − π) → π³/3. Consequências estruturais: no cerco por perímetros o
+erro externo é o dobro do interno; no cerco por áreas, o interno é o dobro
+do externo — **o erro dominante troca de lado**. Duas verificações de
+consistência são exatas e demonstráveis já: (π−aₙ) + (bₙ−π) = bₙ−aₙ (logo
+π³/6 + π³/3 = π³/2, a constante do E4.2); e π − A⁻ₙ = (π−aₙ) + aₙ(bₙ−aₙ)/bₙ
+(logo 2π³/3 = π³/6 + π³/2). As quatro constantes individuais **não são
+demonstráveis neste capítulo** — exigem as expansões locais do Cap. 10;
+entram como conjectura sustentada por tabela normalizada.
+**Confiança:** média-alta para os valores (documento fundador + consistência
+interna); alta para a troca de dominância condicionada aos valores.
+**Refutadores:** colunas normalizadas estabilizando em outras constantes;
+violação das identidades de consistência (essas refutariam R1/R4 também).
+
+**Porta declarada:** R5 → Capítulo 10 (expansões locais), junto com a
+constante π³/2 do E4.2, da qual as quatro constantes são o refinamento.

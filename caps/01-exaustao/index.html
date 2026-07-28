@@ -336,7 +336,7 @@ geométrico, é isto — a primeira máquina da história a prometer precisão a
 <strong>½</strong>. No pré-registro, a conjectura C5 apostou que o aparato elementar deste capítulo não alcançaria
 o ¼ — que seriam necessárias as expansões locais do Capítulo 10.</p>
 <p><strong>C5 estava errada, e o registro fica.</strong> Em 28/07/2026, durante o desenho dos exercícios deste
-capítulo (E3.1, seção 8), a folga revelou uma fatoração exata que as desigualdades de médias haviam escondido.
+capítulo (E3.1, seção 9), a folga revelou uma fatoração exata que as desigualdades de médias haviam escondido.
 Por diferença de quadrados, b<sub>2n</sub> − a<sub>n</sub> = (√b<sub>2n</sub> − √a<sub>n</sub>)(√b<sub>2n</sub> + √a<sub>n</sub>), logo:</p>
 <p class="formula">b<sub>2n</sub> − a<sub>2n</sub> = b<sub>2n</sub> − √(a<sub>n</sub>b<sub>2n</sub>) = √b<sub>2n</sub>·(√b<sub>2n</sub> − √a<sub>n</sub>)
 = √b<sub>2n</sub> · (b<sub>2n</sub> − a<sub>n</sub>)/(√a<sub>n</sub> + √b<sub>2n</sub>),</p>
@@ -364,8 +364,187 @@ exercício E4.2 e foi corrigida na integração do merge. Registrado, não apaga
 um teorema (a cota ½), uma conjectura (o ¼), a refutação de uma metaconjectura (C5) e a promoção da conjectura
 a teorema. Sem o ledger, tudo isso teria parecido igualmente sólido desde o início. Não era.</p>
 
+
 <!-- ============================================================ -->
-<h2>7. As três camadas, revisitadas</h2>
+<h2 id="o-segundo-cerco">7. O segundo cerco: as áreas</h2>
+<p>O capítulo, até aqui, cercou π com <em>uma</em> grandeza: o semiperímetro. O leitor primário apontou o que
+faltava (documento fundador de 28/07/2026, verbatim no <code>sources.md</code> do Capítulo 0): a geometria local
+que explica de onde as fórmulas vêm, e um <strong>segundo cerco, independente, por áreas</strong> — que o método
+de exaustão original sempre teve e a primeira redação eliminou. Esta seção reconstrói os dois
+(decisão D3, pré-registro R1–R5 em <code>conjecturas.md</code>).</p>
+
+<h3>7.1 A cunha: de onde vêm as fórmulas</h3>
+<p>O Capítulo 0 — que na ordem de leitura vem antes deste — construiu o átomo: o triângulo fundamental OMV de
+todo polígono regular, com hipotenusa R (circunraio), cateto r (apótema) e cateto L/2 (meio lado), e
+R² = r² + (L/2)². O polígono é essa cunha repetida 2n vezes. Basta especializá-la duas vezes:</p>
+<div class="caixa">
+  <span class="rotulo">Enunciado D (as fórmulas fechadas, pela cunha)</span>
+  <p style="margin:0">Com θ = π/n o semiângulo central: no polígono <em>inscrito</em> no círculo unitário,
+  R = 1, logo L/2 = sen θ e r = cos θ, e o semiperímetro é
+  <span class="formula" style="display:block">a<sub>n</sub> = n·sen θ;</span>
+  no <em>circunscrito</em>, r = 1, logo L/2 = tg θ, e o semiperímetro é
+  <span class="formula" style="display:block">b<sub>n</sub> = n·tg θ.</span></p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> Cada polígono tem n lados de comprimento L; o semiperímetro é nL/2 = n·(L/2).
+  No inscrito, a razão (L/2)/R = sen θ da cunha com R = 1 dá L/2 = sen θ; no circunscrito, (L/2)/r = tg θ
+  com r = 1 dá L/2 = tg θ.<span class="qed">∎</span></p>
+  <p style="font-size:.92rem; color:var(--ink-soft)">As camadas, de novo: a <em>tabela</em> da seção 2 calcula
+  pelas recorrências (aritmética e raiz — Enunciado A); a <em>cunha</em> diz de onde as fórmulas fechadas vêm.
+  O oráculo confere as duas rotas uma contra a outra (invariante I1). A prova das recorrências na seção 4 já
+  usava n·sen θ e n·tg θ — agora essas expressões têm certidão de nascimento geométrica.</p>
+</div>
+
+<h3>7.2 As identidades de área</h3>
+<p>A mesma cunha mede área: o triângulo OMV tem área (1/2)·(L/2)·r, e o polígono é 2n cunhas, logo
+A = n·(L/2)·r. Especializando:</p>
+<div class="caixa">
+  <span class="rotulo">Enunciado E (as áreas em função dos semiperímetros)</span>
+  <p style="margin:0">Sejam A<sub>n</sub><sup>−</sup> e A<sub>n</sub><sup>+</sup> as áreas dos polígonos
+  inscrito e circunscrito ao círculo unitário. Então
+  <span class="formula" style="display:block">A<sub>n</sub><sup>−</sup> = a<sub>n</sub>²/b<sub>n</sub>
+  &nbsp;&nbsp;e&nbsp;&nbsp; A<sub>n</sub><sup>+</sup> = b<sub>n</sub>.</span>
+  A segunda identidade merece ser dita em voz alta: <em>o número que este capítulo vinha chamando de
+  semiperímetro externo é, simultaneamente, a área externa</em> — porque o apótema do circunscrito é o raio 1.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> Inscrito: A<sub>n</sub><sup>−</sup> = n·sen θ·cos θ = a<sub>n</sub>·cos θ, e
+  cos θ = (n·sen θ)/(n·tg θ) = a<sub>n</sub>/b<sub>n</sub>, logo A<sub>n</sub><sup>−</sup> = a<sub>n</sub>²/b<sub>n</sub>.
+  Circunscrito: A<sub>n</sub><sup>+</sup> = n·(L/2)·r = n·tg θ·1 = b<sub>n</sub>.<span class="qed">∎</span></p>
+</div>
+
+<h3>7.3 A herança</h3>
+<div class="caixa">
+  <span class="rotulo">Enunciado F (a área herda o semiperímetro)</span>
+  <p style="margin:0"><span class="formula" style="display:block">A<sub>2n</sub><sup>−</sup> = a<sub>n</sub>,
+  exatamente.</span>
+  A área do inscrito de 2n lados é o semiperímetro do inscrito de n lados: a coluna de áreas da tabela é a
+  coluna a<sub>n</sub> <em>deslocada uma linha</em>. A área alcança hoje o ponto onde o perímetro estava ontem.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> Pela recorrência (Enunciado A), a<sub>2n</sub> = √(a<sub>n</sub>·b<sub>2n</sub>),
+  logo a<sub>2n</sub>² = a<sub>n</sub>·b<sub>2n</sub> e, pelo Enunciado E,
+  A<sub>2n</sub><sup>−</sup> = a<sub>2n</sub>²/b<sub>2n</sub> = a<sub>n</sub>.<span class="qed">∎</span></p>
+</div>
+
+<h3>7.4 A cadeia do duplo cerco</h3>
+<div class="caixa">
+  <span class="rotulo">Enunciado G (a cadeia)</span>
+  <p style="margin:0">Para todo n da sequência de duplicação:
+  <span class="formula" style="display:block">A<sub>n</sub><sup>−</sup> &lt; A<sub>2n</sub><sup>−</sup> = a<sub>n</sub>
+  &lt; π &lt; b<sub>2n</sub> = A<sub>2n</sub><sup>+</sup> &lt; A<sub>n</sub><sup>+</sup>.</span>
+  Cinco elos, dois deles igualdades exatas: o cerco por áreas e o cerco por perímetros são <em>a mesma
+  escada, pisada com um degrau de defasagem</em>.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> A<sub>n</sub><sup>−</sup> = a<sub>n</sub>·(a<sub>n</sub>/b<sub>n</sub>) &lt; a<sub>n</sub>
+  porque a<sub>n</sub> &lt; b<sub>n</sub> (seção 5.1); A<sub>2n</sub><sup>−</sup> = a<sub>n</sub> é o Enunciado F;
+  a<sub>n</sub> &lt; π &lt; b<sub>2n</sub> é o aprisionamento já provado (5.1–5.3); b<sub>2n</sub> = A<sub>2n</sub><sup>+</sup>
+  é o Enunciado E; e b<sub>2n</sub> &lt; b<sub>n</sub> = A<sub>n</sub><sup>+</sup> é a monotonia de 5.1.<span class="qed">∎</span></p>
+  <p style="font-size:.92rem; color:var(--ink-soft)">Consequência gratuita: <strong>as áreas também convergem
+  a π</strong>. A<sub>n</sub><sup>+</sup> = b<sub>n</sub> → π por 5.3; e A<sub>n</sub><sup>−</sup> fica presa
+  entre A<sub>n</sub><sup>−</sup> e a<sub>n</sub> com folga a<sub>n</sub> − A<sub>n</sub><sup>−</sup> =
+  a<sub>n</sub>(b<sub>n</sub> − a<sub>n</sub>)/b<sub>n</sub> &lt; b<sub>n</sub> − a<sub>n</sub> → 0. O método de
+  exaustão sempre foi um cerco duplo — por comprimento e por área — e as duas mandíbulas fecham juntas.</p>
+</div>
+
+<h3>7.5 As duas folgas</h3>
+<p>Cada cerco tem sua folga: b<sub>n</sub> − a<sub>n</sub> (perímetros) e
+ΔA<sub>n</sub> = A<sub>n</sub><sup>+</sup> − A<sub>n</sub><sup>−</sup> (áreas). Elas não são independentes:</p>
+<div class="caixa">
+  <span class="rotulo">Enunciado H (a folga de áreas em função da folga de perímetros)</span>
+  <p style="margin:0"><span class="formula" style="display:block">ΔA<sub>n</sub> = b<sub>n</sub> − a<sub>n</sub>²/b<sub>n</sub>
+  = (b<sub>n</sub> − a<sub>n</sub>)(b<sub>n</sub> + a<sub>n</sub>)/b<sub>n</sub> &nbsp;&nbsp;(identidade exata),</span>
+  e a razão entre as folgas converge:
+  <span class="formula" style="display:block">ΔA<sub>n</sub>/(b<sub>n</sub> − a<sub>n</sub>) =
+  (a<sub>n</sub> + b<sub>n</sub>)/b<sub>n</sub> → 2.</span></p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> A identidade é diferença de quadrados sobre o Enunciado E. Para o limite, sem
+  nada além do que o capítulo já provou: (a<sub>n</sub> + b<sub>n</sub>)/b<sub>n</sub> = 1 + a<sub>n</sub>/b<sub>n</sub>, e</p>
+  <p class="formula">0 &lt; 1 − a<sub>n</sub>/b<sub>n</sub> = (b<sub>n</sub> − a<sub>n</sub>)/b<sub>n</sub>
+  &lt; (b<sub>n</sub> − a<sub>n</sub>)/3 ≤ (2√3 − 3)/(3·2<sup>k</sup>),</p>
+  <p>usando b<sub>n</sub> &gt; a<sub>n</sub> &gt; a₆ = 3 (monotonia, 5.1) e a cota da seção 5.2. Dado ε &gt; 0,
+  qualquer k com 2<sup>k</sup> &gt; (2√3 − 3)/(3ε) garante |razão − 2| &lt; ε — o N é computável, como em 5.4.
+  <span class="qed">∎</span></p>
+  <p style="font-size:.92rem; color:var(--ink-soft)">Em palavras: <em>assintoticamente, a folga de áreas é o
+  dobro da folga de semiperímetros</em>. Este é o teorema que impede, de vez, a confusão que produziu o
+  incidente do fator 2 (seção 6): as duas folgas têm a mesma ordem 1/n², mas constantes diferentes — na razão
+  exata de 2 para 1.</p>
+</div>
+
+<h3>7.6 A dualidade das quatro constantes</h3>
+<p>Cada cerco divide sua folga em duas metades desiguais: déficit interno (π − aproximação por dentro) e
+excesso externo (aproximação por fora − π). A tabela normalizada do laboratório abaixo multiplica cada um
+por n² e observa quatro estabilizações:</p>
+<div class="caixa">
+  <span class="rotulo">Conjectura R5 (pré-registrada em 28/07/2026 · status: sustentada, não demonstrável aqui)</span>
+  <p>n²(π − a<sub>n</sub>) → π³/6 ≈ 5,1677; &nbsp; n²(b<sub>n</sub> − π) → π³/3 ≈ 10,3354; &nbsp;
+  n²(π − A<sub>n</sub><sup>−</sup>) → 2π³/3 ≈ 20,6709; &nbsp; n²(A<sub>n</sub><sup>+</sup> − π) → π³/3.</p>
+  <p>Se os quatro valores estiverem certos, segue uma <strong>dualidade</strong>: no cerco por perímetros o
+  erro externo é o dobro do interno; no cerco por áreas, o interno é o dobro do externo — <em>o erro dominante
+  troca de lado</em>. "Estar mais próximo de π" depende da grandeza com que se mede a proximidade.</p>
+  <p style="margin:0">Duas verificações de consistência são exatas e já demonstráveis:
+  (π − a<sub>n</sub>) + (b<sub>n</sub> − π) = b<sub>n</sub> − a<sub>n</sub>, logo as constantes devem somar
+  π³/6 + π³/3 = π³/2 — exatamente a constante da folga (exercício E4.2); e
+  π − A<sub>n</sub><sup>−</sup> = (π − a<sub>n</sub>) + a<sub>n</sub>(b<sub>n</sub> − a<sub>n</sub>)/b<sub>n</sub>,
+  logo 2π³/3 = π³/6 + π³/2 — confere. A consistência <em>sustenta</em>; não prova. As quatro constantes
+  individuais exigem as expansões locais de sen e tg: <strong>porta fechada → Capítulo 10</strong>, a mesma
+  porta do E4.2, agora com quatro fechaduras em vez de uma.</p>
+</div>
+
+<h3>7.7 O laboratório do duplo cerco</h3>
+<p>O gráfico traça as quatro grandezas do cerco ao longo das duplicações; as tabelas dão os mesmos dados em
+forma numérica (acessível). No modo <em>valores</em>, repare em A<sub>n</sub><sup>+</sup> desenhado sobre
+b<sub>n</sub>: as duas curvas coincidem — isso é o Enunciado E visto, não provado. No modo <em>erros
+normalizados</em>, as quatro curvas achatam sobre as constantes conjecturadas (linhas tracejadas).</p>
+
+<div class="painel">
+  <figure style="margin:0">
+    <canvas id="cv-plot" width="640" height="320"
+      aria-label="Gráfico de linhas com dois modos. Modo valores: as quatro grandezas do duplo cerco (área inscrita, semiperímetro inscrito, semiperímetro circunscrito e área circunscrita) ao longo das duplicações k = 0 a 16, convergindo para a linha horizontal de pi; a curva da área circunscrita coincide com a do semiperímetro circunscrito. Modo erros normalizados: n ao quadrado vezes cada um dos quatro erros, achatando sobre as constantes pi cubo sobre seis, pi cubo sobre três e dois pi cubo sobre três, marcadas por linhas tracejadas. As tabelas adjacentes contêm os mesmos dados em forma numérica."></canvas>
+    <figcaption>O duplo cerco em movimento. Alterne os modos; a tabela normalizada abaixo é o equivalente
+    textual do segundo modo.</figcaption>
+  </figure>
+  <div class="controles">
+    <button id="btn-plot-vals" type="button">Valores</button>
+    <button id="btn-plot-errs" type="button">Erros normalizados</button>
+  </div>
+  <p class="leitura" id="leitura-plot" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-areas">
+  <caption>O cerco por áreas, nas mesmas linhas do estado da seção 2 (duplicar lá atualiza aqui).
+  A<sub>n</sub><sup>−</sup> = a<sub>n</sub>²/b<sub>n</sub> e A<sub>n</sub><sup>+</sup> = b<sub>n</sub>
+  (Enunciado E) — computadas, como tudo na tabela, só com as recorrências. Confira a herança (Enunciado F):
+  a coluna A<sub>n</sub><sup>−</sup> é a coluna a<sub>n</sub> da seção 2 deslocada uma linha.</caption>
+  <thead>
+    <tr><th scope="col">n (lados)</th><th scope="col">A<sub>n</sub><sup>−</sup> (área dentro)</th>
+    <th scope="col">A<sub>n</sub><sup>+</sup> (área fora)</th><th scope="col">ΔA<sub>n</sub></th>
+    <th scope="col">ΔA<sub>n</sub>/(b<sub>n</sub>−a<sub>n</sub>)</th></tr>
+  </thead>
+  <tbody id="tabela-areas-corpo"></tbody>
+</table>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-normal">
+  <caption>Os quatro erros normalizados por n², em toda a faixa de duplicação (k = 0…16). Camada de
+  observação declarada: a referência π aqui é a constante de máquina (float64), não o limite definido em 5.3
+  — para <em>observar</em> estabilização isso basta; para <em>demonstrá-la</em>, não (Conjectura R5,
+  porta → Cap. 10).</caption>
+  <thead>
+    <tr><th scope="col">k</th><th scope="col">n</th><th scope="col">n²(π−a<sub>n</sub>)</th>
+    <th scope="col">n²(b<sub>n</sub>−π)</th><th scope="col">n²(π−A<sub>n</sub><sup>−</sup>)</th>
+    <th scope="col">n²(A<sub>n</sub><sup>+</sup>−π)</th></tr>
+  </thead>
+  <tbody id="tabela-normal-corpo"></tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. As três camadas, revisitadas</h2>
 <p>A lupa da seção 2 não era ilustração — era argumento. <strong>Objeto:</strong> o número π, limite demonstrado do
 cerco. <strong>Representação:</strong> a₉₆ escrito em dígitos decimais, ou como torre de raízes quadradas.
 <strong>Observação:</strong> os pixels em que os três traços colapsam, os dezesseis dígitos em que o ponto flutuante
@@ -374,7 +553,7 @@ trunca a torre. A convergência <em>visual</em> (n ≈ 48, na lupa em 1×) e a c
 patologia de estimação: lá, funções inteiras serão construídas para enganar exatamente o olho que aqui já titubeou.</p>
 
 <!-- ============================================================ -->
-<h2 id="exercicios">8. Exercícios</h2>
+<h2 id="exercicios">9. Exercícios</h2>
 <p>Cinco níveis, do socrático ao impossível-por-enquanto (E20 do manual). Regra de uso: tente antes de abrir o
 gabarito — mas <em>abra sempre</em>, mesmo quando acertar. O gabarito não é conferência: é a segunda metade do
 exercício, e às vezes diz algo que a sua solução correta não disse. Os N4 não têm solução aqui — têm a razão
@@ -700,7 +879,7 @@ impossibilidade atual e o endereço onde ela cai.</p>
 </div>
 
 <!-- ============================================================ -->
-<h2>9. Horizonte</h2>
+<h2>10. Horizonte</h2>
 <ul class="compacta">
   <li><strong>Pergunta inevitável:</strong> o erro deste capítulo tem forma exponencial na duplicação (1/2<sup>k</sup>)
   e aparente forma quadrática nos lados (1/n²). Erros têm <em>taxonomia</em>? Ordens de convergência são
@@ -708,7 +887,12 @@ impossibilidade atual e o endereço onde ela cai.</p>
   <li><strong>Porta fechada → Cap. 9:</strong> comprimento do círculo como integral; o postulado de convexidade
   de Arquimedes deixa de ser postulado.</li>
   <li><strong>Porta fechada → Cap. 10:</strong> expansões locais; a constante exata da folga (π³/(2n²), exercício
-  E4.2) — o ¼ já caiu aqui (seção 6), a forma fina não.</li>
+  E4.2) — o ¼ já caiu aqui (seção 6), a forma fina não; e agora as quatro constantes da dualidade
+  (π³/6, π³/3, 2π³/3 — Conjectura R5, seção 7.6), cuja consistência interna já está provada mas cujos valores
+  individuais esperam a fábrica.</li>
+  <li><strong>Porta aberta ← Cap. 0:</strong> a cunha fundamental usada na seção 7.1 é o átomo construído no
+  prólogo; o cerco invertido de lá (duas circunferências, um polígono) e o cerco duplo daqui (dois polígonos e
+  duas grandezas) são os dois lados da mesma moeda inferencial.</li>
   <li><strong>Porta fechada → Cap. 6:</strong> o princípio do supremo posto à prova: o que a densidade de ℚ
   não compra.</li>
 </ul>
@@ -730,9 +914,15 @@ impossibilidade atual e o endereço onde ela cai.</p>
   (socrático → impossível-por-enquanto), conforme a emenda E20 do manual. Durante o desenho de E3.1, a fatoração
   exata da folga refutou a conjectura C5 do pré-registro e promoveu C4 (razão → ¼) a teorema do capítulo —
   autópsia em <code>conjecturas.md</code>, ledger atualizado.</p>
-  <p>MATH3us.md · Capítulo 1 · escavação · release: <strong>cap-01-gate0-r1</strong> (veredito do leitor primário
-  em 28/07/2026; manifest em <code>releases/manifests/</code>; a criação da tag remota coube ao proprietário —
-  o proxy desta sessão recusa push de tags, incidente declarado no manifest).</p>
+  <p><strong>Reconstrução geométrica (28/07/2026, decisão D3 · E21).</strong> Seção 7 adicionada — a cunha
+  fundamental (importada do Capítulo 0) como certidão de nascimento das fórmulas fechadas; o segundo cerco por
+  áreas: identidades A⁻ = a²/b e A⁺ = b, a herança A⁻₂ₙ = aₙ, a cadeia do duplo cerco, a razão das folgas → 2
+  (teorema que sela o incidente do fator 2) e a dualidade das quatro constantes (Conjectura R5, porta → Cap. 10).
+  Pré-registro R1–R5 commitado antes do desenvolvimento; laboratório gráfico e tabelas de áreas e de erros
+  normalizados adicionados. Conteúdo posterior à r2: <strong>aguardando reauditoria e decisão de tag r3</strong>.</p>
+  <p>MATH3us.md · Capítulo 1 · escavação · release: <strong>cap-01-gate0-r2</strong> (r3 pendente da decisão do
+  leitor primário; manifests em <code>releases/manifests/</code>; a criação das tags remotas coube ao
+  proprietário — o proxy desta sessão recusa push de tags, incidente declarado nos manifests).</p>
 </footer>
 
 </main>
@@ -786,6 +976,141 @@ function renderTable() {
     tbody.appendChild(tr);
   });
 }
+
+
+/* ===== Section 7: the double siege (areas) ====================
+ * Same layer discipline: everything numeric below comes from the
+ * mean recurrences (ALL) — the closed trig forms never feed in.
+ * PI_REF is the float64 machine constant, used ONLY as reference
+ * for the OBSERVED normalized errors (declared in the table caption
+ * and in claims.yml: observation layer, not proof). */
+const ALL = (() => {
+  const out = [initialRow()];
+  for (let i = 0; i < MAX_K; i++) out.push(nextRow(out[out.length - 1]));
+  return out;
+})();
+const PI_REF = Math.PI;
+const areaIn = (r) => r.a * r.a / r.b;   // Enunciado E
+const areaOut = (r) => r.b;              // Enunciado E
+
+function renderAreasTable() {
+  const tb = document.getElementById("tabela-areas-corpo");
+  tb.innerHTML = "";
+  rows.forEach((r, i) => {
+    const Am = areaIn(r), Ap = areaOut(r), dA = Ap - Am;
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      "<td>" + fmtInt(r.n) + "</td>" +
+      "<td>" + fmt(Am, 10) + "</td>" +
+      "<td>" + fmt(Ap, 10) + "</td>" +
+      "<td>" + fmt(dA, 10) + "</td>" +
+      "<td>" + fmt(dA / (r.b - r.a), 6) + "</td>";
+    if (i === rows.length - 1) tr.style.background = "#efe7d3";
+    tb.appendChild(tr);
+  });
+}
+
+function renderNormTable() {
+  const tb = document.getElementById("tabela-normal-corpo");
+  tb.innerHTML = "";
+  ALL.forEach((r, k) => {
+    const n2 = r.n * r.n;
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      "<td>" + k + "</td>" +
+      "<td>" + fmtInt(r.n) + "</td>" +
+      "<td>" + fmt(n2 * (PI_REF - r.a), 5) + "</td>" +
+      "<td>" + fmt(n2 * (r.b - PI_REF), 5) + "</td>" +
+      "<td>" + fmt(n2 * (PI_REF - areaIn(r)), 5) + "</td>" +
+      "<td>" + fmt(n2 * (areaOut(r) - PI_REF), 5) + "</td>";
+    tb.appendChild(tr);
+  });
+}
+
+const cvPlot = document.getElementById("cv-plot");
+const ctxP = cvPlot.getContext("2d");
+let plotMode = "vals"; // "vals" | "errs"
+
+function drawPlot() {
+  const W = cvPlot.width, H = cvPlot.height;
+  const mL = 46, mR = 130, mT = 16, mB = 34;
+  const pw = W - mL - mR, ph = H - mT - mB;
+  ctxP.clearRect(0, 0, W, H);
+  const X = (k) => mL + (pw * k) / MAX_K;
+
+  const series = plotMode === "vals"
+    ? [
+        { label: "A\u207b\u2099 (\u00e1rea dentro)", color: "#1c5e3c", dash: [5, 4], f: (r) => areaIn(r) },
+        { label: "a\u2099 (per\u00edmetro dentro)", color: "#1c5e3c", dash: [], f: (r) => r.a },
+        { label: "b\u2099 (per\u00edmetro fora)", color: "#8a3318", dash: [], f: (r) => r.b },
+        { label: "A\u207a\u2099 = b\u2099 (\u00e1rea fora)", color: "#8a3318", dash: [5, 4], f: (r) => areaOut(r) },
+      ]
+    : [
+        { label: "n\u00b2(\u03c0\u2212a\u2099)", color: "#1c5e3c", dash: [], f: (r) => r.n * r.n * (PI_REF - r.a) },
+        { label: "n\u00b2(b\u2099\u2212\u03c0)", color: "#8a3318", dash: [], f: (r) => r.n * r.n * (r.b - PI_REF) },
+        { label: "n\u00b2(\u03c0\u2212A\u207b\u2099)", color: "#1c5e3c", dash: [5, 4], f: (r) => r.n * r.n * (PI_REF - areaIn(r)) },
+        { label: "n\u00b2(A\u207a\u2099\u2212\u03c0)", color: "#8a3318", dash: [5, 4], f: (r) => r.n * r.n * (areaOut(r) - PI_REF) },
+      ];
+  const refs = plotMode === "vals"
+    ? [{ y: PI_REF, label: "\u03c0" }]
+    : [
+        { y: Math.pow(PI_REF, 3) / 6, label: "\u03c0\u00b3/6" },
+        { y: Math.pow(PI_REF, 3) / 3, label: "\u03c0\u00b3/3" },
+        { y: 2 * Math.pow(PI_REF, 3) / 3, label: "2\u03c0\u00b3/3" },
+      ];
+
+  let lo = Infinity, hi = -Infinity;
+  for (const s of series) for (const r of ALL) { const v = s.f(r); lo = Math.min(lo, v); hi = Math.max(hi, v); }
+  for (const r of refs) { lo = Math.min(lo, r.y); hi = Math.max(hi, r.y); }
+  const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+  const Y = (v) => mT + ph * (1 - (v - lo) / (hi - lo));
+
+  // axes
+  ctxP.strokeStyle = "#c9bda3"; ctxP.lineWidth = 1;
+  ctxP.beginPath(); ctxP.moveTo(mL, mT); ctxP.lineTo(mL, mT + ph); ctxP.lineTo(mL + pw, mT + ph); ctxP.stroke();
+  ctxP.font = "11px Georgia, serif"; ctxP.fillStyle = "#4c443a";
+  for (let k = 0; k <= MAX_K; k += 4) {
+    ctxP.fillText(String(k), X(k) - 3, mT + ph + 14);
+    ctxP.beginPath(); ctxP.moveTo(X(k), mT + ph); ctxP.lineTo(X(k), mT + ph + 3); ctxP.stroke();
+  }
+  ctxP.fillText("k (duplica\u00e7\u00f5es; n = 6\u00b72\u1d4f)", mL + pw / 2 - 55, H - 6);
+  for (const rf of refs) {
+    ctxP.setLineDash([3, 4]); ctxP.strokeStyle = "#26221a"; ctxP.beginPath();
+    ctxP.moveTo(mL, Y(rf.y)); ctxP.lineTo(mL + pw, Y(rf.y)); ctxP.stroke(); ctxP.setLineDash([]);
+    ctxP.fillText(rf.label + " = " + fmt(rf.y, 4), mL + pw + 6, Y(rf.y) + 4);
+  }
+  // y ticks (min/max)
+  ctxP.fillText(fmt(lo + pad, 3), 4, Y(lo + pad) + 4);
+  ctxP.fillText(fmt(hi - pad, 3), 4, Y(hi - pad) + 4);
+
+  // curves
+  series.forEach((sr, si) => {
+    ctxP.setLineDash(sr.dash); ctxP.strokeStyle = sr.color; ctxP.lineWidth = 1.8;
+    ctxP.beginPath();
+    ALL.forEach((r, k) => { const x = X(k), y = Y(sr.f(r)); k === 0 ? ctxP.moveTo(x, y) : ctxP.lineTo(x, y); });
+    ctxP.stroke(); ctxP.setLineDash([]);
+    // legend
+    const ly = mT + 14 + si * 16;
+    ctxP.setLineDash(sr.dash); ctxP.strokeStyle = sr.color; ctxP.lineWidth = 2;
+    ctxP.beginPath(); ctxP.moveTo(mL + pw + 6, ly - 4); ctxP.lineTo(mL + pw + 28, ly - 4); ctxP.stroke();
+    ctxP.setLineDash([]);
+    ctxP.fillStyle = "#26221a"; ctxP.fillText(sr.label, mL + pw + 32, ly);
+    ctxP.fillStyle = "#4c443a";
+  });
+
+  const last = ALL[MAX_K];
+  document.getElementById("leitura-plot").textContent = plotMode === "vals"
+    ? "modo valores  |  em k = 16 (n = " + fmtInt(last.n) + "): A\u207b = " + fmt(areaIn(last), 10) +
+      "  |  a = " + fmt(last.a, 10) + "  |  b = A\u207a = " + fmt(last.b, 10) +
+      "  |  as curvas de b e A\u207a coincidem (Enunciado E)"
+    : "modo erros normalizados  |  em k = 16: n\u00b2(\u03c0\u2212a) = " + fmt(last.n * last.n * (PI_REF - last.a), 5) +
+      "  |  n\u00b2(b\u2212\u03c0) = " + fmt(last.n * last.n * (last.b - PI_REF), 5) +
+      "  |  n\u00b2(\u03c0\u2212A\u207b) = " + fmt(last.n * last.n * (PI_REF - areaIn(last)), 5) +
+      "  |  alvos conjecturados: \u03c0\u00b3/6, \u03c0\u00b3/3, 2\u03c0\u00b3/3 (R5)";
+}
+
+document.getElementById("btn-plot-vals").addEventListener("click", () => { plotMode = "vals"; drawPlot(); });
+document.getElementById("btn-plot-errs").addEventListener("click", () => { plotMode = "errs"; drawPlot(); });
 
 // --- canvases -------------------------------------------------
 const cvMain = document.getElementById("cv-main");
@@ -933,6 +1258,7 @@ function render() {
   zoomVal.textContent = z + "×";
 
   renderTable();
+  renderAreasTable();
   announce(cur, field);
   document.getElementById("btn-doble").disabled = rows.length - 1 >= MAX_K;
   document.getElementById("btn-back").disabled = rows.length <= 1;
@@ -970,6 +1296,8 @@ document.getElementById("btn-reset").addEventListener("click", () => {
 });
 zoomInput.addEventListener("input", render);
 
+renderNormTable();
+drawPlot();
 render();
 </script>
 </body>
