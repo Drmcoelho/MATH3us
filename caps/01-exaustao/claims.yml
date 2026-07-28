@@ -1,0 +1,174 @@
+# Chapter 1 — The Exhaustion. Epistemological ledger (MATH3us.md §1.4, §8).
+# NOTE (E12): no claim below asserts a passed oracle. All verification blocks
+# are `pending` until the canonical triple oracle runs and writes artifacts
+# into audit/. The in-page table is exploratory evidence, not an oracle run.
+
+chapter: 1
+claims:
+  - id: chapter-01.supremum-principle
+    statement: >
+      Every non-empty set of real numbers bounded above has a least
+      upper bound. Imported as the constitutive completeness principle
+      of the real numbers; not proved in this treatise.
+    kind: definition
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    notes: >
+      Foundational import, declared in the chapter text. Chapter 6 will
+      examine what fails without it (density of Q vs completeness).
+
+  - id: chapter-01.archimedes-recurrences
+    statement: >
+      For the unit circle, the semiperimeters of inscribed and
+      circumscribed regular polygons satisfy, under doubling of sides,
+      b_{2n} = 2 a_n b_n / (a_n + b_n) (harmonic mean) and
+      a_{2n} = sqrt(a_n * b_{2n}) (geometric mean), with a_6 = 3,
+      b_6 = 2*sqrt(3).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#do-padrao-ao-enunciado"
+    notes: >
+      Content is classical (Archimedes, Measurement of a Circle). The
+      proof given here is the modern half-angle verification, declared
+      as such; sine and tangent enter with geometric status (ratios in
+      the circle), not as series. A purely Euclidean derivation is a
+      declared pending item.
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: pending }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.monotone-trapping
+    statement: >
+      Along the doubling sequence n = 6, 12, 24, ..., a_n is strictly
+      increasing, b_n is strictly decreasing, and a_n < b_n for all n.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#as-provas"
+    dependencies:
+      - claim: "chapter-01.archimedes-recurrences"
+    notes: >
+      Proved by induction from the recurrences alone, via mean
+      inequalities; no inclusion-of-figures argument is used.
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: pending }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.gap-halving
+    statement: >
+      At each doubling, b_{2n} - a_{2n} < (1/2)(b_n - a_n); hence for
+      n = 6 * 2^k, b_n - a_n < (2*sqrt(3) - 3) / 2^k.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#as-provas"
+    dependencies:
+      - claim: "chapter-01.archimedes-recurrences"
+      - claim: "chapter-01.monotone-trapping"
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: pending }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.monotone-convergence
+    statement: >
+      Every increasing sequence of real numbers bounded above converges
+      (to the supremum of its set of values).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#as-provas"
+    dependencies:
+      - claim: "chapter-01.supremum-principle"
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: not_applicable }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.pi-common-limit
+    statement: >
+      The sequences a_n and b_n converge to a common limit; within this
+      treatise, pi is defined as that limit, and
+      |a_n - pi| <= b_n - a_n < (2*sqrt(3) - 3)/2^k for n = 6 * 2^k.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#as-provas"
+    dependencies:
+      - claim: "chapter-01.monotone-trapping"
+      - claim: "chapter-01.gap-halving"
+      - claim: "chapter-01.monotone-convergence"
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: pending }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.circle-identification
+    statement: >
+      The number pi defined by the recurrences equals the semiperimeter
+      of the unit circle.
+    kind: theorem
+    status: conditional
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    dependencies:
+      - claim: "chapter-01.pi-common-limit"
+    notes: >
+      Conditional on Archimedes' convexity postulate (perimeter
+      monotonicity under inclusion for convex boundaries), imported and
+      declared as a closed door. Reopened in Chapter 9 via arc length
+      as an integral.
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: pending }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.gap-ratio-quarter
+    statement: >
+      The ratio (b_{2n} - a_{2n}) / (b_n - a_n) converges to 1/4.
+    kind: conjecture
+    status: supported
+    provenance: classical
+    proof_mode: computational_only
+    proof_location: "#o-que-a-prova-nao-entregou"
+    dependencies:
+      - claim: "chapter-01.archimedes-recurrences"
+    notes: >
+      Preregistered as C4 (conjecturas.md, 2026-07-28). Supported by the
+      in-page table (exploratory, non-canonical evidence per E12).
+      Classical asymptotics (gap ~ pi^3 / n^2) predict it; the local
+      expansions needed for proof belong to Chapter 10.
+    verification:
+      symbolic: { status: pending }
+      numeric: { status: pending }
+      edge_cases: { status: pending }
+
+  - id: chapter-01.elementary-apparatus-limit
+    statement: >
+      The elementary apparatus of this chapter (mean inequalities on the
+      recurrences) cannot deliver the 1/4 contraction factor; 1/2 is
+      what it proves.
+    kind: conjecture
+    status: conjectured
+    provenance: authorial
+    proof_mode: not_applicable
+    priority_note: >
+      Authorial meta-conjecture within this treatise about provability
+      with declared tools; to be settled (or autopsied) by Chapter 10.
+    dependencies:
+      - claim: "chapter-01.gap-halving"
+      - claim: "chapter-01.gap-ratio-quarter"

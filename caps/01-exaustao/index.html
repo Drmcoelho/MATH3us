@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 1 — A Exaustão · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --in-color:#1c5e3c; --out-color:#8a3318; --circle-color:#26221a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  figure{margin:1.6rem 0}
+  figcaption{font-size:.92rem; color:var(--ink-soft); margin-top:.5rem}
+  .painel{
+    border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0;
+  }
+  .canvases{display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:flex-start}
+  canvas{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto}
+  .controles{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.9rem 0}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  label{font-size:.95rem}
+  input[type=range]{vertical-align:middle}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.98rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge);
+  }
+  .legenda-cores{font-size:.92rem; margin:.4rem 0}
+  .sw{display:inline-block; width:.85em; height:.85em; margin-right:.3em; vertical-align:baseline; border:1px solid var(--ink)}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Parte I</span>
+  <h1>Capítulo 1 — A Exaustão</h1>
+  <p><span class="tipo">escavação</span></p>
+  <p class="pergunta">Por que o aprisionamento de Arquimedes — polígonos por dentro, polígonos por fora —
+  <strong>converge</strong>? E com que <strong>velocidade</strong>? O que exatamente garante que apertar o cerco
+  funciona, além de “as figuras se aproximam”?
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2>1. O sítio</h2>
+<p>No século III a.C., Arquimedes cercou o círculo. Por dentro, um hexágono regular; por fora, outro.
+Depois dobrou os lados: doze, vinte e quatro, quarenta e oito, noventa e seis. Ao final, anunciou que a razão
+entre a circunferência e o diâmetro está entre 3&nbsp;+&nbsp;10/71 e 3&nbsp;+&nbsp;1/7 — e parou, não porque o método
+tivesse acabado, mas porque a precisão lhe bastava.</p>
+<p>Este capítulo não repete o cálculo: escava a pergunta que o cálculo deixa em aberto. Toda a apresentação a seguir
+obedece a uma regra — <strong>nada será fornecido pronto</strong>. Nenhuma fórmula aparecerá antes de os números
+a sugerirem; nenhum teorema antes de a necessidade dele se impor. Primeiro o experimento; depois o padrão;
+depois o enunciado; só então a prova.</p>
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<!-- ============================================================ -->
+<h2>2. O experimento</h2>
+<p>Abaixo, um círculo de raio 1. Dentro dele, um polígono regular inscrito; fora, um circunscrito. Comece com
+6 lados, como Arquimedes, e duplique. Observe duas coisas ao mesmo tempo: <em>a figura</em> (o que os olhos dizem)
+e <em>os números</em> (o que a tabela registra). Eles não vão contar a mesma história.</p>
+
+<div class="painel">
+  <div class="canvases">
+    <figure style="margin:0">
+      <canvas id="cv-main" width="420" height="420"
+        aria-label="Círculo de raio um com polígono regular inscrito (traço verde) e circunscrito (traço vermelho). O número de lados é controlado pelos botões abaixo. A tabela adiante contém os mesmos dados em forma numérica."></canvas>
+      <figcaption>Vista geral do cerco.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <canvas id="cv-zoom" width="260" height="260"
+        aria-label="Lupa: ampliação da região onde a distância entre os polígonos e o círculo é máxima. O fator de ampliação é controlado pelo cursor deslizante abaixo."></canvas>
+      <figcaption>Lupa sobre a folga máxima do cerco.</figcaption>
+    </figure>
+  </div>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#1c5e3c"></span>inscrito (por dentro) ·
+    <span class="sw" style="background:#8a3318"></span>circunscrito (por fora) ·
+    <span class="sw" style="background:#26221a"></span>círculo
+  </div>
+  <div class="controles">
+    <button id="btn-doble" type="button">Duplicar lados</button>
+    <button id="btn-back" type="button">Voltar um passo</button>
+    <button id="btn-reset" type="button">Recomeçar (n = 6)</button>
+    <label for="zoom">Lupa:
+      <input type="range" id="zoom" min="1" max="400" value="8" step="1"
+             aria-describedby="zoom-desc">
+      <span id="zoom-val">8×</span>
+    </label>
+    <span id="zoom-desc" class="visually-hidden">Fator de ampliação da lupa, de 1 a 400 vezes.</span>
+  </div>
+  <p class="leitura" id="leitura" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela">
+  <caption>Cada linha é um estado do cerco. a<sub>n</sub> = semiperímetro inscrito; b<sub>n</sub> = semiperímetro circunscrito
+  (círculo de raio 1). A coluna “razão” divide a folga da linha pela folga da linha anterior.
+  <strong>Estes números são computados apenas com as quatro operações e raiz quadrada</strong> — nenhuma função
+  trigonométrica participa; o porquê disso é o assunto da seção 4.</caption>
+  <thead>
+    <tr><th scope="col">n (lados)</th><th scope="col">a<sub>n</sub> (dentro)</th><th scope="col">b<sub>n</sub> (fora)</th>
+    <th scope="col">folga b<sub>n</sub>−a<sub>n</sub></th><th scope="col">razão da folga</th></tr>
+  </thead>
+  <tbody id="tabela-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Nada. Ele produz <em>observações</em> (§2.1 do manual): pixels e números em ponto flutuante.
+  A figura pode mentir por limitação de tela; a tabela pode mentir por arredondamento. O que o experimento faz é
+  <em>sugerir padrões precisos o bastante para serem enunciados</em> — e enunciado é coisa que se pode provar ou refutar.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Os padrões</h2>
+<p>Duplique lados algumas vezes antes de continuar. Três regularidades devem ter aparecido — se não apareceram,
+o texto a seguir é ilegítimo e você deve desconfiar dele.</p>
+<p><strong>Padrão 1 — o cerco só aperta.</strong> A coluna a<sub>n</sub> só cresce. A coluna b<sub>n</sub> só decresce.
+E em nenhuma linha a<sub>n</sub> alcança b<sub>n</sub>.</p>
+<p><strong>Padrão 2 — a folga esvazia com ritmo.</strong> A coluna “razão” não oscila ao acaso: ela se aproxima de um
+valor. Olhe as últimas linhas. O valor que ela persegue parece ser <span class="destaque">1/4 = 0,25</span> — cada
+duplicação corta a folga a aproximadamente um quarto.</p>
+<p><strong>Padrão 3 — os olhos desistem antes dos números.</strong> Com a lupa em 1×, a partir de n ≈ 48 os três
+traços fundem-se num só. Suba a lupa: a distinção reaparece. A convergência <em>visual</em> aconteceu dezenas de
+linhas antes de a tabela estabilizar os dígitos que Arquimedes precisava. O olho declara o limite; a tabela ainda não;
+e nenhum dos dois <em>demonstra</em> coisa alguma.</p>
+<p>Os padrões 1 e 2 são afirmações sobre <em>infinitas</em> linhas de uma tabela que só mostra algumas. Nenhum
+experimento fecha essa distância. É aqui que a teoria deixa de ser opcional.</p>
+
+<!-- ============================================================ -->
+<h2 id="do-padrao-ao-enunciado">4. Do padrão ao enunciado</h2>
+<p>Antes de provar, é preciso enunciar — e para enunciar é preciso descobrir <em>que operação</em> leva uma linha
+da tabela à seguinte. A tabela foi computada sem trigonometria de propósito: se a duplicação de lados fosse um
+mistério geométrico opaco, isso seria impossível. Há uma mecânica escondida. Vamos exumá-la dos próprios números.</p>
+<p>Tome a primeira linha: a₆ = 3 e b₆ = 2√3 ≈ 3,464102. A linha seguinte tem b₁₂ ≈ 3,215390. Que operação produz
+3,215390 a partir de 3 e 3,464102? Não é a média aritmética (que dá 3,232051 — perto, mas errado, e “perto” aqui é
+a diferença entre teorema e engano). Teste a <em>média harmônica</em>:</p>
+<p class="formula">2 · (3 · 3,464102) / (3 + 3,464102) = 20,784612 / 6,464102 = 3,215390…</p>
+<p>Exato, dígito a dígito. E a₁₂ ≈ 3,105829? Teste a <em>média geométrica</em> entre a₆ e o recém-obtido b₁₂:</p>
+<p class="formula">√(3 · 3,215390) = √9,646170 = 3,105829…</p>
+<p>Verifique nas demais linhas da tabela — qualquer uma. A mecânica é sempre a mesma, e agora pode ser enunciada.</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado A (as recorrências de Arquimedes)</span>
+  <p>Sejam a<sub>n</sub> e b<sub>n</sub> os semiperímetros dos polígonos regulares de n lados inscrito e circunscrito
+  ao círculo de raio 1. Então, para todo n ≥ 3:</p>
+  <p class="formula">b<sub>2n</sub> = 2·a<sub>n</sub>·b<sub>n</sub> / (a<sub>n</sub> + b<sub>n</sub>) &nbsp;&nbsp;e&nbsp;&nbsp;
+  a<sub>2n</sub> = √(a<sub>n</sub> · b<sub>2n</sub>),</p>
+  <p style="margin:0">com valores iniciais a₆ = 3 e b₆ = 2√3. Em palavras: <em>o circunscrito novo é a média harmônica
+  do par anterior; o inscrito novo é a média geométrica entre o inscrito velho e o circunscrito novo.</em></p>
+</div>
+
+<div class="prova">
+  <p><strong>Por que as recorrências valem.</strong> A geometria da duplicação: ao dobrar os lados, o novo vértice do
+  inscrito nasce no ponto médio do arco, e o novo lado do circunscrito é a tangente nesse ponto. Escrevendo o
+  semiperímetro de cada polígono em função do semiângulo central θ = π/n — inscrito: n·sen θ; circunscrito: n·tg θ —
+  a duplicação leva θ em θ/2, e duas identidades do ângulo-metade —</p>
+  <p class="formula">tg(x/2) = sen x / (1 + cos x) &nbsp;&nbsp;e&nbsp;&nbsp; sen x = 2·sen(x/2)·cos(x/2)</p>
+  <p>— reduzem a duplicação exatamente à média harmônica e à média geométrica enunciadas.
+  A verificação algébrica completa: com x = π/n,</p>
+  <p class="formula">2·(n sen x)(n tg x)/(n sen x + n tg x) = 2n·tg x/(1 + sec x) = 2n·sen x/(1 + cos x) = 2n·tg(x/2) = b<sub>2n</sub>,</p>
+  <p class="formula">√(n sen x · 2n tg(x/2)) = n·√(2 sen x · tg(x/2)) = n·√(4 sen²(x/2)) = 2n·sen(x/2) = a<sub>2n</sub>.<span class="qed">∎</span></p>
+  <p style="font-size:.92rem; color:var(--ink-soft)">Nota de proveniência: o conteúdo é clássico (Arquimedes,
+  <em>A Medida do Círculo</em>); a dedução euclidiana pura, sem funções trigonométricas, pertence ao dossiê do sítio.
+  Aqui apresentamos a verificação em linguagem moderna e a declaramos como tal — as funções sen e tg entram com
+  estatuto geométrico (razões no círculo), não como séries. Ver <code>claims.yml</code>.</p>
+</div>
+
+<p>Uma consequência imediata e não decorativa: <strong>a tabela inteira vive no corpo dos números construtíveis por
+raiz quadrada</strong>. Arquimedes não tinha trigonometria nem casas decimais — tinha razões e raízes, e isso basta.
+O experimento acima é, computacionalmente, o mesmo objeto que o cálculo de 250 a.C.; só a camada de
+<em>representação</em> mudou (§2.1). O desenho no canvas, esse sim, usa seno e cosseno — para <em>desenhar</em>,
+não para <em>calcular</em>. As camadas não se misturam.</p>
+
+<p>Os padrões 1 e 2 também podem agora ser enunciados — sobre as recorrências, não sobre a tabela:</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado B (monotonia e aprisionamento)</span>
+  <p style="margin:0">Para a sequência de duplicações n = 6, 12, 24, …: (i) a<sub>n</sub> é estritamente crescente;
+  (ii) b<sub>n</sub> é estritamente decrescente; (iii) a<sub>n</sub> &lt; b<sub>n</sub> para todo n.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado C (contração da folga)</span>
+  <p style="margin:0">A cada duplicação, a folga cai a menos da metade: b<sub>2n</sub> − a<sub>2n</sub> &lt; ½·(b<sub>n</sub> − a<sub>n</sub>).</p>
+</div>
+
+<p>Repare no que o Enunciado C <em>não</em> diz: ele promete ½, e o experimento sugeriu ¼. Essa distância é
+deliberada e será acertada na seção 6.</p>
+
+<!-- ============================================================ -->
+<h2 id="as-provas">5. As provas</h2>
+
+<h3>5.1 Monotonia e aprisionamento (prova do Enunciado B)</h3>
+<div class="prova">
+  <p>Tudo sai das recorrências e do caso base a₆ = 3 &lt; 2√3 = b₆. Suponha a<sub>n</sub> &lt; b<sub>n</sub> (indução).</p>
+  <p><strong>(ii)</strong> A média harmônica de dois números positivos distintos fica estritamente entre eles; logo
+  a<sub>n</sub> &lt; b<sub>2n</sub> &lt; b<sub>n</sub>. Em particular b<sub>2n</sub> &lt; b<sub>n</sub>: a sequência de fora só desce.</p>
+  <p><strong>(i)</strong> Como b<sub>2n</sub> &gt; a<sub>n</sub>, a média geométrica dá
+  a<sub>2n</sub> = √(a<sub>n</sub>·b<sub>2n</sub>) &gt; √(a<sub>n</sub>·a<sub>n</sub>) = a<sub>n</sub>: a sequência de dentro só sobe.</p>
+  <p><strong>(iii)</strong> E como a<sub>n</sub> &lt; b<sub>2n</sub>, também
+  a<sub>2n</sub> = √(a<sub>n</sub>·b<sub>2n</sub>) &lt; √(b<sub>2n</sub>·b<sub>2n</sub>) = b<sub>2n</sub> — o que fecha a indução:
+  o novo par continua na ordem a<sub>2n</sub> &lt; b<sub>2n</sub>.<span class="qed">∎</span></p>
+</div>
+<p>Note o que a prova usou: <em>nada de geometria</em> além do que as recorrências já carregam, e nada de limite.
+Só desigualdades de médias. A Conjectura C1 do pré-registro está confirmada — mas por um caminho que a intuição
+(“duplicar só pode melhorar”) não fornecia: a intuição falava de inclusão de figuras; a prova falou de médias.</p>
+
+<h3>5.2 A folga cai pela metade (prova do Enunciado C)</h3>
+<div class="prova">
+  <p>Primeiro, a distância do circunscrito novo ao inscrito <em>velho</em>:</p>
+  <p class="formula">b<sub>2n</sub> − a<sub>n</sub> = 2a<sub>n</sub>b<sub>n</sub>/(a<sub>n</sub>+b<sub>n</sub>) − a<sub>n</sub>
+  = a<sub>n</sub>·(b<sub>n</sub> − a<sub>n</sub>)/(a<sub>n</sub> + b<sub>n</sub>) &lt; ½·(b<sub>n</sub> − a<sub>n</sub>),</p>
+  <p>porque a<sub>n</sub>/(a<sub>n</sub>+b<sub>n</sub>) &lt; ½ sempre que a<sub>n</sub> &lt; b<sub>n</sub> (e 5.1 garante isso).
+  Como 5.1 também deu a<sub>2n</sub> &gt; a<sub>n</sub>, a folga nova é ainda menor:</p>
+  <p class="formula">b<sub>2n</sub> − a<sub>2n</sub> &lt; b<sub>2n</sub> − a<sub>n</sub> &lt; ½·(b<sub>n</sub> − a<sub>n</sub>).<span class="qed">∎</span></p>
+</div>
+<p>Iterando desde o hexágono, com n = 6·2<sup>k</sup>:</p>
+<p class="formula">b<sub>n</sub> − a<sub>n</sub> &lt; (b₆ − a₆)/2<sup>k</sup> = (2√3 − 3)/2<sup>k</sup>.</p>
+<p>Isto já é uma <strong>cota de erro explícita e calculável antes de qualquer experimento</strong>. Para os 96 lados
+de Arquimedes (k = 4): folga &lt; 0,4641/16 ≈ 0,029. O erro, que na seção 2 era uma coluna de números observados,
+agora tem <em>forma</em>: uma exponencial decrescente que o cerca por cima. É a primeira vez no tratado que o erro
+deixa de ser resto e vira objeto.</p>
+
+<h3>5.3 O cerco converge — e é aqui que a teoria entra</h3>
+<p>As seções 5.1 e 5.2 dizem: a<sub>n</sub> sobe, é limitada por cima (por b₆); b<sub>n</sub> desce, limitada por baixo
+(por a₆); a folga vai a zero. Falta a pergunta que nenhuma manipulação de médias responde: <em>subir sendo limitado
+garante chegar a algum lugar?</em> Isso não é propriedade das recorrências — é propriedade <strong>dos números
+reais</strong>. É exatamente o ponto onde este capítulo precisa importar seu primeiro princípio, e o importa
+declaradamente:</p>
+<div class="caixa">
+  <span class="rotulo">Princípio do supremo (importado; fundação de ℝ)</span>
+  <p style="margin:0">Todo conjunto não vazio de números reais limitado superiormente possui uma menor cota
+  superior (supremo). — Este princípio é constitutivo de ℝ; o Capítulo 6 examinará o que desaba sem ele
+  (ℚ é denso e ainda assim furado).</p>
+</div>
+<div class="prova">
+  <p><strong>Teorema (convergência monótona).</strong> Toda sequência crescente e limitada superiormente converge.</p>
+  <p><strong>Prova.</strong> Seja s o supremo do conjunto dos valores {a<sub>n</sub>}. Dado qualquer ε &gt; 0, o número
+  s − ε não é cota superior (s é a <em>menor</em>), logo existe N com a<sub>N</sub> &gt; s − ε. Pela monotonia,
+  todo n ≥ N cumpre s − ε &lt; a<sub>N</sub> ≤ a<sub>n</sub> ≤ s. Ou seja: |a<sub>n</sub> − s| &lt; ε para todo n ≥ N.
+  Isso é, literalmente, a definição de a<sub>n</sub> → s.<span class="qed">∎</span></p>
+</div>
+<p>Simetricamente, b<sub>n</sub> desce e é limitada, logo converge. E como b<sub>n</sub> − a<sub>n</sub> → 0 (seção 5.2),
+os dois limites coincidem. O cerco fecha sobre um único número real.</p>
+<div class="caixa">
+  <span class="rotulo">Definição (no âmbito deste tratado)</span>
+  <p style="margin:0"><strong>π</strong> é o limite comum das sequências a<sub>n</sub> e b<sub>n</sub> geradas pelas
+  recorrências de Arquimedes a partir de a₆ = 3, b₆ = 2√3. A cota da seção 5.2 dá, imediatamente:
+  <span class="formula" style="display:block">|a<sub>n</sub> − π| ≤ b<sub>n</sub> − a<sub>n</sub> &lt; (2√3 − 3)/2<sup>k</sup>
+  &nbsp;&nbsp;(n = 6·2<sup>k</sup>).</span></p>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Porta fechada — o círculo propriamente dito</span>
+  <p style="margin:0">Definimos π pelas recorrências. Identificá-lo com o <em>semiperímetro do círculo</em> exige
+  comparar comprimentos de curvas com perímetros de polígonos — e perímetro <strong>não</strong> é monótono sob
+  inclusão em geral (um contorno serrilhado dentro do círculo pode ser mais longo que ele). Vale para fronteiras
+  <em>convexas</em>, princípio que o próprio Arquimedes tomou como postulado. O tratamento honesto de comprimento
+  de curva exige a integral: <strong>porta reaberta no Capítulo 9</strong>. Até lá, a identificação usa o postulado
+  de convexidade de Arquimedes, importado e declarado.</p>
+</div>
+
+<h3>5.4 Tradução: o que significa “converge”, dito sem gestos</h3>
+<p>O capítulo prometeu traduzir o método geométrico para a linguagem moderna. A tradução já foi feita — dentro da
+prova do teorema de convergência monótona. Basta destacá-la:</p>
+<p class="formula">Para todo ε &gt; 0 existe N tal que n ≥ N ⟹ |a<sub>n</sub> − π| &lt; ε.</p>
+<p>E aqui ela não é abstrata: <strong>N é computável</strong>. Dado ε, basta k com 2<sup>k</sup> &gt; (2√3 − 3)/ε,
+ou seja, k = ⌈log₂((2√3 − 3)/ε)⌉ duplicações. Quer π com erro menor que 10⁻⁶? k = 19 duplicações, n = 6·2¹⁹ = 3.145.728
+lados — e isso é uma <em>garantia demonstrada antes de calcular</em>, não uma esperança observada depois.
+A linguagem ε-N não é formalismo decorativo: é o contrato de entrega do erro. O método de exaustão, nascido
+geométrico, é isto — a primeira máquina da história a prometer precisão arbitrária com prazo explícito.</p>
+
+<!-- ============================================================ -->
+<h2 id="o-que-a-prova-nao-entregou">6. O que a prova não entregou</h2>
+<p>O experimento sugeriu contração de <strong>¼</strong> por duplicação (Padrão 2). A prova entregou <strong>½</strong>
+(seção 5.2). As duas afirmações são compatíveis — ½ é cota, ¼ é comportamento — mas a distância entre elas é real
+e fica registrada, conforme o pré-registro:</p>
+<div class="caixa">
+  <span class="rotulo">Conjectura C4 (pré-registrada em 28/07/2026 · status: sustentada, não demonstrada aqui)</span>
+  <p style="margin:0">(b<sub>2n</sub> − a<sub>2n</sub>)/(b<sub>n</sub> − a<sub>n</sub>) → 1/4. A evidência é a coluna
+  “razão” da tabela — verificação computacional, camada de observação, <em>não prova</em>. A assintótica fina
+  (folga ∼ π³/n², que implica o ¼) requer expansões locais de sen e tg, ferramentas que este tratado só constrói
+  no <strong>Capítulo 10</strong>. A conjectura C5 do pré-registro — de que o aparato elementar deste capítulo
+  não alcançaria o ¼ — permanece de pé até aquele capítulo decidir seu destino.</p>
+</div>
+<p>Este é o desenho epistemológico que o tratado quer tornar visível: <em>a mesma tabela</em> sustenta um teorema
+(a cota ½, provada) e uma conjectura (o limite ¼, aguardando). Sem o ledger, as duas afirmações pareceriam
+igualmente sólidas. Não são.</p>
+
+<!-- ============================================================ -->
+<h2>7. As três camadas, revisitadas</h2>
+<p>A lupa da seção 2 não era ilustração — era argumento. <strong>Objeto:</strong> o número π, limite demonstrado do
+cerco. <strong>Representação:</strong> a₉₆ escrito em dígitos decimais, ou como torre de raízes quadradas.
+<strong>Observação:</strong> os pixels em que os três traços colapsam, os dezesseis dígitos em que o ponto flutuante
+trunca a torre. A convergência <em>visual</em> (n ≈ 48, na lupa em 1×) e a convergência <em>demonstrada</em>
+(ε-N, com N computável) não acontecem no mesmo mundo. Confundi-las é o erro que o Capítulo 6 vai transformar em
+patologia de estimação: lá, funções inteiras serão construídas para enganar exatamente o olho que aqui já titubeou.</p>
+
+<!-- ============================================================ -->
+<h2>8. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> o erro deste capítulo tem forma exponencial na duplicação (1/2<sup>k</sup>)
+  e aparente forma quadrática nos lados (1/n²). Erros têm <em>taxonomia</em>? Ordens de convergência são
+  comparáveis, somáveis, compostas? — o tratado inteiro é, num sentido, essa pergunta.</li>
+  <li><strong>Porta fechada → Cap. 9:</strong> comprimento do círculo como integral; o postulado de convexidade
+  de Arquimedes deixa de ser postulado.</li>
+  <li><strong>Porta fechada → Cap. 10:</strong> expansões locais; julgamento das conjecturas C4 e C5 (o ¼).</li>
+  <li><strong>Porta fechada → Cap. 6:</strong> o princípio do supremo posto à prova: o que a densidade de ℚ
+  não compra.</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: aberto.</strong> Pendências declaradas (protocolo §9 do manual):
+  mineração do dossiê do sítio (<code>sources.md</code> registra o estado); oráculo triplo canônico com artefatos em
+  <code>audit/</code>; auditoria de gate v0 (screenshots, interação, acessibilidade verificada); dedução euclidiana
+  pura das recorrências. Nenhum item de <code>claims.yml</code> alega verificação que não ocorreu (E12).</p>
+  <p>MATH3us.md · Capítulo 1 · escavação · release: nenhuma.</p>
+</footer>
+
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 1 — The Exhaustion. Interactive trapping of the circle.
+ *
+ * Layer discipline (manual §2.1):
+ *  - TABLE values: computed ONLY via Archimedes' mean recurrences
+ *    (arithmetic + sqrt). No trigonometry. This is the "calculation".
+ *  - CANVAS drawing: uses sin/cos to place vertices. This is the
+ *    "representation" layer and never feeds numbers back.
+ * ============================================================ */
+
+const START_N = 6;
+const MAX_K = 16; // n up to 6 * 2^16 = 393216
+
+// --- recurrence state: list of rows {n, a, b} -----------------
+function initialRow() {
+  return { n: START_N, a: 3, b: 2 * Math.sqrt(3) }; // a6 = 3, b6 = 2*sqrt(3)
+}
+function nextRow(r) {
+  const b2 = (2 * r.a * r.b) / (r.a + r.b); // harmonic mean
+  const a2 = Math.sqrt(r.a * b2);           // geometric mean
+  return { n: 2 * r.n, a: a2, b: b2 };
+}
+
+let rows = [initialRow()];
+
+// --- formatting (pt-BR decimal comma) -------------------------
+function fmt(x, d) { return x.toFixed(d).replace(".", ","); }
+function fmtInt(n) { return n.toLocaleString("pt-BR"); }
+
+// --- table ----------------------------------------------------
+const tbody = document.getElementById("tabela-corpo");
+function renderTable() {
+  tbody.innerHTML = "";
+  rows.forEach((r, i) => {
+    const gap = r.b - r.a;
+    const prevGap = i > 0 ? rows[i - 1].b - rows[i - 1].a : null;
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      "<td>" + fmtInt(r.n) + "</td>" +
+      "<td>" + fmt(r.a, 10) + "</td>" +
+      "<td>" + fmt(r.b, 10) + "</td>" +
+      "<td>" + fmt(gap, 10) + "</td>" +
+      "<td>" + (prevGap ? fmt(gap / prevGap, 6) : "—") + "</td>";
+    if (i === rows.length - 1) tr.style.background = "#efe7d3";
+    tbody.appendChild(tr);
+  });
+}
+
+// --- canvases -------------------------------------------------
+const cvMain = document.getElementById("cv-main");
+const cvZoom = document.getElementById("cv-zoom");
+const ctxM = cvMain.getContext("2d");
+const ctxZ = cvZoom.getContext("2d");
+const zoomInput = document.getElementById("zoom");
+const zoomVal = document.getElementById("zoom-val");
+
+const COL_IN = "#1c5e3c", COL_OUT = "#8a3318", COL_CIRC = "#26221a";
+
+/* Draw circle + inscribed polygon (vertices at angles 2πk/n) +
+ * circumscribed polygon (vertices at angles (2k+1)π/n, radius sec(π/n)).
+ * With this placement the maximum radial spread occurs at angle π/n:
+ * inscribed edge midpoint (cos(π/n)), circle (1), circumscribed vertex
+ * (sec(π/n)) — the magnifier is centered there. */
+function drawScene(ctx, W, H, n, scale, cx, cy) {
+  ctx.save();
+  ctx.clearRect(0, 0, W, H);
+  ctx.translate(W / 2, H / 2);
+  ctx.scale(scale, -scale);
+  ctx.translate(-cx, -cy);
+  const lw = 1.6 / scale;
+
+  // circle (object drawn in representation layer)
+  ctx.beginPath();
+  ctx.arc(0, 0, 1, 0, 2 * Math.PI);
+  ctx.strokeStyle = COL_CIRC;
+  ctx.lineWidth = lw;
+  ctx.stroke();
+
+  const drawAsCircle = n > 3072; // beyond pixel resolution — declared in caption
+  if (!drawAsCircle) {
+    // inscribed
+    ctx.beginPath();
+    for (let k = 0; k <= n; k++) {
+      const t = (2 * Math.PI * k) / n;
+      const x = Math.cos(t), y = Math.sin(t);
+      k === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = COL_IN;
+    ctx.lineWidth = lw;
+    ctx.stroke();
+    // circumscribed
+    const R = 1 / Math.cos(Math.PI / n);
+    ctx.beginPath();
+    for (let k = 0; k <= n; k++) {
+      const t = ((2 * k + 1) * Math.PI) / n;
+      const x = R * Math.cos(t), y = R * Math.sin(t);
+      k === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = COL_OUT;
+    ctx.lineWidth = lw;
+    ctx.stroke();
+  }
+  ctx.restore();
+  return drawAsCircle;
+}
+
+function render() {
+  const cur = rows[rows.length - 1];
+  const n = cur.n;
+
+  drawScene(ctxM, cvMain.width, cvMain.height, n, cvMain.width / 2.6, 0, 0);
+
+  // magnifier centered on the point of maximum spread (angle π/n)
+  const z = Number(zoomInput.value);
+  const t0 = Math.PI / n;
+  drawScene(ctxZ, cvZoom.width, cvZoom.height, n,
+            (cvZoom.width / 2.6) * z, Math.cos(t0), Math.sin(t0));
+  zoomVal.textContent = z + "×";
+
+  renderTable();
+  announce(cur);
+  document.getElementById("btn-doble").disabled = rows.length - 1 >= MAX_K;
+  document.getElementById("btn-back").disabled = rows.length <= 1;
+}
+
+// --- status line (aria-live) ---------------------------------
+function announce(r) {
+  const i = rows.length - 1;
+  const gap = r.b - r.a;
+  const prev = i > 0 ? rows[i - 1] : null;
+  let msg = "n = " + fmtInt(r.n) +
+    "  |  dentro aₙ = " + fmt(r.a, 8) +
+    "  |  fora bₙ = " + fmt(r.b, 8) +
+    "  |  folga = " + fmt(gap, 8);
+  if (prev) msg += "  |  razão da folga = " + fmt(gap / (prev.b - prev.a), 5);
+  if (r.n > 3072) msg += "  |  (desenho: polígonos além da resolução de tela; a tabela continua distinguindo-os)";
+  document.getElementById("leitura").textContent = msg;
+}
+
+// --- controls -------------------------------------------------
+document.getElementById("btn-doble").addEventListener("click", () => {
+  if (rows.length - 1 < MAX_K) { rows.push(nextRow(rows[rows.length - 1])); render(); }
+});
+document.getElementById("btn-back").addEventListener("click", () => {
+  if (rows.length > 1) { rows.pop(); render(); }
+});
+document.getElementById("btn-reset").addEventListener("click", () => {
+  rows = [initialRow()]; render();
+});
+zoomInput.addEventListener("input", render);
+
+render();
+</script>
+</body>
+</html>
