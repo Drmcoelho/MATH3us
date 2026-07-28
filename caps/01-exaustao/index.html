@@ -111,19 +111,21 @@ e <em>os números</em> (o que a tabela registra). Eles não vão contar a mesma 
   <div class="canvases">
     <figure style="margin:0">
       <canvas id="cv-main" width="420" height="420"
-        aria-label="Círculo de raio um com polígono regular inscrito (traço verde) e circunscrito (traço vermelho). O número de lados é controlado pelos botões abaixo. A tabela adiante contém os mesmos dados em forma numérica."></canvas>
-      <figcaption>Vista geral do cerco.</figcaption>
+        aria-label="Círculo de raio um com polígono regular inscrito (traço verde, tocando o círculo nos vértices, marcados com pontos cheios) e circunscrito (traço vermelho, tocando o círculo nas tangências, marcadas com pontos vazados). O número de lados é controlado pelos botões abaixo. A tabela adiante contém os mesmos dados em forma numérica."></canvas>
+      <figcaption>Vista geral do cerco. O inscrito beija o círculo nos vértices (●); o circunscrito, nas tangências (○).</figcaption>
     </figure>
     <figure style="margin:0">
       <canvas id="cv-zoom" width="260" height="260"
-        aria-label="Lupa: ampliação da região onde a distância entre os polígonos e o círculo é máxima. O fator de ampliação é controlado pelo cursor deslizante abaixo."></canvas>
-      <figcaption>Lupa sobre a folga máxima do cerco.</figcaption>
+        aria-label="Lupa: ampliação centrada no círculo, a meio caminho entre um vértice do inscrito e uma tangência do circunscrito, onde os três traços estão separados. O fator de ampliação é controlado pelo cursor deslizante abaixo. Quando um traço sai do campo, uma anotação no canto informa a distância; a mesma informação aparece na linha de status."></canvas>
+      <figcaption>Lupa entre dois beijos: centrada no círculo, onde os três traços se separam. O que sai do campo é anotado no canto.</figcaption>
     </figure>
   </div>
   <div class="legenda-cores">
     <span class="sw" style="background:#1c5e3c"></span>inscrito (por dentro) ·
     <span class="sw" style="background:#8a3318"></span>circunscrito (por fora) ·
-    <span class="sw" style="background:#26221a"></span>círculo
+    <span class="sw" style="background:#26221a"></span>círculo ·
+    <span style="color:#1c5e3c">●</span> vértice do inscrito <em>sobre</em> o círculo ·
+    <span style="color:#8a3318">○</span> tangência do circunscrito <em>sobre</em> o círculo (marcas até n = 96)
   </div>
   <div class="controles">
     <button id="btn-doble" type="button">Duplicar lados</button>
@@ -368,6 +370,12 @@ patologia de estimação: lá, funções inteiras serão construídas para engan
   teclado, overflow, autocontenção sem rede, screenshots desktop e iPhone inspecionados. Pendências declaradas:
   mineração do dossiê do sítio (<code>sources.md</code>); dedução euclidiana pura das recorrências (item de dossiê,
   não bloqueante); decisão de tag <code>cap-01-gate0-r1</code> pelo leitor primário.</p>
+  <p><strong>Correção de render (28/07/2026, pós-auditoria).</strong> Relato do leitor primário em iOS expôs dois
+  defeitos que a auditoria não exercitava: lupa em branco sob zoom alto (rasterização de arcos sob transformação
+  gigante) e coincidência das duas famílias de pontos de contato, que fazia três curvas passarem pelos mesmos pontos
+  e se lerem como trançado. Desenho refeito em coordenadas de dispositivo com amostragem adaptativa; famílias de
+  contato separadas e marcadas; anotação de fora-de-campo na lupa. Auditoria re-executada com novo invariante
+  (lupa jamais em branco no intervalo de zoom). Registrado, não apagado.</p>
   <p>MATH3us.md · Capítulo 1 · escavação · release: nenhuma (pronto para tag).</p>
 </footer>
 
@@ -433,52 +441,123 @@ const zoomVal = document.getElementById("zoom-val");
 
 const COL_IN = "#1c5e3c", COL_OUT = "#8a3318", COL_CIRC = "#26221a";
 
-/* Draw circle + inscribed polygon (vertices at angles 2πk/n) +
- * circumscribed polygon (vertices at angles (2k+1)π/n, radius sec(π/n)).
- * With this placement the maximum radial spread occurs at angle π/n:
- * inscribed edge midpoint (cos(π/n)), circle (1), circumscribed vertex
- * (sec(π/n)) — the magnifier is centered there. */
-function drawScene(ctx, W, H, n, scale, cx, cy) {
-  ctx.save();
+/* All drawing happens in DEVICE coordinates via an explicit transform
+ * (no ctx.scale): huge zoom transforms break canvas arc rasterization
+ * on some engines (iOS Safari) — the 2026-07-28 render incident. The
+ * circle is sampled adaptively over the visible angular window only.
+ *
+ * Placement: inscribed AND circumscribed vertices sit at angles
+ * (2k+1)·π/n. The inscribed polygon kisses the circle at its vertices,
+ * the circumscribed at its tangency points 2k·π/n — two DISTINCT
+ * families of contact points. (The first version made both families
+ * coincide: three curves through the same points, reading as woven
+ * "two circles".) The magnifier centers on the circle at angle π/(2n),
+ * halfway between a kiss of each family, where the three traces are
+ * genuinely separated. */
+function drawScene(ctx, W, H, n, s, cx, cy) {
   ctx.clearRect(0, 0, W, H);
-  ctx.translate(W / 2, H / 2);
-  ctx.scale(scale, -scale);
-  ctx.translate(-cx, -cy);
-  const lw = 1.6 / scale;
+  const dev = (x, y) => [W / 2 + (x - cx) * s, H / 2 - (y - cy) * s];
+  const margin = 6 / s;
+  const xmin = cx - W / (2 * s) - margin, xmax = cx + W / (2 * s) + margin;
+  const ymin = cy - H / (2 * s) - margin, ymax = cy + H / (2 * s) + margin;
+  const inView = (x, y) => x >= xmin && x <= xmax && y >= ymin && y <= ymax;
 
-  // circle (object drawn in representation layer)
-  ctx.beginPath();
-  ctx.arc(0, 0, 1, 0, 2 * Math.PI);
-  ctx.strokeStyle = COL_CIRC;
-  ctx.lineWidth = lw;
-  ctx.stroke();
-
-  const drawAsCircle = n > 3072; // beyond pixel resolution — declared in caption
-  if (!drawAsCircle) {
-    // inscribed
+  // circle: sample only the angular window that can reach the viewport
+  const rc = Math.hypot(cx, cy);
+  const Rview = Math.hypot(W, H) / (2 * s) + margin;
+  const th0 = rc > 1e-9 ? Math.atan2(cy, cx) : 0;
+  let dth = Math.PI;
+  if (rc > 1e-9) {
+    const c = (1 + rc * rc - Rview * Rview) / (2 * rc);
+    dth = c >= 1 ? 0 : c <= -1 ? Math.PI : Math.acos(c);
+  }
+  if (dth > 0) {
     ctx.beginPath();
-    for (let k = 0; k <= n; k++) {
-      const t = (2 * Math.PI * k) / n;
-      const x = Math.cos(t), y = Math.sin(t);
-      k === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    const N = 1200;
+    for (let i = 0; i <= N; i++) {
+      const t = th0 - dth + (2 * dth * i) / N;
+      const [dx, dy] = dev(Math.cos(t), Math.sin(t));
+      i === 0 ? ctx.moveTo(dx, dy) : ctx.lineTo(dx, dy);
     }
-    ctx.strokeStyle = COL_IN;
-    ctx.lineWidth = lw;
-    ctx.stroke();
-    // circumscribed
-    const R = 1 / Math.cos(Math.PI / n);
-    ctx.beginPath();
-    for (let k = 0; k <= n; k++) {
-      const t = ((2 * k + 1) * Math.PI) / n;
-      const x = R * Math.cos(t), y = R * Math.sin(t);
-      k === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = COL_OUT;
-    ctx.lineWidth = lw;
+    ctx.strokeStyle = COL_CIRC;
+    ctx.lineWidth = 2.4;
     ctx.stroke();
   }
-  ctx.restore();
-  return drawAsCircle;
+
+  const drawPolys = n <= 3072; // beyond pixel resolution — declared in status
+  if (drawPolys) {
+    const R = 1 / Math.cos(Math.PI / n);
+    const vert = (k, rad) => {
+      const t = ((2 * k + 1) * Math.PI) / n;
+      return [rad * Math.cos(t), rad * Math.sin(t)];
+    };
+    const strokePoly = (rad, color) => {
+      ctx.beginPath();
+      let prev = vert(0, rad);
+      for (let k = 1; k <= n; k++) {
+        const cur = vert(k, rad);
+        if (Math.max(prev[0], cur[0]) >= xmin && Math.min(prev[0], cur[0]) <= xmax &&
+            Math.max(prev[1], cur[1]) >= ymin && Math.min(prev[1], cur[1]) <= ymax) {
+          const [ax, ay] = dev(prev[0], prev[1]);
+          const [bx, by] = dev(cur[0], cur[1]);
+          ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
+        }
+        prev = cur;
+      }
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.7;
+      ctx.stroke();
+    };
+    strokePoly(1, COL_IN);
+    strokePoly(R, COL_OUT);
+
+    if (n <= 96) { // contact markers: where each polygon kisses the circle
+      for (let k = 0; k < n; k++) {
+        const [vx, vy] = vert(k, 1); // inscribed vertex ON the circle
+        if (inView(vx, vy)) {
+          const [dx, dy] = dev(vx, vy);
+          ctx.beginPath(); ctx.arc(dx, dy, 3, 0, 2 * Math.PI);
+          ctx.fillStyle = COL_IN; ctx.fill();
+        }
+        const t = (2 * k * Math.PI) / n; // circumscribed tangency ON the circle
+        const tx = Math.cos(t), ty = Math.sin(t);
+        if (inView(tx, ty)) {
+          const [dx, dy] = dev(tx, ty);
+          ctx.beginPath(); ctx.arc(dx, dy, 3, 0, 2 * Math.PI);
+          ctx.fillStyle = "#fffdf7"; ctx.fill();
+          ctx.strokeStyle = COL_OUT; ctx.lineWidth = 1.5; ctx.stroke();
+        }
+      }
+    }
+  }
+  return drawPolys;
+}
+
+// what the magnifier field contains at the current zoom
+function lupaField(n, s, W, H) {
+  const cosH = Math.cos(Math.PI / (2 * n));
+  const dIn = 1 - Math.cos(Math.PI / n) / cosH; // radial gap to inscribed edge
+  const dOut = 1 / cosH - 1;                    // radial gap to circumscribed edge
+  const half = Math.min(W, H) / (2 * s);
+  return { dIn, dOut, inVisible: dIn < half, outVisible: dOut < half };
+}
+
+function fmtDist(d) {
+  return (d < 0.0005 ? d.toExponential(1) : d.toFixed(3)).replace(".", ",");
+}
+
+function drawLupaNotes(ctx, W, H, f) {
+  const parts = [];
+  if (!f.inVisible) parts.push("inscrito −" + fmtDist(f.dIn));
+  if (!f.outVisible) parts.push("circunscrito +" + fmtDist(f.dOut));
+  if (!parts.length) return;
+  const msg = "fora do campo: " + parts.join(" · ");
+  ctx.font = "12px Georgia, serif";
+  const w = ctx.measureText(msg).width + 12;
+  ctx.fillStyle = "rgba(239,231,211,.92)";
+  ctx.fillRect(0, H - 22, w, 22);
+  ctx.fillStyle = "#4c443a";
+  ctx.fillText(msg, 6, H - 7);
 }
 
 function render() {
@@ -487,21 +566,24 @@ function render() {
 
   drawScene(ctxM, cvMain.width, cvMain.height, n, cvMain.width / 2.6, 0, 0);
 
-  // magnifier centered on the point of maximum spread (angle π/n)
+  // magnifier: centered ON the circle at angle π/(2n), between the two
+  // contact families — the circle always crosses the field
   const z = Number(zoomInput.value);
-  const t0 = Math.PI / n;
-  drawScene(ctxZ, cvZoom.width, cvZoom.height, n,
-            (cvZoom.width / 2.6) * z, Math.cos(t0), Math.sin(t0));
+  const sZ = (cvZoom.width / 2.6) * z;
+  const t0 = Math.PI / (2 * n);
+  drawScene(ctxZ, cvZoom.width, cvZoom.height, n, sZ, Math.cos(t0), Math.sin(t0));
+  const field = lupaField(n, sZ, cvZoom.width, cvZoom.height);
+  drawLupaNotes(ctxZ, cvZoom.width, cvZoom.height, field);
   zoomVal.textContent = z + "×";
 
   renderTable();
-  announce(cur);
+  announce(cur, field);
   document.getElementById("btn-doble").disabled = rows.length - 1 >= MAX_K;
   document.getElementById("btn-back").disabled = rows.length <= 1;
 }
 
 // --- status line (aria-live) ---------------------------------
-function announce(r) {
+function announce(r, field) {
   const i = rows.length - 1;
   const gap = r.b - r.a;
   const prev = i > 0 ? rows[i - 1] : null;
@@ -511,6 +593,12 @@ function announce(r) {
     "  |  folga = " + fmt(gap, 8);
   if (prev) msg += "  |  razão da folga = " + fmt(gap / (prev.b - prev.a), 5);
   if (r.n > 3072) msg += "  |  (desenho: polígonos além da resolução de tela; a tabela continua distinguindo-os)";
+  if (field && (!field.inVisible || !field.outVisible)) {
+    const parts = [];
+    if (!field.inVisible) parts.push("inscrito a " + fmtDist(field.dIn));
+    if (!field.outVisible) parts.push("circunscrito a " + fmtDist(field.dOut));
+    msg += "  |  lupa: " + parts.join(" e ") + " fora do campo";
+  }
   document.getElementById("leitura").textContent = msg;
 }
 

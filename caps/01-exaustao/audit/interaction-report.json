@@ -1,7 +1,7 @@
 {
   "chapter_dir": "/home/user/MATH3us/caps/01-exaustao",
   "script": "tools/audit.mjs",
-  "code_commit": "d8dc136",
+  "code_commit": "34d28c4",
   "date": "2026-07-28",
   "gate": "v0",
   "checks": {
@@ -23,7 +23,7 @@
     },
     "desktop.canvases_labeled_and_painted": {
       "passed": true,
-      "detail": "0.0406, 0.0108"
+      "detail": "0.0448, 0.0667"
     },
     "desktop.formulas_textual_no_images": {
       "passed": true
@@ -38,6 +38,10 @@
     "desktop.self_contained_no_network": {
       "passed": true,
       "detail": "only file:// requests"
+    },
+    "desktop.magnifier_painted_at_extreme_zoom": {
+      "passed": true,
+      "detail": "share n=6: 0.0968, n=96: 0.0320 at 400x"
     },
     "iphone.interaction_values_n96": {
       "passed": true,
@@ -57,7 +61,7 @@
     },
     "iphone.canvases_labeled_and_painted": {
       "passed": true,
-      "detail": "0.0406, 0.0108"
+      "detail": "0.0448, 0.0667"
     },
     "iphone.formulas_textual_no_images": {
       "passed": true
@@ -72,6 +76,10 @@
     "iphone.self_contained_no_network": {
       "passed": true,
       "detail": "only file:// requests"
+    },
+    "iphone.magnifier_painted_at_extreme_zoom": {
+      "passed": true,
+      "detail": "share n=6: 0.0968, n=96: 0.0320 at 400x"
     },
     "no_console_or_page_errors": {
       "passed": true
