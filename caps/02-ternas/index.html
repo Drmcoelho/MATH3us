@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Capítulo 2 — As Ternas do Ímpar · Do Número ao Contínuo</title>
+<meta name="description" content="As ternas pitagóricas do ímpar — 3-4-5, 5-12-13, 7-24-25 — classificadas: direta, recíproca, primitividade e geometria, com experimento interativo.">
+<link rel="canonical" href="https://drmcoelho.github.io/MATH3us/caps/02-ternas/">
 <style>
   :root{
     --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
@@ -78,6 +80,16 @@
   details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
   details.gab[open]{padding-bottom:.8rem}
   footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  .box-curio,.box-segredo{border:1px solid var(--box-edge);background:var(--box);padding:1rem 1.2rem;margin:1.6rem 0;border-radius:4px}
+  .box-curio>h3,.box-segredo>h3{margin:0 0 .5rem;font-size:1rem;font-variant:small-caps;letter-spacing:.08em;color:var(--accent)}
+  .box-segredo{border-left:4px solid var(--accent)}
+  nav.capnav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.95rem;margin:1.5rem 0;padding:.6rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  nav.capnav a{color:var(--accent);text-decoration:none}
+  nav.capnav a:hover,nav.capnav a:focus{text-decoration:underline}
+  details.meta-editorial>summary{cursor:pointer;font-variant:small-caps;letter-spacing:.08em;color:var(--ink-soft)}
+  details.meta-editorial>summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  details.meta-editorial[open]>summary{margin-bottom:.8rem}
+  figure.familia svg{max-width:100%;height:auto;display:block;margin:0 auto}
   ul.compacta li{margin:.25rem 0}
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
   sub,sup{line-height:0}
@@ -85,6 +97,8 @@
 </head>
 <body>
 <main>
+
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../01-exaustao/">← Capítulo 1 — A Exaustão</a><a href="../../">↑ Índice</a><a href="../03-quatro/">Capítulo 3 — A Singularidade do Quatro →</a></nav>
 
 <header class="chapter">
   <span class="kicker">Do Número ao Contínuo · Parte I</span>
@@ -103,6 +117,37 @@ triângulo retângulo — 9&nbsp;+&nbsp;16&nbsp;=&nbsp;25; 25&nbsp;+&nbsp;144&nb
 49&nbsp;+&nbsp;576&nbsp;=&nbsp;625 — e as três exibem a mesma assinatura: um cateto <em>ímpar</em>, e os
 outros dois lados <em>consecutivos</em>: 4 e 5; 12 e 13; 24 e 25. Daí a intuição do sítio, na sua
 formulação original: <em>todo ímpar gera uma terna</em>.</p>
+
+<figure class="familia">
+  <svg viewBox="0 0 520 130" role="img"
+    aria-label="Os três primeiros triângulos retângulos da família, desenhados na mesma escala, lado a lado: o triângulo 3-4-5, com cateto ímpar 3 na vertical, cateto 4 na horizontal e hipotenusa 5; o triângulo 5-12-13, com cateto ímpar 5, cateto 12 e hipotenusa 13; e o triângulo 7-24-25, com cateto ímpar 7, cateto 24 e hipotenusa 25. Cada triângulo tem o ângulo reto marcado no canto inferior esquerdo. Conforme o ímpar cresce, o triângulo fica visivelmente mais largo e achatado.">
+    <!-- 3-4-5 -->
+    <polygon points="26,92 66,92 26,62" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    <rect x="26" y="84" width="8" height="8" fill="none" stroke="var(--ink-soft)" stroke-width="1"/>
+    <text x="14" y="81" font-size="13" fill="var(--ink)">3</text>
+    <text x="43" y="106" font-size="13" fill="var(--ink)">4</text>
+    <text x="51" y="71" font-size="13" fill="var(--ink)">5</text>
+    <text x="46" y="123" font-size="13" fill="var(--accent)" text-anchor="middle">3-4-5</text>
+    <!-- 5-12-13 -->
+    <polygon points="104,92 224,92 104,42" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    <rect x="104" y="84" width="8" height="8" fill="none" stroke="var(--ink-soft)" stroke-width="1"/>
+    <text x="92" y="71" font-size="13" fill="var(--ink)">5</text>
+    <text x="157" y="106" font-size="13" fill="var(--ink)">12</text>
+    <text x="171" y="59" font-size="13" fill="var(--ink)">13</text>
+    <text x="164" y="123" font-size="13" fill="var(--accent)" text-anchor="middle">5-12-13</text>
+    <!-- 7-24-25 -->
+    <polygon points="262,92 502,92 262,22" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    <rect x="262" y="84" width="8" height="8" fill="none" stroke="var(--ink-soft)" stroke-width="1"/>
+    <text x="248" y="61" font-size="13" fill="var(--ink)">7</text>
+    <text x="375" y="106" font-size="13" fill="var(--ink)">24</text>
+    <text x="390" y="49" font-size="13" fill="var(--ink)">25</text>
+    <text x="382" y="123" font-size="13" fill="var(--accent)" text-anchor="middle">7-24-25</text>
+  </svg>
+  <figcaption>Os três primeiros membros da família, na <em>mesma</em> escala: 3-4-5, 5-12-13 e 7-24-25.
+  O cateto ímpar fica na vertical; o quadradinho marca o ângulo reto. Já se vê a tendência que o
+  experimento da seção 2 vai exagerar: quando o ímpar cresce, o triângulo alarga muito mais depressa
+  do que sobe.</figcaption>
+</figure>
 <p>O estado documental do sítio está declarado em <code>sources.md</code>: a mineração dos registros
 pessoais ainda não ocorreu, e nada aqui será apresentado como memória recuperada. O que este capítulo
 escava é a própria intuição — e a falha prevista pelo manual é precisa: <strong>reconhecer o padrão sem
@@ -113,6 +158,14 @@ um padrão que classifica é um teorema. A distância entre os dois é o assunto
 <p>Os dois lados consecutivos <em>somam o quadrado do ímpar</em>. Se isso for lei, ela dita a máquina:
 dado o ímpar n, tome n², parta-o em duas metades consecutivas — a de baixo e a de cima — e aposte que
 elas fecham um triângulo retângulo com n. É essa aposta que o experimento a seguir testa.</p>
+
+<aside class="box-curio" aria-label="Caixa de curiosidade"><h3>Curiosidade</h3><p>O 3-4-5 ainda trabalha
+em obra. Para conferir o esquadro de uma parede, marca-se 3 unidades em uma borda, 4 na outra, e mede-se
+a diagonal: se der exatamente 5, o canto é reto — é a <em>recíproca</em> de Pitágoras em serviço (o
+gabarito de E0.2 a demonstra). A versão clássica é a corda fechada com 12 nós igualmente espaçados,
+esticada em 3 + 4 + 5: repare que 12 é justamente o perímetro P = n(n+1) = 3·4 da terna de n = 3, a
+fórmula que o Teorema 4 provará para a família inteira.</p></aside>
+
 <p class="divisa">O experimento sugere. A demonstração obriga.</p>
 
 <!-- ============================================================ -->
@@ -291,6 +344,13 @@ até 6-8-10, se tivesse hipotenusa e cateto maior consecutivos, teria que ser te
 gera uma terna”; o que ficou provado é mais forte e mais fino: <strong>os ímpares ≥ 3 são exatamente os
 nomes próprios das ternas de lados consecutivos</strong>.</p>
 
+<aside class="box-curio" aria-label="Caixa de curiosidade"><h3>Curiosidade</h3><p>O 3-4-5 é a
+<em>única</em> terna pitagórica de três inteiros consecutivos. A conta cabe numa linha: pedir
+a² + (a+1)² = (a+2)² é pedir a² − 2a − 3 = 0, isto é, (a − 3)(a + 1) = 0 — e o único positivo é a = 3.
+Dito de outro modo, o 3-4-5 é o único ponto onde duas famílias se cruzam: a deste capítulo (hipotenusa
+= cateto maior + 1) e a das ternas de <em>catetos</em> consecutivos, cujo próximo membro já salta para
+20-21-29 (o exercício E4.1 conta por que essa outra família custa muito mais caro).</p></aside>
+
 <h3 id="primitividade">5.3 Primitividade: a folga 1 não deixa herança</h3>
 <div class="caixa">
   <span class="rotulo">Teorema 3 (primitividade)</span>
@@ -330,6 +390,15 @@ confirmada — pela prova acima e, independentemente, pelo oráculo em todo o do
 (múltiplos de 4, sem exceção possível), por que R nunca é múltiplo de 2 nem deixa resto 3 por 4 — e ele
 voltará na seção 5.5 para entregar a paridade da área. Nos capítulos à frente, restos módulo 4 decidirão
 quem é hipotenusa e quem é soma de dois quadrados (a porta trancada, adiante).</p>
+
+<aside class="box-segredo" aria-label="Caixa de segredo oculto"><h3>Segredo oculto</h3><p>O lema acima
+proibiu restos módulo 4 e módulo 8. Mas a tabela esconde uma proibição que ele <em>não</em> explica:
+olhe o último algarismo da coluna R — 5, 13, 25, 41, 61, 85, 113, 145, 181, 221 terminam em
+5, 3, 5, 1, 1, 5, 3, 5, 1, 1. O padrão repete para sempre nesse ciclo de cinco, e os algarismos 7 e 9
+<em>nunca</em> aparecem no fim de um R (verifique: estenda a tabela quanto quiser). Por que o final da
+escrita decimal de R fica preso a 1, 3 e 5 — e por que a proibição é sobre o <em>numeral</em>, não sobre
+o número? A ferramenta que transforma essa observação em teorema é o valor posicional lido por
+congruências. <em>Porta: Capítulo 4.</em></p></aside>
 
 <h3 id="medidas">5.5 Medidas: perímetro, semiperímetro triangular, área</h3>
 <div class="caixa">
@@ -767,7 +836,11 @@ exata da impossibilidade atual e o endereço onde ela cai.</p>
   congruência do tratado, ferramenta permanente.</li>
 </ul>
 
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../01-exaustao/">← Capítulo 1 — A Exaustão</a><a href="../../">↑ Índice</a><a href="../03-quatro/">Capítulo 3 — A Singularidade do Quatro →</a></nav>
+
 <footer class="estado">
+<details class="meta-editorial">
+<summary>Metadados editoriais e de auditoria</summary>
   <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Oráculo triplo
   executado em 28/07/2026 com artefatos em <code>audit/</code>: derivação simbólica S1–S7
   (<code>symbolic-check.md</code>), verificação numérica independente por duas implementações (fórmulas
@@ -788,6 +861,9 @@ exata da impossibilidade atual e o endereço onde ela cai.</p>
   a lacuna); fixação da edição de referência dos <em>Elementos</em> para o lema de X.28–29; decisão de
   tag <code>cap-02-gate0-r1</code> pelo leitor primário via sessão-coordenadora.</p>
   <p>MATH3us.md · Capítulo 2 · escavação · release: nenhuma (pronto para tag).</p>
+  <p>28/07/2026 — Aplicação retroativa da E23 (figura estática da família, caixas de curiosidade e
+  segredo), navegação entre capítulos e metadados de head. Conteúdo matemático anterior inalterado.</p>
+</details>
 </footer>
 
 </main>
