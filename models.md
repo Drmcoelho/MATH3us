@@ -40,9 +40,10 @@ Uma sessão-agente = um capítulo = uma branch.
 - **Namespace de claims:** `chapter-NN.*` — dependência entre capítulos só
   para capítulo já fechado ou marcada explicitamente como porta futura (E13).
 - **Entregáveis mínimos por sessão:** `conjecturas.md` (commit próprio) →
-  `index.html` autocontido → `claims.yml` ortogonal → `sources.md` →
-  oráculo triplo com artefatos em `audit/` → auditoria de gate vigente →
-  encerramento §9 com pendências declaradas.
+  `index.html` autocontido → seção de exercícios em cinco níveis com
+  gabaritos robustos (E20, §6.1 item 10) → `claims.yml` ortogonal →
+  `sources.md` → oráculo triplo com artefatos em `audit/` → auditoria de
+  gate vigente → encerramento §9 com pendências declaradas.
 - **Integração:** PR para `main`; um capítulo por PR; o PR carrega os
   artefatos de auditoria. Arquivos compartilhados (`index.html` da raiz,
   `MATH3us.md`, `models.md`, `tools/`) são tocados apenas pela

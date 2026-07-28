@@ -1,7 +1,7 @@
 {
   "chapter_dir": "/home/user/MATH3us/caps/01-exaustao",
   "script": "tools/audit.mjs",
-  "code_commit": "34d28c4",
+  "code_commit": "f770cc9",
   "date": "2026-07-28",
   "gate": "v0",
   "checks": {
@@ -34,6 +34,13 @@
     "desktop.table_mirrors_state": {
       "passed": true,
       "detail": "rows=2 (after reset+1 doubling)"
+    },
+    "desktop.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=19, gabaritos=19"
+    },
+    "desktop.gabarito_keyboard_toggle": {
+      "passed": true
     },
     "desktop.self_contained_no_network": {
       "passed": true,
@@ -72,6 +79,13 @@
     "iphone.table_mirrors_state": {
       "passed": true,
       "detail": "rows=2 (after reset+1 doubling)"
+    },
+    "iphone.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=19, gabaritos=19"
+    },
+    "iphone.gabarito_keyboard_toggle": {
+      "passed": true
     },
     "iphone.self_contained_no_network": {
       "passed": true,
