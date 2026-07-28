@@ -157,15 +157,20 @@ fechamento. Ordem obrigatória de execução:
 
 1. **D1** (`cap-00-gate0-r1` em `73caa07`) — 2º fechamento; gate v1 já
    executado sobre o ledger (16 claims), sem pendência;
-2. **coordenadora entrega o gate v2** e o executa sobre os Caps. 2–4 (com a
-   reauditoria E9 dos já fechados);
-3. **só então** as tags dos Caps. 2–4, nomeadas sob o gate que de fato
-   validou cada release:
+2. ~~coordenadora entrega o gate v2~~ — **ENTREGUE e executado em
+   28/07/2026** (`tools/bundle.mjs` + `tools/validate-release.mjs`) sobre
+   os Caps. 0–4, reauditoria E9 incluída: cinco capítulos aprovados,
+   bundles byte-idênticos (todos já autocontidos), zero requisições
+   externas, zero erros (relatórios em `caps/*/audit/bundle-report.json` e
+   `release-validation.json`; registro §5);
+3. as tags dos Caps. 2–4, nomeadas sob o gate que de fato validou cada
+   release, apontando o commit de merge do PR do gate v2 (substituir
+   abaixo; ver §5):
 
 ```
-git tag -a cap-02-gate2-r1 <commit-do-gate-v2> -m "chapter 2 release: gate v2, content revision 1"
-git tag -a cap-03-gate2-r1 <commit-do-gate-v2> -m "chapter 3 release: gate v2, content revision 1"
-git tag -a cap-04-gate2-r1 <commit-do-gate-v2> -m "chapter 4 release: gate v2, content revision 1"
+git tag -a cap-02-gate2-r1 <merge-do-gate-v2> -m "chapter 2 release: gate v2, content revision 1"
+git tag -a cap-03-gate2-r1 <merge-do-gate-v2> -m "chapter 3 release: gate v2, content revision 1"
+git tag -a cap-04-gate2-r1 <merge-do-gate-v2> -m "chapter 4 release: gate v2, content revision 1"
 git push origin cap-02-gate2-r1 cap-03-gate2-r1 cap-04-gate2-r1
 ```
 
@@ -230,6 +235,8 @@ Os incidentes são dados (§12 do manual). Detalhes nos artefatos citados.
 | 28/07/2026 | `tools/oracle-ch00.py` | 0 | pós-PR #9 (`a7a41c1`) | re-execução sobre o estado integrado: 12/12 | `caps/00-inferencia/audit/numeric-check.json` |
 | 28/07/2026 | `tools/audit-ch00.mjs` | 0 | pós-PR #9 (`a7a41c1`) | re-execução (fecha a lacuna: o run anterior antecedia a nota E21 e o ajuste do ledger): 31/31 | `caps/00-inferencia/audit/interaction-report.json` |
 | 28/07/2026 | `tools/verify-claims.mjs` | 0 | pós-PR #9 (`a7a41c1`) | 16 claims válidos | saída no commit desta reauditoria |
+| 28/07/2026 | `tools/bundle.mjs` (gate v2) | 0–4 | pós-PR #12 (`870af23`) | cinco bundles produzidos, todos byte-idênticos ao fonte (autocontenção já satisfeita) | `caps/*/audit/bundle-report.json` |
+| 28/07/2026 | `tools/validate-release.mjs` (gate v2) | 0–4 | pós-PR #12 (`870af23`) | estático + dinâmico aprovados: zero cargas remotas, zero requisições, zero erros, documento pintado — reauditoria E9 dos Caps. 0–1 incluída | `caps/*/audit/release-validation.json` |
 
 ---
 

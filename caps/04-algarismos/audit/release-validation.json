@@ -1,0 +1,28 @@
+{
+  "chapter_dir": "04-algarismos",
+  "script": "tools/validate-release.mjs",
+  "gate": "v2",
+  "code_commit": "870af23",
+  "date": "2026-07-28",
+  "validated_file": "releases/bundles/04-algarismos.html",
+  "bundle_used": true,
+  "checks": {
+    "static.no_remote_resource_loads": {
+      "passed": true
+    },
+    "dynamic.zero_network_requests": {
+      "passed": true
+    },
+    "dynamic.zero_console_or_page_errors": {
+      "passed": true
+    },
+    "dynamic.document_painted": {
+      "passed": true,
+      "detail": "body text length 31843"
+    }
+  },
+  "navigation_links": [],
+  "violations": [],
+  "external_requests": [],
+  "errors": []
+}
