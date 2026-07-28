@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "03-quatro",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "870af23",
+  "date": "2026-07-28",
+  "bundle_path": "releases/bundles/03-quatro.html",
+  "bundle_sha256": "9958157a3b61af73ec5f0d55a1aea495cd3c3f6746cc8a7b6111e290d978cf4d",
+  "source_sha256": "9958157a3b61af73ec5f0d55a1aea495cd3c3f6746cc8a7b6111e290d978cf4d",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}

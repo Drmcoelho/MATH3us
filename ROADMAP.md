@@ -47,11 +47,11 @@ antiga demais e dois PRs tocando os mesmos arquivos. Regras vigentes:
 - **Bloqueio externo:** nenhuma tag remota existe (D1, D2′, D4 do
   `AUDIT.md`). As tags destravam o fechamento formal e o critério estrito
   da Onda 2.
-- **Entregável imediato da coordenadora:** gate v2 (`tools/bundle.mjs` +
-  `tools/validate-release.mjs`) — **antes** da execução da D4, pelo
-  sequenciamento de gates do §1.7 (o 3º fechamento ativa o v2; tags
-  imutáveis não podem contornar o gate vigente — correção aceita de
-  revisão externa no PR #11).
+- **Gate v2 entregue e executado (28/07/2026):** `tools/bundle.mjs` +
+  `tools/validate-release.mjs`, aprovados nos Caps. 0–4 com reauditoria
+  E9 (relatórios em `caps/*/audit/`). A D4 está destravada do lado da
+  infraestrutura — pende apenas do ato humano das tags (D1 primeiro,
+  depois Caps. 2–4 como `cap-0N-gate2-r1`).
 
 ## 4. Ondas restantes — atribuição e sequência
 

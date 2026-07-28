@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "02-ternas",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "870af23",
+  "date": "2026-07-28",
+  "bundle_path": "releases/bundles/02-ternas.html",
+  "bundle_sha256": "a610cb042ceebd1d3bb5453c4fa8a5ecf4c6d0182433dd77e9ee3f96a7ea88a7",
+  "source_sha256": "a610cb042ceebd1d3bb5453c4fa8a5ecf4c6d0182433dd77e9ee3f96a7ea88a7",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}

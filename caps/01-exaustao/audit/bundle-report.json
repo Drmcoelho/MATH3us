@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "01-exaustao",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "870af23",
+  "date": "2026-07-28",
+  "bundle_path": "releases/bundles/01-exaustao.html",
+  "bundle_sha256": "19faffb11dc429f4399a6a4cc82f445cda36d8f6ef4ed9fc2d5e0aba80f01aa9",
+  "source_sha256": "19faffb11dc429f4399a6a4cc82f445cda36d8f6ef4ed9fc2d5e0aba80f01aa9",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}
