@@ -7,9 +7,9 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 28/07/2026 · pós-merge dos PRs #8 (prólogo) e #9 (Caps. 2–4) ·
-reauditoria do Cap. 0 sobre o estado integrado · branch
-`claude/chapter-1-geometric-rebuild-uf3z1f`.
+**Fotografia:** 28/07/2026 · pós-merge dos PRs #8 (prólogo), #9 (Caps. 2–4) e
+#10 (reauditoria do Cap. 0 sobre o estado integrado, `73caa07`) ·
+reconciliação da sessão-coordenadora: tabela completa 0–4 e Decisão D4.
 
 ---
 
@@ -19,11 +19,13 @@ reauditoria do Cap. 0 sobre o estado integrado · branch
 |---|---|---|---|---|---|---|
 | 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **nenhuma — aguarda Decisão D1** |
 | 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido; `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r1** (`085e494`); correções pós-release neste merge — **aguarda Decisão D2′ (r2)** |
-| 2–4 | Ternas · Quatro · Algarismos | produção paralela (main, PRs #5–#9) | vide `caps/0X-*/claims.yml` | auditados v0 (main) | vide capítulos | abertos — decisões de tag fora deste documento até integração |
+| 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
+| 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
+| 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
 | 5–12 | — | contrato editorial no manual | — | — | — | previstos |
 
-Nenhum item vigente do §10 está pendente para os Capítulos 0 e 1 **exceto a
-tag de release** — que o manual reserva, deliberadamente, a um ato humano.
+Nenhum item vigente do §10 está pendente para os Capítulos 0–4 **exceto as
+tags de release** — que o manual reserva, deliberadamente, a um ato humano.
 
 ---
 
@@ -46,7 +48,7 @@ executado sobre o ledger na integração.
 **Execução, quando decidida:**
 
 ```
-git tag -a cap-00-gate0-r1 <commit-desta-reauditoria> -m "chapter 0 release: gate v1, content revision 1"
+git tag -a cap-00-gate0-r1 73caa07 -m "chapter 0 release: gate v1, content revision 1"
 git push origin cap-00-gate0-r1
 ```
 
@@ -56,7 +58,7 @@ acompanhada do manifest em `releases/manifests/` (§1.7):
 chapter: 0
 content_revision: 1
 gate_version: 1
-commit: <commit-desta-reauditoria>
+commit: 73caa07
 previous_release: null
 ```
 
@@ -114,6 +116,35 @@ normalizado legítimo; a reconstrução os importa em vez de recriá-los.
 **Opções em aberto:** (a) reconstruir já; (b) taggear D1 e D2′ primeiro e
 reconstruir como revisão seguinte; (c) adiar com prioridade explícita para a
 ordem de produção (§5: os Capítulos 2–4 já estão em produção no main).
+
+### D4 — Tags de release dos Capítulos 2–4 (Onda 1)
+
+**O que é.** Os três capítulos da Onda 1 (PR #9, `a7a41c1`) estão integrados,
+auditados sob gate v0 e validados pelo gate v1 com zero achados (§1). Cada um
+aguarda sua tag — mesma natureza da D1: ato humano, imutável, um por capítulo.
+
+**Execução, quando decidida** (o proxy dos agentes recusa push de tags —
+executar como proprietário, ou via GitHub UI → Releases):
+
+```
+git tag -a cap-02-gate0-r1 a7a41c1 -m "chapter 2 release: gate v1, content revision 1"
+git tag -a cap-03-gate0-r1 a7a41c1 -m "chapter 3 release: gate v1, content revision 1"
+git tag -a cap-04-gate0-r1 a7a41c1 -m "chapter 4 release: gate v1, content revision 1"
+git push origin cap-02-gate0-r1 cap-03-gate0-r1 cap-04-gate0-r1
+```
+
+com manifests em `releases/manifests/` (§1.7). **Atenção:** nenhuma tag
+remota existe ainda — nem `cap-01-gate0-r1` (decisão D2 exercida, manifest no
+main, mas o objeto tag nunca foi criado no remoto). A execução da D2 pende do
+mesmo ato: `git tag -a cap-01-gate0-r1 f049091 && git push origin cap-01-gate0-r1`.
+
+**Consequências em cadeia.** O fechamento formal do 3º capítulo arma o
+gatilho do gate v2 (`tools/bundle.mjs` + `tools/validate-release.mjs`,
+models.md §4) e a reauditoria E9 dos capítulos fechados sob gate anterior.
+Pela tabela §4 do models.md, as pré-condições lógicas da Onda 2 (Cap. 6:
+Cap. 1 fechado; Cap. 7: claims do Cap. 2 no main) **já estão satisfeitas**;
+a nota da Onda 1 condiciona o disparo ao fechamento formal de 2–4 — critério
+mais estrito, a arbitrar pelo leitor primário junto com esta decisão.
 
 ---
 
