@@ -1,0 +1,126 @@
+{
+  "chapter_dir": "/home/user/MATH3us/caps/00-inferencia",
+  "script": "tools/audit-ch00.mjs",
+  "code_commit": "31bc78c",
+  "date": "2026-07-28",
+  "gate": "v0",
+  "checks": {
+    "desktop.lab1_values_n96": {
+      "passed": true,
+      "detail": "expected rho=0,9994645875, deficit=0,0005354125 in \"n = 96  |  ρ = r/R = 0,9994645875  |  déficit 1−ρ = 0,0005354125  |  folga g = ρ(n+1)−ρ(n)…\""
+    },
+    "desktop.lab1_buttons": {
+      "passed": true
+    },
+    "desktop.keyboard_activation": {
+      "passed": true
+    },
+    "desktop.lab2_unique_guaranteed": {
+      "passed": true,
+      "detail": "IDENTIFICAÇÃO UNÍVOCA: m = 12 (correto).  ·  Cotas dos sanduíches para o n verdadeiro: garantia de identificação SIM (En"
+    },
+    "desktop.lab2_sliver_at_170": {
+      "passed": true,
+      "detail": "IDENTIFICAÇÃO UNÍVOCA: m = 170 (correto).  ·  Cotas dos sanduíches para o n verdadeiro: garantia de identificação não (Enunciado I); ambiguidade construtível nã"
+    },
+    "desktop.lab2_ambiguous_at_171_deviated": {
+      "passed": true,
+      "detail": "AMBÍGUO: compatível com m de 171 a 172 (2 candidatos). Círculo excluído (ρ̃ + δ = 0,9998332416 < 1): certamente um polígono — só não se sabe qual. Janela crepus"
+    },
+    "desktop.lab2_circle_not_excluded": {
+      "passed": true,
+      "detail": "Compatível com todo m ≥ 2.221 — e o CÍRCULO NÃO É EXCLUÍDO: o intervalo alcança 1. O instrumento não separa o polígono do seu limite.  ·  Co"
+    },
+    "desktop.lab2_precision_control": {
+      "passed": true
+    },
+    "desktop.no_horizontal_overflow": {
+      "passed": true
+    },
+    "desktop.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.3403, 0.0368"
+    },
+    "desktop.wedge_painted_at_n96": {
+      "passed": true,
+      "detail": "painted share 0.0238"
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=15, imgs=0"
+    },
+    "desktop.aria_live_regions_present": {
+      "passed": true,
+      "detail": "count=3"
+    },
+    "desktop.tables_populated": {
+      "passed": true,
+      "detail": "main=22, collapse=5"
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.lab1_values_n96": {
+      "passed": true,
+      "detail": "expected rho=0,9994645875, deficit=0,0005354125 in \"n = 96  |  ρ = r/R = 0,9994645875  |  déficit 1−ρ = 0,0005354125  |  folga g = ρ(n+1)−ρ(n)…\""
+    },
+    "iphone.lab1_buttons": {
+      "passed": true
+    },
+    "iphone.keyboard_activation": {
+      "passed": true
+    },
+    "iphone.lab2_unique_guaranteed": {
+      "passed": true,
+      "detail": "IDENTIFICAÇÃO UNÍVOCA: m = 12 (correto).  ·  Cotas dos sanduíches para o n verdadeiro: garantia de identificação SIM (En"
+    },
+    "iphone.lab2_sliver_at_170": {
+      "passed": true,
+      "detail": "IDENTIFICAÇÃO UNÍVOCA: m = 170 (correto).  ·  Cotas dos sanduíches para o n verdadeiro: garantia de identificação não (Enunciado I); ambiguidade construtível nã"
+    },
+    "iphone.lab2_ambiguous_at_171_deviated": {
+      "passed": true,
+      "detail": "AMBÍGUO: compatível com m de 171 a 172 (2 candidatos). Círculo excluído (ρ̃ + δ = 0,9998332416 < 1): certamente um polígono — só não se sabe qual. Janela crepus"
+    },
+    "iphone.lab2_circle_not_excluded": {
+      "passed": true,
+      "detail": "Compatível com todo m ≥ 2.221 — e o CÍRCULO NÃO É EXCLUÍDO: o intervalo alcança 1. O instrumento não separa o polígono do seu limite.  ·  Co"
+    },
+    "iphone.lab2_precision_control": {
+      "passed": true
+    },
+    "iphone.no_horizontal_overflow": {
+      "passed": true
+    },
+    "iphone.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.3403, 0.0368"
+    },
+    "iphone.wedge_painted_at_n96": {
+      "passed": true,
+      "detail": "painted share 0.0238"
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=15, imgs=0"
+    },
+    "iphone.aria_live_regions_present": {
+      "passed": true,
+      "detail": "count=3"
+    },
+    "iphone.tables_populated": {
+      "passed": true,
+      "detail": "main=22, collapse=5"
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}

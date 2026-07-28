@@ -1,0 +1,350 @@
+# Chapter 0 — Inference. Epistemological ledger (MATH3us.md §1.4, §8).
+# NOTE (E12): verification statuses below are backed by artifacts in audit/,
+# produced by the canonical oracle run registered at the end of this file.
+# History: the first oracle run (2026-07-28) REFUTED the chapter's worked
+# example at n=170 (invariant I10) and exposed the naive-gap cancellation
+# (I6b); both were corrected/recorded in commit 31bc78c before the passing run.
+
+chapter: 0
+claims:
+  - id: chapter-00.area-principles
+    statement: >
+      Area is monotone under inclusion and scales quadratically under
+      similarity; the Pythagorean theorem. Imported as the chapter's
+      complete list of foundations.
+    kind: definition
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    notes: >
+      Declared in section 1 and 3 of the chapter. No completeness, no
+      limits, no convexity postulate: that is what lets chapter 0
+      precede chapter 1.
+
+  - id: chapter-00.angle-by-area
+    statement: >
+      Convention: the measure of an angle is twice the area of the
+      sector it cuts in the unit disk; the half-turn then measures the
+      disk-area constant C, named pi within this chapter. The sector of
+      angle theta in radius rho has area theta*rho^2/2 by construction.
+    kind: definition
+    status: proved
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    notes: >
+      The identification of this area constant with the perimetric
+      constant of chapter 1 (and of area-angle with arc-angle) is a
+      THEOREM, deferred: closed door to chapter 9. Numeric
+      implementations use standard trig and therefore presuppose the
+      identification - observation layer, declared in the chapter.
+
+  - id: chapter-00.fundamental-triangle
+    statement: >
+      For a regular n-gon (n >= 3) with center O, vertex V and side
+      midpoint M: triangle OMV has a right angle at M, hence
+      R^2 = r^2 + (L/2)^2, with r/R = cos(pi/n) and (L/2)/R = sin(pi/n).
+      The polygon is this wedge repeated 2n times.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#a-cunha"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.annulus-identity
+    statement: >
+      The annulus between the two circles of a regular polygon has the
+      area of the circle of radius L/2: C(R^2 - r^2) = C(L/2)^2, for
+      any value of the disk-area constant C.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#a-coroa"
+    dependencies:
+      - claim: "chapter-00.fundamental-triangle"
+    notes: >
+      One line from Pythagoras; consumes no knowledge about pi. The
+      classical no-words proof (Mamikon's tangent sweep) is mentioned,
+      not used.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.area-trapping
+    statement: >
+      C r^2 < A_n = n (L/2) r < C R^2: the polygon's area lies strictly
+      between the areas of its two disks.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#a-coroa"
+    dependencies:
+      - claim: "chapter-00.area-principles"
+      - claim: "chapter-00.fundamental-triangle"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.ratio-monotone
+    statement: >
+      rho_n = cos(pi/n) is strictly increasing for n >= 3, from
+      rho_3 = 1/2, always below 1.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#a-razao"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.inference-theorem
+    statement: >
+      (i) The pair (r, R) determines the regular polygon up to rotation
+      about the common center, with n = pi/arccos(r/R) and
+      L = 2 sqrt(R^2 - r^2). (ii) A concentric pair is realized by a
+      regular polygon iff r/R lies in the discrete set
+      {cos(pi/n) : n >= 3}; ratios below 1/2 refute the hypothesis.
+      (iii) A single circle determines nothing about n.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#a-razao"
+    dependencies:
+      - claim: "chapter-00.fundamental-triangle"
+      - claim: "chapter-00.ratio-monotone"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.ratio-as-sufficient-statistic
+    statement: >
+      The scale/shape decomposition (R carries scale, r/R carries the
+      whole shape) framed as inference: the ratio is the sufficient
+      statistic of form, the polygon a message transmitted through two
+      circles, and precision the channel's capacity.
+    kind: synthesis
+    status: supported
+    provenance: authorial
+    proof_mode: not_applicable
+    priority_note: >
+      Authorial synthesis within this treatise; historical priority not
+      established. The mathematical content is the inference theorem;
+      the synthesis is the organization.
+    dependencies:
+      - claim: "chapter-00.inference-theorem"
+
+  - id: chapter-00.wedge-inequality
+    statement: >
+      sin theta < theta < tan theta for 0 < theta < quarter-turn, by
+      strict area trapping of the sector between two triangles, with
+      sector area theta/2 holding by the angle-by-area convention;
+      consequently theta cos theta < sin theta.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#aprisionamento-da-cunha"
+    dependencies:
+      - claim: "chapter-00.area-principles"
+      - claim: "chapter-00.angle-by-area"
+    notes: >
+      The chapter's motif applied to its own atom: the wedge trapped by
+      areas. No limits, no series.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.deficit-sandwich
+    statement: >
+      For all n >= 3:
+      (pi^2/(2n^2)) * rho_{2n}^2 < 1 - rho_n < pi^2/(2n^2).
+      The quadratic threshold; the left correction factor is the ratio
+      of the 2n-gon squared - the sequence controls its own error.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#aprisionamento-da-cunha"
+    dependencies:
+      - claim: "chapter-00.wedge-inequality"
+    priority_note: >
+      Elementary enough to plausibly exist in the literature; no
+      systematic search performed. Authorial packaging (rho_{2n}
+      factor) within this treatise; historical priority not established.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.gap-sandwich
+    statement: >
+      For all n >= 3, with g_n = rho_{n+1} - rho_n:
+      pi^2 rho_n / (n (n+1)^2) < g_n < pi^2/n^3.
+      The cubic threshold. Mid-derivation exact identity:
+      cos(alpha) cos(beta) = (rho_n + rho_{n+1})/2 for the two product
+      angles.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#aprisionamento-da-cunha"
+    dependencies:
+      - claim: "chapter-00.wedge-inequality"
+      - claim: "chapter-00.ratio-monotone"
+    priority_note: >
+      Same status as the deficit sandwich: authorial packaging;
+      historical priority not established.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.identification-guarantee
+    statement: >
+      If 2*delta < pi^2 rho_n/(n(n+1)^2) and (for n > 3)
+      2*delta < pi^2 rho_{n-1}/((n-1)n^2), every measurement of
+      precision delta makes the nearest-admissible rule return exactly n.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    proof_location: "#inferencia-sob-erro"
+    dependencies:
+      - claim: "chapter-00.gap-sandwich"
+      - claim: "chapter-00.ratio-monotone"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.ambiguity-construction
+    statement: >
+      If 2*delta >= pi^2/n^3, the midpoint (rho_n + rho_{n+1})/2 is a
+      valid measurement of both an n-gon and an (n+1)-gon: no decision
+      rule extracts a guaranteed answer.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    proof_location: "#inferencia-sob-erro"
+    dependencies:
+      - claim: "chapter-00.gap-sandwich"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py", note: "strict margin is sub-float64 at large n; Decimal50 arbitrates (edge-cases.md)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.twilight-window
+    statement: >
+      For every delta <= 1/100, every integer n with
+      (pi^2/(2 delta))^{1/3} <= n <= delta^{-1/2} admits an ambiguous
+      measurement (n vs n+1) while every honest measurement of an n-gon
+      excludes the circle; the window contains at least two integers.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#inferencia-sob-erro"
+    dependencies:
+      - claim: "chapter-00.deficit-sandwich"
+      - claim: "chapter-00.gap-sandwich"
+      - claim: "chapter-00.ambiguity-construction"
+    correction_log: >
+      2026-07-28: the worked example (delta = 1e-6) first claimed
+      g_170/2 > 1e-6 (n=170 still identifiable). Oracle invariant I10
+      measured g_170/2 = 9.956e-7 < 1e-6: n=170 is already ambiguous,
+      inside the sliver where both bounds are silent. Corrected in
+      commit 31bc78c; recorded, not erased.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle-ch00.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-00.stabilization
+    statement: >
+      The normalized columns n^2 (1 - rho_n) and n^3 g_n stabilize at
+      pi^2/2 and pi^2 respectively.
+    kind: conjecture
+    status: supported
+    provenance: derived_in_treatise
+    proof_mode: computational_only
+    proof_location: "#tabela"
+    dependencies:
+      - claim: "chapter-00.deficit-sandwich"
+      - claim: "chapter-00.gap-sandwich"
+    notes: >
+      Preregistered as C0.7 (conjecturas.md, 2026-07-28). The chapter
+      CANNOT state this as a theorem: "stabilize" is limit language,
+      forbidden by the prologue's house rule. The sandwiches pin both
+      columns by inequalities whose ends tighten; the promotion to a
+      limit statement is a closed door to chapter 1 (tooling) and
+      chapter 10 (fine asymptotics).
+
+  - id: chapter-00.float64-collapse
+    statement: >
+      In float64, the direct representation 1 - cos(pi/n) collapses to
+      exactly 0 near n ~ 3e8 (the instrument declares the polygon a
+      circle), while 2 sin^2(pi/(2n)) remains accurate; likewise the
+      direct gap cos(pi/(n+1)) - cos(pi/n) drowns in cancellation from
+      n ~ 1.5e4, while the product form 2 sin(a) sin(b) does not.
+    kind: estimate
+    status: supported
+    provenance: derived_in_treatise
+    proof_mode: computational_only
+    proof_location: "#quase-mentiu"
+    notes: >
+      Preregistered as C0.8; confirmed by invariants I11 and I6b.
+      Computational/representational imperfection (manual §2.3): the
+      object is innocent. The proof's product form doubles as the
+      numerically correct representation of its own theorem.
+    dependencies:
+      - claim: "chapter-00.deficit-sandwich"
+      - claim: "chapter-00.gap-sandwich"
+
+# --- execution registry (E12): who witnessed what, when -------------------
+oracle_run:
+  script: tools/oracle-ch00.py
+  report: caps/00-inferencia/audit/numeric-check.json
+  edge_report: caps/00-inferencia/audit/edge-cases.md
+  code_commit: 31bc78c
+  environment: "python 3, stdlib only, linux"
+  date: 2026-07-28
+  tested_domain:
+    dense_n: { min: 3, max: 200000 }
+    decimal_spot_n: [14921, 1000000, 1000000000, 1000000000000]
+    adversarial_refused: [2, 1, 0, -6, 2.5, "12"]
+  implementations:
+    - "A: float64 stable forms (mirrors in-page JS)"
+    - "B: float64 coordinate geometry + shoelace (no closed trig formulas)"
+    - "C: Decimal 50-digit Taylor sin/cos (independent arithmetic)"
+  result: all_passed
+  incident: >
+    First run (same date) FAILED invariant I10: the worked example's
+    claim that n=170 remains identifiable at delta=1e-6 was refuted
+    (g_170/2 = 9.956e-7 < 1e-6). The author had estimated by head a
+    value inside the very sliver the paragraph called bound-undecidable.
+    Chapter corrected (commit 31bc78c); second run passed 12/12.
+    Additionally, tolerances for observation-layer effects were
+    calibrated and declared: shoelace accumulation (I2), annulus
+    cancellation factor (I3), sub-float64 ambiguity margin (I8); the
+    naive gap form's failure is REQUIRED and recorded (I6b).
