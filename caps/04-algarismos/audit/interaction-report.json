@@ -1,0 +1,162 @@
+{
+  "chapter_dir": "/home/user/MATH3us/.claude/worktrees/agent-a21c36194058c1e0c/caps/04-algarismos",
+  "script": "caps/04-algarismos/audit.mjs",
+  "code_commit": "7497538",
+  "date": "2026-07-28",
+  "gate": "v0",
+  "checks": {
+    "desktop.initial_1_7_base10_status": {
+      "passed": true,
+      "detail": "\"expansão de 1/7 na base 10: pré-período 0, período 6, dígitos período 142857…\" vs ref pre=0 per=6"
+    },
+    "desktop.initial_1_7_digits_match_reference": {
+      "passed": true,
+      "detail": "expected block 142857"
+    },
+    "desktop.interaction_5_12_base10": {
+      "passed": true,
+      "detail": "ref pre=41 per=6"
+    },
+    "desktop.unreduced_2_6_reduced_and_recorded": {
+      "passed": true,
+      "detail": "\"Fração recebida: 2/6 → reduzida automaticamente para 1/3 (÷2). A expansão é do v\""
+    },
+    "desktop.base60_colon_digits": {
+      "passed": true,
+      "detail": "expected 8:34:17"
+    },
+    "desktop.termination_detector_1_7_base7": {
+      "passed": true,
+      "detail": "\"expansão de 1/7 na base 7: pré-período 1, período 0, dígitos pré 1, sem parte periódica\""
+    },
+    "desktop.criterion_verdict_shown": {
+      "passed": true
+    },
+    "desktop.d_zero_refused": {
+      "passed": true,
+      "detail": "\"Entrada recusada: d = 0 — divisão por zero não é uma expansão, é uma n\""
+    },
+    "desktop.large_prime_9973_period_554": {
+      "passed": true,
+      "detail": "\"expansão de 1/9973 na base 10: pré-período 0, período 554, dígitos período 000100270730973\""
+    },
+    "desktop.no_horizontal_overflow_with_long_stream": {
+      "passed": true
+    },
+    "desktop.keyboard_enter_runs": {
+      "passed": true,
+      "detail": "\"expansão de 1/13 na base 10: pré-período 0, período 6, dígitos período 076923\""
+    },
+    "desktop.keyboard_preset_activation": {
+      "passed": true
+    },
+    "desktop.state_machine_table_mirrors_run": {
+      "passed": true,
+      "detail": "rows=6, last=\"655071novo resto 1 já visto no passo 1 → ciclo fecha\""
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=8, imgs=0"
+    },
+    "desktop.aria_live_region_present": {
+      "passed": true
+    },
+    "desktop.no_canvas_by_design_tables_instead": {
+      "passed": true,
+      "detail": "canvases=0 (chapter uses digit streams + tables; no canvas to audit)"
+    },
+    "desktop.stream_period_markers_present": {
+      "passed": true
+    },
+    "desktop.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=14, gabaritos=14"
+    },
+    "desktop.gabarito_toggle": {
+      "passed": true
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.initial_1_7_base10_status": {
+      "passed": true,
+      "detail": "\"expansão de 1/7 na base 10: pré-período 0, período 6, dígitos período 142857…\" vs ref pre=0 per=6"
+    },
+    "iphone.initial_1_7_digits_match_reference": {
+      "passed": true,
+      "detail": "expected block 142857"
+    },
+    "iphone.interaction_5_12_base10": {
+      "passed": true,
+      "detail": "ref pre=41 per=6"
+    },
+    "iphone.unreduced_2_6_reduced_and_recorded": {
+      "passed": true,
+      "detail": "\"Fração recebida: 2/6 → reduzida automaticamente para 1/3 (÷2). A expansão é do v\""
+    },
+    "iphone.base60_colon_digits": {
+      "passed": true,
+      "detail": "expected 8:34:17"
+    },
+    "iphone.termination_detector_1_7_base7": {
+      "passed": true,
+      "detail": "\"expansão de 1/7 na base 7: pré-período 1, período 0, dígitos pré 1, sem parte periódica\""
+    },
+    "iphone.criterion_verdict_shown": {
+      "passed": true
+    },
+    "iphone.d_zero_refused": {
+      "passed": true,
+      "detail": "\"Entrada recusada: d = 0 — divisão por zero não é uma expansão, é uma n\""
+    },
+    "iphone.large_prime_9973_period_554": {
+      "passed": true,
+      "detail": "\"expansão de 1/9973 na base 10: pré-período 0, período 554, dígitos período 000100270730973\""
+    },
+    "iphone.no_horizontal_overflow_with_long_stream": {
+      "passed": true
+    },
+    "iphone.keyboard_enter_runs": {
+      "passed": true,
+      "detail": "\"expansão de 1/13 na base 10: pré-período 0, período 6, dígitos período 076923\""
+    },
+    "iphone.keyboard_preset_activation": {
+      "passed": true
+    },
+    "iphone.state_machine_table_mirrors_run": {
+      "passed": true,
+      "detail": "rows=6, last=\"655071novo resto 1 já visto no passo 1 → ciclo fecha\""
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=8, imgs=0"
+    },
+    "iphone.aria_live_region_present": {
+      "passed": true
+    },
+    "iphone.no_canvas_by_design_tables_instead": {
+      "passed": true,
+      "detail": "canvases=0 (chapter uses digit streams + tables; no canvas to audit)"
+    },
+    "iphone.stream_period_markers_present": {
+      "passed": true
+    },
+    "iphone.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=14, gabaritos=14"
+    },
+    "iphone.gabarito_toggle": {
+      "passed": true
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}

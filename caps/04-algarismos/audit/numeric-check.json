@@ -1,0 +1,115 @@
+{
+  "chapter": 4,
+  "script": "caps/04-algarismos/oracle.py",
+  "code_commit": "7497538",
+  "date": "2026-07-28",
+  "environment": "python 3.11.15, stdlib only, linux",
+  "implementations": {
+    "A": "long-division state machine, digit by digit (mirrors in-page JS)",
+    "B": "theory: pre = max ceil(v_p(d)/v_p(b)); period = mult. order via successive powers"
+  },
+  "tested_domain": {
+    "d": {
+      "min": 1,
+      "max": 2000
+    },
+    "bases": [
+      2,
+      3,
+      7,
+      10,
+      12,
+      16,
+      60
+    ],
+    "numerators": "a = 1 and smallest coprime a > 1 (reduced fractions only)",
+    "expansions_compared": 27986
+  },
+  "invariants": {
+    "I1_preperiod_machine_vs_theory": {
+      "tested_expansions": 27986,
+      "mismatches": [],
+      "passed": true
+    },
+    "I2_period_machine_vs_theory": {
+      "mismatches": [],
+      "passed": true
+    },
+    "I3_termination_criterion": {
+      "statement": "machine terminates <=> every prime factor of reduced d divides b",
+      "failures": [],
+      "passed": true
+    },
+    "I4_independence_of_numerator": {
+      "statement": "pre-period and period identical for a=1 and smallest coprime a>1",
+      "failures": [],
+      "passed": true
+    },
+    "I5_seven_case_study": {
+      "digits_1_over_7": [
+        1,
+        4,
+        2,
+        8,
+        5,
+        7
+      ],
+      "period": 6,
+      "ord_7_10": 6,
+      "full_reptend": true,
+      "block": 142857,
+      "multiples_are_rotations": true,
+      "block_identity_999999": true,
+      "passed": true
+    },
+    "I6_full_reptend_below_100": {
+      "found": [
+        7,
+        17,
+        19,
+        23,
+        29,
+        47,
+        59,
+        61,
+        97
+      ],
+      "expected": [
+        7,
+        17,
+        19,
+        23,
+        29,
+        47,
+        59,
+        61,
+        97
+      ],
+      "passed": true
+    },
+    "I7_pathology_is_representational": {
+      "checks": {
+        "1/7 base 7 exact 0.1": true,
+        "1/3 base 3 exact 0.1": true,
+        "1/3 base 10 pure period 3": true,
+        "1/2 base 3 pure period 1": true,
+        "1/7 base 12 period 6 (full reptend)": true,
+        "1/7 base 16 period 3": true,
+        "1/7 base 60 period 3 (8:34:17)": true
+      },
+      "passed": true
+    },
+    "I8_pure_period_block_identity": {
+      "statement": "for gcd(d,b)=1: pre-period empty and a*(b^t-1) = d*B (B = period block)",
+      "failures": [],
+      "passed": true
+    },
+    "W1_door_witness_998001": {
+      "ord_998001_10": 2997,
+      "ord_9801_10": 198,
+      "note": "witness values for the closed door (Cap. 10); 2997 and 198 as stated",
+      "passed": true
+    }
+  },
+  "all_passed": true
+}
