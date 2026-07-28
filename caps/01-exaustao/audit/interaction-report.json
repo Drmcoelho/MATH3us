@@ -1,7 +1,7 @@
 {
   "chapter_dir": "/home/user/MATH3us/caps/01-exaustao",
   "script": "tools/audit.mjs",
-  "code_commit": "bc2ea1f",
+  "code_commit": "1773b98",
   "date": "2026-07-28",
   "gate": "v0",
   "checks": {
@@ -23,7 +23,23 @@
     },
     "desktop.canvases_labeled_and_painted": {
       "passed": true,
-      "detail": "0.0448, 0.0667"
+      "detail": "0.0448, 0.0667, 0.0258"
+    },
+    "desktop.areas_table_mirrors_state": {
+      "passed": true,
+      "detail": "rows=2"
+    },
+    "desktop.normalized_table_full_range": {
+      "passed": true,
+      "detail": "rows=17"
+    },
+    "desktop.inheritance_visible_in_tables": {
+      "passed": true,
+      "detail": "A-_{2n} cell \"3,0000000000\" vs a_n cell \"3,0000000000\" (Enunciado F)"
+    },
+    "desktop.plot_painted_both_modes": {
+      "passed": true,
+      "detail": "vals: 0.0301, errs: 0.0356"
     },
     "desktop.formulas_textual_no_images": {
       "passed": true
@@ -68,7 +84,23 @@
     },
     "iphone.canvases_labeled_and_painted": {
       "passed": true,
-      "detail": "0.0448, 0.0667"
+      "detail": "0.0448, 0.0667, 0.0258"
+    },
+    "iphone.areas_table_mirrors_state": {
+      "passed": true,
+      "detail": "rows=2"
+    },
+    "iphone.normalized_table_full_range": {
+      "passed": true,
+      "detail": "rows=17"
+    },
+    "iphone.inheritance_visible_in_tables": {
+      "passed": true,
+      "detail": "A-_{2n} cell \"3,0000000000\" vs a_n cell \"3,0000000000\" (Enunciado F)"
+    },
+    "iphone.plot_painted_both_modes": {
+      "passed": true,
+      "detail": "vals: 0.0301, errs: 0.0356"
     },
     "iphone.formulas_textual_no_images": {
       "passed": true

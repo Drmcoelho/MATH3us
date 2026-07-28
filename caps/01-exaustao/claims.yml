@@ -202,6 +202,153 @@ claims:
       - claim: "chapter-01.gap-halving"
       - claim: "chapter-01.gap-ratio-quarter"
 
+
+  # ---- geometric rebuild (D3, preregistration R1-R5, 2026-07-28) ----------
+
+  - id: chapter-01.wedge-closed-forms
+    statement: >
+      Via the fundamental wedge of chapter 0 specialized to the unit
+      circle: a_n = n sin(pi/n) (inscribed, R = 1) and
+      b_n = n tan(pi/n) (circumscribed, r = 1).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    proof_location: "#o-segundo-cerco"
+    dependencies:
+      - claim: "chapter-00.fundamental-triangle"
+    notes: >
+      First cross-chapter dependency of the treatise: the wedge is
+      imported from the closed chapter 0 (cap-00-gate0-r1). The
+      recurrences compute (Enunciado A); the wedge is where the closed
+      forms come from. Cross-checked by oracle I1/I9.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-01.area-identities
+    statement: >
+      For the unit circle, the polygon areas satisfy A-_n = a_n^2/b_n
+      and A+_n = b_n: the outer semiperimeter IS the outer area
+      (its apothem is the radius 1).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#o-segundo-cerco"
+    dependencies:
+      - claim: "chapter-01.wedge-closed-forms"
+    notes: >
+      Substance is the classical A = r*s specialized; the emphasis
+      (the chapter's "outer semiperimeter" is simultaneously the outer
+      area) is the founding document's. Preregistered as R1.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I9" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-01.area-inherits-semiperimeter
+    statement: >
+      A-_{2n} = a_n exactly: the inscribed area column is the inscribed
+      semiperimeter column shifted by one doubling.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#o-segundo-cerco"
+    dependencies:
+      - claim: "chapter-01.archimedes-recurrences"
+      - claim: "chapter-01.area-identities"
+    priority_note: >
+      One line from the geometric-mean recurrence; presumably known in
+      the pi-algorithm literature, but the 2026-07-28 searches
+      (caps/00-inferencia/prioridade.md) did not locate it stated as
+      such. Re-search before any novelty claim. Preregistered as R2.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I10: exact to Decimal-60 rounding" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-01.double-siege-chain
+    statement: >
+      A-_n < A-_{2n} = a_n < pi < b_{2n} = A+_{2n} < A+_n along the
+      doubling sequence: the area siege and the perimeter siege are the
+      same staircase, stepped with a one-doubling lag; both jaws close
+      on pi.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#o-segundo-cerco"
+    dependencies:
+      - claim: "chapter-01.area-identities"
+      - claim: "chapter-01.area-inherits-semiperimeter"
+      - claim: "chapter-01.monotone-trapping"
+      - claim: "chapter-01.pi-common-limit"
+    priority_note: >
+      Preregistered as R3, from the founding document. Same status as
+      R2: presumably classical in substance, priority not established.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I11: strict links at every step" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-01.area-gap-ratio-two
+    statement: >
+      Delta A_n = A+_n - A-_n = (b_n - a_n)(b_n + a_n)/b_n exactly, and
+      Delta A_n / (b_n - a_n) -> 2 with computable N (asymptotically,
+      the area gap is exactly twice the semiperimeter gap).
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#o-segundo-cerco"
+    dependencies:
+      - claim: "chapter-01.area-identities"
+      - claim: "chapter-01.gap-halving"
+      - claim: "chapter-01.monotone-trapping"
+    notes: >
+      Preregistered as R4. This theorem permanently seals the factor-2
+      incident: the two gaps share order 1/n^2 with constants in exact
+      ratio 2:1, which is why pi^3/n^2 belongs to areas and pi^3/(2n^2)
+      to semiperimeters.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I12" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-01.error-duality
+    statement: >
+      n^2(pi - a_n) -> pi^3/6, n^2(b_n - pi) -> pi^3/3,
+      n^2(pi - A-_n) -> 2 pi^3/3, n^2(A+_n - pi) -> pi^3/3: in the
+      perimeter siege the outer error dominates (2x), in the area siege
+      the inner error dominates (2x) - the dominant error swaps sides.
+    kind: conjecture
+    status: supported
+    provenance: classical
+    proof_mode: computational_only
+    proof_location: "#o-segundo-cerco"
+    dependencies:
+      - claim: "chapter-01.area-identities"
+      - claim: "chapter-01.area-gap-ratio-two"
+    notes: >
+      Preregistered as R5 (founding document). The two consistency
+      identities - (pi - a) + (b - pi) = b - a forcing pi^3/6 + pi^3/3
+      = pi^3/2 (the E4.2 constant), and pi - A- = (pi - a) + a(b - a)/b
+      forcing 2 pi^3/3 = pi^3/6 + pi^3/2 - are exact algebra, proved
+      in-chapter. The four individual constants are classical
+      asymptotics whose proof needs the local expansions of chapter 10:
+      same closed door as E4.2, now with four locks.
+    verification:
+      symbolic: { status: not_applicable, note: "conjecture; only the consistency identities are proved (symbolic-check S7)" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I13: support at deep k, relative dev < 1e-9; consistency identities exact" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
 # --- execution registry (E12): who witnessed what, when -------------------
 oracle_run:
   script: tools/oracle.py
@@ -220,6 +367,13 @@ oracle_run:
     - "float64 closed trig forms n*sin(pi/n), n*tan(pi/n)"
     - "Decimal 60-digit mean recurrences"
   result: all_passed
+  rerun_2026_07_28_rebuild: >
+    Geometric rebuild (D3): invariants I9-I13 added for preregistered
+    R1-R5 (area identities, inheritance, double-siege chain, gap ratio
+    -> 2, duality support); full oracle re-run 13/13 plus edge cases;
+    gate v0 audit re-run with new checks (3 canvases, area and
+    normalized tables mirroring state, inheritance visible in DOM,
+    plot painted in both modes).
   incident: >
     First run (same date) FAILED invariant I6: the error bound as first
     stated was false at k=0 (equality, not strict inequality). Statement

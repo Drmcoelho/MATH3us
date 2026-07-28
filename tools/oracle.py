@@ -145,6 +145,74 @@ def run_oracle():
                  "(proved in-chapter on 2026-07-28 via exact factorization, "
                  "symbolic-check S6; originally preregistered as conjecture C4)")}
 
+
+    # ---- rebuild invariants (D3, preregistration R1-R5) -------------------
+    def area_in(a, b): return a * a / b        # Enunciado E
+    # I9 (R1): area identities vs closed trig forms (independent route)
+    worst = 0.0
+    for (n, a, b) in A:
+        x = math.pi / n
+        worst = max(worst,
+                    abs(area_in(a, b) - n * math.sin(x) * math.cos(x)),
+                    abs(b - n * math.tan(x)))
+    results["I9_area_identities"] = {
+        "tolerance": 5e-15, "worst_abs_diff": worst, "passed": worst < 5e-15}
+
+    # I10 (R2): inheritance A-_{2n} = a_n, exact in Decimal-60
+    worst_d = Decimal(0)
+    for i in range(MAX_K):
+        (_, a0, _), (_, a1, b1) = C[i], C[i + 1]
+        worst_d = max(worst_d, abs(a1 * a1 / b1 - a0))
+    results["I10_area_inherits_semiperimeter"] = {
+        "tolerance": "1e-55 (Decimal-60 rounding)",
+        "worst_abs_diff": float(worst_d), "passed": worst_d < Decimal("1e-55")}
+
+    # I11 (R3): the double-siege chain, strict links at every step
+    chain = True
+    for i in range(MAX_K):
+        (_, a0, b0), (_, a1, b1) = C[i], C[i + 1]
+        Am0 = a0 * a0 / b0
+        if not (Am0 < a0 < PI_50 < b1 < b0):
+            chain = False
+    results["I11_double_siege_chain"] = {"passed": chain}
+
+    # I12 (R4): exact gap identity + ratio -> 2 support at depth
+    worst_id = Decimal(0)
+    for (_, a, b) in C[: MAX_K + 1]:
+        worst_id = max(worst_id, abs((b - a * a / b) - (b - a) * (b + a) / b))
+    _, aK, bK = C[MAX_K]
+    dev2 = abs((aK + bK) / bK - 2)
+    results["I12_gap_identity_and_ratio_two"] = {
+        "identity_worst_abs": float(worst_id),
+        "ratio_dev_from_2_at_k16": float(dev2),
+        "passed": worst_id < Decimal("1e-55") and dev2 < Decimal("1e-9"),
+        "note": "ratio -> 2 is a THEOREM in-chapter (section 7.5); this is its independent witness"}
+
+    # I13 (R5): duality constants SUPPORT ONLY (conjecture; door to ch. 10)
+    # Deep Decimal row (k = DEEP_K, n ~ 6.6e12) against pi^3/6, pi^3/3, 2pi^3/3.
+    nD = Decimal(domain_n(DEEP_K))
+    _, aD, bD = C[DEEP_K]
+    AmD = aD * aD / bD
+    p3 = PI_50 ** 3
+    targets = {
+        "n2_pi_minus_a": (nD * nD * (PI_50 - aD), p3 / 6),
+        "n2_b_minus_pi": (nD * nD * (bD - PI_50), p3 / 3),
+        "n2_pi_minus_Ain": (nD * nD * (PI_50 - AmD), 2 * p3 / 3),
+        "n2_Aout_minus_pi": (nD * nD * (bD - PI_50), p3 / 3),
+    }
+    devs = {k: float(abs(v / t - 1)) for k, (v, t) in targets.items()}
+    # exact consistency identities (provable already; must hold to Decimal rounding)
+    cons1 = abs((PI_50 - aD) + (bD - PI_50) - (bD - aD))
+    cons2 = abs((PI_50 - AmD) - ((PI_50 - aD) + aD * (bD - aD) / bD))
+    results["I13_duality_constants_support"] = {
+        "relative_devs_at_deep_k": devs,
+        "consistency_identity_1_abs": float(cons1),
+        "consistency_identity_2_abs": float(cons2),
+        "passed": max(devs.values()) < 1e-9 and cons1 < Decimal("1e-55") and cons2 < Decimal("1e-55"),
+        "note": ("SUPPORT for preregistered conjecture R5, not proof; the four "
+                 "individual constants await chapter 10 expansions. The two "
+                 "consistency identities are exact algebra, proved in-chapter.")}
+
     for i, (n, a, b) in enumerate(C[: MAX_K + 1]):
         rows.append({
             "k": i, "n": n,

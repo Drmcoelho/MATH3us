@@ -102,3 +102,34 @@ apareceria ali como desvio. As verificações são independentes: esta é
 - A identificação de π com o semiperímetro do círculo: condicional ao
   postulado de convexidade de Arquimedes (`chapter-01.circle-identification`,
   porta para o Cap. 9).
+
+---
+
+## S7 — Adendo da reconstrução geométrica (D3, 28/07/2026)
+
+Notação: θ = π/n; a = n sen θ, b = n tg θ (Enunciado D, pela cunha do
+Cap. 0 com R = 1 e r = 1 respectivamente).
+
+**Enunciado E.** A⁻ = n sen θ cos θ = a·cos θ; cos θ = sen θ/tg θ = a/b ⟹
+A⁻ = a²/b. A⁺ = n·(L/2)·r = n·tg θ·1 = b. ✓
+
+**Enunciado F.** a₂ₙ² = aₙ·b₂ₙ (recorrência, Enunciado A) ⟹
+A⁻₂ₙ = a₂ₙ²/b₂ₙ = aₙ. ✓ (exata; sem aproximação)
+
+**Enunciado G.** A⁻ₙ = aₙ·(aₙ/bₙ) < aₙ pois aₙ < bₙ (5.1);
+aₙ < π < b₂ₙ (5.1–5.3); b₂ₙ < bₙ (5.1); igualdades por E–F. ✓
+Convergência das áreas: A⁺ₙ = bₙ → π; 0 < aₙ − A⁻ₙ = aₙ(bₙ−aₙ)/bₙ <
+bₙ − aₙ → 0. ✓
+
+**Enunciado H.** b − a²/b = (b² − a²)/b = (b−a)(b+a)/b. ✓
+Razão: (a+b)/b = 1 + a/b; 0 < 1 − a/b = (b−a)/b < (b−a)/3 ≤
+(2√3−3)/(3·2^k), pois b > a > a₆ = 3 e pela cota de 5.2; N computável:
+2^k > (2√3−3)/(3ε). ✓
+
+**Consistências de R5 (exatas; os quatro valores individuais NÃO são
+demonstrados aqui — porta Cap. 10):**
+(π−a) + (b−π) = b − a ⟹ soma das constantes = π³/2 (E4.2):
+π³/6 + π³/3 = π³/2. ✓
+π − A⁻ = π − a + a − a²/b = (π−a) + a(b−a)/b ⟹ 2π³/3 = π³/6 + π³/2. ✓
+Dualidade condicionada aos valores: π³/3 = 2·(π³/6) (externo domina nos
+perímetros); 2π³/3 = 2·(π³/3) (interno domina nas áreas). ✓ (aritmética)
