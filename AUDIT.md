@@ -7,7 +7,8 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 28/07/2026 · integração do merge main ↔ prólogo (PR #8) · branch
+**Fotografia:** 28/07/2026 · pós-merge dos PRs #8 (prólogo) e #9 (Caps. 2–4) ·
+reauditoria do Cap. 0 sobre o estado integrado · branch
 `claude/chapter-1-geometric-rebuild-uf3z1f`.
 
 ---
@@ -16,9 +17,10 @@
 
 | Cap. | Título | Pré-registro | Oráculo triplo | Gate v0 | Ledger | Release |
 |---|---|---|---|---|---|---|
-| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (`31bc78c`; artefatos em `caps/00-inferencia/audit/`) | 31/31 checks, desktop + iPhone, screenshots inspecionados (`c8221c7`) | `claims.yml` válido, campos ortogonais, registro E12 | **nenhuma — aguarda Decisão D1** |
+| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **nenhuma — aguarda Decisão D1** |
 | 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido; `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r1** (`085e494`); correções pós-release neste merge — **aguarda Decisão D2′ (r2)** |
-| 2–12 | — | contrato editorial no manual | — | — | — | previstos |
+| 2–4 | Ternas · Quatro · Algarismos | produção paralela (main, PRs #5–#9) | vide `caps/0X-*/claims.yml` | auditados v0 (main) | vide capítulos | abertos — decisões de tag fora deste documento até integração |
+| 5–12 | — | contrato editorial no manual | — | — | — | previstos |
 
 Nenhum item vigente do §10 está pendente para os Capítulos 0 e 1 **exceto a
 tag de release** — que o manual reserva, deliberadamente, a um ato humano.
@@ -44,7 +46,7 @@ executado sobre o ledger na integração.
 **Execução, quando decidida:**
 
 ```
-git tag -a cap-00-gate0-r1 <commit-de-merge> -m "chapter 0 release: gate v1, content revision 1"
+git tag -a cap-00-gate0-r1 <commit-desta-reauditoria> -m "chapter 0 release: gate v1, content revision 1"
 git push origin cap-00-gate0-r1
 ```
 
@@ -54,7 +56,7 @@ acompanhada do manifest em `releases/manifests/` (§1.7):
 chapter: 0
 content_revision: 1
 gate_version: 1
-commit: <commit-de-merge>
+commit: <commit-desta-reauditoria>
 previous_release: null
 ```
 
@@ -155,6 +157,9 @@ Os incidentes são dados (§12 do manual). Detalhes nos artefatos citados.
 | 28/07/2026 | `tools/audit.mjs` | 1 | `be998ae` | re-run sobre conteúdo corrigido: aprovado | `caps/01-exaustao/audit/interaction-report.json` |
 | 28/07/2026 | `tools/oracle.py` + `tools/audit.mjs` | 1 | pós-merge PR #8 | re-execução sobre o conteúdo integrado (promoção do ¼ + correção da constante) | `caps/01-exaustao/audit/` |
 | 28/07/2026 | `tools/verify-claims.mjs` (gate v1) | 0 e 1 | pós-merge PR #8 | validação de schema e dependências dos dois ledgers | saída registrada no commit de merge |
+| 28/07/2026 | `tools/oracle-ch00.py` | 0 | pós-PR #9 (`a7a41c1`) | re-execução sobre o estado integrado: 12/12 | `caps/00-inferencia/audit/numeric-check.json` |
+| 28/07/2026 | `tools/audit-ch00.mjs` | 0 | pós-PR #9 (`a7a41c1`) | re-execução (fecha a lacuna: o run anterior antecedia a nota E21 e o ajuste do ledger): 31/31 | `caps/00-inferencia/audit/interaction-report.json` |
+| 28/07/2026 | `tools/verify-claims.mjs` | 0 | pós-PR #9 (`a7a41c1`) | 16 claims válidos | saída no commit desta reauditoria |
 
 ---
 
