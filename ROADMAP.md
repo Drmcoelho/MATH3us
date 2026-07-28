@@ -45,8 +45,13 @@ antiga demais e dois PRs tocando os mesmos arquivos. Regras vigentes:
 - **Fila de merge:** vazia. PR #6 (MATHeu$) aguarda veredito do leitor
   primário — política na §6.
 - **Bloqueio externo:** nenhuma tag remota existe (D1, D2′, D4 do
-  `AUDIT.md`). As tags destravam o fechamento formal, o gate v2 e o
-  critério estrito da Onda 2.
+  `AUDIT.md`). As tags destravam o fechamento formal e o critério estrito
+  da Onda 2.
+- **Entregável imediato da coordenadora:** gate v2 (`tools/bundle.mjs` +
+  `tools/validate-release.mjs`) — **antes** da execução da D4, pelo
+  sequenciamento de gates do §1.7 (o 3º fechamento ativa o v2; tags
+  imutáveis não podem contornar o gate vigente — correção aceita de
+  revisão externa no PR #11).
 
 ## 4. Ondas restantes — atribuição e sequência
 
@@ -55,8 +60,8 @@ tabela §4 do models.md; fila de merge na ordem abaixo.
 
 | Ordem | Agente | Branch | Capítulo | Pode iniciar quando | Observação anti-conflito |
 |---|---|---|---|---|---|
-| 1 | `agent-cap-06` | `claude/cap-06-patologias` | 6 — As Patologias | Cap. 1 fechado ✓ (lógica satisfeita; arbitragem D4 pendente para o critério estrito) | não toca `caps/01-exaustao/`; usa claims do Cap. 1 por referência |
-| 2 | `agent-cap-07` | `claude/cap-07-complexos` | 7 — ℂ | claims do Cap. 2 na `main` ✓ (idem) | reabre porta do Cap. 2 **por referência**, sem editar o Cap. 2; sem exponencial (E11) |
+| 1 | `agent-cap-06` | `claude/cap-06-patologias` | 6 — As Patologias | tag `cap-01-gate0-r1` criada — pelo §10 do manual, capítulo só fecha com a tag; veredito e manifest não a substituem (correção aceita de revisão externa) | não toca `caps/01-exaustao/`; usa claims do Cap. 1 por referência |
+| 2 | `agent-cap-07` | `claude/cap-07-complexos` | 7 — ℂ | claims do Cap. 2 na `main` ✓ (pré-condição da §4 do models.md é claims, não fechamento) | reabre porta do Cap. 2 **por referência**, sem editar o Cap. 2; sem exponencial (E11) |
 | 3 | `agent-cap-02r2` | `claude/cap-02-r2-density` | 2 — revisão r2 (W1, §5) | tag `cap-02-gate0-r1` criada (E9: correção/extensão pós-release exige revisão própria) | mesmo diretório do Cap. 2; **não pode correr em paralelo com outro trabalho no Cap. 2** |
 | 4 | `agent-cap-01r` | escopo da D3 | 1 — reconstrução geométrica (W2, §5) | decisão D3 do leitor primário | toca `caps/01-exaustao/` — exclusivo enquanto durar |
 | 5 | `agent-cap-05` | `claude/cap-05-consonancia` | 5 — A Consonância | Caps. 6 e 7 na `main` | — |
