@@ -207,8 +207,21 @@ audit_run:
   script: tools/audit.mjs
   report: caps/01-exaustao/audit/interaction-report.json
   screenshots: [caps/01-exaustao/audit/desktop.png, caps/01-exaustao/audit/iphone.png]
-  code_commit: d8dc136
+  code_commit: 34d28c4
   gate: v0
   date: 2026-07-28
   result: all_passed
   render_seen: true
+  history: >
+    Run 1 (commit d8dc136) passed but did not exercise the magnifier
+    across the zoom range nor engine-specific arc rasterization. A
+    primary-reader report on iOS exposed (a) a blank magnifier at high
+    zoom (canvas arc rasterization under giant transforms) and (b)
+    coincident contact families that read as woven curves. Rendering
+    was rewritten in device coordinates with adaptive sampling, contact
+    families offset and marked, out-of-field annotations added (commit
+    34d28c4), and a new invariant was added: magnifier never blank
+    across the zoom range. That invariant's own first run produced a
+    false failure by sampling aliasing (stride-40 pixel reads missing
+    thin vertical traces) — an observation-layer artifact, fixed by
+    reading every pixel. Run 2 passed 23/23 checks per viewport pair.

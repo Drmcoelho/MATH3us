@@ -112,12 +112,17 @@ async function auditViewport(name, viewport) {
 
   // -- magnifier must never go blank across the zoom range
   //    (render incident 2026-07-28: iOS arc rasterization + field framing)
+  // NOTE: read EVERY pixel. A sparse stride aliases against the thin
+  // near-vertical traces (stride-40 sampling lands only on columns
+  // divisible by 20 and can miss all three lines entirely) — a pure
+  // observation-layer artifact that produced a false "blank" on the
+  // first run of this invariant.
   const lupaPainted = () => page.evaluate(() => {
     const c = document.getElementById('cv-zoom');
     const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
     let p = 0;
-    for (let i = 3; i < d.length; i += 160) if (d[i] !== 0) p++;
-    return p / (d.length / 160);
+    for (let i = 3; i < d.length; i += 4) if (d[i] !== 0) p++;
+    return p / (d.length / 4);
   });
   await page.click('#btn-reset');
   await page.fill('#zoom', '400'); await page.dispatchEvent('#zoom', 'input');
