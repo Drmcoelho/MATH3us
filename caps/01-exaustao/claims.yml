@@ -156,8 +156,14 @@ claims:
     notes: >
       Preregistered as C4 (conjecturas.md, 2026-07-28). Supported by the
       in-page table (exploratory, non-canonical evidence per E12).
-      Classical asymptotics (gap ~ pi^3 / n^2) predict it; the local
+      Classical asymptotics (gap ~ pi^3 / (2 n^2)) predict it; the local
       expansions needed for proof belong to Chapter 10.
+    correction_log: >
+      2026-07-28: notes and chapter text first attributed the constant
+      pi^3/n^2 to the semiperimeter gap; the primary reader caught the
+      swap. pi^3/n^2 is the AREA-gap asymptotic; the semiperimeter gap
+      satisfies n^2 (b_n - a_n) -> pi^3/2 (numerically verified,
+      n up to 393216). Recorded, not erased.
     verification:
       symbolic: { status: not_applicable, note: "conjecture; no proof claimed in this chapter" }
       numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: support only, ratio within 1e-4 of 0.25 at k=16" }
