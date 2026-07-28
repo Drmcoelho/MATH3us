@@ -168,9 +168,9 @@ fechamento. Ordem obrigatória de execução:
    abaixo; ver §5):
 
 ```
-git tag -a cap-02-gate2-r1 <merge-do-gate-v2> -m "chapter 2 release: gate v2, content revision 1"
-git tag -a cap-03-gate2-r1 <merge-do-gate-v2> -m "chapter 3 release: gate v2, content revision 1"
-git tag -a cap-04-gate2-r1 <merge-do-gate-v2> -m "chapter 4 release: gate v2, content revision 1"
+git tag -a cap-02-gate2-r1 19d2bc3 -m "chapter 2 release: gate v2, content revision 1"
+git tag -a cap-03-gate2-r1 19d2bc3 -m "chapter 3 release: gate v2, content revision 1"
+git tag -a cap-04-gate2-r1 19d2bc3 -m "chapter 4 release: gate v2, content revision 1"
 git push origin cap-02-gate2-r1 cap-03-gate2-r1 cap-04-gate2-r1
 ```
 
