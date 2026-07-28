@@ -2,7 +2,7 @@
 
 > Reconstrução formal de uma matemática já vivida.
 > Leitor primário: Matheus M. Coelho. Autor: o mesmo. Testemunha: o repositório.
-> Revisão 2 — emendas E1–E19 (ver §13).
+> Revisão 2 — emendas E1–E21 (ver §13).
 
 ---
 
@@ -264,13 +264,13 @@ A recíproca não é ornamental. Ela determina se o resultado apenas produz exem
 
 A numeração dos capítulos é a **ordem canônica de leitura** e é topologicamente compatível com as dependências. A ordem de produção, distinta, está na §5.
 
-### Prólogo (E20)
+### Prólogo (E21)
 
 | Cap. | Título | Sítio | Teoria puxada | Obrigação canônica | Falha prevista |
 |---|---|---|---|---|---|
 | 0 | A Inferência | Duas circunferências e um polígono: a configuração dual do Cap. 1. A cunha fundamental R, r, L/2 e a pergunta inferencial — o que o par de circunferências sabe sobre o polígono? | Pitágoras → semelhança e monotonia de área → medida do ângulo por área → desigualdade da cunha → sanduíches explícitos → decisão sob erro de medição | Demonstrar que (r, R) determina o polígono a menos de rotação; quantificar por desigualdades explícitas, **sem linguagem de limite**, o limiar quadrático (excluir o círculo) e o cúbico (decidir n) | Usar linguagem de limite antes de possuí-la; confundir a constante do déficit (π²/2, quadrática) com a da folga entre razões (π², cúbica) |
 
-**Capítulo 0 — obrigação estrutural (E20).** O capítulo precede o Capítulo 1 na leitura porque precisa de **menos**: nenhuma completude, nenhum limite, nenhum postulado de convexidade — apenas Pitágoras, semelhança, monotonia de área sob inclusão e a medida do ângulo pela área varrida. Obrigações: (i) o triângulo fundamental R² = r² + (L/2)² como átomo do polígono regular; (ii) a identidade da coroa (área da coroa = área do círculo de raio L/2), independente do valor de π; (iii) a razão r/R como portadora integral da forma — inferência de n a partir do par de circunferências, com o conjunto admissível discreto; (iv) desigualdades-sanduíche explícitas para o déficit 1 − r/R e para a folga entre razões consecutivas; (v) teoria da decisão sob erro δ: garantia de identificação, possibilidade de ambiguidade e a janela crepuscular (polígono certo, identidade indecidível). O símbolo π entra como **constante da área do disco** (ângulo medido por área); sua identificação com a constante perimetral do Cap. 1 é porta fechada → Cap. 9. Toda afirmação assintótica com seta (→) é observação de tabela ou conjectura pré-registrada — a linguagem de limite pertence ao Cap. 1. O capítulo fornece a cunha que a reconstrução geométrica do Cap. 1 (pendência editorial registrada) utilizará.
+**Capítulo 0 — obrigação estrutural (E21).** O capítulo precede o Capítulo 1 na leitura porque precisa de **menos**: nenhuma completude, nenhum limite, nenhum postulado de convexidade — apenas Pitágoras, semelhança, monotonia de área sob inclusão e a medida do ângulo pela área varrida. Obrigações: (i) o triângulo fundamental R² = r² + (L/2)² como átomo do polígono regular; (ii) a identidade da coroa (área da coroa = área do círculo de raio L/2), independente do valor de π; (iii) a razão r/R como portadora integral da forma — inferência de n a partir do par de circunferências, com o conjunto admissível discreto; (iv) desigualdades-sanduíche explícitas para o déficit 1 − r/R e para a folga entre razões consecutivas; (v) teoria da decisão sob erro δ: garantia de identificação, possibilidade de ambiguidade e a janela crepuscular (polígono certo, identidade indecidível). O símbolo π entra como **constante da área do disco** (ângulo medido por área); sua identificação com a constante perimetral do Cap. 1 é porta fechada → Cap. 9. Toda afirmação assintótica com seta (→) é observação de tabela ou conjectura pré-registrada — a linguagem de limite pertence ao Cap. 1. O capítulo fornece a cunha que a reconstrução geométrica do Cap. 1 (pendência editorial registrada) utilizará.
 
 ### Parte I — Escavações
 
@@ -391,7 +391,7 @@ Topologicamente compatível com as dependências: Fourier (11) sucede integral (
 
 As justificativas abaixo são **exclusivamente de produção** — descrevem a ordem em que o autor constrói, não a ordem em que o leitor recebe:
 
-- **Capítulo 0 depois do 1 (E20):** o prólogo nasceu da crítica do leitor primário ao Capítulo 1 já produzido — a configuração dual (duas circunferências, um polígono) e a cunha fundamental surgiram como o que faltava *antes*. A leitura recebe o prólogo primeiro; a produção o recebeu depois. Registrar isso é mais honesto que fingir planejamento prévio.
+- **Capítulo 0 depois do 1 (E21):** o prólogo nasceu da crítica do leitor primário ao Capítulo 1 já produzido — a configuração dual (duas circunferências, um polígono) e a cunha fundamental surgiram como o que faltava *antes*. A leitura recebe o prólogo primeiro; a produção o recebeu depois. Registrar isso é mais honesto que fingir planejamento prévio.
 - **Capítulo 3 cedo:** o menor sítio valida o formato mínimo com custo baixo. Deve provar que o projeto consegue produzir densidade sem gigantismo.
 - **Capítulo 6 produzido antes do 5:** o autor endurece primeiro sua própria desconfiança de gráficos e regularidade visual, e escreve o Cap. 5 já vacinado. Na leitura, o 5 vem antes do 6 sem dependência lógica: frações contínuas não exigem ε-δ.
 - **Capítulo 7 produzido antes do 5:** disponibiliza ao autor a linguagem de rotação e fase enquanto redige a ponte musical. Não é pré-requisito de leitura.
@@ -414,6 +414,7 @@ Quando um capítulo antecipar uma ideia futura, deverá marcá-la como porta fec
 7. **Experimento computacional inline** — controles; valores legíveis; código determinístico quando possível; capacidade de procurar contraexemplos; explicação do que o experimento não prova.
 8. **Gate de verificação** — na versão vigente (§1.7).
 9. **Horizonte** — pergunta que o capítulo torna inevitável; porta que permanece fechada; capítulo em que será reaberta.
+10. **Exercícios (E20)** — em cinco níveis: **N0 socrático** (revisão intuitiva e dedutiva do conceito, por perguntas); **N1 básico** (jogo geométrico ou computacional, relacionado ou não ao eixo do capítulo); **N2 intermediário** (opera o aparato do capítulo); **N3 difícil** (estende ou tensiona o aparato); **N4 "impossível por enquanto"** (enunciado honesto cuja solução pertence a capítulo ou ciclo futuro, com a porta indicada). N0–N3 exigem gabarito robusto e detalhado, escrito com a paciência de quem explica a uma criança inteligente — o gabarito é parte do argumento, não apêndice. N4 não recebe solução: recebe a razão precisa pela qual ainda não é possível, gerando a curiosidade que o capítulo futuro cobrará. Exercícios podem refutar ou estender conjecturas do capítulo; quando isso ocorrer, aplica-se o fluxo da §1.3 (autópsia e registro).
 
 ### 6.2 Elementos opcionais
 
@@ -727,4 +728,5 @@ Regras: emendas são **atômicas** — uma decisão por emenda; emendas nunca s�
 | E17 | 28/07/2026 | — | §11 | — | Fora de escopo reformulado: adiamento por ausência de sítio, não por competência presumida |
 | E18 | 28/07/2026 | — | §13 | — | Governança de emendas: atomicidade; imutabilidade; colunas de commit, seções e substituição |
 | E19 | 28/07/2026 | — | §3 (Cap. 10) | — | a⁰/0⁰ como interlúdio do Cap. 10; núcleo protegido: séries de potências como definição de função |
-| E20 | 28/07/2026 | — | §3, §5 | — | Capítulo 0 (A Inferência) criado como Prólogo: duas circunferências e um polígono; cunha fundamental; inferência sob erro por desigualdades, sem linguagem de limite; π entra como constante de área (identificação perimetral: porta → Cap. 9); numeração 1–12 inalterada; reconstrução geométrica do Cap. 1 sobre a cunha registrada como pendência editorial |
+| E20 | 28/07/2026 | pr-05 | §6.1 | — | Exercícios como elemento obrigatório do template, em cinco níveis (N0 socrático → N4 porta-fechada); gabarito robusto obrigatório em N0–N3; N4 sem solução, com a porta e a razão da impossibilidade atual declaradas |
+| E21 | 28/07/2026 | — | §3, §5 | — | Capítulo 0 (A Inferência) criado como Prólogo: duas circunferências e um polígono; cunha fundamental; inferência sob erro por desigualdades, sem linguagem de limite; π entra como constante de área (identificação perimetral: porta → Cap. 9); numeração 1–12 inalterada; reconstrução geométrica do Cap. 1 sobre a cunha registrada como pendência editorial. Nota de integração: nascida como "E20" em branch paralela à E20 dos exercícios; renumerada para E21 na integração — a colisão fica registrada, não reescrita |

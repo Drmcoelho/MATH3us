@@ -1,0 +1,27 @@
+release: cap-01-gate0-r1
+chapter: 1
+content_revision: 1
+gate_version: 0
+commit: f049091
+previous_release: null
+date: 2026-07-28
+primary_reader_verdict: given 2026-07-28
+audit:
+  oracle_report: caps/01-exaustao/audit/numeric-check.json
+  interaction_report: caps/01-exaustao/audit/interaction-report.json
+  symbolic_check: caps/01-exaustao/audit/symbolic-check.md
+  edge_cases: caps/01-exaustao/audit/edge-cases.md
+  screenshots:
+    - caps/01-exaustao/audit/desktop.png
+    - caps/01-exaustao/audit/iphone.png
+tag_status: >
+  Annotated tag cap-01-gate0-r1 -> f049091 was created locally by the
+  coordinator session; pushing tags is refused by this session's git
+  proxy (HTTP 403 - branch pushes only). The remote tag must be created
+  by the repository owner:
+    git fetch origin main
+    git tag -a cap-01-gate0-r1 f049091 -m "Chapter 1 gate v0 release r1"
+    git push origin cap-01-gate0-r1
+  (or GitHub UI: Releases -> Draft new release -> tag cap-01-gate0-r1,
+  target commit f049091). This manifest is the durable release record;
+  the incident is declared here rather than hidden (E12 spirit).

@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "math3us/claims.schema.json",
+  "title": "MATH3us chapter claims ledger (gate v1, E6/E13)",
+  "type": "object",
+  "required": ["chapter", "claims"],
+  "properties": {
+    "chapter": { "type": "integer", "minimum": 0, "maximum": 12 },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/claim" }
+    },
+    "oracle_run": { "$ref": "#/definitions/run" },
+    "audit_run": { "$ref": "#/definitions/run" }
+  },
+  "definitions": {
+    "claim": {
+      "type": "object",
+      "required": ["id", "statement", "kind", "status", "provenance", "proof_mode"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^chapter-[0-9]{2}\\.[a-z0-9-]+$" },
+        "statement": { "type": "string", "minLength": 10 },
+        "kind": {
+          "enum": ["theorem", "lemma", "definition", "conjecture", "estimate", "question", "synthesis"]
+        },
+        "status": {
+          "enum": ["proved", "supported", "conjectured", "refuted", "open", "conditional"]
+        },
+        "provenance": {
+          "enum": ["classical", "rediscovered", "derived_in_treatise", "authorial", "unknown"]
+        },
+        "proof_mode": {
+          "enum": ["proved_here", "cited", "computational_only", "not_applicable"]
+        },
+        "role": {
+          "enum": ["central_result", "supporting_result", "example", "bridge"]
+        },
+        "proof_location": { "type": "string", "pattern": "^#" },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["claim"],
+            "properties": {
+              "claim": { "type": "string", "pattern": "^chapter-[0-9]{2}\\.[a-z0-9-]+$" },
+              "door": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "verification": {
+          "type": "object",
+          "properties": {
+            "symbolic": { "$ref": "#/definitions/verificationLeg" },
+            "numeric": { "$ref": "#/definitions/verificationLeg" },
+            "edge_cases": { "$ref": "#/definitions/verificationLeg" }
+          },
+          "additionalProperties": false
+        },
+        "notes": { "type": "string" },
+        "priority_note": { "type": "string" },
+        "correction_log": { "type": "string" },
+        "autopsy": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "verificationLeg": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["passed", "failed", "pending", "not_applicable"] },
+        "artifact": { "type": "string" },
+        "implementation": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "run": {
+      "type": "object",
+      "required": ["script", "code_commit", "date"],
+      "properties": {
+        "script": { "type": "string" },
+        "code_commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

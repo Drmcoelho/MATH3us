@@ -146,27 +146,37 @@ claims:
   - id: chapter-01.gap-ratio-quarter
     statement: >
       The ratio (b_{2n} - a_{2n}) / (b_n - a_n) converges to 1/4.
-    kind: conjecture
-    status: supported
-    provenance: classical
-    proof_mode: computational_only
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
     proof_location: "#o-que-a-prova-nao-entregou"
     dependencies:
       - claim: "chapter-01.archimedes-recurrences"
-    notes: >
-      Preregistered as C4 (conjecturas.md, 2026-07-28). Supported by the
-      in-page table (exploratory, non-canonical evidence per E12).
-      Classical asymptotics (gap ~ pi^3 / (2 n^2)) predict it; the local
-      expansions needed for proof belong to Chapter 10.
+      - claim: "chapter-01.gap-halving"
+      - claim: "chapter-01.pi-common-limit"
     correction_log: >
-      2026-07-28: notes and chapter text first attributed the constant
-      pi^3/n^2 to the semiperimeter gap; the primary reader caught the
-      swap. pi^3/n^2 is the AREA-gap asymptotic; the semiperimeter gap
-      satisfies n^2 (b_n - a_n) -> pi^3/2 (numerically verified,
-      n up to 393216). Recorded, not erased.
+      2026-07-28: preregistered as conjecture C4; first recorded as
+      supported-only with proof deferred to Chapter 10. Promoted to
+      theorem the same day via the exact gap factorization
+      (b_2n - a_2n)/(b_n - a_n) = [a_n/(a_n+b_n)]*[sqrt(b_2n)/(sqrt(a_n)+sqrt(b_2n))],
+      each bracket -> 1/2 by common convergence to pi. Found while
+      designing exercise E3.1. Recorded, not erased.
+      Also 2026-07-28, parallel branch: the semiperimeter-gap constant
+      was written as pi^3/n^2 in notes and chapter text; the primary
+      reader caught the swap - pi^3/n^2 is the AREA-gap asymptotic,
+      while the semiperimeter gap satisfies n^2 (b_n - a_n) -> pi^3/2
+      (numerically verified up to n = 393216). The swap reappeared in
+      the parallel promotion wording (chapter text, exercise E4.2 and
+      this ledger) and was fixed at merge integration. Recorded, not
+      erased.
+    notes: >
+      The sharp asymptotic form gap ~ pi^3/(2 n^2) (exact constant) is
+      NOT claimed here; it remains a closed door to Chapter 10 (E4.2).
     verification:
-      symbolic: { status: not_applicable, note: "conjecture; no proof claimed in this chapter" }
-      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: support only, ratio within 1e-4 of 0.25 at k=16" }
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6: exact factorization and limit" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: independent numeric witness, ratio within 1e-4 of 0.25 at k=16" }
       edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
 
   - id: chapter-01.elementary-apparatus-limit
@@ -175,12 +185,19 @@ claims:
       recurrences) cannot deliver the 1/4 contraction factor; 1/2 is
       what it proves.
     kind: conjecture
-    status: conjectured
+    status: refuted
     provenance: authorial
     proof_mode: not_applicable
+    autopsy: >
+      Refuted 2026-07-28, the same day it was preregistered (C5), while
+      designing exercise E3.1: the gap admits an exact factorization —
+      no estimation needed — and common convergence closes the 1/4
+      limit elementarily. Full five-question autopsy in conjecturas.md.
+      The surviving kernel: 1/2 is a uniform per-step bound, 1/4 is
+      asymptotic, and the exact constant pi^3 still needs Chapter 10.
     priority_note: >
       Authorial meta-conjecture within this treatise about provability
-      with declared tools; to be settled (or autopsied) by Chapter 10.
+      with declared tools; settled by refutation in-chapter.
     dependencies:
       - claim: "chapter-01.gap-halving"
       - claim: "chapter-01.gap-ratio-quarter"
@@ -190,7 +207,7 @@ oracle_run:
   script: tools/oracle.py
   report: caps/01-exaustao/audit/numeric-check.json
   edge_report: caps/01-exaustao/audit/edge-cases.md
-  code_commit: d8dc136
+  code_commit: f770cc9
   environment: "python 3.12, stdlib only, linux"
   date: 2026-07-28
   tested_domain:
@@ -213,7 +230,7 @@ audit_run:
   script: tools/audit.mjs
   report: caps/01-exaustao/audit/interaction-report.json
   screenshots: [caps/01-exaustao/audit/desktop.png, caps/01-exaustao/audit/iphone.png]
-  code_commit: 34d28c4
+  code_commit: f770cc9
   gate: v0
   date: 2026-07-28
   result: all_passed

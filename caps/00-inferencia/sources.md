@@ -8,7 +8,7 @@ Estado em 28/07/2026.
 na sessão de trabalho que também produziu a correção do fator 2 no Capítulo 1.
 **Natureza:** fala original (não transcrição, não resumo posterior). O documento
 é declaradamente misto: em sua maior parte é *crítica ao Capítulo 1
-implementado* (material da pendência editorial de reconstrução, E20 — não deste
+implementado* (material da pendência editorial de reconstrução, E21 — não deste
 capítulo); entremeada, está a instrução fundadora deste prólogo.
 
 Fragmentos verbatim com função fundadora para o Capítulo 0:

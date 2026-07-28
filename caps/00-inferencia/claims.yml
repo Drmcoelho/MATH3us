@@ -31,9 +31,12 @@ claims:
     kind: definition
     status: proved
     provenance: classical
-    proof_mode: not_applicable
+    proof_mode: cited
     role: bridge
     notes: >
+      Direct classical precedent located (prioridade.md): Apostol's
+      Calculus defines sine and cosine by sector area, deferring arc
+      length for the same reason this chapter does.
       The identification of this area constant with the perimetric
       constant of chapter 1 (and of area-angle with arc-angle) is a
       THEOREM, deferred: closed door to chapter 9. Numeric

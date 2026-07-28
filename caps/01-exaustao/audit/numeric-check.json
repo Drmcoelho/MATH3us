@@ -1,7 +1,7 @@
 {
   "chapter": 1,
   "script": "tools/oracle.py",
-  "code_commit": "d8dc136",
+  "code_commit": "bc2ea1f",
   "date": "2026-07-28",
   "environment": "python 3.11.15, stdlib only, linux",
   "implementations": {
@@ -47,7 +47,7 @@
       "final_ratio": 0.24999999998803152,
       "abs_dev_from_0.25": 1.1968481761215344e-11,
       "passed": true,
-      "note": "supports conjecture chapter-01.gap-ratio-quarter; NOT a proof"
+      "note": "independent numeric witness for chapter-01.gap-ratio-quarter (proved in-chapter on 2026-07-28 via exact factorization, symbolic-check S6; originally preregistered as conjecture C4)"
     }
   },
   "all_passed": true,

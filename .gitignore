@@ -1,0 +1,7 @@
+# Claude Code session infrastructure (agent worktrees, local state)
+.claude/
+
+# validator dependencies (gate v1), resolved locally — not vendored
+node_modules/
+package.json
+package-lock.json
