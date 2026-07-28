@@ -123,15 +123,30 @@ ordem de produção (§5: os Capítulos 2–4 já estão em produção no main).
 auditados sob gate v0 e validados pelo gate v1 com zero achados (§1). Cada um
 aguarda sua tag — mesma natureza da D1: ato humano, imutável, um por capítulo.
 
-**Execução, quando decidida** (o proxy dos agentes recusa push de tags —
-executar como proprietário, ou via GitHub UI → Releases):
+**Sequenciamento de gates (correção aceita de revisão externa, 28/07/2026).**
+O §1.7 endurece o gate a cada fechamento: o 2º capítulo fechado ativa o
+gate v1 (já entregue e executado) e o **3º ativa o gate v2** — que ainda não
+existe (`tools/bundle.mjs` + `tools/validate-release.mjs`). Tags são
+imutáveis: taggear os Caps. 2–4 antes de o gate v2 existir e rodar
+registraria para sempre releases que contornaram o gate vigente no seu
+fechamento. Ordem obrigatória de execução:
+
+1. **D1** (`cap-00-gate0-r1` em `73caa07`) — 2º fechamento; gate v1 já
+   executado sobre o ledger (16 claims), sem pendência;
+2. **coordenadora entrega o gate v2** e o executa sobre os Caps. 2–4 (com a
+   reauditoria E9 dos já fechados);
+3. **só então** as tags dos Caps. 2–4, nomeadas sob o gate que de fato
+   validou cada release:
 
 ```
-git tag -a cap-02-gate0-r1 a7a41c1 -m "chapter 2 release: gate v1, content revision 1"
-git tag -a cap-03-gate0-r1 a7a41c1 -m "chapter 3 release: gate v1, content revision 1"
-git tag -a cap-04-gate0-r1 a7a41c1 -m "chapter 4 release: gate v1, content revision 1"
-git push origin cap-02-gate0-r1 cap-03-gate0-r1 cap-04-gate0-r1
+git tag -a cap-02-gate2-r1 <commit-do-gate-v2> -m "chapter 2 release: gate v2, content revision 1"
+git tag -a cap-03-gate2-r1 <commit-do-gate-v2> -m "chapter 3 release: gate v2, content revision 1"
+git tag -a cap-04-gate2-r1 <commit-do-gate-v2> -m "chapter 4 release: gate v2, content revision 1"
+git push origin cap-02-gate2-r1 cap-03-gate2-r1 cap-04-gate2-r1
 ```
+
+(o proxy dos agentes recusa push de tags — executar como proprietário, ou
+via GitHub UI → Releases)
 
 com manifests em `releases/manifests/` (§1.7). **Atenção:** nenhuma tag
 remota existe ainda — nem `cap-01-gate0-r1` (decisão D2 exercida, manifest no
