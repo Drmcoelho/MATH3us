@@ -110,6 +110,26 @@ async function auditViewport(name, viewport) {
   check(`${name}.self_contained_no_network`, external.length === 0,
     external.length ? external.join(' ') : 'only file:// requests');
 
+  // -- magnifier must never go blank across the zoom range
+  //    (render incident 2026-07-28: iOS arc rasterization + field framing)
+  const lupaPainted = () => page.evaluate(() => {
+    const c = document.getElementById('cv-zoom');
+    const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+    let p = 0;
+    for (let i = 3; i < d.length; i += 160) if (d[i] !== 0) p++;
+    return p / (d.length / 160);
+  });
+  await page.click('#btn-reset');
+  await page.fill('#zoom', '400'); await page.dispatchEvent('#zoom', 'input');
+  const paintedN6 = await lupaPainted();
+  for (let i = 0; i < 4; i++) await page.click('#btn-doble');
+  const paintedN96 = await lupaPainted();
+  check(`${name}.magnifier_painted_at_extreme_zoom`,
+    paintedN6 > 0.0005 && paintedN96 > 0.0005,
+    `share n=6: ${paintedN6.toFixed(4)}, n=96: ${paintedN96.toFixed(4)} at 400x`);
+  await page.click('#btn-reset'); await page.click('#btn-doble');
+  await page.fill('#zoom', '120'); await page.dispatchEvent('#zoom', 'input');
+
   // -- screenshot (full page: typography and formulas inspectable)
   await page.screenshot({ path: `${auditDir}/${name}.png`, fullPage: true });
   await page.close();
