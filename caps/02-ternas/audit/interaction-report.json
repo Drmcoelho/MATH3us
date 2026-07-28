@@ -1,0 +1,112 @@
+{
+  "chapter_dir": "/home/user/MATH3us/.claude/worktrees/agent-a7551e034efcf2554/caps/02-ternas",
+  "script": "caps/02-ternas/audit.mjs",
+  "code_commit": "3c8942d",
+  "date": "2026-07-28",
+  "gate": "v0",
+  "checks": {
+    "desktop.interaction_values_n11": {
+      "passed": true,
+      "detail": "expected L=60 R=61 K=330 in \"n = 11  |  L = 60  |  R = 61  |  teste n²+L²−R² = 0  |  P = 132  |  s = 66  |  K = 330  | …\""
+    },
+    "desktop.prev_and_reset": {
+      "passed": true
+    },
+    "desktop.keyboard_activation": {
+      "passed": true
+    },
+    "desktop.slider_control": {
+      "passed": true
+    },
+    "desktop.table_rows_and_highlight": {
+      "passed": true,
+      "detail": "rows=10, highlighted n=17"
+    },
+    "desktop.no_horizontal_overflow": {
+      "passed": true
+    },
+    "desktop.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0265, 0.0415"
+    },
+    "desktop.canvases_never_blank_across_range": {
+      "passed": true
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=13, imgs=0"
+    },
+    "desktop.aria_live_region_present": {
+      "passed": true
+    },
+    "desktop.claims_proof_anchors_exist": {
+      "passed": true,
+      "detail": "all 9 anchors present"
+    },
+    "desktop.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=15, gabaritos=15"
+    },
+    "desktop.gabarito_toggle": {
+      "passed": true
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.interaction_values_n11": {
+      "passed": true,
+      "detail": "expected L=60 R=61 K=330 in \"n = 11  |  L = 60  |  R = 61  |  teste n²+L²−R² = 0  |  P = 132  |  s = 66  |  K = 330  | …\""
+    },
+    "iphone.prev_and_reset": {
+      "passed": true
+    },
+    "iphone.keyboard_activation": {
+      "passed": true
+    },
+    "iphone.slider_control": {
+      "passed": true
+    },
+    "iphone.table_rows_and_highlight": {
+      "passed": true,
+      "detail": "rows=10, highlighted n=17"
+    },
+    "iphone.no_horizontal_overflow": {
+      "passed": true
+    },
+    "iphone.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0265, 0.0415"
+    },
+    "iphone.canvases_never_blank_across_range": {
+      "passed": true
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=13, imgs=0"
+    },
+    "iphone.aria_live_region_present": {
+      "passed": true
+    },
+    "iphone.claims_proof_anchors_exist": {
+      "passed": true,
+      "detail": "all 9 anchors present"
+    },
+    "iphone.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=15, gabaritos=15"
+    },
+    "iphone.gabarito_toggle": {
+      "passed": true
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}
