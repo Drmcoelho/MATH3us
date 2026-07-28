@@ -2,7 +2,7 @@
 
 > Reconstrução formal de uma matemática já vivida.
 > Leitor primário: Matheus M. Coelho. Autor: o mesmo. Testemunha: o repositório.
-> Revisão 2 — emendas E1–E21 (ver §13).
+> Revisão 2 — emendas E1–E22 (ver §13).
 
 ---
 
@@ -415,6 +415,7 @@ Quando um capítulo antecipar uma ideia futura, deverá marcá-la como porta fec
 8. **Gate de verificação** — na versão vigente (§1.7).
 9. **Horizonte** — pergunta que o capítulo torna inevitável; porta que permanece fechada; capítulo em que será reaberta.
 10. **Exercícios (E20)** — em cinco níveis: **N0 socrático** (revisão intuitiva e dedutiva do conceito, por perguntas); **N1 básico** (jogo geométrico ou computacional, relacionado ou não ao eixo do capítulo); **N2 intermediário** (opera o aparato do capítulo); **N3 difícil** (estende ou tensiona o aparato); **N4 "impossível por enquanto"** (enunciado honesto cuja solução pertence a capítulo ou ciclo futuro, com a porta indicada). N0–N3 exigem gabarito robusto e detalhado, escrito com a paciência de quem explica a uma criança inteligente — o gabarito é parte do argumento, não apêndice. N4 não recebe solução: recebe a razão precisa pela qual ainda não é possível, gerando a curiosidade que o capítulo futuro cobrará. Exercícios podem refutar ou estender conjecturas do capítulo; quando isso ocorrer, aplica-se o fluxo da §1.3 (autópsia e registro).
+11. **Fundação geométrica visual (E22)** — geometria é o alicerce da obra, e geometria se dá pelo desenho. Todo capítulo que introduza ou use trigonometria deve, **antes do primeiro uso**, apresentar a figura do triângulo retângulo com lados nomeados e as definições escolares formais como razões: **sen θ = cateto oposto / hipotenusa**, **cos θ = cateto adjacente / hipotenusa**, **tg θ = cateto oposto / cateto adjacente** — a figura e a razão juntas, nunca a fórmula sozinha. Objetos geométricos novos (cunha, coroa, tangência, semelhança) entram desenhados e nomeados antes de entrarem em fórmula. A regra vale retroativamente como pendência editorial dos capítulos já integrados que usam trigonometria sem este preâmbulo.
 
 ### 6.2 Elementos opcionais
 
@@ -730,3 +731,4 @@ Regras: emendas são **atômicas** — uma decisão por emenda; emendas nunca s�
 | E19 | 28/07/2026 | — | §3 (Cap. 10) | — | a⁰/0⁰ como interlúdio do Cap. 10; núcleo protegido: séries de potências como definição de função |
 | E20 | 28/07/2026 | pr-05 | §6.1 | — | Exercícios como elemento obrigatório do template, em cinco níveis (N0 socrático → N4 porta-fechada); gabarito robusto obrigatório em N0–N3; N4 sem solução, com a porta e a razão da impossibilidade atual declaradas |
 | E21 | 28/07/2026 | — | §3, §5 | — | Capítulo 0 (A Inferência) criado como Prólogo: duas circunferências e um polígono; cunha fundamental; inferência sob erro por desigualdades, sem linguagem de limite; π entra como constante de área (identificação perimetral: porta → Cap. 9); numeração 1–12 inalterada; reconstrução geométrica do Cap. 1 sobre a cunha registrada como pendência editorial. Nota de integração: nascida como "E20" em branch paralela à E20 dos exercícios; renumerada para E21 na integração — a colisão fica registrada, não reescrita |
+| E22 | 28/07/2026 | — | §6.1 | — | Fundação geométrica visual: diretiva do autor — todo uso de trigonometria precedido da figura do triângulo retângulo com as definições escolares formais em razões (sen = oposto/hipotenusa, cos = adjacente/hipotenusa, tg = oposto/adjacente); objetos geométricos desenhados e nomeados antes de entrarem em fórmula; aplicação retroativa registrada como pendência editorial dos capítulos integrados |

@@ -110,7 +110,8 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 
 | Cap. | Estado | Branch | Última auditoria |
 |---|---|---|---|
-| 1 | **fechado** — release cap-01-gate0-r1 (manifest em `releases/manifests/`; tag remota a criar pelo proprietário) | coordenadora | 28/07/2026 — oráculo 8/8, auditoria 25/25 por viewport |
+| 0 | **integrado** (PR #8) — prólogo criado por E21; auditado v0 (oráculo 12/12, auditoria 31/31); gate v1 validado na integração; aguarda tag (Decisão D1, `AUDIT.md`) | claude/chapter-1-geometric-rebuild-uf3z1f → main | 28/07/2026 |
+| 1 | **fechado** — release cap-01-gate0-r1 (manifest em `releases/manifests/`; tag remota a criar pelo proprietário); revisão r2 pendente pelas correções pós-release (Decisão D2′, `AUDIT.md`) | coordenadora | 28/07/2026 — oráculo 8/8, auditoria 25/25 por viewport; re-executado pós-merge PR #8 |
 | 2 | **integrado** — auditado v0 (oráculo 10/10, auditoria 29/29); aguarda veredito do leitor primário para tag | wave1/cap-02 → coordenadora | 28/07/2026 |
 | 3 | **integrado** — auditado v0 (oráculo 7/7, auditoria 31/31); formato mínimo comprovado; aguarda veredito | wave1/cap-03 → coordenadora | 28/07/2026 |
 | 4 | **integrado** — auditado v0 (oráculo 9/9 com 27.986 expansões, auditoria 41/41); aguarda veredito | wave1/cap-04 → coordenadora | 28/07/2026 |
@@ -122,6 +123,15 @@ integração por cherry-pick na coordenadora, cada ledger validado pelo
 `verify-claims.mjs` (gate v1 antecipado) com zero achados. Incidentes dos
 agentes registrados nos próprios capítulos, não apagados. Próxima onda
 (Caps. 6 e 7) pode disparar após o fechamento formal de 2–4.
+
+**Nota de coordenação (28/07/2026, pós-reconciliação):** pela tabela da §4,
+as pré-condições **lógicas** da Onda 2 já estão satisfeitas — Cap. 6 exige
+Cap. 1 fechado (veredito dado, D2 exercida) e Cap. 7 exige claims do Cap. 2
+na `main` (PR #9). O condicionamento ao fechamento formal de 2–4, acima, é
+critério mais estrito adotado pela coordenadora da Onda 1; a arbitragem
+entre os dois está registrada na Decisão D4 do `AUDIT.md`, junto com as
+tags pendentes (nenhuma tag remota existe, nem a do Cap. 1). O fechamento
+do 3º capítulo arma o gate v2 (tabela de gatilhos, §4).
 
 **Gate v1 pronto (antecipado):** `schemas/claims.schema.json` e
 `tools/verify-claims.mjs` já existem e validam o Cap. 1; tornam-se
