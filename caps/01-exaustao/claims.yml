@@ -163,9 +163,17 @@ claims:
       (b_2n - a_2n)/(b_n - a_n) = [a_n/(a_n+b_n)]*[sqrt(b_2n)/(sqrt(a_n)+sqrt(b_2n))],
       each bracket -> 1/2 by common convergence to pi. Found while
       designing exercise E3.1. Recorded, not erased.
+      Also 2026-07-28, parallel branch: the semiperimeter-gap constant
+      was written as pi^3/n^2 in notes and chapter text; the primary
+      reader caught the swap - pi^3/n^2 is the AREA-gap asymptotic,
+      while the semiperimeter gap satisfies n^2 (b_n - a_n) -> pi^3/2
+      (numerically verified up to n = 393216). The swap reappeared in
+      the parallel promotion wording (chapter text, exercise E4.2 and
+      this ledger) and was fixed at merge integration. Recorded, not
+      erased.
     notes: >
-      The sharp asymptotic form gap ~ pi^3/n^2 (exact constant) is NOT
-      claimed here; it remains a closed door to Chapter 10 (E4.2).
+      The sharp asymptotic form gap ~ pi^3/(2 n^2) (exact constant) is
+      NOT claimed here; it remains a closed door to Chapter 10 (E4.2).
     verification:
       symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6: exact factorization and limit" }
       numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "tools/oracle.py", note: "I8: independent numeric witness, ratio within 1e-4 of 0.25 at k=16" }

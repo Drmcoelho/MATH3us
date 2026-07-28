@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 0 — A Inferência · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --in-color:#1c5e3c; --out-color:#8a3318; --poly-color:#26221a; --wedge-color:#1d4a6b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  figure{margin:1.6rem 0}
+  figcaption{font-size:.92rem; color:var(--ink-soft); margin-top:.5rem}
+  .painel{border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0}
+  .canvases{display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:flex-start}
+  canvas{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto}
+  .controles{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.9rem 0}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  button.mini{padding:.25rem .6rem; font-size:.9rem}
+  label{font-size:.95rem}
+  input[type=range]{vertical-align:middle}
+  input[type=number]{font-family:'Courier New',monospace; font-size:1rem; padding:.3rem; width:8.5rem;
+    border:1px solid var(--box-edge); background:#fffdf7; color:var(--ink)}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.98rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge); overflow-x:auto;
+  }
+  .veredito{
+    font-size:1.02rem; background:var(--box); border-left:4px solid var(--wedge-color);
+    padding:.7rem .9rem; margin:.8rem 0;
+  }
+  .legenda-cores{font-size:.92rem; margin:.4rem 0}
+  .sw{display:inline-block; width:.85em; height:.85em; margin-right:.3em; vertical-align:baseline; border:1px solid var(--ink)}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Prólogo</span>
+  <h1>Capítulo 0 — A Inferência</h1>
+  <p><span class="tipo">território virgem</span></p>
+  <p class="pergunta">Todo polígono regular carrega duas circunferências — a inscrita, de raio r, e a
+  circunscrita, de raio R. <strong>O que esse par de circunferências sabe sobre o polígono?</strong>
+  Se eu só puder medir r e R — com erro — o que posso inferir: quantos lados, que tamanho, com que
+  certeza? E onde a inferência <strong>morre</strong>?
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2>1. O cerco invertido</h2>
+<p>O Capítulo 1 cerca uma circunferência com dois polígonos. Este prólogo inverte a configuração:
+<strong>duas circunferências aprisionam um polígono</strong>. A inversão não é jogo de espelhos — ela muda a
+pergunta. Lá, a pergunta é de <em>convergência</em>: por que o cerco fecha? Aqui, a pergunta é de
+<em>inferência</em>: o que as medidas do cerco revelam sobre o cercado — e quando deixam de revelar.</p>
+<p>Este capítulo vem antes do Capítulo 1 porque precisa de <strong>menos</strong>. Nenhuma completude dos
+reais, nenhum limite, nenhum postulado de convexidade. O inventário completo de importações: o teorema de
+Pitágoras; o princípio de que área é monótona sob inclusão; o princípio de que área escala com o quadrado
+sob semelhança. Só. Em troca, uma regra de casa mais dura que a do Capítulo 1: <strong>nenhuma frase deste
+capítulo usará linguagem de limite</strong>. Toda afirmação será uma desigualdade explícita, verificável em
+cada n individualmente. Onde a tabela <em>sugerir</em> um valor-limite, a sugestão será registrada como
+observação e a seta (→) ficará em quarentena até o Capítulo 1 construir o direito de usá-la.</p>
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<!-- ============================================================ -->
+<h2 id="a-cunha">2. A cunha</h2>
+<p>Tome um polígono regular de n lados: seu centro O, um vértice V, e o ponto médio M do lado que parte
+de V. Três pontos, três segmentos:</p>
+<p class="formula">OV = R (raio da circunscrita), &nbsp;&nbsp; OM = r (raio da inscrita, o apótema),
+&nbsp;&nbsp; MV = L/2 (meio lado).</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado A (o triângulo fundamental)</span>
+  <p style="margin:0">O triângulo OMV é retângulo em M, e portanto
+  <span class="formula" style="display:block">R² = r² + (L/2)².</span>
+  O polígono inteiro é esta cunha repetida 2n vezes em torno de O. As duas circunferências não são
+  acréscimos à figura: <em>nascem do mesmo triângulo</em> — a circunscrita é o lugar da hipotenusa OV,
+  a inscrita é o lugar do cateto OM.</p>
+</div>
+
+<div class="prova">
+  <p><strong>Prova.</strong> Sejam V e V′ vértices adjacentes. O triângulo OVV′ é isósceles (OV = OV′ = R,
+  raios do mesmo polígono regular). Em triângulo isósceles, a mediana relativa à base é também altura:
+  o segmento OM, que liga O ao ponto médio M de VV′, é perpendicular ao lado. Logo OMV tem ângulo reto
+  em M, e Pitágoras dá R² = OM² + MV² = r² + (L/2)².<span class="qed">∎</span></p>
+</div>
+
+<p>Chame de θ o semiângulo central da cunha (a volta inteira dividida em 2n partes; θ = π/n na notação
+que a caixa da seção 3 tornará precisa). As razões do triângulo retângulo ganham os nomes geométricos
+clássicos — <em>razões</em>, não séries, não funções analíticas:</p>
+<p class="formula">r/R = cos θ, &nbsp;&nbsp; (L/2)/R = sen θ, &nbsp;&nbsp; (L/2)/r = tg θ.</p>
+<p>A razão r/R receberá um nome próprio, porque este capítulo inteiro gira em torno dela:</p>
+<p class="formula">ρ<sub>n</sub> = r/R = cos(π/n).</p>
+
+<div class="painel">
+  <div class="canvases">
+    <figure style="margin:0">
+      <canvas id="cv-main" width="420" height="420"
+        aria-label="Polígono regular com suas duas circunferências: a circunscrita (traço vermelho) passa pelos vértices, marcados com pontos cheios; a inscrita (traço verde) toca os pontos médios dos lados, marcados com pontos vazados. A coroa entre as duas circunferências aparece sombreada. Uma cunha fundamental é destacada à direita, com o raio R até o vértice, o apótema r e o meio lado L/2, e o ângulo reto marcado em M. O número de lados é controlado pelos botões e pelo cursor abaixo. Os valores numéricos aparecem na linha de status e na tabela da seção 7."></canvas>
+      <figcaption>O cerco invertido: a circunscrita beija o polígono nos vértices (●); a inscrita, nos
+      pontos médios dos lados (○). Entre elas, sombreada, a coroa — onde o polígono inteiro mora.
+      À direita, a cunha fundamental OMV.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <canvas id="cv-wedge" width="280" height="280"
+        aria-label="A cunha fundamental normalizada: triângulo retângulo com hipotenusa R de comprimento fixo na tela, cateto horizontal r e cateto vertical L/2, para o número atual de lados (traço contínuo) e para um lado a mais (traço tracejado). Conforme n cresce, os dois triângulos afinam e tornam-se indistinguíveis; a linha de status registra a diferença numérica entre as duas razões."></canvas>
+      <figcaption>A cunha normalizada (R fixo na tela): n lados em traço contínuo, n+1 em tracejado.
+      O que o olho deixa de separar, a linha de status ainda separa — por enquanto.</figcaption>
+    </figure>
+  </div>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#8a3318"></span>circunscrita (R) ·
+    <span class="sw" style="background:#1c5e3c"></span>inscrita (r) ·
+    <span class="sw" style="background:#26221a"></span>polígono ·
+    <span class="sw" style="background:#1d4a6b"></span>meio lado (L/2) ·
+    <span style="color:#8a3318">●</span> vértice <em>sobre</em> a circunscrita ·
+    <span style="color:#1c5e3c">○</span> ponto médio <em>sobre</em> a inscrita
+  </div>
+  <div class="controles">
+    <button id="btn-minus" type="button">n − 1</button>
+    <button id="btn-plus" type="button">n + 1</button>
+    <button id="btn-double" type="button">Duplicar n</button>
+    <button id="btn-reset" type="button">Recomeçar (n = 3)</button>
+    <label for="n-range">n:
+      <input type="range" id="n-range" min="3" max="96" value="3" step="1"
+             aria-describedby="n-range-desc">
+    </label>
+    <span id="n-range-desc" class="visually-hidden">Número de lados do polígono, de 3 a 96.</span>
+  </div>
+  <p class="leitura" id="leitura-1" role="status" aria-live="polite"></p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Nada — como sempre. Ele produz observações: pixels e ponto flutuante (§2.1 do
+  manual). Sua função aqui é outra: fixar <em>o objeto</em> deste capítulo. Não é o polígono que
+  interessa, nem as circunferências. É o <strong>par</strong> — e o que ele carrega de informação.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="a-coroa">3. A coroa</h2>
+<p>Entre as duas circunferências há uma coroa circular de largura R − r, e o contorno do polígono mora
+inteiro dentro dela. Antes de medir a coroa, é preciso declarar com que régua se medem áreas de figuras
+circulares — e aqui o capítulo faz sua única convenção delicada.</p>
+
+<div class="caixa">
+  <span class="rotulo">Convenção (medida do ângulo pela área; o estatuto de π neste capítulo)</span>
+  <p>Pelos princípios importados, a área do disco de raio ϱ é C·ϱ² para uma constante universal C
+  (semelhança: dobrar o raio quadruplica a área). <strong>Definimos</strong>: a medida de um ângulo de
+  vértice O é o dobro da área do setor que ele recorta no disco unitário centrado em O. A meia-volta mede,
+  então, exatamente C — e é a esse número que este capítulo chama <strong>π</strong>. Com isso, o setor de
+  ângulo θ no disco de raio ϱ tem área θϱ²/2, por construção, e o semiângulo central da cunha é θ = π/n.</p>
+  <p style="margin:0">O leitor conhece π por outro caminho — comprimento. A medida usual do ângulo
+  (por arco) e a identificação da constante de área com a constante de perímetro <em>coincidem</em> com as
+  daqui; mas essa coincidência é um teorema, não uma notação, e sua prova exige comparar comprimentos de
+  curvas — aparato que o tratado só constrói adiante. <strong>Porta fechada → Capítulo 9.</strong> Nas
+  implementações numéricas deste capítulo usamos as funções trigonométricas padrão, o que <em>pressupõe</em>
+  a coincidência sem prová-la: camada de observação, declarada como tal.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado B (a identidade da coroa)</span>
+  <p style="margin:0">A coroa entre as duas circunferências tem área igual à do círculo cujo raio é o
+  meio lado:
+  <span class="formula" style="display:block">C·R² − C·r² = C·(L/2)².</span>
+  A identidade vale <em>qualquer que seja</em> o valor da constante C — ela é Pitágoras vestido de área,
+  e não consome nenhum conhecimento sobre π.</p>
+</div>
+
+<div class="prova">
+  <p><strong>Prova.</strong> C·R² − C·r² = C·(R² − r²) = C·(L/2)², pelo Enunciado A.<span class="qed">∎</span>
+  <br><span style="font-size:.92rem; color:var(--ink-soft)">Nota: existe uma prova sem palavras clássica —
+  varrer a coroa com o meio lado MV girando tangente à circunferência inscrita (o varrido tangencial de
+  Mamikon). Fica como imagem, não como argumento: o argumento de uma linha acima basta e importa menos.</span></p>
+</div>
+
+<p>A coroa também aprisiona a <em>área</em> do polígono. A cunha OMV tem área (1/2)·(L/2)·r; o polígono
+é 2n cunhas; logo A<sub>n</sub> = n·(L/2)·r. E como a circunferência inscrita cabe no polígono, que cabe
+no disco circunscrito, a monotonia da área sob inclusão dá:</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado C (aprisionamento por área)</span>
+  <p style="margin:0"><span class="formula" style="display:block">C·r² &lt; A<sub>n</sub> = n·(L/2)·r &lt; C·R².</span>
+  O polígono, medido em área, vive estritamente entre suas duas circunferências — o cerco invertido é um
+  cerco de verdade.</p>
+</div>
+
+<p>Repare no que <em>não</em> foi afirmado: nada sobre perímetros. Comparar perímetros sob inclusão exige
+o postulado de convexidade de Arquimedes — que o Capítulo 1 importa e discute. Área não exige nada além da
+monotonia. É por isso que este capítulo consegue vir antes.</p>
+
+<!-- ============================================================ -->
+<h2 id="a-razao">4. A razão suficiente</h2>
+<p>Agora a pergunta central. Suponha que do polígono você não vê nada — só as duas circunferências.
+O que dá para inferir?</p>
+<p>Primeiro, uma separação. O par (r, R) carrega duas informações de naturezas diferentes:
+<strong>escala</strong> e <strong>forma</strong>. A escala é R (ou r — uma fixa a outra, dada a forma).
+A forma inteira mora na razão ρ = r/R, que é invariante por semelhança: amplie o polígono e ρ não se move.
+Se existe inferência de n, ela tem de sair de ρ sozinho.</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado D (monotonia da razão)</span>
+  <p style="margin:0">A sequência ρ<sub>n</sub> = cos(π/n), n ≥ 3, é estritamente crescente, começa em
+  ρ₃ = 1/2 e permanece abaixo de 1.</p>
+</div>
+
+<div class="prova">
+  <p><strong>Prova.</strong> Para 0 &lt; θ′ &lt; θ &lt; meia-volta, a identidade de produto
+  (consequência clássica da adição de ângulos, válida para as razões geométricas)</p>
+  <p class="formula">cos θ′ − cos θ = 2·sen((θ + θ′)/2)·sen((θ − θ′)/2)</p>
+  <p>tem os dois fatores de seno estritamente positivos (ângulos entre 0 e meia-volta); logo
+  cos θ′ &gt; cos θ. Como π/n decresce estritamente em n, ρ<sub>n</sub> cresce estritamente. Os extremos:
+  ρ₃ = cos(π/3) = 1/2 (triângulo equilátero); e ρ<sub>n</sub> &lt; 1 porque no triângulo fundamental o
+  cateto r é estritamente menor que a hipotenusa R (o meio lado L/2 nunca é nulo).<span class="qed">∎</span></p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado E (o teorema da inferência)</span>
+  <p>(i) <strong>O par determina o polígono.</strong> Se duas circunferências concêntricas de raios
+  r &lt; R são a inscrita e a circunscrita de um polígono regular, o número de lados é o único n com
+  cos(π/n) = r/R — recuperável como n = π/arccos(r/R) —, o lado é L = 2·√(R² − r²), e o polígono fica
+  determinado a menos de rotação em torno do centro comum.</p>
+  <p>(ii) <strong>O conjunto admissível é discreto.</strong> Um par concêntrico (r, R) é realizado por
+  algum polígono regular se, e somente se, r/R pertence a {cos(π/n) : n ≥ 3} = {0,5; 0,7071…; 0,8090…; …}.
+  Em particular, toda razão abaixo de 1/2 <em>refuta</em> a hipótese "isto são as circunferências de um
+  polígono regular". A hipótese é falseável — e é isso que a torna interessante.</p>
+  <p style="margin:0">(iii) <strong>Uma circunferência sozinha não sabe nada.</strong> Dado qualquer raio
+  r e qualquer n ≥ 3, existe um polígono regular de n lados com inscrita de raio r (tome L = 2r·tg(π/n));
+  o mesmo vale para R. Isolados, os raios só carregam escala. A informação de forma é propriedade do
+  <em>par</em> — em linguagem que outros capítulos tornarão precisa: a razão é a estatística suficiente
+  da forma.</p>
+</div>
+
+<div class="prova">
+  <p><strong>Prova.</strong> (i) A unicidade de n é a injetividade dada pelo Enunciado D; L sai de
+  Pitágoras (Enunciado A); fixados centro, R e n, os vértices de qualquer realização são n pontos
+  igualmente espaçados na circunferência de raio R, e dois desses conjuntos diferem por uma rotação.
+  (ii) A necessidade é a definição de ρ<sub>n</sub>; a suficiência é a construção: dado ρ = cos(π/n),
+  monte o polígono de n lados com circunraio R — sua inscrita tem raio R·cos(π/n) = r. A exclusão de
+  razões abaixo de 1/2 é o Enunciado D (ρ₃ = 1/2 é o mínimo). (iii) É a construção exibida.<span class="qed">∎</span></p>
+</div>
+
+<p>Note a assimetria com o Capítulo 1 antes mesmo de ele existir: lá o interesse está no que acontece
+quando n cresce; aqui, n é <em>a incógnita</em>. A geometria virou canal de informação: o polígono
+transmite sua identidade através de duas circunferências, e a pergunta passa a ser a capacidade do canal.
+Medição perfeita: capacidade infinita — o Enunciado E decide tudo. O jogo começa quando a medição erra.</p>
+
+<!-- ============================================================ -->
+<h2 id="aprisionamento-da-cunha">5. O aprisionamento da cunha</h2>
+<p>Para quantificar inferência com erro, precisamos de duas medidas de separação: quão longe ρ<sub>n</sub>
+está de 1 (o "déficit" — a distância ao caso-limite circular) e quão longe ρ<sub>n</sub> está de
+ρ<sub>n+1</sub> (a "folga" — a distância ao vizinho). As duas saem da mesma fonte, e a fonte é o motivo
+do capítulo aplicado ao seu próprio átomo: <strong>a cunha aprisionada entre dois triângulos</strong>.</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado F (a desigualdade da cunha)</span>
+  <p style="margin:0">Para 0 &lt; θ &lt; quarto-de-volta:
+  <span class="formula" style="display:block">sen θ &lt; θ &lt; tg θ, &nbsp;&nbsp; e em consequência &nbsp;&nbsp; θ·cos θ &lt; sen θ.</span></p>
+</div>
+
+<div class="prova">
+  <p><strong>Prova.</strong> No disco unitário de centro O, sejam A e B pontos da circunferência com
+  ângulo θ em O. Três figuras encaixadas: o triângulo OAB; o setor OAB; o triângulo OAT, onde T é o ponto
+  em que a tangente em A encontra o prolongamento de OB (T existe porque θ é agudo). As inclusões
+  triângulo ⊂ setor ⊂ triângulo são estritas, e a monotonia da área dá</p>
+  <p class="formula">(1/2)·sen θ &lt; (1/2)·θ &lt; (1/2)·tg θ,</p>
+  <p>onde a área do setor é θ/2 <em>por construção</em> — é exatamente assim que a caixa da seção 3
+  definiu a medida do ângulo. Nenhum limite, nenhuma série: três áreas e duas inclusões. A consequência:
+  de θ &lt; tg θ = sen θ/cos θ segue θ·cos θ &lt; sen θ.<span class="qed">∎</span></p>
+</div>
+
+<p>Deste único aprisionamento saem os dois sanduíches do capítulo.</p>
+
+<h3>5.1 O déficit é quadrático</h3>
+<div class="caixa">
+  <span class="rotulo">Enunciado G (sanduíche do déficit)</span>
+  <p style="margin:0">Para todo n ≥ 3:
+  <span class="formula" style="display:block">(π²/2n²)·ρ<sub>2n</sub>² &nbsp;&lt;&nbsp; 1 − ρ<sub>n</sub> &nbsp;&lt;&nbsp; π²/2n².</span>
+  O fator de correção à esquerda é a razão do polígono de 2n lados, ao quadrado: <em>a sequência
+  controla o próprio erro</em>.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> Com θ = π/n, a identidade do ângulo-metade dá
+  1 − cos θ = 2·sen²(θ/2). Pelo Enunciado F aplicado a θ/2 (que é agudo):
+  sen(θ/2) &lt; θ/2 dá o lado direito, 2·sen²(θ/2) &lt; θ²/2 = π²/2n²; e
+  sen(θ/2) &gt; (θ/2)·cos(θ/2) dá o esquerdo, 2·sen²(θ/2) &gt; (θ²/2)·cos²(θ/2) =
+  (π²/2n²)·ρ<sub>2n</sub>², pois cos(θ/2) = cos(π/2n) = ρ<sub>2n</sub>.<span class="qed">∎</span></p>
+  <p style="font-size:.92rem; color:var(--ink-soft)">Consequência geométrica, de brinde: com circunraio R,
+  a largura da coroa é R − r = R·(1 − ρ<sub>n</sub>) = c² / (2R), onde c = 2R·sen(π/2n) é o lado do
+  polígono de <em>2n</em> lados com o mesmo circunraio — a relação clássica da sagita. A largura da coroa
+  de n é ditada pelo lado de 2n: as gerações conversam.</p>
+</div>
+
+<h3>5.2 A folga é cúbica</h3>
+<div class="caixa">
+  <span class="rotulo">Enunciado H (sanduíche da folga)</span>
+  <p style="margin:0">Para todo n ≥ 3, com g<sub>n</sub> = ρ<sub>n+1</sub> − ρ<sub>n</sub>:
+  <span class="formula" style="display:block">π²·ρ<sub>n</sub> / (n(n+1)²) &nbsp;&lt;&nbsp; g<sub>n</sub> &nbsp;&lt;&nbsp; π²/n³.</span></p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> A identidade de produto (seção 4), com os ângulos π/n e π/(n+1):</p>
+  <p class="formula">g<sub>n</sub> = 2·sen α · sen β, &nbsp;&nbsp; α = π(2n+1)/(2n(n+1)), &nbsp;&nbsp; β = π/(2n(n+1)),</p>
+  <p>onde α + β = π/n e α − β = π/(n+1) — ambos agudos, logo o Enunciado F se aplica aos dois fatores.</p>
+  <p><em>Lado direito.</em> sen α &lt; α e sen β &lt; β dão
+  g<sub>n</sub> &lt; 2αβ = π²(2n+1)/(2n²(n+1)²), e este número é menor que π²/n³ porque
+  n(2n+1) = 2n² + n &lt; 2n² + 4n + 2 = 2(n+1)².</p>
+  <p><em>Lado esquerdo.</em> sen α &gt; α·cos α e sen β &gt; β·cos β dão
+  g<sub>n</sub> &gt; 2αβ·cos α·cos β. E aqui a derivação entrega um presente que o pré-registro
+  apenas esperava (C0.4): o produto dos cossenos é <em>exatamente</em> a média do par que estamos
+  estudando —</p>
+  <p class="formula">cos α · cos β = ½·[cos(α − β) + cos(α + β)] = (ρ<sub>n+1</sub> + ρ<sub>n</sub>)/2.</p>
+  <p>Logo g<sub>n</sub> &gt; αβ·(ρ<sub>n</sub> + ρ<sub>n+1</sub>) = π²(2n+1)(ρ<sub>n</sub> + ρ<sub>n+1</sub>)/(4n²(n+1)²).
+  Minorando 2n+1 &gt; 2n e ρ<sub>n+1</sub> &gt; ρ<sub>n</sub>:
+  g<sub>n</sub> &gt; π²·4n·ρ<sub>n</sub>/(4n²(n+1)²) = π²·ρ<sub>n</sub>/(n(n+1)²).<span class="qed">∎</span></p>
+</div>
+
+<p>Pare um instante no que os dois sanduíches dizem, juntos. A distância de um polígono ao seu
+caso-limite circular fecha como <strong>1/n²</strong>; a distância entre dois polígonos vizinhos fecha
+como <strong>1/n³</strong> — uma ordem inteira mais rápido. Distinguir um polígono do círculo é
+estruturalmente mais barato do que distinguir um polígono do seu vizinho. Essa diferença de ordens
+não é um detalhe assintótico: é a anatomia de onde a inferência morre primeiro.</p>
+
+<!-- ============================================================ -->
+<h2 id="inferencia-sob-erro">6. A inferência sob erro</h2>
+<p>Formalizemos o instrumento. Uma <strong>medição de precisão δ</strong> da razão ρ é qualquer número
+ρ̃ com |ρ̃ − ρ| ≤ δ. A <strong>regra de decisão</strong> é a ingênua honesta: declarar o m ≥ 3 cujo
+ρ<sub>m</sub> = cos(π/m) está mais próximo de ρ̃ (e declarar "refutado" se até o mais próximo é
+incompatível, isto é, se ρ̃ + δ &lt; 1/2). Três teoremas — todos desigualdades finitas, todos
+consequências diretas dos sanduíches.</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado I (garantia de identificação — o limiar cúbico, por baixo)</span>
+  <p style="margin:0">Seja n ≥ 3 o verdadeiro número de lados. Se
+  <span class="formula" style="display:block">2δ &lt; π²·ρ<sub>n</sub>/(n(n+1)²) &nbsp;&nbsp;e, para n &gt; 3,&nbsp;&nbsp; 2δ &lt; π²·ρ<sub>n−1</sub>/((n−1)n²),</span>
+  então <em>toda</em> medição de precisão δ leva a regra de decisão a devolver exatamente n.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> Pelas hipóteses e pelo Enunciado H, 2δ &lt; g<sub>n</sub> e (se n &gt; 3)
+  2δ &lt; g<sub>n−1</sub>; logo δ &lt; g<sub>n</sub>/2 e δ &lt; g<sub>n−1</sub>/2. Qualquer medição
+  satisfaz |ρ̃ − ρ<sub>n</sub>| ≤ δ, enquanto todo outro admissível ρ<sub>m</sub> (m ≠ n) dista de
+  ρ<sub>n</sub> pelo menos min(g<sub>n−1</sub>, g<sub>n</sub>) &gt; 2δ (monotonia, Enunciado D), e
+  portanto dista de ρ̃ mais que δ. O mais próximo é ρ<sub>n</sub>. Para n = 3 não há admissível à
+  esquerda, e a condição sobre g<sub>n−1</sub> é vazia.<span class="qed">∎</span></p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado J (ambiguidade — o limiar cúbico, por cima)</span>
+  <p style="margin:0">Se 2δ ≥ π²/n³, então existe uma medição de precisão δ compatível simultaneamente
+  com n e com n+1: o ponto médio ρ̃ = (ρ<sub>n</sub> + ρ<sub>n+1</sub>)/2. Nenhuma regra de decisão —
+  a nossa ou qualquer outra — extrai de ρ̃ uma resposta certa garantida.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> Pelo Enunciado H, g<sub>n</sub> &lt; π²/n³ ≤ 2δ, logo
+  |ρ̃ − ρ<sub>n</sub>| = |ρ̃ − ρ<sub>n+1</sub>| = g<sub>n</sub>/2 &lt; δ: ρ̃ é medição válida de um
+  n-ágono <em>e</em> de um (n+1)-ágono. Os dois estados do mundo produzem o mesmo dado; nenhuma função
+  do dado distingue os dois.<span class="qed">∎</span></p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado K (a janela crepuscular)</span>
+  <p style="margin:0">Para todo δ ≤ 1/100, todo inteiro n na janela
+  <span class="formula" style="display:block">(π²/2δ)<sup>1/3</sup> &nbsp;≤&nbsp; n &nbsp;≤&nbsp; 1/√δ</span>
+  satisfaz, simultaneamente: (a) existe medição de precisão δ que não decide entre n e n+1
+  (Enunciado J); (b) toda medição honesta de um n-ágono exclui o círculo — o intervalo
+  [ρ̃ − δ, ρ̃ + δ] fica inteiro abaixo de 1, e o conjunto de m compatíveis é limitado. E a janela nunca
+  é vazia: contém ao menos dois inteiros.</p>
+</div>
+<div class="prova">
+  <p><strong>Prova.</strong> (a) n ≥ (π²/2δ)<sup>1/3</sup> equivale a 2δ ≥ π²/n³: Enunciado J.
+  (b) Como 2n ≥ 6, a monotonia dá ρ<sub>2n</sub> ≥ ρ₆ = √3/2, e o Enunciado G minora o déficit:
+  1 − ρ<sub>n</sub> &gt; (π²/2n²)·(3/4) = 3π²/8n² &gt; 2/n². Se n ≤ 1/√δ, então 2δ ≤ 2/n² &lt; 1 − ρ<sub>n</sub>,
+  logo ρ̃ + δ ≤ ρ<sub>n</sub> + 2δ &lt; 1: nenhum admissível ρ<sub>m</sub> arbitrariamente próximo de 1
+  cabe no intervalo, e o conjunto compatível é finito. Não vazia: para δ ≤ 1/100 vale
+  δ<sup>−1/2</sup> = δ<sup>−1/6</sup>·δ<sup>−1/3</sup> ≥ 100<sup>1/6</sup>·δ<sup>−1/3</sup> &gt; 2,15·δ<sup>−1/3</sup>,
+  enquanto (π²/2)<sup>1/3</sup> &lt; 1,71; a diferença entre as pontas excede
+  0,44·δ<sup>−1/3</sup> ≥ 0,44·100<sup>1/3</sup> &gt; 2.<span class="qed">∎</span></p>
+</div>
+
+<p><strong>Exemplo trabalhado, δ = 10⁻⁶.</strong> As cotas do Enunciado I garantem identificação até
+n = 169. O Enunciado J constrói ambiguidade de n = 171 em diante. E n = 170? <em>As cotas não o
+classificam</em> — a fresta entre a condição suficiente e a necessária é real. O cálculo direto decide,
+e decide para o lado da ambiguidade: g₁₇₀/2 ≈ 9,956·10⁻⁷ &lt; δ, então 170 <em>já é indecidível</em>,
+embora nenhuma das duas cotas o diga. A janela crepuscular garantida pelas cotas é n ∈ [171, 1000] —
+e a efetiva começa uma casa antes: oitocentos e trinta e um polígonos que a medição certifica serem
+polígonos (círculo excluído) sem conseguir dizer <em>quais</em>. O cálculo direto estica a exclusão do
+círculo até n = 1570; de n = 1571 em diante, 1 − ρ<sub>n</sub> ≤ 2δ e o instrumento não separa mais o
+polígono do seu limite. Três regimes, duas fronteiras, uma fresta honesta — tudo isso estava contido em
+sen θ &lt; θ &lt; tg θ.</p>
+<p style="font-size:.92rem; color:var(--ink-soft)">Nota de auditoria (28/07/2026): a primeira redação
+deste parágrafo afirmava g₁₇₀/2 ≈ 1,004·10⁻⁶ &gt; δ e concluía que 170 ainda era identificável. O braço
+numérico do oráculo (invariante I10) mediu g₁₇₀/2 = 9,956·10⁻⁷ &lt; δ e refutou a frase — o autor havia
+estimado de cabeça o valor dentro da fresta que o próprio parágrafo chamava de indecidível pelas cotas.
+Corrigido; o incidente fica registrado, porque é o capítulo acontecendo consigo mesmo: dentro da fresta,
+só o cálculo decide — inclusive contra a intuição de quem a descreveu.</p>
+
+<div class="painel">
+  <p style="margin:.2rem 0 .6rem"><strong>Laboratório de inferência.</strong> Escolha o polígono
+  verdadeiro e a precisão do instrumento; deslize a medição dentro da barra de erro e observe o que a
+  regra de decisão consegue — e o que ela confessa não conseguir.</p>
+  <div class="controles">
+    <label for="lab-n">n verdadeiro:
+      <input type="number" id="lab-n" min="3" max="10000000" value="12" step="1">
+    </label>
+    <span>atalhos:</span>
+    <button class="mini lab-preset" type="button" data-n="12">12</button>
+    <button class="mini lab-preset" type="button" data-n="96">96</button>
+    <button class="mini lab-preset" type="button" data-n="169">169</button>
+    <button class="mini lab-preset" type="button" data-n="170">170</button>
+    <button class="mini lab-preset" type="button" data-n="171">171</button>
+    <button class="mini lab-preset" type="button" data-n="500">500</button>
+    <button class="mini lab-preset" type="button" data-n="1571">1571</button>
+    <button class="mini lab-preset" type="button" data-n="100000">10⁵</button>
+  </div>
+  <div class="controles">
+    <label for="lab-p">precisão δ = 10<sup>−p</sup>, p:
+      <input type="range" id="lab-p" min="1" max="12" value="6" step="1">
+      <span id="lab-p-val">6</span>
+    </label>
+    <label for="lab-dev">desvio da medição (% de δ):
+      <input type="range" id="lab-dev" min="-100" max="100" value="0" step="1">
+      <span id="lab-dev-val">0%</span>
+    </label>
+  </div>
+  <p class="leitura" id="lab-leitura" role="status" aria-live="polite"></p>
+  <div class="veredito" id="lab-veredito" role="status" aria-live="polite"></div>
+  <p style="font-size:.92rem; color:var(--ink-soft); margin:.6rem 0 0">Camada de observação: o laboratório
+  computa em float64 com as funções trigonométricas padrão (convenção da seção 3). A partir de
+  n ≈ 2·10⁸ o próprio instrumento colapsa — a seção 8 disseca esse colapso em vez de escondê-lo.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="tabela">7. A tabela e as estabilizações</h2>
+<p>A tabela registra, para cada n, a razão, o déficit, a folga — e duas colunas normalizadas,
+n²·(1 − ρ<sub>n</sub>) e n³·g<sub>n</sub>, que os sanduíches G e H aprisionam por desigualdade. Olhe o
+que as colunas normalizadas fazem.</p>
+
+<div class="tabela-scroll">
+<table id="tabela">
+  <caption>ρ<sub>n</sub> = r/R = cos(π/n). O déficit é computado como 2·sen²(π/2n) e a folga pela forma
+  de produto 2·sen α·sen β — representações estáveis; as formas diretas colapsam em ponto flutuante
+  (seção 8). Os sanduíches provados garantem: n²·déficit ∈ (π²ρ<sub>2n</sub>²/2, π²/2) e
+  n³·folga ∈ (π²ρ<sub>n</sub>·n²/ ((n+1)²), π²) para <em>cada</em> linha — a estabilização
+  <em>sugerida</em> pelas colunas é mais do que isso, e não está provada aqui.</caption>
+  <thead>
+    <tr><th scope="col">n</th><th scope="col">ρ<sub>n</sub> = r/R</th>
+    <th scope="col">déficit 1 − ρ<sub>n</sub></th><th scope="col">n²·déficit</th>
+    <th scope="col">folga g<sub>n</sub></th><th scope="col">n³·folga</th></tr>
+  </thead>
+  <tbody id="tabela-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Conjectura C0.7 (pré-registrada em 28/07/2026 · status: sustentada, não demonstrável aqui)</span>
+  <p style="margin:0">As colunas normalizadas estabilizam em <span class="destaque">π²/2 ≈ 4,9348</span>
+  e <span class="destaque">π² ≈ 9,8696</span>. Este capítulo <em>não pode nem enunciar</em> isso como
+  teorema: "estabilizar em" é linguagem de limite, e limites são exatamente o que o prólogo se proibiu.
+  Os Enunciados G e H aprisionam as duas colunas por desigualdades cujas pontas se apertam — mas
+  transformar aperto em convergência exige o princípio do supremo e a linguagem ε-N.
+  <strong>Porta fechada → Capítulo 1</strong> (a ferramenta) e Capítulo 10 (a assintótica fina).
+  A seta (→) sai da quarentena lá.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="quase-mentiu">8. O computador quase mentiu (duas vezes)</h2>
+<p>Este capítulo é sobre inferência morrendo por falta de resolução. A implementação forneceu,
+involuntariamente, duas demonstrações práticas — registradas aqui porque são o tema do capítulo
+acontecendo na camada de observação (§2.1–2.3 do manual).</p>
+<p><strong>Primeira: o instrumento declara círculo.</strong> Em float64, o espaçamento dos números
+representáveis vizinhos de 1 é 2⁻⁵³ ≈ 1,1·10⁻¹⁶. Quando o déficit verdadeiro 1 − ρ<sub>n</sub> cai
+abaixo disso — pelo sanduíche G, na ordem de n ≈ 3·10⁸ — a expressão direta <code>1 − cos(π/n)</code>
+arredonda para exatamente 0: <em>o instrumento afirma que o polígono é um círculo</em>. A forma
+equivalente 2·sen²(π/2n) computa a mesma grandeza sem subtrair vizinhos e continua correta. Mesmo
+objeto, duas representações, uma mente:</p>
+
+<div class="tabela-scroll">
+<table id="tabela-colapso">
+  <caption>O colapso da representação direta. A coluna do meio é o que <code>1 − cos(π/n)</code> devolve
+  em float64; a da direita, o que 2·sen²(π/2n) devolve. A partir de n = 3·10⁸ a forma direta afirma
+  déficit zero — polígono = círculo. Imperfeição computacional e representacional; o objeto não tem culpa.</caption>
+  <thead>
+    <tr><th scope="col">n</th><th scope="col">1 − cos(π/n) (direto)</th><th scope="col">2·sen²(π/2n) (estável)</th></tr>
+  </thead>
+  <tbody id="tabela-colapso-corpo"></tbody>
+</table>
+</div>
+
+<p><strong>Segunda: a folga afogada em cancelamento.</strong> Durante o desenvolvimento, a primeira
+verificação exploratória do sanduíche H computou g<sub>n</sub> pela forma direta
+<code>cos(π/(n+1)) − cos(π/n)</code> e "encontrou" milhares de violações a partir de n ≈ 15.000.
+O sanduíche estava certo; a subtração de dois números quase iguais havia destruído os dígitos que
+importavam (a folga vale ~10⁻¹², o erro de arredondamento de cada cosseno, ~10⁻¹⁶ — sobra precisão
+relativa de 10⁻⁴, da mesma ordem da largura do sanduíche). A forma de produto 2·sen α·sen β — a mesma
+da prova — computa sem cancelamento, e as violações desaparecem. O incidente fica registrado no
+oráculo (<code>audit/edge-cases.md</code>): a prova forneceu não só o teorema, mas a representação
+numericamente correta dele. <em>Demonstração e implementação não são camadas independentes.</em></p>
+
+<!-- ============================================================ -->
+<h2>9. As três camadas, no idioma deste capítulo</h2>
+<p><strong>Objeto:</strong> o polígono regular — ou melhor, a correspondência n ↔ ρ<sub>n</sub>, que o
+Enunciado E provou ser biunívoca. <strong>Representação:</strong> ρ escrito como razão exata r/R, como
+cos(π/n), como decimal truncado, como float64 — e a seção 8 mostrou que a escolha entre
+<code>1 − cos</code> e <code>2·sen²</code> não é estilística. <strong>Observação:</strong> a medição
+ρ̃, com sua barra de erro δ — e os três regimes que ela atravessa: identifica, certifica-sem-identificar,
+não separa do círculo. A inferência não falha porque o objeto se degrada; falha porque a observação tem
+resolução finita. O Capítulo 1 tomará exatamente essa morte — polígonos tornando-se indistinguíveis das
+suas circunferências — e a converterá de defeito em <em>método</em>.</p>
+
+<!-- ============================================================ -->
+<h2>10. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> a folga entre vizinhos fecha como 1/n³; o déficit, como 1/n².
+  O aperto dos sanduíches <em>sugere</em> valores exatos (π², π²/2) que este capítulo se proibiu de
+  enunciar. Que linguagem transforma desigualdades que se apertam em um número? — o Capítulo 1 existe
+  para responder isso.</li>
+  <li><strong>Porta fechada → Cap. 1:</strong> linguagem de limite; promoção da conjectura C0.7;
+  e a cunha fundamental R, r, L/2 como átomo da reconstrução geométrica do cerco de Arquimedes
+  (pendência editorial registrada em E21, nascida E20 em branch paralela) — os semiperímetros a<sub>n</sub> = n·sen θ e
+  b<sub>n</sub> = n·tg θ são leituras da mesma cunha.</li>
+  <li><strong>Porta fechada → Cap. 9:</strong> a identificação das duas constantes — π-área (deste
+  capítulo) e π-perímetro (do Capítulo 1) — via comprimento de curva como integral.</li>
+  <li><strong>Porta fechada → Cap. 10:</strong> a assintótica fina dos sanduíches (expansões locais);
+  julgamento definitivo das estabilizações.</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Pré-registro
+  commitado antes do desenvolvimento (<code>conjecturas.md</code>, C0.1–C0.8). Oráculo triplo executado
+  em 28/07/2026 com artefatos em <code>audit/</code> (12 invariantes, três implementações independentes,
+  casos adversariais; a primeira execução refutou a afirmação do texto sobre n = 170 no exemplo
+  trabalhado — corrigida e registrada, ver §6 — e documentou os dois colapsos de representação da §8
+  como invariantes obrigatórios). Auditoria de gate v0 completa (<code>tools/audit-ch00.mjs</code>):
+  interação dos dois laboratórios, teclado, overflow, canvases, fórmulas textuais, autocontenção sem
+  rede, screenshots desktop e iPhone inspecionados. Pendências declaradas: busca bibliográfica de
+  prioridade para os sanduíches G–H e a formulação inferencial (<code>sources.md</code>); decisão de tag
+  <code>cap-00-gate0-r1</code> pelo leitor primário.</p>
+  <p>MATH3us.md · Capítulo 0 · território virgem · release: nenhuma (pronto para tag).</p>
+</footer>
+
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 0 — Inference. One polygon trapped by its two circles.
+ *
+ * Layer discipline (manual §2.1):
+ *  - All numeric readouts use float64 with standard trig; the section-3
+ *    convention box declares what that presupposes (observation layer).
+ *  - Deficit uses 2*sin^2(pi/2n) and gap uses the product form
+ *    2*sin(a)*sin(b): the STABLE representations. The direct forms
+ *    collapse (section 8) and are shown only in the collapse table.
+ * ============================================================ */
+
+const PI = Math.PI;
+const rho = (n) => Math.cos(PI / n);
+const deficit = (n) => 2 * Math.sin(PI / (2 * n)) ** 2;          // 1 - rho(n), stable
+const gap = (n) => {                                              // rho(n+1) - rho(n), stable
+  const a = PI * (2 * n + 1) / (2 * n * (n + 1));
+  const b = PI / (2 * n * (n + 1));
+  return 2 * Math.sin(a) * Math.sin(b);
+};
+
+// --- formatting (pt-BR decimal comma) -------------------------
+function fmt(x, d) { return x.toFixed(d).replace(".", ","); }
+function fmtInt(n) { return n.toLocaleString("pt-BR"); }
+function fmtSci(x) {
+  if (x === 0) return "0 (exato)";
+  const s = x.toExponential(4).replace(".", ",").replace("e", " · 10^");
+  return s;
+}
+
+/* ================= Lab 1: the wedge and the two circles ======= */
+let N = 3;
+const MIN_N = 3, MAX_N = 96;
+const cvMain = document.getElementById("cv-main");
+const cvWedge = document.getElementById("cv-wedge");
+const ctxM = cvMain.getContext("2d");
+const ctxW = cvWedge.getContext("2d");
+const COL_IN = "#1c5e3c", COL_OUT = "#8a3318", COL_POLY = "#26221a", COL_WEDGE = "#1d4a6b";
+
+function drawMain(n) {
+  const W = cvMain.width, H = cvMain.height;
+  const cx = W / 2, cy = H / 2, s = W / 2.35;
+  ctxM.clearRect(0, 0, W, H);
+  const r = rho(n);
+  const th = PI / n;
+  const dev = (x, y) => [cx + x * s, cy - y * s];
+
+  // annulus (between the two circles), soft fill
+  ctxM.beginPath();
+  ctxM.arc(cx, cy, s, 0, 2 * PI);
+  ctxM.arc(cx, cy, r * s, 0, 2 * PI, true);
+  ctxM.fillStyle = "rgba(138,51,24,.10)";
+  ctxM.fill();
+
+  // polygon: vertices at angles (2k+1)*theta so one side midpoint sits at angle 0
+  ctxM.beginPath();
+  for (let k = 0; k <= n; k++) {
+    const t = (2 * k + 1) * th;
+    const [x, y] = dev(Math.cos(t), Math.sin(t));
+    k === 0 ? ctxM.moveTo(x, y) : ctxM.lineTo(x, y);
+  }
+  ctxM.strokeStyle = COL_POLY;
+  ctxM.lineWidth = 1.7;
+  ctxM.stroke();
+
+  // circumcircle and incircle
+  ctxM.beginPath(); ctxM.arc(cx, cy, s, 0, 2 * PI);
+  ctxM.strokeStyle = COL_OUT; ctxM.lineWidth = 2.2; ctxM.stroke();
+  ctxM.beginPath(); ctxM.arc(cx, cy, r * s, 0, 2 * PI);
+  ctxM.strokeStyle = COL_IN; ctxM.lineWidth = 2.2; ctxM.stroke();
+
+  // contact markers: vertices ON the circumcircle, side midpoints ON the incircle
+  for (let k = 0; k < n; k++) {
+    const tv = (2 * k + 1) * th;
+    const [vx, vy] = dev(Math.cos(tv), Math.sin(tv));
+    ctxM.beginPath(); ctxM.arc(vx, vy, 3, 0, 2 * PI);
+    ctxM.fillStyle = COL_OUT; ctxM.fill();
+    const tm = 2 * k * th;
+    const [mx, my] = dev(r * Math.cos(tm), r * Math.sin(tm));
+    ctxM.beginPath(); ctxM.arc(mx, my, 3, 0, 2 * PI);
+    ctxM.fillStyle = "#fffdf7"; ctxM.fill();
+    ctxM.strokeStyle = COL_IN; ctxM.lineWidth = 1.5; ctxM.stroke();
+  }
+
+  // fundamental wedge O-M-V at angle 0 (midpoint on positive x-axis)
+  const [ox, oy] = dev(0, 0);
+  const [mx, my] = dev(r, 0);
+  const [vx, vy] = dev(Math.cos(th), Math.sin(th));
+  ctxM.beginPath(); ctxM.moveTo(ox, oy); ctxM.lineTo(mx, my); ctxM.lineTo(vx, vy); ctxM.closePath();
+  ctxM.fillStyle = "rgba(29,74,107,.15)"; ctxM.fill();
+  ctxM.beginPath(); ctxM.moveTo(ox, oy); ctxM.lineTo(vx, vy);
+  ctxM.strokeStyle = COL_OUT; ctxM.lineWidth = 2; ctxM.stroke();     // R
+  ctxM.beginPath(); ctxM.moveTo(ox, oy); ctxM.lineTo(mx, my);
+  ctxM.strokeStyle = COL_IN; ctxM.lineWidth = 2; ctxM.stroke();      // r
+  ctxM.beginPath(); ctxM.moveTo(mx, my); ctxM.lineTo(vx, vy);
+  ctxM.strokeStyle = COL_WEDGE; ctxM.lineWidth = 2; ctxM.stroke();   // L/2
+  // right-angle mark at M (aligned with the side, which is vertical at angle 0)
+  const q = 7;
+  ctxM.beginPath();
+  ctxM.moveTo(mx - q, my); ctxM.lineTo(mx - q, my - q); ctxM.lineTo(mx, my - q);
+  ctxM.strokeStyle = COL_POLY; ctxM.lineWidth = 1.2; ctxM.stroke();
+  // labels
+  ctxM.font = "italic 14px Georgia, serif";
+  ctxM.fillStyle = COL_POLY;
+  ctxM.fillText("O", ox - 14, oy + 4);
+  ctxM.fillText("M", mx + 5, my + 14);
+  ctxM.fillText("V", vx + 5, vy - 5);
+}
+
+function drawWedge(n) {
+  const W = cvWedge.width, H = cvWedge.height;
+  ctxW.clearRect(0, 0, W, H);
+  const K = W - 70;             // normalized: R has fixed screen length
+  const ox = 35, oy = H - 45;
+  const tri = (m, dash) => {
+    const th = PI / m;
+    const mx = ox + K * Math.cos(th), my = oy;
+    const vx = mx, vy = oy - K * Math.sin(th);
+    ctxW.setLineDash(dash ? [6, 5] : []);
+    ctxW.beginPath(); ctxW.moveTo(ox, oy); ctxW.lineTo(mx, my);
+    ctxW.strokeStyle = COL_IN; ctxW.lineWidth = 1.8; ctxW.stroke();
+    ctxW.beginPath(); ctxW.moveTo(mx, my); ctxW.lineTo(vx, vy);
+    ctxW.strokeStyle = COL_WEDGE; ctxW.lineWidth = 1.8; ctxW.stroke();
+    ctxW.beginPath(); ctxW.moveTo(ox, oy); ctxW.lineTo(vx, vy);
+    ctxW.strokeStyle = COL_OUT; ctxW.lineWidth = 1.8; ctxW.stroke();
+    ctxW.setLineDash([]);
+  };
+  tri(n, false);
+  tri(n + 1, true);
+  ctxW.font = "italic 13px Georgia, serif";
+  ctxW.fillStyle = COL_POLY;
+  ctxW.fillText("O", ox - 16, oy + 4);
+  ctxW.fillText("r = R·ρ", ox + K * 0.42, oy + 16);
+  ctxW.fillText("L/2", ox + K * Math.cos(PI / n) + 6, oy - K * Math.sin(PI / n) * 0.5);
+  ctxW.fillText("R", ox + K * 0.45 * Math.cos(PI / (2 * n)) - 18,
+                oy - K * 0.5 * Math.sin(PI / n) - 8);
+  ctxW.font = "12px Georgia, serif";
+  ctxW.fillStyle = "#4c443a";
+  ctxW.fillText("contínuo: n = " + fmtInt(n) + " · tracejado: n = " + fmtInt(n + 1), ox - 10, H - 12);
+}
+
+function announce1(n) {
+  const el = document.getElementById("leitura-1");
+  el.textContent =
+    "n = " + fmtInt(n) +
+    "  |  ρ = r/R = " + fmt(rho(n), 10) +
+    "  |  déficit 1−ρ = " + fmt(deficit(n), 10) +
+    "  |  folga g = ρ(n+1)−ρ(n) = " + fmt(gap(n), 10) +
+    "  |  L/2R = " + fmt(Math.sin(PI / n), 8);
+}
+
+function render1() {
+  drawMain(N);
+  drawWedge(N);
+  announce1(N);
+  document.getElementById("n-range").value = N;
+  document.getElementById("btn-minus").disabled = N <= MIN_N;
+  document.getElementById("btn-plus").disabled = N >= MAX_N;
+  document.getElementById("btn-double").disabled = 2 * N > MAX_N;
+}
+
+document.getElementById("btn-minus").addEventListener("click", () => { if (N > MIN_N) { N--; render1(); } });
+document.getElementById("btn-plus").addEventListener("click", () => { if (N < MAX_N) { N++; render1(); } });
+document.getElementById("btn-double").addEventListener("click", () => { if (2 * N <= MAX_N) { N *= 2; render1(); } });
+document.getElementById("btn-reset").addEventListener("click", () => { N = 3; render1(); });
+document.getElementById("n-range").addEventListener("input", (e) => { N = Number(e.target.value); render1(); });
+
+/* ================= Lab 2: inference under error =============== */
+const labN = document.getElementById("lab-n");
+const labP = document.getElementById("lab-p");
+const labDev = document.getElementById("lab-dev");
+
+function compatibleRange(meas, delta) {
+  // admissible m >= 3 with |cos(pi/m) - meas| <= delta; monotone => contiguous
+  const lo = meas - delta, hi = meas + delta;
+  if (hi < 0.5) return { empty: true };
+  if (hi >= 1) {
+    let mMin = 3;
+    if (lo > 0.5) mMin = Math.max(3, Math.floor(PI / Math.acos(Math.min(lo, 1))));
+    while (rho(mMin) < lo) mMin++;
+    return { unbounded: true, mMin };
+  }
+  let mMin = 3;
+  if (lo > 0.5) {
+    mMin = Math.max(3, Math.floor(PI / Math.acos(lo)));
+    while (rho(mMin) < lo) mMin++;
+    while (mMin > 3 && rho(mMin - 1) >= lo) mMin--;
+  }
+  let mMax = Math.max(3, Math.floor(PI / Math.acos(hi)));
+  while (mMax > 3 && rho(mMax) > hi) mMax--;
+  while (rho(mMax + 1) <= hi) mMax++;
+  if (mMax < mMin) return { empty: true };
+  return { mMin, mMax };
+}
+
+function renderLab() {
+  let n = Math.floor(Number(labN.value));
+  if (!(n >= 3)) n = 3;
+  if (n > 10000000) n = 10000000;
+  const p = Number(labP.value);
+  const delta = Math.pow(10, -p);
+  const devPct = Number(labDev.value);
+  document.getElementById("lab-p-val").textContent = p;
+  document.getElementById("lab-dev-val").textContent = devPct + "%";
+
+  const r = rho(n);
+  const meas = r + (devPct / 100) * delta;
+  const guardR = PI * PI * rho(n) / (n * (n + 1) ** 2);
+  const guardL = n > 3 ? PI * PI * rho(n - 1) / ((n - 1) * n * n) : Infinity;
+  const guaranteed = 2 * delta < guardR && 2 * delta < guardL;
+  const ambiguityPossible = 2 * delta >= PI * PI / n ** 3;
+  const circleExcluded = meas + delta < 1;
+
+  document.getElementById("lab-leitura").textContent =
+    "ρ verdadeiro = " + fmt(r, 12) +
+    "  |  medição ρ̃ = " + fmt(meas, 12) +
+    "  |  δ = 10^−" + p +
+    "  |  intervalo [ρ̃−δ, ρ̃+δ] = [" + fmt(meas - delta, 12) + ", " + fmt(meas + delta, 12) + "]";
+
+  const c = compatibleRange(meas, delta);
+  let verdict;
+  if (c.empty) {
+    verdict = "A medição REFUTA: nenhum polígono regular tem essas circunferências (intervalo abaixo de ρ₃ = 0,5).";
+  } else if (c.unbounded) {
+    verdict = "Compatível com todo m ≥ " + fmtInt(c.mMin) +
+      " — e o CÍRCULO NÃO É EXCLUÍDO: o intervalo alcança 1. O instrumento não separa o polígono do seu limite.";
+  } else if (c.mMin === c.mMax) {
+    verdict = "IDENTIFICAÇÃO UNÍVOCA: m = " + fmtInt(c.mMin) +
+      (c.mMin === n ? " (correto)." : " (INCORRETO — a medição saiu da faixa admitida? verifique o desvio).");
+  } else {
+    verdict = "AMBÍGUO: compatível com m de " + fmtInt(c.mMin) + " a " + fmtInt(c.mMax) +
+      " (" + fmtInt(c.mMax - c.mMin + 1) + " candidatos). Círculo excluído (ρ̃ + δ = " +
+      fmt(meas + delta, 10) + " < 1): certamente um polígono — só não se sabe qual. Janela crepuscular.";
+  }
+  verdict += "  ·  Cotas dos sanduíches para o n verdadeiro: garantia de identificação " +
+    (guaranteed ? "SIM" : "não") + " (Enunciado I); ambiguidade construtível " +
+    (ambiguityPossible ? "SIM" : "não") + " (Enunciado J)" +
+    (guaranteed || ambiguityPossible ? "." : " — fresta entre as cotas: só o cálculo direto decide.");
+  document.getElementById("lab-veredito").textContent = verdict;
+}
+
+labN.addEventListener("input", renderLab);
+labP.addEventListener("input", renderLab);
+labDev.addEventListener("input", renderLab);
+document.querySelectorAll(".lab-preset").forEach(b =>
+  b.addEventListener("click", () => { labN.value = b.dataset.n; renderLab(); }));
+
+/* ================= tables ==================================== */
+const TABLE_NS = [3,4,5,6,7,8,9,10,11,12,16,24,48,96,192,384,768,1536,3072,10000,100000,1000000];
+function renderTable() {
+  const tb = document.getElementById("tabela-corpo");
+  tb.innerHTML = "";
+  for (const n of TABLE_NS) {
+    const d = deficit(n), g = gap(n);
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      "<td>" + fmtInt(n) + "</td>" +
+      "<td>" + fmt(rho(n), 10) + "</td>" +
+      "<td>" + fmtSci(d) + "</td>" +
+      "<td>" + fmt(n * n * d, 6) + "</td>" +
+      "<td>" + fmtSci(g) + "</td>" +
+      "<td>" + fmt(n ** 3 * g, 6) + "</td>";
+    tb.appendChild(tr);
+  }
+}
+const COLLAPSE_NS = [1e7, 1e8, 2e8, 3e8, 1e9];
+function renderCollapse() {
+  const tb = document.getElementById("tabela-colapso-corpo");
+  tb.innerHTML = "";
+  for (const n of COLLAPSE_NS) {
+    const direct = 1 - Math.cos(PI / n);
+    const stable = deficit(n);
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      "<td>" + n.toExponential(0).replace("e+", " · 10^").replace("1 ·", "1 ·") + "</td>" +
+      "<td>" + fmtSci(direct) + "</td>" +
+      "<td>" + fmtSci(stable) + "</td>";
+    tb.appendChild(tr);
+  }
+}
+
+render1();
+renderLab();
+renderTable();
+renderCollapse();
+</script>
+</body>
+</html>

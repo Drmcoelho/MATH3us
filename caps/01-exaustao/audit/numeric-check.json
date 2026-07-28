@@ -1,7 +1,7 @@
 {
   "chapter": 1,
   "script": "tools/oracle.py",
-  "code_commit": "f770cc9",
+  "code_commit": "bc2ea1f",
   "date": "2026-07-28",
   "environment": "python 3.11.15, stdlib only, linux",
   "implementations": {

@@ -352,7 +352,14 @@ Por diferença de quadrados, b<sub>2n</sub> − a<sub>n</sub> = (√b<sub>2n</su
 <p>A autópsia de C5 está em <code>conjecturas.md</code>, como manda a §1.3 do manual. O erro: tratar “elementar”
 como sinônimo de “grosseiro”. A intuição que sobreviveu: o ½ é cota <em>uniforme</em>, válida desde o primeiro
 passo; o ¼ é <em>assintótico</em>. E uma porta permanece honesta e fechada: a forma exata da folga
-(∼ π³/n², a constante que contém o próprio π) continua exigindo o <strong>Capítulo 10</strong> — exercício E4.2.</p>
+(∼ π³/(2n²), a constante que contém o próprio π) continua exigindo o <strong>Capítulo 10</strong> — exercício E4.2.</p>
+<p style="font-size:.92rem; color:var(--ink-soft)">Correção (28/07/2026): a folga de semiperímetros foi escrita
+como ∼ π³/n² na primeira redação deste capítulo e, de novo, na redação paralela desta seção promovida. O leitor
+primário detectou a troca de constante: π³/n² é a assintótica da <em>diferença de áreas</em> entre os polígonos
+(A<sub>n</sub><sup>+</sup> − A<sub>n</sub><sup>−</sup> ∼ 2(b<sub>n</sub> − a<sub>n</sub>)); a folga de
+<em>semiperímetros</em> satisfaz n²(b<sub>n</sub> − a<sub>n</sub>) → π³/2 ≈ 15,5031 (verificação numérica no
+commit da correção). O ¼ não é afetado — ambas as constantes o implicam. A troca reapareceu no gabarito do
+exercício E4.2 e foi corrigida na integração do merge. Registrado, não apagado.</p>
 <p>Este é o desenho epistemológico que o tratado quer tornar visível: a mesma tabela sustentou, num único dia,
 um teorema (a cota ½), uma conjectura (o ¼), a refutação de uma metaconjectura (C5) e a promoção da conjectura
 a teorema. Sem o ledger, tudo isso teria parecido igualmente sólido desde o início. Não era.</p>
@@ -653,11 +660,13 @@ impossibilidade atual e o endereço onde ela cai.</p>
   <span class="nivel">N4 · E4.2</span>
   <p>A folga se comporta como C/n². Encontre a constante C exata.</p>
   <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
-    <p>Resposta (sem prova, como provocação): C = π³. O erro de cercar π conhece π melhor do que você — a
-    constante do erro contém o próprio número sendo cercado, ao cubo. Para provar isso é preciso saber <em>quanto</em>
-    uma corda perde para seu arco no limite — as expansões locais de seno e tangente, que são exatamente o
-    maquinário do <strong>Capítulo 10</strong>. Este capítulo provou a razão ¼ (seção 6) sem séries; a constante
-    π³ é o degrau seguinte, e ele exige a fábrica.</p>
+    <p>Resposta (sem prova, como provocação): C = π³/2. O erro de cercar π conhece π melhor do que você — a
+    constante do erro contém o próprio número sendo cercado, ao cubo (o π³ inteiro, sem o meio, pertence à
+    <em>diferença de áreas</em> entre os dois polígonos, que vale ∼ 2(b<sub>n</sub> − a<sub>n</sub>); confundir as
+    duas folgas foi um erro real deste capítulo, registrado na seção 6). Para provar isso é preciso saber
+    <em>quanto</em> uma corda perde para seu arco no limite — as expansões locais de seno e tangente, que são
+    exatamente o maquinário do <strong>Capítulo 10</strong>. Este capítulo provou a razão ¼ (seção 6) sem séries;
+    a constante π³/2 é o degrau seguinte, e ele exige a fábrica.</p>
   </details>
 </div>
 
@@ -698,7 +707,7 @@ impossibilidade atual e o endereço onde ela cai.</p>
   comparáveis, somáveis, compostas? — o tratado inteiro é, num sentido, essa pergunta.</li>
   <li><strong>Porta fechada → Cap. 9:</strong> comprimento do círculo como integral; o postulado de convexidade
   de Arquimedes deixa de ser postulado.</li>
-  <li><strong>Porta fechada → Cap. 10:</strong> expansões locais; a constante exata da folga (π³/n², exercício
+  <li><strong>Porta fechada → Cap. 10:</strong> expansões locais; a constante exata da folga (π³/(2n²), exercício
   E4.2) — o ¼ já caiu aqui (seção 6), a forma fina não.</li>
   <li><strong>Porta fechada → Cap. 6:</strong> o princípio do supremo posto à prova: o que a densidade de ℚ
   não compra.</li>

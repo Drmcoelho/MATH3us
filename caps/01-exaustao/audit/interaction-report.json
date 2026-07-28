@@ -1,7 +1,7 @@
 {
   "chapter_dir": "/home/user/MATH3us/caps/01-exaustao",
   "script": "tools/audit.mjs",
-  "code_commit": "f770cc9",
+  "code_commit": "bc2ea1f",
   "date": "2026-07-28",
   "gate": "v0",
   "checks": {

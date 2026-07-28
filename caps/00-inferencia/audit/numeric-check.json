@@ -1,0 +1,100 @@
+{
+  "chapter": 0,
+  "script": "tools/oracle-ch00.py",
+  "date": "2026-07-28",
+  "code_commit": "31bc78c",
+  "environment": "python 3.11.15, stdlib only, linux",
+  "implementations": [
+    "A: float64 stable forms (mirrors in-page JS)",
+    "B: float64 coordinate geometry + shoelace (no closed trig formulas)",
+    "C: Decimal 50-digit Taylor sin/cos (independent arithmetic)"
+  ],
+  "tested_domain": {
+    "dense_n": {
+      "min": 3,
+      "max": 200000
+    },
+    "decimal_spot_n": [
+      14921,
+      1000000,
+      1000000000,
+      1000000000000
+    ],
+    "adversarial_refused": [
+      2,
+      1,
+      0,
+      -6,
+      2.5,
+      "12"
+    ]
+  },
+  "checks": [
+    {
+      "invariant": "I1 fundamental-triangle",
+      "passed": true,
+      "detail": "max relative |r^2+(L/2)^2-R^2|/R^2 = 2.33e-16 over n and scales"
+    },
+    {
+      "invariant": "I2 area-formula-and-trapping",
+      "passed": true,
+      "detail": "max |n(L/2)r - shoelace| = 0.6 x (n*eps); strict trapping held"
+    },
+    {
+      "invariant": "I3 annulus-identity",
+      "passed": true,
+      "detail": "max relative error = 0.01 x tolerance 50*eps/sin^2(pi/n) (cancellation-aware); identity holds within declared precision for C in {pi, 1}"
+    },
+    {
+      "invariant": "I4 ratio-monotone-and-crosscheck",
+      "passed": true,
+      "detail": "gap>0 for all n in [3,100000]; max |float64 - Decimal50| = 1.0E-16"
+    },
+    {
+      "invariant": "I5 deficit-sandwich",
+      "passed": true,
+      "detail": "float64 stable: 0 violations in [3,200000]; Decimal50 holds at n=1e6,1e9,1e12"
+    },
+    {
+      "invariant": "I6 gap-sandwich",
+      "passed": true,
+      "detail": "float64 stable: 0 violations in [3,200000]; Decimal50 holds at n=14921,1e6,1e9"
+    },
+    {
+      "invariant": "I6b naive-gap-collapse-documented",
+      "passed": true,
+      "detail": "naive cos-difference violates the (true) sandwich 174477 times, first at n=14921 - observation-layer artifact, recorded in edge-cases.md"
+    },
+    {
+      "invariant": "I7 identification-guarantee",
+      "passed": true,
+      "detail": "worst-case measurements at +/-delta decided correctly for sampled n, delta = 0.4999 * min sandwich guard"
+    },
+    {
+      "invariant": "I8 ambiguity-midpoint",
+      "passed": true,
+      "detail": "midpoint compatible with n and n+1 when 2*delta = pi^2/n^3; float64 for n <= 1000, Decimal50 for n in {1e5, 1e7} (strict margin below float64 there)"
+    },
+    {
+      "invariant": "I9 twilight-window",
+      "passed": true,
+      "detail": "windows: {'1e-2': [8, 10], '1e-4': [37, 100], '1e-6': [171, 1000]}; both ends verified at edges and midpoint; delta=1e-6 window is [171,1000] as stated in the chapter"
+    },
+    {
+      "invariant": "I10 worked-example-boundaries",
+      "passed": true,
+      "detail": "guarantee holds at 169; bounds silent at 170 but g/2=9.955876e-07 < 1e-6 (already ambiguous - first chapter wording refuted here, corrected); bound-certified ambiguity from 171; circle excluded through 1570, not 1571"
+    },
+    {
+      "invariant": "I11 float-collapse",
+      "passed": true,
+      "detail": "n=3e8: 1-cos = 0.0 (collapsed), 2sin^2 = 5.483e-17, Decimal50 relative agreement 1.3E-16"
+    },
+    {
+      "invariant": "I12 domain-refusal",
+      "passed": true,
+      "detail": "refused: [2, 1, 0, -6, 2.5, '12']"
+    }
+  ],
+  "result": "all_passed"
+}
