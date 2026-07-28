@@ -110,5 +110,14 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 
 | Cap. | Estado | Branch | Última auditoria |
 |---|---|---|---|
-| 1 | auditado gate v0, aguardando tag | esta sessão | 28/07/2026 — oráculo 8/8, auditoria 21/21 |
-| 2–12 | previstos | — | — |
+| 1 | **fechado** — release cap-01-gate0-r1 (manifest em `releases/manifests/`; tag remota a criar pelo proprietário) | coordenadora | 28/07/2026 — oráculo 8/8, auditoria 25/25 por viewport |
+| 2 | em produção — Onda 1 (agent-cap-02, worktree) | wave1/cap-02 | — |
+| 3 | em produção — Onda 1 (agent-cap-03, worktree) | wave1/cap-03 | — |
+| 4 | em produção — Onda 1 (agent-cap-04, worktree) | wave1/cap-04 | — |
+| 5–12 | previstos | — | — |
+
+**Gate v1 pronto (antecipado):** `schemas/claims.schema.json` e
+`tools/verify-claims.mjs` já existem e validam o Cap. 1; tornam-se
+obrigatórios a partir do fechamento do segundo capítulo (§1.7).
+Dependência do validador: `js-yaml` (obrigatória) e `ajv` (opcional),
+resolvidas via `node_modules` ou `NODE_PATH`.
