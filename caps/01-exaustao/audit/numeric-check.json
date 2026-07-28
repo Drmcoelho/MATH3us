@@ -1,7 +1,7 @@
 {
   "chapter": 1,
   "script": "tools/oracle.py",
-  "code_commit": "cca24d6",
+  "code_commit": "d8dc136",
   "date": "2026-07-28",
   "environment": "python 3.11.15, stdlib only, linux",
   "implementations": {
@@ -36,7 +36,9 @@
       "passed": true
     },
     "I6_explicit_error_bound": {
-      "passed": false
+      "equality_at_k0": true,
+      "strict_for_k_ge_1": true,
+      "passed": true
     },
     "I7_trap_contains_pi_reference": {
       "passed": true
@@ -48,7 +50,7 @@
       "note": "supports conjecture chapter-01.gap-ratio-quarter; NOT a proof"
     }
   },
-  "all_passed": false,
+  "all_passed": true,
   "values": [
     {
       "k": 0,

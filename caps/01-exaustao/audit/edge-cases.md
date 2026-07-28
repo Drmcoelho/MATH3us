@@ -1,6 +1,6 @@
 # Capítulo 1 — Casos extremos, degenerados e adversariais
 
-Gerado por `tools/oracle.py` em 2026-07-28, commit `cca24d6`.
+Gerado por `tools/oracle.py` em 2026-07-28, commit `d8dc136`.
 
 - **base case exactness** — a_6 == 3 exactly (rational); b_6 == 2*sqrt(3) to 60 digits → **passou**
 - **minimal domain value k=0** — 3 < pi < 2*sqrt(3) holds at the very first step → **passou**

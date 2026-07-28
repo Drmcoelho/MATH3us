@@ -1,0 +1,82 @@
+{
+  "chapter_dir": "/home/user/MATH3us/caps/01-exaustao",
+  "script": "tools/audit.mjs",
+  "code_commit": "d8dc136",
+  "date": "2026-07-28",
+  "gate": "v0",
+  "checks": {
+    "desktop.interaction_values_n96": {
+      "passed": true,
+      "detail": "expected a=3,14103195 b=3,14271460 in \"n = 96  |  dentro aₙ = 3,14103195  |  fora bₙ = 3,14271460  |  folga = 0,0016826…\""
+    },
+    "desktop.back_and_reset": {
+      "passed": true
+    },
+    "desktop.keyboard_activation": {
+      "passed": true
+    },
+    "desktop.zoom_control": {
+      "passed": true
+    },
+    "desktop.no_horizontal_overflow": {
+      "passed": true
+    },
+    "desktop.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0406, 0.0108"
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true
+    },
+    "desktop.aria_live_region_present": {
+      "passed": true
+    },
+    "desktop.table_mirrors_state": {
+      "passed": true,
+      "detail": "rows=2 (after reset+1 doubling)"
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.interaction_values_n96": {
+      "passed": true,
+      "detail": "expected a=3,14103195 b=3,14271460 in \"n = 96  |  dentro aₙ = 3,14103195  |  fora bₙ = 3,14271460  |  folga = 0,0016826…\""
+    },
+    "iphone.back_and_reset": {
+      "passed": true
+    },
+    "iphone.keyboard_activation": {
+      "passed": true
+    },
+    "iphone.zoom_control": {
+      "passed": true
+    },
+    "iphone.no_horizontal_overflow": {
+      "passed": true
+    },
+    "iphone.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0406, 0.0108"
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true
+    },
+    "iphone.aria_live_region_present": {
+      "passed": true
+    },
+    "iphone.table_mirrors_state": {
+      "passed": true,
+      "detail": "rows=2 (after reset+1 doubling)"
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}
