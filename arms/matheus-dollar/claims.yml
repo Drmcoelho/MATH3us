@@ -44,7 +44,7 @@ claims:
     provenance: derived_in_treatise
     proof_mode: proved_here
     role: supporting_result
-    proof_location: "#erros"
+    proof_location: "#identidades"
 
   - id: dollar.visual-semantic-integrity
     statement: Every admissible visual state keeps the circle, inscribed boundary and circumscribed boundary semantically identifiable.
