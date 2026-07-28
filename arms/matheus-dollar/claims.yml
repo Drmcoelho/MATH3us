@@ -1,0 +1,56 @@
+chapter: matheus-dollar-01
+status: open_prototype
+claims:
+  - id: dollar.triangle-identity
+    statement: R^2 = r^2 + (L/2)^2 for the fundamental right triangle of a regular polygon.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#triangulo"
+
+  - id: dollar.inscribed-area
+    statement: A_n^- = a_n^2 / b_n for the unit circle.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#areas"
+
+  - id: dollar.circumscribed-area
+    statement: A_n^+ = b_n for the unit circle.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#areas"
+
+  - id: dollar.doubled-inscribed-area
+    statement: A_{2n}^- = a_n.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#identidades"
+
+  - id: dollar.area-gap-perimeter-gap
+    statement: (A_n^+ - A_n^-)/(b_n-a_n) tends to 2.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#erros"
+
+  - id: dollar.visual-semantic-integrity
+    statement: Every admissible visual state keeps the circle, inscribed boundary and circumscribed boundary semantically identifiable.
+    kind: conjecture
+    status: supported
+    provenance: authorial
+    proof_mode: computational_only
+    role: central_result
+    notes: Requires browser audit and primary-reader inspection before release.
