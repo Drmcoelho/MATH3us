@@ -1,0 +1,312 @@
+{
+  "chapter": 6,
+  "script": "caps/06-patologias/oracle.py",
+  "code_commit": "95ed8ad",
+  "date": "2026-07-29",
+  "environment": "python 3.11.15, stdlib only, linux",
+  "implementations": {
+    "exactness": "all verification arithmetic in Fraction/int; floats only inside adversarial observation cases",
+    "I2": "route A per-q nearest with certified error bounds vs route B exhaustive enumeration in the delta-ball",
+    "I3": "route A exact finite-sum evaluation of T at dyadic points vs route B the +-1 binary-digit formula",
+    "I5": "totient sieve vs direct gcd count"
+  },
+  "tested_domain": {
+    "density_pairs": 7,
+    "thomae_alphas": [
+      "sqrt2/2",
+      "sqrt3/3",
+      "sqrt2-1"
+    ],
+    "thomae_eps": [
+      "1/10",
+      "1/100",
+      "1/1000"
+    ],
+    "dyadic_m_max_exact": 40,
+    "chain_m_max": 52,
+    "farey_Q": [
+      10,
+      100,
+      1000
+    ],
+    "q_hole_samples": "7 canonical + 40 random rationals",
+    "bisection_steps": 60,
+    "adversarial": [
+      "float sampling 4096",
+      "q=0",
+      "6/8 unreduced",
+      "float floor at 2^60/3",
+      "probe m>53"
+    ]
+  },
+  "invariants": {
+    "I1_density_witnesses": {
+      "passed": true,
+      "pairs": 7,
+      "witnesses": [
+        {
+          "a": "0",
+          "b": "1",
+          "midpoint": "1/2",
+          "n_pow2": 2,
+          "n_isqrt": 2
+        },
+        {
+          "a": "7/10",
+          "b": "71/100",
+          "midpoint": "141/200",
+          "n_pow2": 256,
+          "n_isqrt": 142
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "midpoint": "5/12",
+          "n_pow2": 16,
+          "n_isqrt": 9
+        },
+        {
+          "a": "141/100",
+          "b": "71/50",
+          "midpoint": "283/200",
+          "n_pow2": 256,
+          "n_isqrt": 142
+        },
+        {
+          "a": "353553/500000",
+          "b": "707107/1000000",
+          "midpoint": "1414213/2000000",
+          "n_pow2": 2097152,
+          "n_isqrt": 1414214
+        },
+        {
+          "a": "-5/7",
+          "b": "-2/3",
+          "midpoint": "-29/42",
+          "n_pow2": 32,
+          "n_isqrt": 30
+        },
+        {
+          "a": "1000000000/1000000001",
+          "b": "1",
+          "midpoint": "2000000001/2000000002",
+          "n_pow2": 2147483648,
+          "n_isqrt": 1414213564
+        }
+      ]
+    },
+    "I2_thomae_epsilon_delta": {
+      "passed": true,
+      "cases": [
+        {
+          "alpha": "sqrt2/2",
+          "eps": "1/10",
+          "Q": 10,
+          "nearest": "7/10",
+          "delta": 0.006396103067892772
+        },
+        {
+          "alpha": "sqrt2/2",
+          "eps": "1/100",
+          "Q": 100,
+          "nearest": "70/99",
+          "delta": 3.246670425640832e-05
+        },
+        {
+          "alpha": "sqrt2/2",
+          "eps": "1/1000",
+          "Q": 1000,
+          "nearest": "408/577",
+          "delta": 9.557542012641618e-07
+        },
+        {
+          "alpha": "sqrt3/3",
+          "eps": "1/10",
+          "Q": 10,
+          "nearest": "4/7",
+          "delta": 0.0053295279849489025
+        },
+        {
+          "alpha": "sqrt3/3",
+          "eps": "1/100",
+          "Q": 100,
+          "nearest": "56/97",
+          "delta": 2.7613404683806615e-05
+        },
+        {
+          "alpha": "sqrt3/3",
+          "eps": "1/1000",
+          "Q": 1000,
+          "nearest": "571/989",
+          "delta": 5.312379313518811e-07
+        },
+        {
+          "alpha": "sqrt2-1",
+          "eps": "1/10",
+          "Q": 10,
+          "nearest": "2/5",
+          "delta": 0.012792206135785545
+        },
+        {
+          "alpha": "sqrt2-1",
+          "eps": "1/100",
+          "Q": 100,
+          "nearest": "41/99",
+          "delta": 6.493340851281664e-05
+        },
+        {
+          "alpha": "sqrt2-1",
+          "eps": "1/1000",
+          "Q": 1000,
+          "nearest": "408/985",
+          "delta": 3.2796319671143423e-07
+        }
+      ]
+    },
+    "I3_takagi_dyadic_slopes_two_routes": {
+      "passed": true,
+      "chains_first_12": {
+        "0": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "1/3": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "float(sqrt2/2)": [
+          -1,
+          0,
+          -1,
+          -2,
+          -1,
+          -2,
+          -1,
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    "I4_takagi_one_third": {
+      "passed": true
+    },
+    "I5_farey_counts_C2": {
+      "passed": true,
+      "counts": {
+        "10": 32,
+        "100": 3044,
+        "1000": 304192
+      },
+      "dev_Q1000": 0.000751567325391278,
+      "dev_Q10": 0.05275780278286479,
+      "C2_verdict": "confirmed"
+    },
+    "I6_q_hole_witnesses": {
+      "passed": true,
+      "samples": 47
+    },
+    "I7_tvi_bisection_certificates": {
+      "passed": true,
+      "certificates": [
+        {
+          "f": "x^2-2 on [1,2]",
+          "lo": 1.4142135623730951,
+          "hi": 1.4142135623730951,
+          "width": 8.673617379884035e-19
+        },
+        {
+          "f": "x^3+x-1 on [0,1]",
+          "lo": 0.6823278038280193,
+          "hi": 0.6823278038280193,
+          "width": 8.673617379884035e-19
+        }
+      ]
+    },
+    "I8_C5_judgment": {
+      "passed": true,
+      "S": [
+        -1,
+        0,
+        -1,
+        -2,
+        -1,
+        -2,
+        -1,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        2,
+        3,
+        4,
+        3,
+        2,
+        1,
+        0,
+        1,
+        2,
+        1,
+        0,
+        1,
+        2,
+        1,
+        0,
+        1,
+        2,
+        1,
+        0,
+        -1,
+        -2,
+        -3,
+        -4,
+        -5,
+        -4,
+        -3,
+        -4,
+        -5,
+        -6,
+        -5,
+        -6,
+        -7,
+        -8,
+        -9,
+        -8,
+        -7,
+        -8,
+        -9,
+        -8
+      ],
+      "sign_changes": 2,
+      "max_abs_S": 9,
+      "C5_verdict": "REFUTED",
+      "C5_claim": "sign changes >= 3 and max|S_m| <= 12"
+    }
+  },
+  "all_passed": true,
+  "edge_cases_passed": true
+}

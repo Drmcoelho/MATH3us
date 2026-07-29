@@ -151,3 +151,47 @@ chegaram muito antes; o TVI é de Bolzano (1817) e Cauchy; a incompletude de
 demonstra ou cita item a item (`claims.yml`). A única coisa nova que este
 registro protege é a honestidade do experimento: o que foi previsto sobre a
 tela, antes de a tela existir.
+
+---
+
+## Autópsia de C5 (28/07/2026 — apêndice; o registro acima permanece intacto)
+
+**Veredito do oráculo canônico (invariante I8, `audit/numeric-check.json`):**
+REFUTADA. A sequência S_1, …, S_52 do float de √2/2 muda de sinal apenas
+**2** vezes (negativa em m = 1–9, positiva em m = 11–31, negativa em
+m = 33–52, terminando em S_52 = −8 com mínimo −9); a cláusula "pelo menos 3
+mudanças de sinal" falhou. A cláusula de magnitude **segurou**:
+max |S_m| = 9 ≤ 12.
+
+**1. Qual passo parecia plausível?** Modelar os bits da mantissa como
+passeio aleatório equilibrado e concluir daí duas coisas ao mesmo tempo:
+magnitude na escala √52 ≈ 7,2 *e* alternância frequente de sinal. A primeira
+metade era um raciocínio de escala; a segunda, um palpite de frequência
+enxertado nele sem cálculo.
+
+**2. Onde ocorreu a falha lógica?** Em igualar "equilibrado" a "oscilante".
+São propriedades independentes: um passeio pode manter |S| pequeno e ainda
+assim passar longas eras de um só lado do zero. A conjectura fundiu as duas
+num único "e" — e apostou a parte arriscada sem nenhuma estimativa de
+quantas mudanças de sinal um passeio de 52 passos tipicamente faz.
+
+**3. Qual contraexemplo ou teorema expôs a falha?** O contraexemplo é o
+próprio dado: a sequência S do oráculo, com suas três eras longas. O
+fenômeno tem nome clássico — a persistência dos passeios aleatórios (lei do
+arco-seno: excursões longas de um lado só são a regra, não a exceção) —,
+citado aqui apenas como contexto: probabilidade está fora deste ciclo (§11
+do manual), e nada no capítulo depende disso.
+
+**4. O que havia de aproveitável na intuição?** A metade de escala: o
+máximo observado (9) tem exatamente a ordem √m prevista, e o passeio visitou
+ambos os sinais. A intuição de *magnitude* era boa; a de *frequência* era
+decorativa e não sobreviveu ao primeiro contato com o dado.
+
+**5. Qual reformulação sobreviveu?** A cláusula separável e confirmada:
+"max |S_m| ≤ 12 para m ≤ 52 no float de √2/2" (verificada, I8). A parte de
+frequência não será re-conjecturada neste ciclo: estimar mudanças de sinal
+exige a teoria de flutuações que o tratado ainda não construiu — fica como
+observação registrada, não como aposta nova.
+
+**Registro no ledger:** `chapter-06.mantissa-walk-conjecture`
+(`kind: conjecture`, `status: refuted`, com esta autópsia referenciada).
