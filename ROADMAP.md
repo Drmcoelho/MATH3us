@@ -63,7 +63,7 @@ tabela §4 do models.md; fila de merge na ordem abaixo.
 | 1 | `agent-cap-06` | `claude/cap-06-patologias` | 6 — As Patologias | tag `cap-01-gate0-r1` criada — pelo §10 do manual, capítulo só fecha com a tag; veredito e manifest não a substituem (correção aceita de revisão externa) | não toca `caps/01-exaustao/`; usa claims do Cap. 1 por referência |
 | 2 | `agent-cap-07` | `claude/cap-07-complexos` | 7 — ℂ | claims do Cap. 2 na `main` ✓ (pré-condição da §4 do models.md é claims, não fechamento) | reabre porta do Cap. 2 **por referência**, sem editar o Cap. 2; sem exponencial (E11) |
 | 3 | `agent-cap-02r2` | `claude/cap-02-r2-density` | 2 — revisão r2 (W1, §5) | tag `cap-02-gate0-r1` criada (E9: correção/extensão pós-release exige revisão própria) | mesmo diretório do Cap. 2; **não pode correr em paralelo com outro trabalho no Cap. 2** |
-| 4 | `agent-cap-01r` | escopo da D3 | 1 — reconstrução geométrica (W2, §5) | decisão D3 do leitor primário | toca `caps/01-exaustao/` — exclusivo enquanto durar |
+| ~~4~~ | ~~`agent-cap-01r`~~ | — | 1 — reconstrução geométrica — **CONCLUÍDA** (D3 exercida; PR #17, release r3 em `947aa80`; primeira aresta inter-capítulos do grafo: cunha do Cap. 1 → Cap. 0) | — | vaga liberada para a política da §8 |
 | 5 | `agent-cap-05` | `claude/cap-05-consonancia` | 5 — A Consonância | Caps. 6 e 7 na `main` | — |
 | 5 | `agent-cap-08` | `claude/cap-08-algebra-linear` | 8 — Álgebra Linear | nenhuma lógica; produzir na onda do 5 | paralelo seguro com o 5 (diretórios disjuntos) |
 | 6 | `agent-cap-09` | `claude/cap-09-integral` | 9 — A Integral | Caps. 1–8 fechados | reabre retificação por referência |
@@ -75,6 +75,31 @@ tabela §4 do models.md; fila de merge na ordem abaixo.
 `tools/validate-release.mjs`) no fechamento formal do 3º capítulo;
 reauditoria E9 dos fechados a cada endurecimento; aplicação retroativa da
 E22 (§5, W2) como pendência editorial auditável.
+
+## 4.1 Política de alocação de paralelismo
+
+Quantos agentes produtores rodar ao mesmo tempo. O teto estrutural em cada
+momento é o número de frentes **logicamente destravadas** com diretórios
+disjuntos (§2); o número recomendado fica abaixo do teto, por três razões
+operacionais comprovadas em 28/07/2026:
+
+1. a fila de merge é serializada (§1) — cada produtor a mais envelhece as
+   branches dos outros (causa raiz da colisão E20 e dos conflitos do PR #8);
+2. o gargalo real é o leitor primário — capítulo produzido além da
+   capacidade de veredito vira estoque, não progresso;
+3. revisões de capítulo em avaliação (tags em emissão) criam alvo móvel —
+   no máximo **uma revisão** em curso por vez.
+
+| Fase | Frentes destravadas | Recomendado | Composição |
+|---|---|---|---|
+| **Atual (pós-tags D1/D2′/D4/D5)** | 6, 7, 8, 2-r2 | **4 + coordenadora** | `agent-cap-06` ∥ `agent-cap-07` ∥ `agent-cap-08` ∥ `agent-cap-02r2` |
+| Após fechar 6 e 7 | 5 (+ revisão pendente) | 2 + coordenadora | `agent-cap-05` ∥ revisão remanescente |
+| Cauda (9 → 10 → 11 → 12) | cadeia estritamente sequencial | 1 + coordenadora | um agente por vez; paralelismo extra não acelera a lógica |
+
+A curva do projeto é 4 → 2 → 1. Aumentar além do recomendado só é
+justificável se o leitor primário estiver com a fila de vereditos vazia; o
+teto estrutural nunca pode ser excedido. A coordenadora não produz capítulo
+enquanto houver ≥ 2 produtores ativos (integração vira o trabalho dela).
 
 ## 5. Trabalhos registrados pelo autor em 28/07/2026
 
