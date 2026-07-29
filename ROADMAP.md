@@ -44,9 +44,13 @@ antiga demais e dois PRs tocando os mesmos arquivos. Regras vigentes:
   validados pelo gate v1).
 - **Fila de merge:** vazia. PR #6 (MATHeu$) aguarda veredito do leitor
   primário — política na §6.
-- **Bloqueio externo:** nenhuma tag remota existe (D1, D2′, D4 do
-  `AUDIT.md`). As tags destravam o fechamento formal e o critério estrito
-  da Onda 2.
+- **Bloqueio de tags encerrado (29/07/2026):** as seis tags dos Caps. 0–1
+  foram criadas via workflow `create-release-tags` (deriva tags dos
+  manifests commitados; autorização explícita do autor). Caps. 0 e 1
+  **formalmente fechados** (§10). A pré-condição do Cap. 6 (Onda 2) está
+  satisfeita; a Onda de 4 produtores da §4.1 está liberada, exceto
+  `agent-cap-02r2`, que aguarda a decisão D4 → manifests dos Caps. 2–4 →
+  novo dispatch do workflow.
 - **Gate v2 entregue e executado (28/07/2026):** `tools/bundle.mjs` +
   `tools/validate-release.mjs`, aprovados nos Caps. 0–4 com reauditoria
   E9 (relatórios em `caps/*/audit/`). A D4 está destravada do lado da

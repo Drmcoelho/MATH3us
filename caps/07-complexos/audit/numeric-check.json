@@ -1,0 +1,166 @@
+{
+  "chapter": 7,
+  "script": "caps/07-complexos/oracle.py",
+  "code_commit": "df8cfdd",
+  "date": "2026-07-29",
+  "environment": "python 3.11.15, stdlib only, linux",
+  "seed": 20260728,
+  "implementations": {
+    "A": "exact Fraction pairs (field ops), exact Z[i] ints (division, gcd, sieve, two-squares search)",
+    "B": "2x2 matrix representation (field), iterated multiplication (roots), brute-force divisor search (Gaussian primes), math vs cmath (polar)"
+  },
+  "tested_domain": {
+    "field_fraction_samples": 120,
+    "polar_float_pairs": 4000,
+    "roots_cases": "7 targets x n in 1..12",
+    "branch_pairs": 6000,
+    "division_trials": 3000,
+    "two_squares_primes_below": 50000,
+    "gauss_brute_square": 14,
+    "wilson_largest": 49999
+  },
+  "invariants": {
+    "I1_field_axioms_exact_and_matrix_route": {
+      "passed": true,
+      "triples_checked": 40
+    },
+    "I2_norm_multiplicative_exact": {
+      "passed": true
+    },
+    "I3_product_modulus_argument_float": {
+      "passed": true,
+      "max_modulus_rel_err": 2.842170943040401e-14,
+      "max_argument_winding_err": 2.220446049250313e-16
+    },
+    "I4_nth_roots_count_polygon_sum_C3": {
+      "passed": true,
+      "cases": 84,
+      "worst_rel_power_err": 1.939246048755017e-14
+    },
+    "I5_branch_defect_C5": {
+      "passed": true,
+      "pairs": 6000,
+      "defects_observed_2pi_multiples": [
+        -1,
+        0,
+        1
+      ]
+    },
+    "I6_gaussian_division_remainder_shrinks": {
+      "passed": true,
+      "trials": 3000
+    },
+    "I7_wilson_and_qr_witness": {
+      "passed": true,
+      "primes_sampled": 63,
+      "largest_prime_sampled": 49999
+    },
+    "I8_two_squares_exhaustive_and_C1": {
+      "passed": true,
+      "primes_tested": 5133,
+      "p_1_mod_4": 2549,
+      "p_3_mod_4": 2583,
+      "composite_65_reps": [
+        [
+          1,
+          8
+        ],
+        [
+          4,
+          7
+        ]
+      ]
+    },
+    "I9_wilson_witness_gcd_algorithm_C2": {
+      "passed": true,
+      "cases": [
+        {
+          "p": 5,
+          "gcd": [
+            2,
+            1
+          ],
+          "norm": 5
+        },
+        {
+          "p": 13,
+          "gcd": [
+            -2,
+            -3
+          ],
+          "norm": 13
+        },
+        {
+          "p": 17,
+          "gcd": [
+            -4,
+            1
+          ],
+          "norm": 17
+        },
+        {
+          "p": 29,
+          "gcd": [
+            5,
+            -2
+          ],
+          "norm": 29
+        },
+        {
+          "p": 97,
+          "gcd": [
+            9,
+            -4
+          ],
+          "norm": 97
+        },
+        {
+          "p": 101,
+          "gcd": [
+            -10,
+            1
+          ],
+          "norm": 101
+        },
+        {
+          "p": 997,
+          "gcd": [
+            31,
+            6
+          ],
+          "norm": 997
+        },
+        {
+          "p": 4001,
+          "gcd": [
+            -40,
+            -49
+          ],
+          "norm": 4001
+        },
+        {
+          "p": 9973,
+          "gcd": [
+            57,
+            82
+          ],
+          "norm": 9973
+        },
+        {
+          "p": 49993,
+          "gcd": [
+            -213,
+            68
+          ],
+          "norm": 49993
+        }
+      ]
+    },
+    "I10_gaussian_primes_criterion_vs_brute_C4": {
+      "passed": true,
+      "square_bound": 14,
+      "mismatches": []
+    }
+  },
+  "all_passed": true
+}

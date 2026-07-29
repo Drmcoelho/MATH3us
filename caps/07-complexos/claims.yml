@@ -1,0 +1,548 @@
+# Chapter 7 — Complex numbers. Epistemological ledger (MATH3us.md §1.4, §8).
+# NOTE (E12): verification statuses below are backed by artifacts in audit/,
+# produced by the oracle and audit runs registered at the end of this file.
+# E11 discipline: the exponential notation is confined to door-marked boxes
+# (audited: eitheta_notation_contained_in_door_boxes = 0 occurrences outside).
+
+chapter: 7
+claims:
+  - id: chapter-07.field-construction
+    statement: >
+      The set of ordered pairs of reals with (a,b)+(c,d) = (a+c, b+d) and
+      (a,b)*(c,d) = (ac-bd, ad+bc) is a field, with i = (0,1) satisfying
+      i^2 = -1. The multiplication rule is forced by three declared demands
+      (reals act as scalings, the quarter turn squares to the half turn,
+      distributivity). Inverse: z^{-1} = conj(z)/N(z), z != 0; no zero
+      divisors; no field order exists on C (i^2 = -1 < 0 blocks it).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    proof_location: "#corpo"
+    notes: >
+      Routine axioms (commutativity, associativity, distributivity) are
+      declared and carried by symbolic-check S1 and oracle I1 (exact
+      Fractions + independent 2x2 matrix route); the interesting parts
+      (inverse via norm, no zero divisors) are proved in the text.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S1" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I1" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "inverse of 0 refused (A2)" }
+
+  - id: chapter-07.norm-multiplicative
+    statement: >
+      N(zw) = N(z)N(w), i.e. (a^2+b^2)(c^2+d^2) = (ac-bd)^2 + (ad+bc)^2
+      (Brahmagupta-Fibonacci identity). Equivalently |zw| = |z||w|. Also
+      the engine of two-squares composition (products of sums of two
+      squares are sums of two squares).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.field-construction"
+    proof_location: "#norma-identidade"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S2" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I2 (exact)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.rotation-coordinates
+    statement: >
+      The rotation R_theta about the origin is linear and
+      R_theta(x,y) = (x cos t - y sen t, x sen t + y cos t). Geometric
+      facts imported and declared: rotations preserve lengths/angles
+      (hence linearity), R_theta(1,0) = (cos t, sen t) by the circle
+      definition, and the quarter turn maps (p,q) to (-q,p). Sine and
+      cosine carry explicitly geometric status (E11/E22): school ratio
+      definitions with the right-triangle figure precede first use.
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#rotacao"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S3" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I3 (float, bounded)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.multiplication-rotation-scale
+    statement: >
+      Multiplication by cos t + i sen t equals the rotation R_theta;
+      multiplication by w = s(cos p + i sen p), s > 0, is rotation by p
+      followed by scaling by s.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.field-construction"
+      - claim: "chapter-07.rotation-coordinates"
+    proof_location: "#rotacao-escala"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S3" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I3" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.addition-formulas
+    statement: >
+      cos(a+b) = cos a cos b - sen a sen b and
+      sen(a+b) = sen a cos b + cos a sen b, DERIVED geometrically from
+      rotation composition (R_a o R_b = R_{a+b}, a declared geometric
+      fact) translated into products by the rotation-scale theorem.
+      Declared route per E11: derived, not imported from analysis.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.multiplication-rotation-scale"
+    proof_location: "#formulas-adicao"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S4" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I3" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.polar-product
+    statement: >
+      For z = r(cos t + i sen t), w = s(cos p + i sen p):
+      zw = rs(cos(t+p) + i sen(t+p)). Moduli multiply; arguments add up
+      to integer multiples of 2 pi (made precise by the multivalued
+      argument definition).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.addition-formulas"
+      - claim: "chapter-07.norm-multiplicative"
+    proof_location: "#produto-polar"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S4" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I3 (independent math/cmath routes)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.de-moivre
+    statement: >
+      (cos t + i sen t)^n = cos nt + i sen nt for every integer n >= 1;
+      hence z^n = r^n (cos nt + i sen nt).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    dependencies:
+      - claim: "chapter-07.addition-formulas"
+    proof_location: "#de-moivre"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S5" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I4 (de Moivre vs iterated power)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.real-nth-root
+    statement: >
+      Every real s > 0 has a unique real n-th root r > 0, proved via the
+      supremum principle (Chapter 1) with explicit binomial-type bounds
+      replacing limit language.
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-01.supremum-principle"
+    proof_location: "#raiz-real"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I4 (radius checks)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.nth-roots-theorem
+    statement: >
+      Every w != 0 has exactly n n-th roots z_k, k = 0..n-1, all of
+      modulus |w|^(1/n), with arguments (arg w + 2 k pi)/n: the vertices
+      of a regular n-gon inscribed in the circle of radius |w|^(1/n).
+      This destroys the predicted failure ("every inverse operation
+      returns a single value") without any exponential (E11). Degenerate
+      case declared: w = 0 has the single root 0.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.de-moivre"
+      - claim: "chapter-07.real-nth-root"
+      - claim: "chapter-07.polar-product"
+    proof_location: "#raizes-enesimas"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S7" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I4 (count, distinctness, polygon regularity, radius)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "w = 0 degenerate declared (A1)" }
+
+  - id: chapter-07.roots-sum-zero
+    statement: >
+      For n >= 2 and w != 0, the n n-th roots of w sum to exactly 0
+      (telescoping with the primitive root of unity; cancellation valid
+      because C has no zero divisors). Preregistered conjecture C3,
+      confirmed.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-07.nth-roots-theorem"
+    proof_location: "#soma-raizes"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S7" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I4 (sum bound)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.branch-cost
+    statement: >
+      arg z is a set (theta_0 + 2 pi Z); Arg z is the chosen
+      representative in (-pi, pi]. The set-law arg(zw) = arg z + arg w
+      holds exactly; for the representative,
+      Arg(zw) - Arg z - Arg w lies in {-2 pi, 0, +2 pi} and all three
+      values occur. Any branch choice buys single-valuedness at the cost
+      of a discontinuity (the cut), a broken addition law, and n-1
+      hidden root siblings. Preregistered conjecture C5, confirmed.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.polar-product"
+    proof_location: "#custo-ramo"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S8" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I5 (6000 pairs + cut-adjacent)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "float wraparound at the cut recorded as observation-layer note (A4)" }
+
+  - id: chapter-07.exponential-door
+    statement: >
+      Is the rotation operator cos t + i sen t an exponential? The
+      notation e^{i t} appears exclusively inside a closed-door box: the
+      equality will be proved when exponential, sine and cosine are
+      rebuilt from power series (Ch. 10) and synthesized (Ch. 12). The
+      complex logarithm is deferred, recorded only as the formal relation
+      z = ln|w| + i(Arg w + 2 k pi), k in Z, w != 0, whose inversion will
+      be validated later. No Riemann surfaces, no covering topology in
+      this cycle.
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    proof_location: "#porta-exponencial"
+    notes: >
+      E11 hard constraint, audited: the audit counts occurrences of the
+      notation outside door-marked regions and requires zero. Incident
+      recorded: the first audit run found ONE leak (a Horizonte bullet
+      naming the notation outside a door box); the bullet was rewritten
+      and the re-run passed. The incident is data, not erased.
+
+  - id: chapter-07.gaussian-units
+    statement: >
+      u in Z[i] is a unit iff N(u) = 1 iff u in {1, -1, i, -i}.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    dependencies:
+      - claim: "chapter-07.norm-multiplicative"
+    proof_location: "#unidades"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S9" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I10 (unit rotations in criterion)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "unit-multiplication invariance (A5)" }
+
+  - id: chapter-07.gaussian-division
+    statement: >
+      For z, d in Z[i], d != 0, there exist q, r with z = qd + r and
+      N(r) <= N(d)/2 < N(d) — proved by the rounding argument (nearest
+      integers to the exact quotient's rational coordinates).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.field-construction"
+      - claim: "chapter-07.norm-multiplicative"
+    proof_location: "#divisao-gaussiana"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S9" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I6 (3000 exact random trials, seed fixed)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "division by zero refused (A2); tie-rounding declared" }
+
+  - id: chapter-07.gaussian-euclid-chain
+    statement: >
+      From the division algorithm: gcds exist in Z[i] (Euclid's algorithm
+      terminates on strictly decreasing remainder norms), Bezout holds
+      (each remainder is a Z[i]-combination), and Euclid's lemma follows
+      (a Gaussian prime dividing a product divides a factor).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-07.gaussian-division"
+    proof_location: "#euclides-gaussiano"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S10" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I9 (gcd algorithm exercised end to end)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.wilson
+    statement: >
+      For every prime p, (p-1)! == -1 (mod p) — proved by the pairing
+      argument (each residue pairs with its unique inverse; only 1 and
+      p-1 are self-paired). Sharpness noted: composites n > 4 give 0.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#wilson"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S11" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I7 (63 primes up to 49999 + composite sharpness)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.minus-one-quadratic-residue
+    statement: >
+      If p == 1 (mod 4), then m = ((p-1)/2)! satisfies m^2 == -1 (mod p):
+      -1 is a quadratic residue with an explicit witness (Wilson +
+      pairing k with p-k; the sign (-1)^((p-1)/2) is +1).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-07.wilson"
+    proof_location: "#residuo-quadratico"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S11" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I7 (and the mod-3 contrast m^2 == +1)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.two-squares
+    statement: >
+      Fermat: an odd prime p is a sum of two integer squares iff
+      p == 1 (mod 4); and 2 = 1^2 + 1^2. Forward: the Wilson witness
+      gives p | m^2 + 1 = (m+i)(m-i); p divides neither factor, so p is
+      not a Gaussian prime; the norm partition of any nontrivial
+      factorization yields N(pi) = p = a^2 + b^2. Converse: squares
+      mod 4 lie in {0, 1}, so a^2 + b^2 is never 3 mod 4.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.minus-one-quadratic-residue"
+      - claim: "chapter-07.gaussian-euclid-chain"
+      - claim: "chapter-07.gaussian-units"
+      - claim: "chapter-07.norm-multiplicative"
+    proof_location: "#dois-quadrados"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S12" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I8 (EXHAUSTIVE: all 5133 primes p < 50000)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "p = 2 special case (A3); 49993 = 68^2 + 213^2 (A6)" }
+
+  - id: chapter-07.two-squares-uniqueness
+    statement: >
+      A prime p = a^2 + b^2 (0 < a <= b) has exactly one such
+      representation — proved elementarily via p | (ac+bd)(ac-bd) and the
+      two Brahmagupta pairings; uniqueness fails for composites
+      (65 has two). Preregistered conjecture C1, confirmed.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-07.two-squares"
+      - claim: "chapter-07.norm-multiplicative"
+    proof_location: "#exercicios"
+    notes: "Proved in exercise E3.1 with full gabarito."
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "final section (C1)" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I8 (uniqueness exhaustive + composite 65 contrast)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.witness-gcd-algorithm
+    statement: >
+      For p == 1 (mod 4) with Wilson witness m, the Gaussian gcd
+      gcd(m + i, p) computed by the rounding Euclid algorithm has norm
+      exactly p: the existence proof is also an algorithm producing the
+      decomposition. Preregistered conjecture C2, confirmed.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-07.two-squares"
+      - claim: "chapter-07.gaussian-euclid-chain"
+    proof_location: "#algoritmo-gcd"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S12 (algorithm part)" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I9 (10 primes incl. 49993)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-07.gaussian-primes-classification
+    statement: >
+      (a) N(z) rational prime implies z Gaussian prime; (b) 1+i is prime;
+      (c) rational p == 3 (mod 4) stays prime in Z[i]; (d) rational
+      p == 1 (mod 4) splits as pi * conj(pi) with N(pi) = p; (e) off the
+      axes, a + bi is a Gaussian prime iff a^2 + b^2 is a rational prime.
+      Preregistered conjecture C4 is (e), confirmed.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-07.two-squares"
+      - claim: "chapter-07.gaussian-euclid-chain"
+      - claim: "chapter-07.gaussian-units"
+    proof_location: "#primos-gaussianos"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S12" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/07-complexos/oracle.py", note: "I10 (criterion vs brute-force divisor search, |a|,|b| <= 14)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "unit invariance (A5); 2 ramifies (A3)" }
+
+  - id: chapter-07.cap2-door-reopened
+    statement: >
+      The locked door of Chapter 2 ("which primes are sums of two
+      squares?") is reopened and closed from the inside: the hypotenuse
+      congruence R == 1 (mod 4), which was mere necessity there, is now a
+      characterization — for an odd prime, being == 1 (mod 4), being a
+      sum of two squares, and being the hypotenuse of a primitive triple
+      are equivalent (exercise E3.2 closes the cycle using Chapter 2's
+      Euclid reading).
+    kind: synthesis
+    status: supported
+    provenance: derived_in_treatise
+    proof_mode: not_applicable
+    role: bridge
+    dependencies:
+      - claim: "chapter-07.two-squares"
+      - claim: "chapter-02.sum-of-two-squares-door"
+        door: true
+      - claim: "chapter-02.parity-lemma"
+        door: true
+      - claim: "chapter-02.euclid-inverse-reading"
+        door: true
+    proof_location: "#porta-reaberta"
+    notes: >
+      Chapter 2 is integrated but not yet tagged (AUDIT.md D4), so its
+      claims are referenced with door: true per E13; the door markers
+      should be removed when Chapter 2 receives its release tag. The
+      components of the equivalence are proved theorems (two-squares here;
+      parity lemma and Euclid reading there); the synthesis is the
+      cross-chapter organization.
+
+  - id: chapter-07.gaussian-moat-question
+    statement: >
+      Can one walk to infinity on Gaussian primes with bounded steps
+      (Gaussian moat problem, Gordon 1962)? Open problem of mathematics,
+      declared as such in exercise E4.2; density tools are outside this
+      cycle.
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    proof_location: "#exercicios"
+
+  - id: chapter-07.fundamental-theorem-algebra-question
+    statement: >
+      Does every nonconstant complex polynomial have a root? The chapter
+      solves the case z^n - w explicitly (nth-roots theorem) and declares
+      the general case out of reach: every known proof needs analysis
+      (compactness, power series — Ch. 10) or covering/winding topology
+      (second cycle). Exercise E4.3.
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    dependencies:
+      - claim: "chapter-07.nth-roots-theorem"
+    proof_location: "#exercicios"
+
+# --- execution registry (E12): who witnessed what, when -------------------
+oracle_run:
+  script: caps/07-complexos/oracle.py
+  report: caps/07-complexos/audit/numeric-check.json
+  edge_report: caps/07-complexos/audit/edge-cases.md
+  code_commit: df8cfdd
+  environment: "python 3.11, stdlib only, linux"
+  date: 2026-07-28
+  seed: 20260728
+  tested_domain:
+    field_fraction_samples: 120
+    polar_float_pairs: 4000
+    roots_cases: "7 targets x n in 1..12"
+    branch_pairs: 6000
+    gaussian_division_trials: 3000
+    two_squares_primes_below: 50000
+    gaussian_brute_square: 14
+    wilson_largest_prime: 49999
+    adversarial: "w = 0 roots, division by 0 (C and Z[i]), p = 2, unit invariance, cut-adjacent arguments"
+  implementations:
+    - "exact Fraction pairs / exact Z[i] integers (field ops, division, gcd, sieve, two-squares search)"
+    - "independent routes: 2x2 matrix representation (field), iterated multiplication vs de Moivre (roots), brute-force divisor search vs norm criterion (Gaussian primes), math vs cmath (polar)"
+  result: all_passed
+  invariants: 10
+  notes: >
+    First canonical run passed 10/10 invariants and all edge cases on the
+    first execution. All five preregistered conjectures (C1..C5) received
+    independent numeric witnesses and were confirmed; no autopsy needed.
+    The float wraparound at the branch cut is recorded as an
+    observation-layer note (A4), not as a failure: the set-law is exact,
+    the machine representative is not.
+
+audit_run:
+  script: caps/07-complexos/audit.mjs
+  report: caps/07-complexos/audit/interaction-report.json
+  screenshots: [caps/07-complexos/audit/desktop.png, caps/07-complexos/audit/iphone.png]
+  code_commit: df8cfdd
+  gate: v0
+  date: 2026-07-28
+  result: all_passed
+  render_seen: true
+  history:
+    - run: 1
+      result: failed
+      finding: >
+        E11 containment check found ONE occurrence of the exponential
+        notation outside the door-marked regions (a Horizonte bullet).
+        The bullet was rewritten to name the box without using the
+        notation; the incident is recorded here, not erased.
+    - run: 2
+      result: all_passed
+  notes: >
+    Gate v0 checks per viewport (1440x900 desktop, 390x844 iPhone):
+    interaction values verified against in-test independent computations
+    (product row, norm identity row, nth-root coordinates, lattice
+    decompositions), keyboard activation (Enter on cycle buttons),
+    degenerate states announced (z = 0, w = 0), no horizontal overflow,
+    3 canvases labeled (>20 chars) and painted (every pixel read),
+    repaint sweeps never blank, formulas >= 8 textual with zero <img>,
+    3 aria-live regions, 32 proof anchors present, 14 exercises with 14
+    gabaritos and toggle test, E11 containment (0 occurrences outside
+    door regions, raw-source check), zero non-file network requests.
+    Screenshots inspected by the responsible agent.

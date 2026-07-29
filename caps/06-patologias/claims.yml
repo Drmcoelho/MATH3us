@@ -1,0 +1,546 @@
+# Chapter 6 — The Pathologies. Epistemological ledger (MATH3us.md §1.4, §8).
+# Virgin territory: the classical content is imported and declared (no
+# personal rediscovery narrative — see conjecturas.md and sources.md).
+# NOTE (E12): verification statuses below are backed by artifacts in audit/,
+# produced by the oracle and audit runs registered at the end of this file.
+# History: the preregistered conjecture C5 (mantissa walk) was REFUTED by
+# the first canonical oracle run; autopsy appended to conjecturas.md and
+# recorded here as chapter-06.mantissa-walk-conjecture.
+
+chapter: 6
+claims:
+  - id: chapter-06.sqrt2-irrational
+    statement: >
+      No rational number has square 2. (Classical wedge; parity argument
+      on a reduced fraction.)
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#cunha-sqrt2"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S1" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I7 spot scan: no p/q with q <= 2000 squares to 2" }
+      edge_cases: { status: not_applicable, note: "purely symbolic statement; numeric leg is a spot check only" }
+
+  - id: chapter-06.archimedean-property
+    statement: >
+      N is unbounded above in R; consequently for every eps > 0 there is
+      n in N with 1/n < eps. Proved from the supremum principle.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-01.supremum-principle"
+    proof_location: "#arquimediana"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S2" }
+      numeric: { status: not_applicable, note: "no numeric content beyond I1's use of it" }
+      edge_cases: { status: not_applicable }
+
+  - id: chapter-06.rational-density
+    statement: >
+      Between any two reals x < y there is a rational m/n. Proof via the
+      Archimedean property and the least element of {m in Z : m > nx}
+      (well-ordering declared as a basic arithmetic principle).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-06.archimedean-property"
+    proof_location: "#densidade-q"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S2" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I1: exact midpoint witnesses on 7 sampled pairs" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "negative pair and near-1 tight pair included in I1 domain" }
+
+  - id: chapter-06.irrational-density
+    statement: >
+      Between any two reals x < y there is an irrational (r + sqrt2 with r
+      rational chosen by rational density in the shifted interval).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-06.rational-density"
+      - claim: "chapter-06.sqrt2-irrational"
+    proof_location: "#densidade-irr"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S3" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I1: witness a + sqrt2/n with exact certificate 2 < n^2(b-a)^2, n from two independent routes" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-06.continuity-definition
+    statement: >
+      f : A -> R is continuous at a in A iff for every eps > 0 there is
+      delta > 0 with |x - a| < delta implying |f(x) - f(a)| < eps (x in A).
+      The classical epsilon-delta definition, sibling of Chapter 1's
+      epsilon-N language.
+    kind: definition
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    proof_location: "#continuidade-def"
+
+  - id: chapter-06.dirichlet-everywhere-discontinuous
+    statement: >
+      The Dirichlet function (indicator of Q) is discontinuous at every
+      point of R, with the single eps_0 = 1/2 working everywhere.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-06.rational-density"
+      - claim: "chapter-06.irrational-density"
+      - claim: "chapter-06.continuity-definition"
+    proof_location: "#dirichlet-prova"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S4" }
+      numeric: { status: not_applicable, note: "the observation layer cannot sample the statement (edge case E1 documents exactly this)" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "E1: float blindness — 4096 samples, 100% rational, D = 1" }
+
+  - id: chapter-06.thomae-continuity-classification
+    statement: >
+      Thomae's function (1/q at reduced p/q, 0 at irrationals) is
+      discontinuous at every rational and continuous at every irrational;
+      the finiteness-of-small-denominators argument yields a computable
+      delta at each irrational.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-06.rational-density"
+      - claim: "chapter-06.irrational-density"
+      - claim: "chapter-06.continuity-definition"
+      - claim: "chapter-06.archimedean-property"
+    proof_location: "#thomae-prova"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S5" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I2: certified delta at 3 irrationals x 3 eps, two independent routes; printed values 7/10 and 408/577 asserted" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "q = 0 refused; unreduced 6/8 must evaluate as 3/4" }
+
+  - id: chapter-06.sawtooth-lipschitz
+    statement: >
+      s(x) = distance from x to the nearest integer satisfies
+      |s(x) - s(y)| <= |x - y| and 0 <= s <= 1/2; hence s is continuous.
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#takagi-continua"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "exact saw() used throughout I3/I4" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "E7: negatives and off-[0,1) arguments exact" }
+
+  - id: chapter-06.takagi-pointwise-defined
+    statement: >
+      T(x) = sum_k s(2^k x)/2^k converges at every x: partial sums are
+      nondecreasing and bounded by 1, so Chapter 1's monotone convergence
+      theorem applies. No import needed for pointwise existence.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-01.monotone-convergence"
+      - claim: "chapter-06.sawtooth-lipschitz"
+    proof_location: "#takagi-continua"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S7 (termination at dyadics), S13 (exact value at 1/3)" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I4: T(1/3) = 2/3 closed by exact partial sums + exact tail" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-06.mtest-uniform-limit
+    statement: >
+      Weierstrass M-test (|f_k| <= M_k with sum M_k finite implies uniform
+      convergence of sum f_k) together with: a uniform limit of continuous
+      functions is continuous. Imported as a declared classical citation;
+      NOT proved in this chapter.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    notes: >
+      Closed door, reopened in Chapter 10 (future chapter, explicitly
+      marked per E13; no claim of that chapter is referenced). This is the
+      chapter's single external demonstrative dependency, declared in the
+      import box of section 5.7 and in section 6 — the same mechanism by
+      which Chapter 1 imported the supremum principle.
+
+  - id: chapter-06.takagi-continuous
+    statement: >
+      T is continuous at every point of R: apply the imported M-test
+      package with M_k = 2^(-k-1).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-06.takagi-pointwise-defined"
+      - claim: "chapter-06.sawtooth-lipschitz"
+      - claim: "chapter-06.mtest-uniform-limit"
+    proof_location: "#takagi-continua"
+    notes: >
+      "Proved here" in the precise sense: the application is complete on
+      the page, with its single imported ingredient declared as an
+      explicit dependency (proof_mode cited on that claim).
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S6 + import declaration" }
+      numeric: { status: not_applicable, note: "continuity is not a finitely checkable predicate; the import carries it" }
+      edge_cases: { status: not_applicable }
+
+  - id: chapter-06.dyadic-slopes-lemma
+    statement: >
+      The slope of T over any dyadic interval [j/2^m, (j+1)/2^m] is the
+      integer S_m(j) = sum of +-1 read off the m-bit window of j (0 -> +1,
+      1 -> -1). Consequences: the two halves of any dyadic interval have
+      slopes differing by exactly 2 (preregistered C4, confirmed); the
+      slope at 0 over step 2^-m equals m exactly (preregistered C3,
+      confirmed); the N-term partial sum is linear on every dyadic
+      interval of depth N.
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-06.takagi-pointwise-defined"
+    proof_location: "#takagi-declives"
+    notes: >
+      The content is the classical dyadic-increment argument; the S_m
+      digit-window organization and the probe built on it are this
+      treatise's redaction. Conjectures C3 and C4 (conjecturas.md) are
+      promoted to theorem by this lemma.
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S7" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I3: exact finite-sum route vs digit route agree on scatter m <= 20 (+ slope m at 0 for m <= 40); children relations checked" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "E6: rightmost interval slope -m both routes" }
+
+  - id: chapter-06.straddle-lemma
+    statement: >
+      If f is differentiable at x and a_m <= x <= b_m with a_m < b_m and
+      b_m - a_m -> 0, then the difference quotients over [a_m, b_m]
+      converge to f'(x). (Endpoint case included.)
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-06.continuity-definition"
+    proof_location: "#lema-aperto"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S8" }
+      numeric: { status: not_applicable }
+      edge_cases: { status: not_applicable, note: "endpoint case handled in the symbolic derivation" }
+
+  - id: chapter-06.takagi-nowhere-differentiable
+    statement: >
+      T is differentiable at no point of R: the nested dyadic slopes S_m
+      at any x form an integer sequence with |S_{m+1} - S_m| = 1 for all
+      m, hence never Cauchy, contradicting the straddle lemma.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-06.dyadic-slopes-lemma"
+      - claim: "chapter-06.straddle-lemma"
+      - claim: "chapter-06.takagi-continuous"
+    proof_location: "#takagi-nao-diferenciavel"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S9" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I3: |Delta S| = 1 along nested chains at 0, 1/3, float(sqrt2/2) up to m = 52" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-06.weierstrass-original-context
+    statement: >
+      Weierstrass's 1872 damped-cosine series is continuous everywhere and
+      differentiable nowhere. Cited as historical context only; neither
+      proved nor used (its proof needs Chapter 10 machinery and the
+      series-defined cosine).
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+    notes: >
+      Exercise E4.3 (N4) states the door: Chapter 10. No trigonometry is
+      used anywhere in this chapter (E22 kept trivially satisfied).
+
+  - id: chapter-06.sign-preservation
+    statement: >
+      If g is continuous at c and g(c) > 0 then g > 0 on a delta-ball
+      around c (and symmetrically for g(c) < 0).
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-06.continuity-definition"
+    proof_location: "#preservacao-sinal"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S10" }
+      numeric: { status: not_applicable }
+      edge_cases: { status: not_applicable }
+
+  - id: chapter-06.ivt
+    statement: >
+      Intermediate value theorem: f continuous on [a,b], u between f(a)
+      and f(b), then f(c) = u for some c. Proved from the supremum
+      principle via c = sup {x : g(x) < 0}.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-01.supremum-principle"
+      - claim: "chapter-06.sign-preservation"
+      - claim: "chapter-06.continuity-definition"
+    proof_location: "#tvi-prova"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S10" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I7: 60-step exact-Fraction bisection certificates for x^2-2 on [1,2] and x^3+x-1 on [0,1], sign change certified at every step" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-06.ivt-fails-in-q
+    statement: >
+      Over Q the IVT fails: g(x) = x^2 - 2 is continuous on [1,2] cap Q
+      with g(1) < 0 < g(2) and has no rational zero. Completeness, not
+      density, is the load-bearing hypothesis.
+    kind: theorem
+    status: proved
+    provenance: derived_in_treatise
+    proof_mode: proved_here
+    role: supporting_result
+    dependencies:
+      - claim: "chapter-06.sqrt2-irrational"
+    proof_location: "#tvi-prova"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S10, final paragraph" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I7: q <= 2000 scan finds no rational zero" }
+      edge_cases: { status: not_applicable }
+
+  - id: chapter-06.darboux-note
+    statement: >
+      Derivatives have the intermediate value property even when
+      discontinuous (Darboux, 1875). Cited note, not proved, not used:
+      the extreme value theorem it needs is not built in this cycle.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: cited
+    role: bridge
+
+  - id: chapter-06.q-hole
+    statement: >
+      A = {x in Q : x^2 < 2} is nonempty and bounded above in Q but has
+      no supremum in Q: every rational upper bound r with r^2 > 2 yields
+      the strictly smaller upper bound r' = r/2 + 1/r (with
+      r'^2 - 2 = (r^2-2)^2 / (4 r^2) exactly), any r with r^2 < 2 is
+      beaten by t = (2r+2)/(r+2) inside A, and r^2 = 2 is impossible.
+      Density does not imply completeness.
+    kind: theorem
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: central_result
+    dependencies:
+      - claim: "chapter-06.sqrt2-irrational"
+    proof_location: "#buraco-q"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S11" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I6: identities exact on 47 rationals; printed chains 3/2 -> 17/12 -> 577/408 and 1 -> 4/3 -> 7/5 with exact excesses/deficits" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-06.floats-are-rational
+    statement: >
+      Every finite binary floating-point number is M * 2^E with integer M,
+      E, hence rational. Consequently honest float sampling of Dirichlet's
+      function returns 1 on 100% of samples: the observation layer cannot
+      reach the investigated property. (Preregistered C1, confirmed.)
+    kind: lemma
+    status: proved
+    provenance: classical
+    proof_mode: proved_here
+    role: supporting_result
+    proof_location: "#floats-racionais"
+    verification:
+      symbolic: { status: passed, artifact: "audit/symbolic-check.md", note: "S12" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "E1 in edge cases: 4096 floats, all exactly rational via Fraction" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md", note: "E1 (blindness), E4 (float floor overflow), E5 (probe beyond mantissa)" }
+
+  - id: chapter-06.farey-count-estimate
+    statement: >
+      The count Phi(Q) of reduced fractions with denominator <= Q in (0,1]
+      behaves as 3Q^2/pi^2 (classical asymptotic, Mertens 1874, not proved
+      here — analytic number theory is out of this cycle). Calibration
+      verified computationally: deviation 0.075% at Q = 1000 and 5.3% at
+      Q = 10 (preregistered C2, confirmed on both clauses).
+    kind: estimate
+    status: supported
+    provenance: classical
+    proof_mode: computational_only
+    role: supporting_result
+    proof_location: "#experimento"
+    verification:
+      symbolic: { status: not_applicable, note: "asymptotic not proved in this cycle (manual §11)" }
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I5: totient sieve vs direct gcd count agree; C2 margins verified" }
+      edge_cases: { status: passed, artifact: "audit/edge-cases.md" }
+
+  - id: chapter-06.mantissa-walk-conjecture
+    statement: >
+      (Preregistered C5, REFUTED.) Claim was: for the float of sqrt(2)/2,
+      the dyadic slope sequence S_1..S_52 changes sign at least 3 times
+      and max|S_m| <= 12. The canonical oracle measured exactly 2 sign
+      changes (three long one-sided eras); the magnitude clause held
+      (max |S| = 9).
+    kind: conjecture
+    status: refuted
+    provenance: authorial
+    proof_mode: computational_only
+    role: example
+    proof_location: "#sonda"
+    autopsy: >
+      Five-question autopsy appended to conjecturas.md (2026-07-28): the
+      plausible step was modeling mantissa bits as a balanced walk; the
+      logical failure was equating "balanced" (magnitude ~ sqrt(m), which
+      held) with "frequently alternating" (which is not what random walks
+      do — long one-sided excursions are the rule, classical arcsine-law
+      context, cited only); the refuter is the measured S sequence itself
+      (oracle I8); the salvageable part is the magnitude clause, confirmed;
+      the surviving reformulation is that clause alone — the frequency
+      clause is not re-conjectured in this cycle.
+    verification:
+      numeric: { status: passed, artifact: "audit/numeric-check.json", implementation: "caps/06-patologias/oracle.py", note: "I8: the judgment run (2 sign changes, max|S| = 9)" }
+
+  - id: chapter-06.observation-hides-property
+    statement: >
+      The computational graph can hide exactly the investigated property:
+      Dirichlet's total discontinuity is invisible to rational-only float
+      sampling; Thomae's continuity set lives entirely at height 0 and
+      lights no pixel; Takagi's partial sums are genuinely linear at depth
+      N while T smooths at no scale. "Da para ver" is an alert, not an
+      argument.
+    kind: synthesis
+    status: supported
+    provenance: authorial
+    proof_mode: not_applicable
+    role: central_result
+    priority_note: >
+      Authorial synthesis within this treatise; historical priority not
+      established. ("Síntese autoral no âmbito deste tratado; prioridade
+      histórica não estabelecida.")
+    dependencies:
+      - claim: "chapter-06.dirichlet-everywhere-discontinuous"
+      - claim: "chapter-06.thomae-continuity-classification"
+      - claim: "chapter-06.dyadic-slopes-lemma"
+      - claim: "chapter-06.takagi-nowhere-differentiable"
+      - claim: "chapter-06.floats-are-rational"
+    proof_location: "#camadas"
+    notes: >
+      The component statements are proved theorems (dependencies); the
+      organizing thesis itself is typed as synthesis (E6 separation).
+
+  - id: chapter-06.continuity-set-question
+    statement: >
+      Which subsets of R are continuity sets of some function? (In
+      particular: no function is continuous exactly on Q — the G-delta /
+      Baire argument.) Not answerable in this cycle: general topology is
+      explicitly deferred.
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    notes: >
+      Exercise E4.1 (N4). Locked door -> second cycle (topology; manual
+      §11), explicitly marked per E13.
+
+  - id: chapter-06.measure-of-q-question
+    statement: >
+      What is the total length of Q cap [0,1]? (Classically zero.) The
+      rigorous question needs measure theory, explicitly excluded from
+      this cycle (E10, §11).
+    kind: question
+    status: open
+    provenance: classical
+    proof_mode: not_applicable
+    role: bridge
+    notes: >
+      Exercise E4.2 (N4). Locked door -> second cycle (Lebesgue measure),
+      explicitly marked per E13.
+
+# --- execution registry (E12): who witnessed what, when -------------------
+oracle_run:
+  script: caps/06-patologias/oracle.py
+  report: caps/06-patologias/audit/numeric-check.json
+  edge_report: caps/06-patologias/audit/edge-cases.md
+  code_commit: 95ed8ad
+  environment: "python 3.11.15, stdlib only, linux"
+  date: 2026-07-28
+  tested_domain:
+    density_pairs: 7
+    thomae_alphas: ["sqrt2/2", "sqrt3/3", "sqrt2-1"]
+    thomae_eps: ["1/10", "1/100", "1/1000"]
+    dyadic_slope_scatter: "m <= 20 full two-route agreement; slope m at 0 for m <= 40; chains to m = 52"
+    farey_Q: [10, 100, 1000]
+    q_hole_samples: "7 canonical + 40 random rationals"
+    bisection_steps: 60
+    adversarial: ["4096-float Dirichlet sampling", "q = 0 refused", "unreduced 6/8", "float floor at 2^60/3", "probe beyond mantissa (m 53..64)"]
+  implementations:
+    - "exact Fraction/int arithmetic on every verification path; floats confined to adversarial observation-layer cases"
+    - "I2: per-q nearest with certified sqrt bounds (error 1/10^80) vs exhaustive delta-ball enumeration"
+    - "I3: exact finite-sum Takagi evaluation at dyadic points vs +-1 binary-digit formula"
+    - "I5: totient sieve vs direct gcd count"
+  result: all_passed
+  invariants: 8
+  notes: >
+    code_commit is the preregistration commit (the only commit preceding
+    the run; the build commit follows it and contains this very registry —
+    the run is reproducible from the build commit). First run FAILED on
+    invariant I2 due to a 10^40/10^80 scale mismatch in the certified
+    sqrt bounds of the oracle itself (not of the chapter); fixed and
+    re-run. The passing run REFUTED preregistered conjecture C5 (2 sign
+    changes, not >= 3); autopsy in conjecturas.md, ledger entry
+    chapter-06.mantissa-walk-conjecture. Recorded, not erased.
+
+audit_run:
+  script: caps/06-patologias/audit.mjs
+  report: caps/06-patologias/audit/interaction-report.json
+  screenshots: [caps/06-patologias/audit/desktop.png, caps/06-patologias/audit/iphone.png]
+  code_commit: 95ed8ad
+  gate: v0
+  date: 2026-07-28
+  result: all_passed
+  render_seen: true
+  notes: >
+    Gate v0 checks per viewport (1440x900 desktop, 390x844 iPhone):
+    function switching and probe values verified against in-test
+    independent computations (Farey sieve, digit-formula S_m), keyboard
+    activation, sliders, no horizontal overflow, three canvases labeled
+    and painted (every pixel read — Chapter 1's aliasing lesson), canvases
+    never blank across the control ranges, formulas textual (no <img>),
+    aria-live regions present, exercises >= 13 with gabaritos >= exercises,
+    gabarito toggles, zero non-file network requests, claims proof anchors
+    present. Screenshots inspected by the responsible agent.
