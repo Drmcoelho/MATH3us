@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "06-patologias",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "4a4b905",
+  "date": "2026-07-29",
+  "bundle_path": "releases/bundles/06-patologias.html",
+  "bundle_sha256": "a5251fdd15a279115f6c29bba330ae9b4e63668ad459c853d36379b253ff6caa",
+  "source_sha256": "a5251fdd15a279115f6c29bba330ae9b4e63668ad459c853d36379b253ff6caa",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}
