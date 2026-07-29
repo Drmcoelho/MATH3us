@@ -1,0 +1,13 @@
+release: cap-07-gate2-r1
+chapter: 7
+content_revision: 1
+gate_version: 2
+commit: 4a4b905
+previous_release: null
+date: 2026-07-29
+decision: primary reader verdict "6 e 7 ok" (29/07/2026, coordinator session); executed by manifest per amendment E23 / decision D6
+audit:
+  oracle_report: caps/07-complexos/audit/numeric-check.json
+  interaction_report: caps/07-complexos/audit/interaction-report.json
+  bundle_report: caps/07-complexos/audit/bundle-report.json
+  release_validation: caps/07-complexos/audit/release-validation.json

@@ -7,12 +7,13 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 29/07/2026 · **D6 exercida** (tags remotas dispensadas —
-emenda E23: o manifest é o registro canônico de release; nenhuma tag remota
-será criada e nenhum capítulo fica aberto por ausência dela) · **D4
-executada por manifests** (`cap-02-gate2-r1`, `cap-03-gate2-r1`,
-`cap-04-gate2-r1` → `19d2bc3`) · Onda 2 integrada (Caps. 6 e 7, PR #28);
-releases dos Caps. 6–7 aguardam veredito do leitor primário.
+**Fotografia:** 29/07/2026 · **releases dos Caps. 6 e 7 exercidas** —
+veredito do leitor primário ("6 e 7 ok", sessão-coordenadora): gate v2
+executado sobre ambos (bundle byte-idêntico, zero cargas remotas, zero
+erros), manifests `cap-06-gate2-r1` e `cap-07-gate2-r1` → `4a4b905` (E23:
+manifest é o registro canônico). **Oito capítulos fechados (0–4, 6–7 mais
+prólogo); o Cap. 5 está destravado** (pré-condição da Onda 3 satisfeita) e
+sua produção foi lançada pela coordenadora.
 
 ---
 
@@ -25,9 +26,10 @@ releases dos Caps. 6–7 aguardam veredito do leitor primário.
 | 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
 | 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
 | 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
-| 6 | As Patologias | `conjecturas.md` commitado antes do desenvolvimento (`e9ef1b0`); **C5 refutada com autópsia** (passeio de mantissa: 2 trocas de sinal < 3) | 8/8 invariantes + 7/7 adversariais, aritmética exata (Fraction); incidente do próprio oráculo (bug de escala em I2) registrado | 41/41 checks, desktop + iPhone; 3 defeitos visuais achados e corrigidos na inspeção do agente | 26 claims, gate v1 zero achados; deps simples ao Cap. 1 (fechado) | **nenhuma — aguarda decisão** |
-| 7 | ℂ | `conjecturas.md` commitado antes do desenvolvimento (`0b423d3`); C1–C5 confirmadas | 10/10 invariantes; dois-quadrados exaustivo nos 5133 primos p < 50000; Wilson + divisão em ℤ[i] com 3000 amostras exatas | aprovado nos dois viewports; contenção de e^{iθ} auditada (5 ocorrências, 0 fora das caixas de porta; 1 vazamento pego no run 1 e corrigido — registrado) | 24 claims, gate v1 zero achados; 3 deps `door: true` ao Cap. 2 (aberto) | **nenhuma — aguarda decisão** |
-| 5, 8–12 | — | contrato editorial no manual | — | — | — | previstos |
+| 6 | As Patologias | `conjecturas.md` commitado antes do desenvolvimento (`e9ef1b0`); **C5 refutada com autópsia** (passeio de mantissa: 2 trocas de sinal < 3) | 8/8 invariantes + 7/7 adversariais, aritmética exata (Fraction); incidente do próprio oráculo (bug de escala em I2) registrado | 41/41 checks, desktop + iPhone; 3 defeitos visuais achados e corrigidos na inspeção do agente | 26 claims, gate v1 zero achados; deps simples ao Cap. 1 (fechado) | **cap-06-gate2-r1** (`4a4b905`, veredito 29/07) |
+| 7 | ℂ | `conjecturas.md` commitado antes do desenvolvimento (`0b423d3`); C1–C5 confirmadas | 10/10 invariantes; dois-quadrados exaustivo nos 5133 primos p < 50000; Wilson + divisão em ℤ[i] com 3000 amostras exatas | aprovado nos dois viewports; contenção de e^{iθ} auditada (5 ocorrências, 0 fora das caixas de porta; 1 vazamento pego no run 1 e corrigido — registrado) | 24 claims, gate v1 zero achados; 3 deps `door: true` ao Cap. 2 (fechado por manifest D4/E23) | **cap-07-gate2-r1** (`4a4b905`, veredito 29/07) |
+| 5 | A Consonância | **em produção** — agente lançado 29/07 (branch `claude/cap-05-consonancia`), pré-condição da Onda 3 satisfeita (Caps. 6 e 7 na main) | — | — | — | — |
+| 8–12 | — | contrato editorial no manual | — | — | — | previstos |
 
 Nenhum item vigente do §10 está pendente para os Capítulos 0 e 1 — tags
 remotas criadas em 29/07/2026. Resta apenas a **decisão D4** (Caps. 2–4):

@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "07-complexos",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "4a4b905",
+  "date": "2026-07-29",
+  "bundle_path": "releases/bundles/07-complexos.html",
+  "bundle_sha256": "5ffd4975d982aa7834d3ff2e2b5e2f7c91f0f9fe039d979d2b4463c602067830",
+  "source_sha256": "5ffd4975d982aa7834d3ff2e2b5e2f7c91f0f9fe039d979d2b4463c602067830",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}
