@@ -1,0 +1,36 @@
+release: cap-01-gate0-r3
+chapter: 1
+content_revision: 3
+gate_version: 1
+commit: 947aa80
+previous_release: cap-01-gate0-r2
+date: 2026-07-28
+primary_reader_verdict: given 2026-07-28 ("Quero" to the PR #17 merge; "PR and merge" to this registration; AUDIT.md D5)
+notes: >
+  The geometric rebuild (decision D3, amendment E21): new section 7,
+  "the double siege by areas", built over the fundamental wedge
+  imported from the closed chapter 0 - the treatise's first
+  cross-chapter dependency edge. Delivers the closed forms' geometric
+  birth certificate, the area identities A- = a^2/b and A+ = b, the
+  exact inheritance A-_{2n} = a_n, the double-siege chain, the exact
+  gap identity with Delta A/(b - a) -> 2 (sealing the factor-2
+  incident), and the four-constant error duality as preregistered
+  conjecture R5 with its consistency identities proved (door to
+  chapter 10). Preregistration R1-R5 committed before development
+  (1773b98). Oracle extended to 13 invariants (I9-I13), all passed;
+  gate v0 audit extended and passed on both viewports; gate v1
+  validated 15 claims.
+audit:
+  oracle_report: caps/01-exaustao/audit/numeric-check.json
+  interaction_report: caps/01-exaustao/audit/interaction-report.json
+  symbolic_check: caps/01-exaustao/audit/symbolic-check.md
+  edge_cases: caps/01-exaustao/audit/edge-cases.md
+  screenshots:
+    - caps/01-exaustao/audit/desktop.png
+    - caps/01-exaustao/audit/iphone.png
+tag_status: >
+  Annotated tag cap-01-gate0-r3 -> 947aa80 was created locally in the
+  working session; pushing tags is refused by this session's git proxy
+  (branch pushes only). The remote tag must be created by the
+  repository owner together with the other three pending tags - the
+  consolidated command block lives in AUDIT.md section 1.

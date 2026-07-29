@@ -7,13 +7,12 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 28/07/2026 · D1 e D2′ exercidas sobre `73caa07` · **D3
-exercida** ("Sim" do leitor primário): reconstrução geométrica do Cap. 1
-construída, auditada (oráculo 13/13; gate v0 com novos checks; gate v1 com
-15 claims e a primeira dependência entre capítulos do grafo) — conteúdo
-pós-r2, **aguarda Decisão D5 (tag r3)**. Tags remotas pendentes do
-proprietário: `cap-01-gate0-r1` → `f049091`, `cap-00-gate0-r1` → `73caa07`,
-`cap-01-gate0-r2` → `73caa07`.
+**Fotografia:** 28/07/2026 · D1, D2′, D3 e **D5 exercidas** — a
+reconstrução geométrica do Cap. 1 (PR #17, `947aa80`) está liberada como
+`cap-01-gate0-r3` (manifest commitado; tag local criada). **Quatro tags
+remotas pendentes do proprietário** (o proxy dos agentes recusa push de
+tags): `cap-01-gate0-r1` → `f049091`, `cap-00-gate0-r1` → `73caa07`,
+`cap-01-gate0-r2` → `73caa07`, `cap-01-gate0-r3` → `947aa80`.
 
 ---
 
@@ -22,16 +21,16 @@ proprietário: `cap-01-gate0-r1` → `f049091`, `cap-00-gate0-r1` → `73caa07`,
 | Cap. | Título | Pré-registro | Oráculo triplo | Gate v0 | Ledger | Release |
 |---|---|---|---|---|---|---|
 | 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **cap-00-gate0-r1** (`73caa07`, D1 exercida 28/07; tag remota pendente do proprietário) |
-| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido (15 claims, gate v1; inclui a 1ª dependência entre capítulos: cunha do Cap. 0); `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r2** (`73caa07`); **reconstrução D3 pós-r2 — aguarda Decisão D5 (r3)** |
+| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido (15 claims, gate v1; inclui a 1ª dependência entre capítulos: cunha do Cap. 0); `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r3** (`947aa80`, D5 exercida 28/07; quatro tags remotas pendentes do proprietário) |
 | 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
 | 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
 | 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
 | 5–12 | — | contrato editorial no manual | — | — | — | previstos |
 
 Nenhum item vigente do §10 está pendente para os Capítulos 0–4 exceto:
-**as três tags remotas** (0 e 1: decisões já exercidas, falta só o push do
-proprietário — comandos nas seções D1/D2/D2′) e **as decisões D4** (Caps.
-2–4, travadas até o gate v2 existir e rodar).
+**as quatro tags remotas** (0 e 1: decisões já exercidas, falta só o push do
+proprietário — bloco abaixo) e **as decisões D4** (Caps. 2–4, travadas até
+o gate v2 existir e rodar).
 
 ```
 # push das tags remotas (proprietário; uma vez só):
@@ -39,7 +38,8 @@ git fetch origin main
 git tag -a cap-01-gate0-r1 f049091 -m "chapter 1 release: gate v0, content revision 1" 2>/dev/null || true
 git tag -a cap-00-gate0-r1 73caa07 -m "chapter 0 release: gate v1, content revision 1" 2>/dev/null || true
 git tag -a cap-01-gate0-r2 73caa07 -m "chapter 1 release: content revision 2" 2>/dev/null || true
-git push origin cap-01-gate0-r1 cap-00-gate0-r1 cap-01-gate0-r2
+git tag -a cap-01-gate0-r3 947aa80 -m "chapter 1 release: geometric rebuild, content revision 3" 2>/dev/null || true
+git push origin cap-01-gate0-r1 cap-00-gate0-r1 cap-01-gate0-r2 cap-01-gate0-r3
 ```
 
 ---
@@ -154,13 +154,14 @@ normalizado legítimo; a reconstrução os importa em vez de recriá-los.
 *(Opções originais superadas pela execução; o caminho realizado foi (b):
 tags D1/D2′ primeiro, reconstrução como revisão seguinte.)*
 
-### D5 — Tag de revisão r3 do Capítulo 1: `cap-01-gate0-r3`
+### D5 — Tag de revisão r3 do Capítulo 1: `cap-01-gate0-r3` — **EXERCIDA** (28/07/2026)
 
-**O que é.** A reconstrução D3 é conteúdo posterior à r2; pela E9, recebe
-revisão explícita. Estado auditado: oráculo 13/13, gate v0 completo, gate
-v1 15 claims. **Pendente da decisão do leitor primário** — tag no commit de
-merge da reconstrução + manifest `content_revision: 3`,
-`previous_release: cap-01-gate0-r2`.
+**Registro da execução.** "PR and merge" do leitor primário; tag local
+anotada `cap-01-gate0-r3` → `947aa80` (merge do PR #17, estado auditado:
+oráculo 13/13, gate v0 completo, gate v1 15 claims); manifest em
+`releases/manifests/cap-01-gate0-r3.yml` (`content_revision: 3`,
+`previous_release: cap-01-gate0-r2`); rodapé e índice atualizados.
+**Pendente apenas a tag remota** (bloco consolidado do proprietário, §1).
 
 ### D4 — Tags de release dos Capítulos 2–4 (Onda 1)
 
