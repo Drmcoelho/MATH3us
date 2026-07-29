@@ -115,10 +115,11 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 | 2 | **fechado** — release cap-02-gate2-r1 (manifest, E23/D6) | wave1/cap-02 → coordenadora | 28/07/2026 |
 | 3 | **fechado** — release cap-03-gate2-r1 (manifest, E23/D6) | wave1/cap-03 → coordenadora | 28/07/2026 |
 | 4 | **fechado** — release cap-04-gate2-r1 (manifest, E23/D6) | wave1/cap-04 → coordenadora | 28/07/2026 |
-| 5 | previsto — Onda 3 (após 6 e 7, §5) | — | — |
+| 5 | em produção — Onda 3 (agent-cap-05, worktree) | wave3/cap-05 | — |
 | 6 | **integrado** — auditado v0 (oráculo 8/8 + adversariais, auditoria 41/41); C5 do pré-registro refutada com autópsia; gate v1: 26 claims, zero achados | wave2/cap-06 → coordenadora | 29/07/2026 |
 | 7 | **integrado** — auditado v0 (oráculo 10/10; dois-quadrados exaustivo p < 50000; contenção de e^{iθ} auditada); gate v1: 24 claims, portas door:true para o Cap. 2 | wave2/cap-07 → coordenadora | 29/07/2026 |
-| 8–12 | previstos | — | — |
+| 8 | em produção — Onda 3 (agent-cap-08, worktree) | wave3/cap-08 | — |
+| 9–12 | previstos | — | — |
 
 **Onda 1 concluída em 28/07/2026:** três agentes paralelos em worktrees,
 dois commits por capítulo (pré-registro isolado antes do build, §1.3),
