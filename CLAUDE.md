@@ -26,13 +26,13 @@ ou `NODE_PATH`. O Chromium do Playwright pode ser apontado por `PW_CHROMIUM`
 node tools/verify-claims.mjs caps/02-ternas
 
 # Oráculo numérico triplo (stdlib Python; regrava artefatos em audit/)
-python3 caps/02-ternas/oracle.py     # caps 2–4
+python3 caps/02-ternas/oracle.py     # caps 2–4 e 6–7 (script próprio por capítulo)
 python3 tools/oracle.py              # cap 1
 python3 tools/oracle-ch00.py         # cap 0
 
 # Gate v0 — auditoria de página com Playwright (interação, teclado,
 # overflow, canvas pintado, autocontenção; screenshots em audit/)
-node caps/02-ternas/audit.mjs        # caps 2–4 (script próprio por capítulo)
+node caps/02-ternas/audit.mjs        # caps 2–4 e 6–7 (script próprio por capítulo)
 node tools/audit.mjs caps/01-exaustao   # cap 1
 node tools/audit-ch00.mjs            # cap 0
 
@@ -58,7 +58,9 @@ bem-vindo, mas não comite artefatos regenerados por acidente — restaure com
   `sources.md` (dossiê), `audit/` (artefatos), e opcionalmente `oracle.py`
   e `audit.mjs` próprios.
 - `schemas/claims.schema.json` — schema do ledger (gate v1).
-- `releases/manifests/` — capítulo fechado ⇔ manifest presente; dependência
+- `releases/manifests/` — manifest presente = decisão de release registrada;
+  o gate v1 trata capítulo com manifest como fechado para fins de dependência,
+  mas o fechamento formal exige a tag remota (§10 do manual). Dependência
   entre capítulos só é válida para capítulo fechado ou marcada `door: true`.
 - `tools/` — validadores e oráculos compartilhados.
 - `arms/matheus-dollar/` + `MATHeu$.md` — braço separado do tratado; não
