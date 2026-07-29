@@ -115,14 +115,17 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 | 2 | **integrado** — auditado v0 (oráculo 10/10, auditoria 29/29); aguarda veredito do leitor primário para tag | wave1/cap-02 → coordenadora | 28/07/2026 |
 | 3 | **integrado** — auditado v0 (oráculo 7/7, auditoria 31/31); formato mínimo comprovado; aguarda veredito | wave1/cap-03 → coordenadora | 28/07/2026 |
 | 4 | **integrado** — auditado v0 (oráculo 9/9 com 27.986 expansões, auditoria 41/41); aguarda veredito | wave1/cap-04 → coordenadora | 28/07/2026 |
-| 5–12 | previstos | — | — |
+| 5 | previsto — Onda 3 (após 6 e 7, §5) | — | — |
+| 6 | **integrado** — auditado v0 (oráculo 8/8 + adversariais, auditoria 41/41); C5 do pré-registro refutada com autópsia; gate v1: 26 claims, zero achados | wave2/cap-06 → coordenadora | 29/07/2026 |
+| 7 | **integrado** — auditado v0 (oráculo 10/10; dois-quadrados exaustivo p < 50000; contenção de e^{iθ} auditada); gate v1: 24 claims, portas door:true para o Cap. 2 | wave2/cap-07 → coordenadora | 29/07/2026 |
+| 8–12 | previstos | — | — |
 
 **Onda 1 concluída em 28/07/2026:** três agentes paralelos em worktrees,
 dois commits por capítulo (pré-registro isolado antes do build, §1.3),
 integração por cherry-pick na coordenadora, cada ledger validado pelo
 `verify-claims.mjs` (gate v1 antecipado) com zero achados. Incidentes dos
-agentes registrados nos próprios capítulos, não apagados. Próxima onda
-(Caps. 6 e 7) pode disparar após o fechamento formal de 2–4.
+agentes registrados nos próprios capítulos, não apagados. Onda 2 (Caps. 6 e 7) disparada em 28/07/2026 pela palavra do autor,
+sob a arbitragem da Decisão D4 (pré-condições lógicas satisfeitas).
 
 **Nota de coordenação (28/07/2026, pós-reconciliação):** pela tabela da §4,
 as pré-condições **lógicas** da Onda 2 já estão satisfeitas — Cap. 6 exige

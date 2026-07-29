@@ -1,0 +1,164 @@
+{
+  "chapter_dir": "/home/user/MATH3us/.claude/worktrees/agent-a7f81bcb8bdc044b5/caps/06-patologias",
+  "script": "caps/06-patologias/audit.mjs",
+  "code_commit": "95ed8ad",
+  "date": "2026-07-29",
+  "gate": "v0",
+  "checks": {
+    "desktop.dirichlet_sampled_status": {
+      "passed": true,
+      "detail": "\"função: dirichlet (amostrado)  |  janela: centro √2/2, largura 2^−0 = 1,00e+0  |  640 amos…\""
+    },
+    "desktop.dirichlet_ideal_status": {
+      "passed": true
+    },
+    "desktop.farey_counts_vs_independent_sieve": {
+      "passed": true,
+      "detail": "page: 32, 3.044, 304.192 vs sieve: 32, 3.044, 304.192"
+    },
+    "desktop.thomae_status_and_count": {
+      "passed": true,
+      "detail": "expected 3.676 drawn points in \"função: thomae  |  janela: centro √2/2, largura 2^−0 = 1,00e+0  |  q ≤ 109: 3.676 pontos (todos de descontinui…\""
+    },
+    "desktop.takagi_minmax_vs_independent": {
+      "passed": true,
+      "detail": "page nums 0.00564575 0.6640625 vs test 0.00564575 0.66406250"
+    },
+    "desktop.takagi_deep_zoom_declares_segment": {
+      "passed": true,
+      "detail": "z=20, N=8: \" reta (lema 5.8c) — da soma parcial, não de T  |  o teorema correspondente (seção 5.10) afirma o que pixel nenhum mostra\""
+    },
+    "desktop.probe_x0_S_equals_m": {
+      "passed": true
+    },
+    "desktop.probe_x13_vs_independent": {
+      "passed": true,
+      "detail": "m=12: S=0 j=1365; m=11: S=1"
+    },
+    "desktop.probe_float_m52_vs_independent": {
+      "passed": true,
+      "detail": "expected S_52 = -8 (oracle: -8) in \"x = float(√2/2)  |  m = 52  |  j = 3184525836262886  |  S_m = -8  |  S_m oscila sem convergir, em 3 eras longa…\""
+    },
+    "desktop.probe_table_mirrors_state": {
+      "passed": true,
+      "detail": "rows=13, last=[52, 3184525836262886, -8, 1]"
+    },
+    "desktop.keyboard_activation": {
+      "passed": true,
+      "detail": "Enter on #btn-x0 with m = 52"
+    },
+    "desktop.no_horizontal_overflow": {
+      "passed": true
+    },
+    "desktop.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0249, 0.0308, 0.0447"
+    },
+    "desktop.canvases_never_blank_across_range": {
+      "passed": true
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=15, imgs=0"
+    },
+    "desktop.aria_live_regions_present": {
+      "passed": true,
+      "detail": "2 live regions"
+    },
+    "desktop.claims_proof_anchors_exist": {
+      "passed": true,
+      "detail": "all 25 anchors present"
+    },
+    "desktop.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=14, gabaritos=14"
+    },
+    "desktop.gabarito_toggle": {
+      "passed": true
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.dirichlet_sampled_status": {
+      "passed": true,
+      "detail": "\"função: dirichlet (amostrado)  |  janela: centro √2/2, largura 2^−0 = 1,00e+0  |  640 amos…\""
+    },
+    "iphone.dirichlet_ideal_status": {
+      "passed": true
+    },
+    "iphone.farey_counts_vs_independent_sieve": {
+      "passed": true,
+      "detail": "page: 32, 3.044, 304.192 vs sieve: 32, 3.044, 304.192"
+    },
+    "iphone.thomae_status_and_count": {
+      "passed": true,
+      "detail": "expected 3.676 drawn points in \"função: thomae  |  janela: centro √2/2, largura 2^−0 = 1,00e+0  |  q ≤ 109: 3.676 pontos (todos de descontinui…\""
+    },
+    "iphone.takagi_minmax_vs_independent": {
+      "passed": true,
+      "detail": "page nums 0.00564575 0.6640625 vs test 0.00564575 0.66406250"
+    },
+    "iphone.takagi_deep_zoom_declares_segment": {
+      "passed": true,
+      "detail": "z=20, N=8: \" reta (lema 5.8c) — da soma parcial, não de T  |  o teorema correspondente (seção 5.10) afirma o que pixel nenhum mostra\""
+    },
+    "iphone.probe_x0_S_equals_m": {
+      "passed": true
+    },
+    "iphone.probe_x13_vs_independent": {
+      "passed": true,
+      "detail": "m=12: S=0 j=1365; m=11: S=1"
+    },
+    "iphone.probe_float_m52_vs_independent": {
+      "passed": true,
+      "detail": "expected S_52 = -8 (oracle: -8) in \"x = float(√2/2)  |  m = 52  |  j = 3184525836262886  |  S_m = -8  |  S_m oscila sem convergir, em 3 eras longa…\""
+    },
+    "iphone.probe_table_mirrors_state": {
+      "passed": true,
+      "detail": "rows=13, last=[52, 3184525836262886, -8, 1]"
+    },
+    "iphone.keyboard_activation": {
+      "passed": true,
+      "detail": "Enter on #btn-x0 with m = 52"
+    },
+    "iphone.no_horizontal_overflow": {
+      "passed": true
+    },
+    "iphone.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0249, 0.0308, 0.0447"
+    },
+    "iphone.canvases_never_blank_across_range": {
+      "passed": true
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=15, imgs=0"
+    },
+    "iphone.aria_live_regions_present": {
+      "passed": true,
+      "detail": "2 live regions"
+    },
+    "iphone.claims_proof_anchors_exist": {
+      "passed": true,
+      "detail": "all 25 anchors present"
+    },
+    "iphone.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=14, gabaritos=14"
+    },
+    "iphone.gabarito_toggle": {
+      "passed": true
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}

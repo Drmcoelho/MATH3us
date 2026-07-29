@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 7 — ℂ · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --in-color:#1c5e3c; --out-color:#8a3318; --circle-color:#26221a;
+    --blue:#1e4a6e;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  figure{margin:1.6rem 0}
+  figcaption{font-size:.92rem; color:var(--ink-soft); margin-top:.5rem}
+  .painel{border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0}
+  .canvases{display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:flex-start}
+  canvas{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto}
+  svg.figura{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto}
+  .controles{display:flex; flex-wrap:wrap; gap:.6rem 1.1rem; align-items:center; margin:.9rem 0}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  label{font-size:.95rem}
+  input[type=range]{vertical-align:middle; max-width:9rem}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.95rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge);
+    overflow-wrap:break-word;
+  }
+  .legenda-cores{font-size:.92rem; margin:.4rem 0}
+  .sw{display:inline-block; width:.85em; height:.85em; margin-right:.3em; vertical-align:baseline; border:1px solid var(--ink)}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  tr.atual td{background:var(--box); font-weight:bold}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  .exercicio{margin:1.4rem 0; padding-left:1.1rem; border-left:3px solid var(--box-edge)}
+  .exercicio .nivel{font-variant:small-caps; letter-spacing:.08em; font-size:.82rem; color:var(--accent)}
+  details.gab{margin:.6rem 0 0; background:var(--box); border:1px solid var(--box-edge); padding:.55rem .9rem}
+  details.gab summary{cursor:pointer; font-variant:small-caps; letter-spacing:.06em; color:var(--accent)}
+  details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.gab[open]{padding-bottom:.8rem}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Parte II</span>
+  <h1>Capítulo 7 — ℂ</h1>
+  <p><span class="tipo">território virgem</span></p>
+  <p class="pergunta">A raiz quadrada devolve <strong>um</strong> número — ou eu sempre acreditei nisso
+  porque só extraí raízes de números positivos? Se existir um plano onde todo número tem raiz, quantas
+  raízes ele devolve — e o que acontece com a porta que o Capítulo 2 deixou trancada: <strong>quais
+  primos são soma de dois quadrados?</strong>
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2 id="por-que">1. Por que este território</h2>
+<p>Este capítulo é <strong>território virgem</strong>, e a assimetria fica declarada (§1.2 do manual):
+não existe descoberta pessoal anterior sobre números complexos suficientemente formada para ser
+escavada. Nada aqui será apresentado como redescoberta; <code>sources.md</code> lista apenas materiais
+clássicos, e a ausência de sítio pessoal é, ela própria, o registro.</p>
+<p>Mas território virgem não é passeio: o critério de corte (§1.1) exige uma necessidade interna, e ela
+tem endereço e data. O Capítulo 2 terminou com uma porta trancada: as hipotenusas da família do ímpar
+são R = u² + v², todas ≡ 1 (mod 4), e a pergunta inevitável — <em>quais primos são soma de dois
+quadrados?</em> — ficou com a metade fácil provada (a necessidade, R ≡ 1 mod 4) e a metade difícil
+(a suficiência, de Fermat) explicitamente fora do alcance das ferramentas de lá. A prova natural fatora
+o primo em um anel maior, ℤ[i], onde “primo”, “dividir” e “fatorar” precisam ser reconstruídos antes de
+significar qualquer coisa. Este capítulo constrói o plano onde esse anel mora — e volta para abrir a
+porta pelo lado de dentro.</p>
+<p>Há uma segunda dívida, esta com o futuro: a falha prevista pelo manual para este capítulo é
+<strong>presumir que toda operação inversa devolve um único valor</strong>. A raiz quadrada real
+ensinou um hábito (√4 = 2, um número); o capítulo vai mostrar que o hábito é um privilégio do semieixo
+positivo, não uma lei das operações inversas — e vai destruí-lo com as raízes n-ésimas, <em>sem usar
+exponencial nenhuma</em>. Por decisão editorial (E11), a exponencial complexa não entra aqui: o
+operador de rotação será escrito cos θ + i·sen θ, com seno e cosseno em estatuto explicitamente
+geométrico, e a notação famosa aparece uma única vez, adiante, dentro de uma caixa de porta fechada.</p>
+
+<!-- ============================================================ -->
+<h2 id="fundacao-geometrica">2. Fundação geométrica: o triângulo antes da fórmula</h2>
+<p>Geometria é alicerce, e geometria se dá pelo desenho (E22). Antes de qualquer uso de trigonometria,
+o capítulo fixa <em>o que</em> seno e cosseno são — e o estatuto deles aqui. As definições são as
+escolares, lidas na figura: um triângulo retângulo com um ângulo agudo θ marcado; os lados recebem
+nomes <em>relativos a θ</em>.</p>
+
+<div class="canvases">
+<figure style="margin:0">
+<svg class="figura" width="440" height="230" viewBox="0 0 440 230" role="img"
+  aria-label="Triângulo retângulo com o ângulo agudo teta no vértice esquerdo. O lado horizontal, que toca teta, é o cateto adjacente; o lado vertical, oposto a teta, é o cateto oposto; o lado inclinado, o maior, é a hipotenusa. Um pequeno quadrado marca o ângulo reto entre os dois catetos.">
+  <polygon points="30,200 320,200 320,60" fill="none" stroke="#26221a" stroke-width="2"/>
+  <rect x="302" y="182" width="18" height="18" fill="none" stroke="#26221a" stroke-width="1"/>
+  <path d="M 70 200 A 40 40 0 0 0 66 183" fill="none" stroke="#8a3318" stroke-width="1.6"/>
+  <text x="76" y="193" font-size="15" fill="#8a3318" font-style="italic">θ</text>
+  <text x="130" y="222" font-size="14" fill="#1c5e3c">cateto adjacente</text>
+  <text x="326" y="135" font-size="14" fill="#1e4a6e">cateto</text>
+  <text x="326" y="152" font-size="14" fill="#1e4a6e">oposto</text>
+  <text x="120" y="115" font-size="14" fill="#26221a" transform="rotate(-26 150 125)">hipotenusa</text>
+</svg>
+<figcaption>A figura primeiro; a razão junto dela — nunca a fórmula sozinha.</figcaption>
+</figure>
+<figure style="margin:0">
+<svg class="figura" width="260" height="230" viewBox="0 0 260 230" role="img"
+  aria-label="Circunferência de raio um centrada na origem de um par de eixos. Um raio inclinado de ângulo teta com o eixo horizontal termina no ponto P sobre a circunferência. Linhas tracejadas projetam P sobre os eixos: a abscissa de P é cosseno de teta, a ordenada é seno de teta. O triângulo retângulo formado pelo raio e pelas projeções é o mesmo triângulo da figura ao lado, com hipotenusa um.">
+  <line x1="10" y1="150" x2="250" y2="150" stroke="#b9ab8a" stroke-width="1"/>
+  <line x1="105" y1="225" x2="105" y2="10" stroke="#b9ab8a" stroke-width="1"/>
+  <circle cx="105" cy="150" r="90" fill="none" stroke="#26221a" stroke-width="1.6"/>
+  <line x1="105" y1="150" x2="183" y2="105" stroke="#8a3318" stroke-width="2"/>
+  <circle cx="183" cy="105" r="4" fill="#8a3318"/>
+  <line x1="183" y1="105" x2="183" y2="150" stroke="#1e4a6e" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <line x1="105" y1="150" x2="183" y2="150" stroke="#1c5e3c" stroke-width="2.4"/>
+  <path d="M 133 150 A 28 28 0 0 0 129 136" fill="none" stroke="#8a3318" stroke-width="1.4"/>
+  <text x="138" y="145" font-size="13" fill="#8a3318" font-style="italic">θ</text>
+  <text x="190" y="100" font-size="13" fill="#8a3318">P</text>
+  <text x="120" y="166" font-size="12" fill="#1c5e3c">cos θ</text>
+  <text x="188" y="132" font-size="12" fill="#1e4a6e">sen θ</text>
+  <text x="128" y="118" font-size="12" fill="#26221a">1</text>
+</svg>
+<figcaption>O mesmo triângulo, com hipotenusa 1: o círculo unitário estende θ a todas as direções.</figcaption>
+</figure>
+</div>
+
+<div class="caixa" id="definicoes-trig">
+  <span class="rotulo">Definições (escolares, formais — razões na figura)</span>
+  <p class="formula">sen θ = cateto oposto / hipotenusa &nbsp;&nbsp;·&nbsp;&nbsp;
+  cos θ = cateto adjacente / hipotenusa &nbsp;&nbsp;·&nbsp;&nbsp;
+  tg θ = cateto oposto / cateto adjacente</p>
+  <p style="margin:0">Para 0 &lt; θ &lt; 90°, as razões não dependem do tamanho do triângulo — dois
+  triângulos retângulos com o mesmo θ são semelhantes, e razões de lados correspondentes coincidem
+  (semelhança, ferramenta do Cap. 0). Para θ qualquer, a <strong>definição do círculo</strong> assume:
+  sen θ e cos θ são a ordenada e a abscissa do ponto P do círculo unitário atingido girando o raio
+  (1, 0) de θ no sentido anti-horário; no primeiro quadrante ela coincide com a razão escolar (figura
+  da direita). <strong>Estatuto (E11):</strong> neste capítulo, seno e cosseno são <em>estes objetos
+  geométricos</em>, importados do círculo — não séries, não soluções de equação diferencial. A
+  reconstrução por séries pertence ao Cap. 10.</p>
+</div>
+<!-- ============================================================ -->
+<h2 id="construcao">3. A construção: o plano que multiplica</h2>
+<p>O caminho de descoberta escolhido — e ganho passo a passo — é o da pergunta x² = −1. Na reta
+numérica, multiplicar por −1 é <em>dar meia-volta</em> em torno de 0: cada número salta para o seu
+oposto. Se existisse um número x com x·x = −1, aplicar “multiplicar por x” duas vezes seguidas teria
+que produzir a meia-volta. Que operação, feita duas vezes, dá meia-volta? <strong>Um quarto de
+volta.</strong> Mas o quarto de volta tira o 1 <em>da reta</em>: ele leva o 1 para um ponto acima da
+origem, onde não mora número real nenhum. A conclusão não é “x não existe”; é “x não cabe na reta”.
+A pergunta x² = −1 não pede um número novo — pede um <strong>plano</strong>.</p>
+<p>Então tomemos o plano a sério como domínio aritmético. Um ponto é um par ordenado (a, b) de números
+reais. A adição é a do paralelogramo, coordenada a coordenada — nenhuma novidade. A multiplicação é
+que precisa ser <em>descoberta</em>, e nós a descobrimos impondo três exigências, todas herdadas do que
+a multiplicação já significa na reta:</p>
+<ul class="compacta">
+  <li><strong>(M1)</strong> na reta, nada muda: (a, 0)·(c, d) = (ac, ad) — os reais continuam agindo
+  como escalas, e (a, 0)·(c, 0) = (ac, 0) reproduz a multiplicação antiga;</li>
+  <li><strong>(M2)</strong> o ponto (0, 1) — o 1 girado de um quarto de volta — é o x procurado:
+  (0, 1)·(0, 1) = (−1, 0);</li>
+  <li><strong>(M3)</strong> a multiplicação distribui sobre a adição, como sempre distribuiu.</li>
+</ul>
+<div class="prova">
+  <p><strong>Dedução da regra.</strong> As três exigências não deixam escolha. Escreva
+  (a, b) = (a, 0) + (0, b) e note que (0, b) = (b, 0)·(0, 1) por (M1). Então, por (M3):</p>
+  <p class="formula">(a, b)·(c, d) = (a, 0)·(c, d) + (b, 0)·(0, 1)·(c, d).</p>
+  <p>A primeira parcela é (ac, ad) por (M1). Na segunda, (0, 1)·(c, d) = (0, 1)·(c, 0) + (0, 1)·(0, d)
+  = (0, c) + (d, 0)·(0, 1)·(0, 1) = (0, c) + (−d, 0) por (M1) e (M2); logo a segunda parcela é
+  (b, 0)·(−d, c) = (−bd, bc). Somando:</p>
+  <p class="formula">(a, b)·(c, d) = (ac − bd, ad + bc).</p>
+  <p>A regra não foi decretada: foi a única sobrevivente das exigências.<span class="qed">∎</span></p>
+</div>
+<div class="caixa">
+  <span class="rotulo">Definição (o corpo ℂ)</span>
+  <p style="margin:0">ℂ é o conjunto dos pares ordenados (a, b) ∈ ℝ², com
+  (a, b) + (c, d) = (a + c, b + d) e (a, b)·(c, d) = (ac − bd, ad + bc). Escreve-se
+  <strong>i = (0, 1)</strong> e abrevia-se (a, b) = a + bi — uma <em>notação</em> para o par, não um
+  novo objeto. Por (M2), i² = −1. Parte real: Re(a + bi) = a; parte imaginária: Im(a + bi) = b
+  (o nome é histórico; a seção 10 o julga).</p>
+</div>
+
+<h3 id="corpo">3.1 ℂ é um corpo</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 1 (axiomas de corpo)</span>
+  <p style="margin:0">Com essas operações, ℂ é um corpo: adição e multiplicação são comutativas e
+  associativas, a multiplicação distribui, (0, 0) e (1, 0) são os neutros, todo elemento tem oposto —
+  e todo z ≠ 0 tem inverso multiplicativo.</p>
+</div>
+<div class="prova">
+  <p><strong>Rotina declarada.</strong> Comutatividade, associatividade e distributividade são
+  expansões diretas das fórmulas — contas sem ideia nova, feitas por extenso no artefato
+  <code>audit/symbolic-check.md</code> (S1) e verificadas pelo oráculo em aritmética exata de frações
+  (invariante I1). O tratado as declara em vez de encená-las.</p>
+  <p><strong>O que merece prova: o inverso.</strong> Defina o <em>conjugado</em>
+  z̄ = a − bi e a <em>norma</em> N(z) = a² + b². A conta central é uma linha:</p>
+  <p class="formula">z·z̄ = (a + bi)(a − bi) = a² − (bi)² = a² + b², &nbsp;ou seja,&nbsp; z·z̄ = N(z).</p>
+  <p>Se z ≠ 0, então N(z) = a² + b² &gt; 0 (soma de quadrados reais, um deles não nulo), e</p>
+  <p class="formula">z · ( z̄ / N(z) ) = N(z)/N(z) = 1, &nbsp;logo&nbsp;
+  z⁻¹ = a/(a² + b²) − b/(a² + b²)·i.</p>
+  <p>O inverso não foi adivinhado: o conjugado “desfaz o giro” (a seção 5 dará sentido literal a isso)
+  e a norma desfaz a escala.<span class="qed">∎</span></p>
+</div>
+<p>Uma consequência imediata e estrutural: <strong>ℂ não tem divisores de zero</strong> — se zw = 0
+com z ≠ 0, multiplicar por z⁻¹ dá w = 0. A reta não perdeu nenhuma das suas leis ao virar plano.
+Perdeu outra coisa, e o tratado a declara desde já: a <strong>ordem</strong>. Não existe em ℂ uma
+relação “&lt;” compatível com as operações — num corpo ordenado todo quadrado é ≥ 0, e i² = −1 &lt; 0
+já seria contradição. O plano multiplica; o plano não enfileira.</p>
+
+<!-- ============================================================ -->
+<h2 id="norma-identidade">4. A norma multiplica — e a porta do Cap. 2 range</h2>
+<div class="caixa">
+  <span class="rotulo">Teorema 2 (identidade dos dois quadrados)</span>
+  <p style="margin:0">Para todos os reais a, b, c, d:
+  (a² + b²)(c² + d²) = (ac − bd)² + (ad + bc)². Equivalentemente: N(zw) = N(z)·N(w) — a norma é
+  multiplicativa.</p>
+</div>
+<div class="prova">
+  <p>Duas rotas, que se conferem mutuamente. <em>Rota estrutural:</em> conjugar respeita o produto —
+  a conta direta (exercício E2.1, com gabarito) mostra que o conjugado de zw é z̄·w̄; então</p>
+  <p class="formula">N(zw) = (zw)·(z̄w̄) = (z z̄)(w w̄) = N(z)·N(w),</p>
+  <p>usando comutatividade e associatividade já declaradas. <em>Rota braçal:</em> expandir
+  (ac − bd)² + (ad + bc)² = a²c² − 2abcd + b²d² + a²d² + 2abcd + b²c² = a²(c² + d²) + b²(c² + d²).
+  As duas rotas coincidem — e o oráculo verifica a identidade em aritmética exata (I2).<span class="qed">∎</span></p>
+</div>
+<p>Guarde esta identidade com dupla atenção. Primeiro, ela é o <em>módulo</em> em disfarce: definindo
+|z| = √N(z) (comprimento do vetor, Pitágoras — Cap. 0), ela diz |zw| = |z|·|w|: <strong>multiplicar
+multiplica comprimentos</strong>. Segundo — e aqui a porta do Capítulo 2 range nas dobradiças — ela diz
+que <strong>o produto de duas somas de dois quadrados é soma de dois quadrados</strong>. 5 = 1² + 2² e
+13 = 2² + 3²; a identidade fabrica 65 = 5·13 = (1·2 − 2·3)² + (1·3 + 2·2)² = 4² + 7² (e também
+1² + 8², pela outra ordem dos fatores — o exercício E3.2 usará as duas). A pergunta “quais primos são
+soma de dois quadrados” tem, desde já, sua metade combinatória: os produtos herdam a propriedade; o
+problema mora nos primos. A seção 9 vai buscá-los.</p>
+<!-- ============================================================ -->
+<h2 id="forma-polar">5. Forma polar: multiplicar é girar e escalar</h2>
+<p>Todo z ≠ 0 fica determinado por dois dados geométricos: o comprimento r = |z| e o ângulo θ que o
+vetor faz com o semieixo real positivo. Pela definição do círculo (seção 2), o ponto do círculo
+unitário na direção de z é (cos θ, sen θ); esticando pelo comprimento:</p>
+<p class="formula">z = r·(cos θ + i·sen θ), &nbsp; r = |z| &gt; 0.</p>
+<p>Esta é a <em>forma polar</em>. O ângulo θ chama-se <em>argumento</em> de z — e o plural escondido
+nesse singular é o assunto da seção 7. Antes, o teorema que dá ao capítulo seu título de trabalho.</p>
+
+<h3 id="rotacao">5.1 A rotação em coordenadas</h3>
+<div class="caixa">
+  <span class="rotulo">Lema 3 (coordenadas da rotação)</span>
+  <p style="margin:0">Seja R<sub>θ</sub> a rotação do plano em torno da origem pelo ângulo θ
+  (anti-horário). Então R<sub>θ</sub>(x, y) = (x·cos θ − y·sen θ, &nbsp;x·sen θ + y·cos θ).</p>
+</div>
+<div class="prova">
+  <p><strong>Fatos geométricos usados (declarados):</strong> a rotação preserva comprimentos e ângulos;
+  logo leva paralelogramos em paralelogramos e preserva escalas ao longo de retas — isto é, é
+  <em>linear</em>: R<sub>θ</sub>(x·u + y·v) = x·R<sub>θ</sub>(u) + y·R<sub>θ</sub>(v). São fatos de
+  congruência do plano euclidiano, importados com esta declaração.</p>
+  <p>Com a linearidade, basta saber para onde vão os dois vetores da base. R<sub>θ</sub>(1, 0) =
+  (cos θ, sen θ) — é a própria definição do círculo. E R<sub>θ</sub>(0, 1): o vetor (0, 1) é (1, 0)
+  girado de um quarto de volta; girar por θ e depois um quarto de volta é o mesmo que um quarto de
+  volta depois de θ, então R<sub>θ</sub>(0, 1) é (cos θ, sen θ) girado de 90°. O quarto de volta em
+  coordenadas troca (p, q) por (−q, p) (o triângulo da figura da seção 2, deitado — congruência):
+  R<sub>θ</sub>(0, 1) = (−sen θ, cos θ). Montando por linearidade:
+  R<sub>θ</sub>(x, y) = x·(cos θ, sen θ) + y·(−sen θ, cos θ), que é a fórmula.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="rotacao-escala">5.2 Multiplicar por cos θ + i·sen θ é girar</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 4 (multiplicação como rotação-escala)</span>
+  <p style="margin:0">Seja u = cos θ + i·sen θ. Então, para todo z = x + iy, o produto u·z é
+  exatamente R<sub>θ</sub>(z). Em geral, multiplicar por w = s·(cos φ + i·sen φ), s &gt; 0, é aplicar
+  a rotação por φ seguida da escala por s.</p>
+</div>
+<div class="prova">
+  <p>Conta de uma linha com a regra da seção 3:</p>
+  <p class="formula">u·z = (cos θ + i·sen θ)(x + iy) = (x·cos θ − y·sen θ) + i·(x·sen θ + y·cos θ),</p>
+  <p>que são precisamente as coordenadas de R<sub>θ</sub>(x, y) do Lema 3. Para w = s·u, a
+  multiplicação por s (real positivo) é a escala (M1), e w·z = s·(u·z).<span class="qed">∎</span></p>
+</div>
+<p>Isto dá certidão geométrica ao conjugado da seção 3: conjugar espelha no eixo real, troca o giro θ
+pelo giro −θ — por isso z·z̄ cancela toda rotação e sobra só escala: N(z).</p>
+
+<h3 id="formulas-adicao">5.3 As fórmulas de adição, ganhas de graça</h3>
+<p>Compor rotações soma ângulos: girar por β e depois por α é girar por α + β — fato geométrico da
+mesma família dos declarados no Lema 3 (o arco percorrido acumula). O Teorema 4 traduz essa composição
+em produto, e a tradução <em>demonstra</em> as fórmulas de adição — aqui elas são derivadas
+geometricamente, não importadas:</p>
+<div class="caixa">
+  <span class="rotulo">Teorema 5 (fórmulas de adição de seno e cosseno)</span>
+  <p style="margin:0">cos(α + β) = cos α·cos β − sen α·sen β &nbsp;&nbsp;e&nbsp;&nbsp;
+  sen(α + β) = sen α·cos β + cos α·sen β.</p>
+</div>
+<div class="prova">
+  <p>Pelo Teorema 4, multiplicar por (cos α + i·sen α) é R<sub>α</sub>, e por
+  (cos β + i·sen β) é R<sub>β</sub>. Aplicando as duas multiplicações seguidas ao número 1 e usando
+  R<sub>α</sub> ∘ R<sub>β</sub> = R<sub>α+β</sub>:</p>
+  <p class="formula">(cos α + i·sen α)(cos β + i·sen β) = cos(α + β) + i·sen(α + β).</p>
+  <p>Agora expanda o lado esquerdo com a regra de multiplicação:
+  (cos α·cos β − sen α·sen β) + i·(sen α·cos β + cos α·sen β). Dois números complexos são iguais
+  exatamente quando partes reais e imaginárias coincidem (pares ordenados!): as duas fórmulas caem
+  juntas, uma em cada coordenada.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="produto-polar">5.4 O produto em forma polar</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 6 (produto: módulos multiplicam, ângulos somam)</span>
+  <p style="margin:0">Se z = r·(cos θ + i·sen θ) e w = s·(cos φ + i·sen φ), com r, s &gt; 0, então
+  z·w = rs·(cos(θ + φ) + i·sen(θ + φ)). Em particular |zw| = |z|·|w|, e todo argumento de zw difere
+  de θ + φ por um múltiplo inteiro de 2π.</p>
+</div>
+<div class="prova">
+  <p>z·w = rs·(cos θ + i·sen θ)(cos φ + i·sen φ) = rs·(cos(θ + φ) + i·sen(θ + φ)) pela fórmula central
+  do Teorema 5. O módulo é rs porque rs &gt; 0 e cos² + sen² = 1 (Pitágoras no círculo unitário —
+  seção 2). Que dois ângulos representando o mesmo ponto do círculo diferem por volta inteira é a
+  periodicidade do círculo; a seção 7 transformará essa observação em definição. Verificação
+  independente do módulo: é o Teorema 2 — a mesma lei, provada por álgebra pura, sem um único
+  seno.<span class="qed">∎</span></p>
+</div>
+
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<h3 id="experimento-produto">5.5 Laboratório de multiplicação</h3>
+<p>O laboratório abaixo multiplica dois números complexos ajustáveis e desenha os três vetores. A
+linha de leitura confere, em cada ajuste, as duas metades do Teorema 6: o produto dos módulos contra o
+módulo do produto, e a soma dos ângulos contra o ângulo do produto (o “defeito” anunciado é o múltiplo
+de 360° que a escolha de representante engole — seção 7). A tabela repete os mesmos dados em forma
+numérica.</p>
+
+<div class="painel">
+  <div class="canvases">
+    <figure style="margin:0">
+      <canvas id="cv-mult" width="520" height="360"
+        aria-label="Plano complexo com eixos e círculo unitário. Três vetores partem da origem: z em verde, w em azul e o produto z vezes w em vermelho escuro. Ao ajustar os controles deslizantes, o vetor do produto gira e escala conforme o teorema seis: seu comprimento é o produto dos comprimentos e seu ângulo é a soma dos ângulos. Os valores exatos aparecem na linha de leitura e na tabela adiante."></canvas>
+      <figcaption>Multiplicar é girar e escalar: o vetor do produto carrega a soma dos ângulos e o
+      produto dos comprimentos.</figcaption>
+    </figure>
+  </div>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#1c5e3c"></span>z ·
+    <span class="sw" style="background:#1e4a6e"></span>w ·
+    <span class="sw" style="background:#8a3318"></span>z·w ·
+    <span class="sw" style="background:#fffdf7"></span>círculo unitário
+  </div>
+  <div class="controles">
+    <label for="za">Re z: <input type="range" id="za" min="-4" max="4" step="0.1" value="2"
+      aria-describedby="lab-desc"> <span id="za-val">2,0</span></label>
+    <label for="zb">Im z: <input type="range" id="zb" min="-4" max="4" step="0.1" value="1"> <span id="zb-val">1,0</span></label>
+    <label for="wa">Re w: <input type="range" id="wa" min="-4" max="4" step="0.1" value="1"> <span id="wa-val">1,0</span></label>
+    <label for="wb">Im w: <input type="range" id="wb" min="-4" max="4" step="0.1" value="3"> <span id="wb-val">3,0</span></label>
+  </div>
+  <div class="controles">
+    <button id="btn-quarter" type="button">w ← i (quarto de volta)</button>
+    <button id="btn-spin" type="button">girar w 90° (w ← i·w)</button>
+    <button id="btn-mult-reset" type="button">Recomeçar (z = 2+i, w = 1+3i)</button>
+  </div>
+  <span id="lab-desc" class="visually-hidden">Ajusta as partes reais e imaginárias de z e w entre menos quatro e quatro, em passos de um décimo.</span>
+  <p class="leitura" id="leitura-mult" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-mult">
+  <caption>Os três vetores do laboratório, em números: parte real, parte imaginária, norma
+  N = a² + b², módulo |·| = √N e ângulo em graus (representante em (−180°, 180°]). A última linha
+  confere o Teorema 6: N(z)·N(w) = N(zw) exatamente (a norma dispensa raízes — por isso o oráculo
+  prefere N a |·|).</caption>
+  <thead>
+    <tr><th scope="col">vetor</th><th scope="col">Re</th><th scope="col">Im</th>
+    <th scope="col">N</th><th scope="col">|·|</th><th scope="col">ângulo (°)</th></tr>
+  </thead>
+  <tbody id="tabela-mult-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">O Teorema 6 — nem poderia: os controles visitam uma grade finita de valores com
+  uma casa decimal, e a tela arredonda cada coordenada para um pixel. O que o laboratório faz é tornar
+  <em>visível</em> a rotação-escala que os Teoremas 4–6 demonstram, e oferecer um lugar onde procurar
+  contraexemplos (ajuste, confira a leitura, tente quebrar a igualdade das normas). A prova está nas
+  seções 5.1–5.4; a verificação numérica independente, no oráculo (I2, I3), em aritmética exata onde
+  exata e com cota de erro declarada onde float.</p>
+</div>
+<!-- ============================================================ -->
+<h2 id="raizes">6. Raízes n-ésimas: a inversa que devolve um polígono</h2>
+
+<h3 id="de-moivre">6.1 De Moivre</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 7 (de Moivre)</span>
+  <p style="margin:0">Para todo inteiro n ≥ 1 e todo θ:
+  (cos θ + i·sen θ)ⁿ = cos(nθ) + i·sen(nθ). Consequentemente, se z = r·(cos θ + i·sen θ), então
+  zⁿ = rⁿ·(cos nθ + i·sen nθ).</p>
+</div>
+<div class="prova">
+  <p>Indução em n. Base n = 1: identidade. Passo: se vale para n, então</p>
+  <p class="formula">(cos θ + i·sen θ)ⁿ⁺¹ = (cos nθ + i·sen nθ)(cos θ + i·sen θ) = cos((n+1)θ) + i·sen((n+1)θ)</p>
+  <p>pela fórmula central do Teorema 5 com α = nθ, β = θ. A forma geral segue de |zⁿ| = |z|ⁿ
+  (Teorema 2, iterado pela mesma indução).<span class="qed">∎</span></p>
+</div>
+
+<h3 id="raiz-real">6.2 A raiz real que ancora as complexas</h3>
+<div class="caixa">
+  <span class="rotulo">Lema 8 (raiz n-ésima real positiva)</span>
+  <p style="margin:0">Para todo real s &gt; 0 e todo inteiro n ≥ 1 existe um único real r &gt; 0 com
+  rⁿ = s. Notação: r = s^(1/n) — aqui o radical devolve <em>um</em> número porque o domínio foi
+  restringido aos reais positivos por hipótese.</p>
+</div>
+<div class="prova">
+  <p><strong>Unicidade.</strong> Em reais positivos, t ↦ tⁿ é estritamente crescente
+  (0 &lt; t &lt; t′ ⟹ tⁿ &lt; t′ⁿ, multiplicando a desigualdade por ela mesma n vezes); dois valores
+  distintos não podem ter a mesma potência.</p>
+  <p><strong>Existência — pelo princípio do supremo do Capítulo 1.</strong> O conjunto
+  A = { t &gt; 0 : tⁿ ≤ s } não é vazio (contém min(1, s), pois min(1, s)ⁿ ≤ min(1, s) ≤ s quando
+  min(1,s) ≤ 1) e é limitado por 1 + s (se t &gt; 1 + s então tⁿ ≥ t &gt; s). Seja r = sup A. Uso a
+  cota binomial: para 0 &lt; h ≤ 1,</p>
+  <p class="formula">(r + h)ⁿ ≤ rⁿ + h·n·(r + 1)ⁿ⁻¹ &nbsp;&nbsp;e&nbsp;&nbsp; (r − h)ⁿ ≥ rⁿ − h·n·rⁿ⁻¹,</p>
+  <p>ambas por expansão: em (r + h)ⁿ − rⁿ, cada um dos n·2ⁿ⁻¹… — mais simplesmente, fatorando
+  x ↦ xⁿ: (r+h)ⁿ − rⁿ = h·((r+h)ⁿ⁻¹ + (r+h)ⁿ⁻²r + … + rⁿ⁻¹) ≤ h·n·(r+1)ⁿ⁻¹ para h ≤ 1, e
+  rⁿ − (r−h)ⁿ = h·(rⁿ⁻¹ + rⁿ⁻²(r−h) + … + (r−h)ⁿ⁻¹) ≤ h·n·rⁿ⁻¹. Se fosse rⁿ &lt; s, o h pequeno
+  h = min(1, (s − rⁿ)/(n(r+1)ⁿ⁻¹)) daria (r + h)ⁿ ≤ s, e r + h ∈ A contrariaria o supremo. Se fosse
+  rⁿ &gt; s, o h = min(r, (rⁿ − s)/(n·rⁿ⁻¹))/2 daria (r − h)ⁿ &gt; s, e r − h seria cota superior de
+  A menor que r. Resta rⁿ = s.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="raizes-enesimas">6.3 O teorema das n raízes</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 9 (as raízes n-ésimas — contagem e geometria)</span>
+  <p style="margin:0">Seja w ≠ 0, escrito w = s·(cos φ + i·sen φ) com s = |w| &gt; 0, e seja n ≥ 1.
+  A equação zⁿ = w tem <strong>exatamente n</strong> soluções em ℂ:</p>
+  <p class="formula">z<sub>k</sub> = s^(1/n)·( cos((φ + 2kπ)/n) + i·sen((φ + 2kπ)/n) ), &nbsp; k = 0, 1, …, n − 1.</p>
+  <p style="margin:0">Todas têm o mesmo módulo s^(1/n), e seus argumentos avançam de 2π/n em 2π/n:
+  são os vértices de um polígono regular de n lados inscrito na circunferência de raio s^(1/n)
+  (para n ≥ 3; para n = 2, pontos antípodas; para n = 1, o próprio w).</p>
+</div>
+<div class="prova">
+  <p><strong>Cada z<sub>k</sub> resolve.</strong> De Moivre:
+  z<sub>k</sub>ⁿ = (s^(1/n))ⁿ·(cos(φ + 2kπ) + i·sen(φ + 2kπ)) = s·(cos φ + i·sen φ) = w, pois somar
+  2kπ é dar k voltas completas — o círculo não distingue.</p>
+  <p><strong>São distintas.</strong> Para 0 ≤ k &lt; k′ ≤ n − 1, os argumentos diferem de
+  2π(k′ − k)/n, que está estritamente entre 0 e 2π: os pontos do círculo são diferentes (mesmo módulo,
+  direções distintas).</p>
+  <p><strong>Não há outras.</strong> Seja z = ρ·(cos α + i·sen α) com zⁿ = w. Tomando módulos,
+  ρⁿ = s; pelo Lema 8 (unicidade), ρ = s^(1/n). Tomando ângulos (Teorema 7), cos nα = cos φ e
+  sen nα = sen φ: nα e φ marcam o mesmo ponto do círculo, logo nα = φ + 2mπ para algum inteiro m, e
+  α = (φ + 2mπ)/n. Escreva m = qn + k com 0 ≤ k ≤ n − 1 (divisão euclidiana — Cap. 2 a usou; aqui ela
+  organiza as voltas): α = (φ + 2kπ)/n + 2qπ, que é o ângulo de z<sub>k</sub> a menos de q voltas
+  completas. Então z = z<sub>k</sub>.</p>
+  <p><strong>Geometria.</strong> Módulo comum s^(1/n); argumentos consecutivos separados por 2π/n
+  constante: arcos iguais no mesmo círculo, cordas iguais — polígono regular.<span class="qed">∎</span></p>
+</div>
+
+<div class="caixa" id="falha-destruida">
+  <span class="rotulo">A falha prevista, destruída — sem exponencial</span>
+  <p style="margin:0">“Toda operação inversa devolve um único valor” está morta, e o assassino não
+  precisou de exponencial nenhuma: a inversa de z ↦ zⁿ devolve um <strong>conjunto de n valores</strong>,
+  arrumados num polígono regular. O hábito real (√4 = 2) era um privilégio duplo: do semieixo positivo
+  <em>e</em> de uma convenção que escolhe a raiz positiva e cala sobre a outra. Em ℂ não há “a” raiz:
+  há n raízes, e qualquer símbolo ⁿ√w só ganha sentido depois de uma <em>escolha declarada</em> —
+  o preço dessa escolha é a seção 7. O degenerado fica registrado: w = 0 tem uma única raiz n-ésima
+  (z = 0, pois |z|ⁿ = 0 força z = 0) — o polígono colapsa num ponto, e o enunciado exige w ≠ 0
+  exatamente por isso.</p>
+</div>
+
+<div class="caixa" id="soma-raizes">
+  <span class="rotulo">Teorema 10 (a soma das raízes é zero — conjectura C3, confirmada)</span>
+  <p>Para n ≥ 2 e w ≠ 0, as n raízes n-ésimas de w somam exatamente 0.</p>
+  <p style="margin:0"><strong>Prova.</strong> Seja ω = cos(2π/n) + i·sen(2π/n); então
+  z<sub>k</sub> = z₀·ωᵏ (Teorema 6: multiplicar por ω avança o argumento em 2π/n e preserva o módulo).
+  A soma é S = z₀·(1 + ω + ω² + … + ωⁿ⁻¹). Multiplicando a soma entre parênteses por (ω − 1), a
+  soma telescopa: (ω − 1)(1 + ω + … + ωⁿ⁻¹) = ωⁿ − 1 = 0 (de Moivre: ωⁿ = cos 2π + i·sen 2π = 1).
+  Como n ≥ 2, ω ≠ 1, e ω − 1 ≠ 0 pode ser cancelado (corpo, sem divisores de zero — Teorema 1):
+  a soma entre parênteses é 0, logo S = 0. O centro do polígono é a origem — dito em vetor.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="experimento-raizes">6.4 Explorador de raízes</h3>
+<p>Escolha w pela forma polar (módulo e ângulo) e o índice n. O explorador desenha as n raízes sobre a
+circunferência de raio |w|^(1/n) e o polígono regular que elas formam; o contador de multivalência
+percorre k = 0, …, n − 1, e para cada raiz a máquina <em>refaz</em> a potência z<sub>k</sub>ⁿ por
+multiplicações sucessivas (rota independente de De Moivre) e mede a distância até w. A tabela lista as
+n raízes.</p>
+
+<div class="painel">
+  <div class="canvases">
+    <figure style="margin:0">
+      <canvas id="cv-roots" width="420" height="420"
+        aria-label="Plano complexo com uma circunferência de raio igual à raiz enésima real do módulo de w. Sobre ela, n pontos igualmente espaçados: as n raízes enésimas de w, ligadas por um polígono regular tracejado. A raiz de índice k atual está destacada em vermelho; o ponto w, quando cabe na janela, aparece marcado em azul. A tabela adiante lista cada raiz com seu ângulo e o erro da verificação por potência."></canvas>
+      <figcaption>As n raízes de w: mesmo módulo, ângulos em progressão de 360°/n — um polígono
+      regular com centro na origem.</figcaption>
+    </figure>
+  </div>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#1c5e3c"></span>raízes ·
+    <span class="sw" style="background:#8a3318"></span>raiz k atual ·
+    <span class="sw" style="background:#1e4a6e"></span>w
+  </div>
+  <div class="controles">
+    <label for="w-mod">|w|: <input type="range" id="w-mod" min="0" max="4" step="0.1" value="2"
+      aria-describedby="roots-desc"> <span id="w-mod-val">2,0</span></label>
+    <label for="w-arg">arg w (°): <input type="range" id="w-arg" min="-180" max="180" step="5" value="60"> <span id="w-arg-val">60</span></label>
+    <label for="n-idx">n: <input type="range" id="n-idx" min="1" max="12" step="1" value="3"> <span id="n-idx-val">3</span></label>
+    <button id="btn-next-root" type="button">Próxima raiz (k → k+1)</button>
+  </div>
+  <span id="roots-desc" class="visually-hidden">Ajusta o módulo de w de zero a quatro, o argumento de menos cento e oitenta a cento e oitenta graus, e o índice n de um a doze. O botão percorre as raízes uma a uma.</span>
+  <p class="leitura" id="leitura-roots" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-roots">
+  <caption>As n raízes atuais: índice k, ângulo (φ + 360°k)/n, partes real e imaginária, e o erro
+  |z<sub>k</sub>ⁿ − w| da verificação por multiplicações sucessivas (float64; o oráculo repete a
+  verificação com cotas declaradas — I4).</caption>
+  <thead>
+    <tr><th scope="col">k</th><th scope="col">ângulo (°)</th><th scope="col">Re z<sub>k</sub></th>
+    <th scope="col">Im z<sub>k</sub></th><th scope="col">|z<sub>k</sub>ⁿ − w|</th></tr>
+  </thead>
+  <tbody id="tabela-roots-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Que as raízes são exatamente n, para todo w e todo n — isso é o Teorema 9, e só
+  ele. O explorador amostra pares (w, n) numa grade finita e verifica cada raiz com aritmética de ponto
+  flutuante: os erros da última coluna são pequenos, nunca zero — camada de observação, não de objeto
+  (seção 10). O que ele destrói de verdade é a <em>intuição</em> do valor único: gire o ângulo de w e
+  veja o polígono inteiro girar junto — nenhuma das n raízes é mais “a raiz” que as outras.</p>
+</div>
+<!-- ============================================================ -->
+<h2 id="argumento-ramo">7. O argumento é um conjunto; o ramo é uma escolha</h2>
+<p>A seção 5 falou em “o ângulo de z” com um singular indevido. A periodicidade do círculo obriga a
+dizer a verdade completa:</p>
+<div class="caixa">
+  <span class="rotulo">Definição (arg e Arg)</span>
+  <p style="margin:0">Para z ≠ 0, o <strong>argumento</strong> de z é o <em>conjunto</em>
+  <span class="formula" style="display:block">arg z = { θ ∈ ℝ : z = |z|·(cos θ + i·sen θ) } = { θ₀ + 2kπ : k ∈ ℤ },</span>
+  onde θ₀ é qualquer um dos seus elementos. O <strong>argumento principal</strong> Arg z é o único
+  elemento de arg z no intervalo (−π, π] — uma <em>escolha</em>, chamada escolha de ramo do argumento.
+  Cada intervalo semiaberto de comprimento 2π daria outra escolha igualmente legítima; o tratado fixa
+  esta e a declara.</p>
+</div>
+<p>Com a definição honesta, o Teorema 6 diz: arg(zw) = arg z + arg w <em>como conjuntos</em> (a soma
+de um elemento de cada, mais voltas inteiras, varre exatamente o conjunto do produto). É uma lei limpa
+— sobre conjuntos. O preço de trocar o conjunto por um único representante tem valor exato:</p>
+<div class="caixa" id="custo-ramo">
+  <span class="rotulo">Teorema 11 (o custo do ramo — conjectura C5, confirmada)</span>
+  <p style="margin:0">Para z, w ≠ 0: Arg(zw) − Arg z − Arg w ∈ { −2π, 0, +2π }. E as três
+  possibilidades ocorrem.</p>
+</div>
+<div class="prova">
+  <p>Arg z + Arg w é um elemento de arg(zw) (lei dos conjuntos acima); Arg(zw) é outro. Dois elementos
+  do mesmo argumento diferem por múltiplo inteiro de 2π: o defeito é 2mπ, m ∈ ℤ. Cotas: Arg z e
+  Arg w estão em (−π, π], logo a soma está em (−2π, 2π]; Arg(zw) está em (−π, π]. A diferença fica em
+  (−3π, 3π), e os únicos múltiplos de 2π nesse intervalo são −2π, 0, +2π. Ocorrência: z = w = 1 dá
+  defeito 0; z = w = −1 + 0,1i tem Arg ≈ 3,0419, soma ≈ 6,0838 &gt; π, e Arg(z²) ≈ −0,1993 =
+  6,0838 − 2π — defeito −2π… visto do produto, a correção foi de uma volta (o oráculo varre pares
+  aleatórios e colados no corte: I5); o simétrico dá +2π.<span class="qed">∎</span></p>
+</div>
+<p><strong>O salto.</strong> Caminhe pelo círculo unitário, no sentido anti-horário, começando em 1:
+Arg cresce suavemente 0 → π/2 → π… e ao cruzar o semieixo real negativo <em>despenca</em> de π para
+valores perto de −π. A função Arg é descontínua em todo o semieixo real negativo — o <em>corte</em> do
+ramo. Não é defeito de desenho: qualquer escolha de ramo tem seu corte, porque o conjunto arg gira
+2π por volta e um representante contínuo teria que voltar ao valor inicial e ao mesmo tempo ter
+crescido 2π. O que uma escolha de ramo custa, em resumo auditável:</p>
+<ul class="compacta">
+  <li><strong>uma descontinuidade</strong> — o corte, onde o representante salta 2π;</li>
+  <li><strong>uma lei quebrada</strong> — Arg(zw) = Arg z + Arg w falha num conjunto grande de pares
+  (Teorema 11 diz exatamente como);</li>
+  <li><strong>n − 1 irmãs ocultas</strong> — a “raiz principal” s^(1/n)·(cos(Arg w/n) + i·sen(Arg w/n))
+  é uma função legítima de w, mas cala sobre as outras n − 1 raízes do Teorema 9.</li>
+</ul>
+<p>O que se ganha: uma <em>função</em>, com valor único, computável — todo software de matemática
+embute essa troca, raramente a anuncia. Superfícies de Riemann — o objeto onde as folhas do argumento
+moram todas ao mesmo tempo — ficam explicitamente fora deste ciclo (§11 do manual).</p>
+
+<!-- ============================================================ -->
+<h2 id="portas-fechadas">8. Duas portas fechadas, com data de reabertura</h2>
+<!-- door-exp:start -->
+<div class="caixa porta" id="porta-exponencial" data-door-exp="true">
+  <span class="rotulo">Porta fechada — a notação e<sup>iθ</sup></span>
+  <p style="margin:0">O operador de rotação cos θ + i·sen θ é escrito, na literatura, como
+  e<sup>iθ</sup>. Neste tratado, <strong>esta igualdade será demonstrada quando exponencial, seno e
+  cosseno forem reconstruídos por séries (Cap. 10) e sintetizados (Cap. 12)</strong>. Até lá, a
+  notação e<sup>iθ</sup> não tem cidadania aqui: tudo o que este capítulo provou usou apenas o operador
+  geométrico — e nada do que provou depende da porta. Quem abrir o Cap. 10 encontrará esta caixa do
+  outro lado.</p>
+</div>
+<!-- door-exp:end -->
+<div class="caixa porta" id="log-formal">
+  <span class="rotulo">Porta fechada — o logaritmo complexo (relação formal, adiada)</span>
+  <p style="margin:0">Se um dia existir um “logaritmo” de w ≠ 0 — um z que a exponencial complexa
+  levará de volta a w — a multivalência do argumento já dita a sua forma:
+  <span class="formula" style="display:block">z = ln|w| + i·(Arg w + 2kπ), &nbsp; k ∈ ℤ, &nbsp; w ≠ 0,</span>
+  uma <em>família</em> de candidatos, um por folha do argumento — nunca um valor só. Este capítulo a
+  registra como relação formal: a inversão que a valida será construída quando a exponencial existir
+  por séries (Cap. 10). Note o w ≠ 0 obrigatório (arg 0 não existe) e que ln|w| é o logaritmo
+  <em>real</em> de um real positivo — objeto que o tratado também só reconstruirá lá. Superfícies de
+  Riemann e topologia de recobrimento: fora deste ciclo.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="inteiros-gaussianos">9. ℤ[i]: a aritmética volta ao plano</h2>
+<p>A porta do Capítulo 2 pede aritmética — divisão, primos, fatoração — dentro do plano. O anel certo
+é o <em>reticulado</em> dos pontos de coordenadas inteiras:</p>
+<div class="caixa">
+  <span class="rotulo">Definição (inteiros gaussianos)</span>
+  <p style="margin:0">ℤ[i] = { a + bi : a, b ∈ ℤ }. Soma, diferença e produto de inteiros gaussianos
+  são inteiros gaussianos (as fórmulas da seção 3 só usam +, −, ×). A norma N(a + bi) = a² + b² é um
+  inteiro ≥ 0, e N(zw) = N(z)·N(w) (Teorema 2). Divisibilidade: d | z quando z = qd para algum
+  q ∈ ℤ[i]. <em>Unidades</em> são os divisores de 1; z e uz (u unidade) são <em>associados</em>.
+  Um π ∈ ℤ[i] é <strong>primo gaussiano</strong> quando não é zero nem unidade e seus únicos
+  divisores são unidades e associados de π.</p>
+</div>
+
+<h3 id="unidades">9.1 As unidades</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 12 (unidades de ℤ[i])</span>
+  <p style="margin:0">u é unidade ⟺ N(u) = 1 ⟺ u ∈ { 1, −1, i, −i }.</p>
+</div>
+<div class="prova">
+  <p>Se uv = 1, então N(u)·N(v) = N(1) = 1 com N(u), N(v) inteiros não negativos: N(u) = 1. As
+  soluções inteiras de a² + b² = 1 são (±1, 0) e (0, ±1): u ∈ {±1, ±i}. E os quatro são unidades:
+  1·1 = (−1)(−1) = i·(−i) = (−i)·i = 1. Geometricamente: as unidades são as quatro rotações de quarto
+  de volta que preservam o reticulado.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="divisao-gaussiana">9.2 O algoritmo da divisão — o arredondamento</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 13 (divisão com resto em ℤ[i])</span>
+  <p style="margin:0">Para z, d ∈ ℤ[i] com d ≠ 0, existem q, r ∈ ℤ[i] tais que z = q·d + r e
+  N(r) ≤ N(d)/2 &lt; N(d).</p>
+</div>
+<div class="prova">
+  <p>No corpo ℂ, o quociente exato existe: z/d = z·d̄/N(d) = x + yi com x, y <em>racionais</em>
+  (numeradores inteiros, denominador N(d)). Arredonde cada coordenada ao inteiro mais próximo:
+  m, n ∈ ℤ com |x − m| ≤ 1/2 e |y − n| ≤ 1/2 (o inteiro mais próximo nunca dista mais de meio; em
+  empate, qualquer vizinho serve — o algoritmo escolhe um e o declara). Tome q = m + ni e
+  r = z − q·d. Então r = d·((x − m) + (y − n)i), e pela multiplicatividade da norma estendida a ℂ
+  (Teorema 2 vale para reais quaisquer):</p>
+  <p class="formula">N(r) = N(d)·((x − m)² + (y − n)²) ≤ N(d)·(1/4 + 1/4) = N(d)/2.</p>
+  <p>Exemplo com as mãos: z = 7 + 2i, d = 2 + i. z/d = (7 + 2i)(2 − i)/5 = (16 − 3i)/5 =
+  3,2 − 0,6i; arredondando, q = 3 − i; r = z − q·d = (7 + 2i) − (7 + i) = i, com N(i) = 1 &lt;
+  5 = N(d). O oráculo repete isso em amostra aleatória exata (I6): o resto <em>sempre</em> encolhe.
+  Geometricamente: os múltiplos de d formam uma cópia girada e escalada do reticulado, de malha
+  √N(d); todo ponto do plano dista no máximo meia diagonal da malha de algum múltiplo — o
+  arredondamento acha esse múltiplo.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="euclides-gaussiano">9.3 De Euclides a “primo divide fator”</h3>
+<p>Com divisão que encolhe o resto, todo o maquinário do Capítulo 2 sobe para o plano — e a subida é
+uma cadeia curta de três elos, cada um provado:</p>
+<div class="prova">
+  <p><strong>Elo 1 — mdc por Euclides.</strong> Dados α, β ≠ 0, itere a divisão: α = q₁β + r₁,
+  β = q₂r₁ + r₂, … As normas N(β) &gt; N(r₁) &gt; N(r₂) &gt; … são inteiros não negativos
+  estritamente decrescentes: o algoritmo para em resto zero, e o último resto não nulo g divide α e β
+  (subindo a cadeia) — e todo divisor comum de α e β divide g (descendo). g é um máximo divisor
+  comum, único a menos de unidade.</p>
+  <p><strong>Elo 2 — Bézout.</strong> Cada resto da cadeia é combinação r = x·α + y·β com
+  x, y ∈ ℤ[i] (indução: r₁ = α − q₁β; cada resto seguinte é combinação de dois anteriores). Em
+  particular g = xα + yβ.</p>
+  <p><strong>Elo 3 — lema de Euclides em ℤ[i].</strong> Se π é primo gaussiano e π | αβ mas
+  π ∤ α, então mdc(π, α) é divisor de π que não é associado de π (senão dividiria α): é unidade,
+  e Bézout dá 1 = xπ + yα. Multiplicando por β: β = xπβ + yαβ — as duas parcelas são múltiplas de π
+  (a segunda porque π | αβ). Logo π | β.<span class="qed">∎</span></p>
+</div>
+<p>É exatamente a estrutura que faltava ao Capítulo 2: um lugar onde “fatorar o primo” significa algo
+— e onde fatorações se controlam. (A fatoração única completa de ℤ[i] segue daqui pelo argumento
+clássico de indução na norma; o capítulo usa apenas os três elos acima, que bastam para a porta.)</p>
+
+<h3 id="wilson">9.4 Wilson: o fatorial confessa</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 14 (Wilson)</span>
+  <p style="margin:0">Para todo primo p: (p − 1)! ≡ −1 (mod p).</p>
+</div>
+<div class="prova">
+  <p>Os restos 1, 2, …, p − 1 têm, cada um, um único inverso multiplicativo módulo p (Bézout em ℤ,
+  mesmo argumento do Elo 2 uma dimensão abaixo: mdc(a, p) = 1 dá 1 = xa + yp, e x é o inverso; único
+  módulo p porque dois inversos diferem por múltiplo de p). <em>Emparelhe cada a com a⁻¹.</em> O par
+  colapsa (a = a⁻¹) exatamente quando a² ≡ 1, isto é, p | (a − 1)(a + 1); p primo divide um dos
+  fatores (lema de Euclides em ℤ), logo a ≡ 1 ou a ≡ −1. Todos os demais restos se agrupam em pares
+  distintos {a, a⁻¹} de produto 1. No produto (p − 1)! = 1·2·…·(p − 1), os pares valem 1 e sobram os
+  solitários: (p − 1)! ≡ 1·(p − 1) ≡ −1 (mod p).</p>
+  <p>Conferência mínima (oráculo I7 vai além): p = 5: 4! = 24 = 5·5 − 1 ≡ −1 ✓; p = 7: 6! = 720 =
+  7·103 − 1 ≡ −1 ✓. E o teste é afiado: para compostos n &gt; 4, (n − 1)! ≡ 0 (mod n) — os fatores
+  de n aparecem no fatorial.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="residuo-quadratico">9.5 −1 vira quadrado quando p ≡ 1 (mod 4)</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 15 (a testemunha fatorial)</span>
+  <p style="margin:0">Se p ≡ 1 (mod 4), então m = ((p − 1)/2)! satisfaz m² ≡ −1 (mod p): −1 é
+  resíduo quadrático módulo p, com testemunha explícita.</p>
+</div>
+<div class="prova">
+  <p>Emparelhe cada k ∈ {1, …, (p−1)/2} com p − k ∈ {(p+1)/2, …, p − 1}: juntos varrem
+  {1, …, p − 1} sem repetição. Então</p>
+  <p class="formula">(p − 1)! = ∏ k·(p − k) ≡ ∏ k·(−k) = (−1)^((p−1)/2) · m² (mod p).</p>
+  <p>Como p ≡ 1 (mod 4), o expoente (p − 1)/2 é par e o sinal é +1: (p − 1)! ≡ m². Wilson
+  (Teorema 14) fecha: m² ≡ −1 (mod p). Conferência: p = 13, m = 6! = 720 ≡ 5 (mod 13), e
+  5² = 25 ≡ 12 ≡ −1 ✓. (O oráculo confere em amostra ampla — I7 — e observa o contraste: para
+  p ≡ 3 (mod 4) o expoente é ímpar e a mesma conta dá m² ≡ +1.)<span class="qed">∎</span></p>
+</div>
+<h3 id="dois-quadrados">9.6 Fermat: os primos que são soma de dois quadrados</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 16 (Fermat, dois quadrados)</span>
+  <p style="margin:0">Um primo ímpar p é soma de dois quadrados de inteiros ⟺ p ≡ 1 (mod 4).
+  E 2 = 1² + 1².</p>
+</div>
+<div class="prova">
+  <p><strong>Ida (p ≡ 1 mod 4 ⟹ soma).</strong> Pelo Teorema 15 existe m com p | m² + 1. No plano,
+  m² + 1 fatora: m² + 1 = (m + i)(m − i). Suponha, por absurdo, que p fosse primo gaussiano. Pelo
+  lema de Euclides em ℤ[i] (Elo 3), p dividiria m + i ou m − i; mas (m ± i)/p = m/p ± i/p tem parte
+  imaginária ±1/p, que não é inteira — p não divide nenhum dos dois. Logo p <em>não</em> é primo
+  gaussiano: existe fatoração p = π·σ com π, σ não unidades. Tomando normas:
+  N(π)·N(σ) = N(p) = p², com N(π), N(σ) &gt; 1 (não unidades, Teorema 12). A única partição possível
+  é N(π) = N(σ) = p. Escrevendo π = a + bi: <strong>a² + b² = p</strong>.</p>
+  <p><strong>Volta (soma ⟹ p ≢ 3 mod 4).</strong> Quadrados módulo 4: (2k)² ≡ 0 e (2k+1)² ≡ 1
+  (o lema n² ≡ 1 (mod 8) do Capítulo 2 diz até mais). Então a² + b² (mod 4) ∈ {0, 1, 2} — nunca 3.
+  Um primo ≡ 3 (mod 4) não é soma de dois quadrados; para o primo ímpar restam ≡ 1 (mod 4), e a ida
+  mostrou que todos esses são. O par p = 2 fica fora da dicotomia e resolve-se à mão: 2 = 1² + 1² =
+  N(1 + i).<span class="qed">∎</span></p>
+</div>
+<p>O oráculo executa a sentença completa em domínio exaustivo: <em>todos</em> os primos p &lt; 50000
+(são 5133), decompostos por busca exata quando p ≡ 1 (mod 4) ou p = 2, e comprovadamente sem
+decomposição quando p ≡ 3 (mod 4) — invariante I8, artefato em <code>audit/numeric-check.json</code>.
+Exemplo grande do domínio: 49993 ≡ 1 (mod 4) e 49993 = 68² + 213².</p>
+
+<div class="caixa" id="algoritmo-gcd">
+  <span class="rotulo">A prova é um algoritmo (conjectura C2, confirmada)</span>
+  <p>A ida do Teorema 16 parece pura existência — mas cada passo dela computa. Quem quiser os dois
+  quadrados de p ≡ 1 (mod 4) pode segui-la literalmente:</p>
+  <p class="formula">m = ((p − 1)/2)! mod p, &nbsp;depois&nbsp; π = mdc(m + i, p) em ℤ[i] &nbsp;⟹&nbsp; N(π) = p.</p>
+  <p style="margin:0"><strong>Por que funciona:</strong> p = π·σ com N(π) = N(σ) = p (ida do
+  Teorema 16); aplicando a conjugação, p = p̄ = π̄·σ̄, e N(σ) = p primo força σ primo gaussiano
+  (Teorema 17 (a), a seguir); de π | (m+i)(m−i) segue que π divide m + i ou m − i (Elo 3) — trocando
+  π por σ̄ se necessário (ambos têm norma p), pode-se supor π | m + i. Então π é divisor comum de
+  m + i e p. E o mdc não pode ser maior (p ∤ m + i) nem menor (se fosse unidade, Bézout daria
+  1 = x(m+i) + yp, e multiplicando pelo conjugado… o caminho curto: qualquer divisor comum tem norma
+  dividindo N(p) = p² e dividindo N(m+i) = m² + 1, cujo mdc inteiro com p² é p, pois p | m² + 1 e
+  p² ∤ m² + 1 quando m &lt; p — verificação: m² + 1 &lt; p² para m ≤ p − 1… m = p−1 daria
+  m² + 1 = p² − 2p + 2 &lt; p²). Logo mdc(m + i, p) tem norma exatamente p, e suas coordenadas são os
+  dois quadrados. O oráculo roda o algoritmo completo em amostra de primos (I9): a norma do mdc é p,
+  sempre — a conjectura C2 do pré-registro sobreviveu ao seu juiz. Exemplos: p = 5: m = 2,
+  mdc(2 + i, 5) = 2 + i, N = 5 ✓; p = 4001: m² ≡ −1 e o mdc tem norma 4001 = 40² + 49² ✓.</p>
+</div>
+
+<h3 id="primos-gaussianos">9.7 Quem é primo no reticulado</h3>
+<div class="caixa">
+  <span class="rotulo">Teorema 17 (classificação dos primos gaussianos)</span>
+  <p style="margin:0">(a) Se N(z) é um primo racional, z é primo gaussiano. (b) 1 + i é primo
+  (N = 2). (c) Um primo racional p ≡ 3 (mod 4) continua primo em ℤ[i]. (d) Um primo racional
+  p ≡ 1 (mod 4) deixa de ser primo: p = π·π̄ com N(π) = p, e π, π̄ são primos gaussianos.
+  (e) <em>(conjectura C4, confirmada)</em> Fora dos eixos (a ≠ 0 e b ≠ 0), a + bi é primo gaussiano
+  ⟺ a² + b² é primo racional.</p>
+</div>
+<div class="prova">
+  <p><strong>(a)</strong> Se z = αβ, então N(α)·N(β) = N(z) primo: um dos fatores tem norma 1 e é
+  unidade (Teorema 12). Divisor próprio não existe. <strong>(b)</strong> caso particular de (a).</p>
+  <p><strong>(c)</strong> Se p = αβ com α, β não unidades, então N(α) = p (partição de p² como no
+  Teorema 16), isto é, a² + b² = p — impossível para p ≡ 3 (mod 4) (volta do Teorema 16). Logo toda
+  fatoração de p é trivial. <strong>(d)</strong> é a ida do Teorema 16 com σ = p/π; de
+  N(π) = N(σ) = p e (a), ambos primos; e σ = π̄ a menos de unidade porque π·π̄ = N(π) = p = π·σ e
+  π ≠ 0 cancela (corpo ℂ).</p>
+  <p><strong>(e)</strong> (⟸) é (a). (⟹) Seja z = a + bi primo gaussiano, fora dos eixos. z divide
+  N(z) = z·z̄, e N(z) = q₁·q₂·…·q<sub>t</sub> é produto de primos racionais (fatoração em ℤ —
+  Capítulo 2 puxou o TFA). Pelo lema de Euclides em ℤ[i] iterado, z | q para algum primo racional q.
+  Então N(z) | N(q) = q², logo N(z) ∈ {q, q²}. Se N(z) = q², então de z | q e N(q/z)… — direto:
+  q = z·γ com N(γ) = q²/q² = 1, γ unidade, e z seria associado de q: z ∈ {±q, ±qi}, todos
+  <em>nos eixos</em> — contradição. Resta N(z) = q, primo racional.<span class="qed">∎</span></p>
+</div>
+
+<div class="caixa porta" id="porta-reaberta">
+  <span class="rotulo">Porta reaberta — a do Capítulo 2, pelo lado de dentro</span>
+  <p style="margin:0">O Capítulo 2 deixou trancado: <em>“quais primos são soma de dois quadrados? A
+  resposta e a razão dela exigem aritmética em ℤ[i] — porta reaberta no Capítulo 7.”</em> Está
+  reaberta. As testemunhas que esperavam julgamento — as hipotenusas primas 5, 13, 41, 61, 113 da
+  família do ímpar — estão julgadas: todas ≡ 1 (mod 4), logo todas soma de dois quadrados
+  (5 = 1² + 2², 13 = 2² + 3², 41 = 4² + 5², 61 = 5² + 6², 113 = 7² + 8²), e a congruência
+  R ≡ 1 (mod 4) que lá era só necessidade é agora <strong>caracterização</strong>: um primo ímpar é
+  hipotenusa de terna primitiva ⟺ é soma de dois quadrados ⟺ ≡ 1 (mod 4) (a primeira equivalência é
+  a leitura euclidiana R = u² + v² do Cap. 2 mais o Teorema 16; o exercício E3.2 percorre os
+  detalhes). A dependência está registrada no ledger com <code>door: true</code>: o Capítulo 2 ainda
+  aguarda tag, e o grafo de claims declara a travessia em vez de escondê-la.</p>
+</div>
+
+<h3 id="experimento-reticulado">9.8 O reticulado, aceso</h3>
+<p>O mapa abaixo desenha ℤ[i] com os primos gaussianos acesos (critério do Teorema 17, verificado
+contra busca bruta de divisores pelo oráculo — I10). O verificador de dois quadrados percorre os
+primos racionais: escolha p e a máquina ou exibe a decomposição p = a² + b² — acendendo os oito
+pontos ±a ± bi, ±b ± ai no reticulado — ou declara o escuro provado (p ≡ 3 mod 4: nenhum ponto do
+reticulado com norma p, pela volta do Teorema 16).</p>
+
+<div class="painel">
+  <div class="canvases">
+    <figure style="margin:0">
+      <canvas id="cv-lattice" width="440" height="440"
+        aria-label="Reticulado dos inteiros gaussianos de menos doze a doze em cada coordenada. Pontos pequenos marcam todos os inteiros gaussianos; quadrados preenchidos marcam os primos gaussianos, formando um padrão com simetria de rotação de noventa graus. Quando o primo racional escolhido é soma de dois quadrados, os oito pontos correspondentes recebem anéis de destaque; para primos congruentes a três módulo quatro nenhum ponto se acende, e a linha de leitura explica por quê. A tabela adiante lista os primos menores que cem com suas decomposições."></canvas>
+      <figcaption>Os primos gaussianos até |a|, |b| ≤ 12. A simetria por quartos de volta é o
+      Teorema 12 em figura: unidades preservam primalidade.</figcaption>
+    </figure>
+  </div>
+  <div class="legenda-cores">
+    <span class="sw" style="background:#8a3318"></span>primo gaussiano ·
+    <span class="sw" style="background:#c9bda3"></span>inteiro gaussiano comum ·
+    <span class="sw" style="background:#1c5e3c"></span>decomposição de p em destaque
+  </div>
+  <div class="controles">
+    <label for="p-idx">primo racional p:
+      <input type="range" id="p-idx" min="0" max="45" step="1" value="5" aria-describedby="lat-desc">
+      <span id="p-idx-val">13</span></label>
+    <button id="btn-next-prime" type="button">Próximo primo</button>
+  </div>
+  <span id="lat-desc" class="visually-hidden">Percorre os primos racionais de dois a cento e noventa e nove; a leitura anuncia a classe módulo quatro e a decomposição em dois quadrados quando ela existe.</span>
+  <p class="leitura" id="leitura-lattice" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-lattice">
+  <caption>Os primos racionais p &lt; 100, julgados: classe módulo 4, decomposição a² + b² quando
+  existe (com a &lt; b; a unicidade é a conjectura C1, provada no exercício E3.1), e destino em ℤ[i]
+  (Teorema 17). A linha destacada é o p atual do verificador.</caption>
+  <thead>
+    <tr><th scope="col">p</th><th scope="col">p mod 4</th><th scope="col">a² + b²</th>
+    <th scope="col">destino em ℤ[i]</th></tr>
+  </thead>
+  <tbody id="tabela-lattice-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">O escuro de um p ≡ 3 (mod 4) na tela é busca finita; o escuro <em>provado</em> é
+  a volta do Teorema 16 — vale para o primo 3 e para um primo de mil dígitos igualmente. E os primos
+  acesos do mapa usam o critério do Teorema 17; a honestidade do desenho vem do oráculo, que comparou
+  o critério com busca bruta de divisores em todo o quadrado |a|, |b| ≤ 14 (I10) — o desenho aplica
+  um teorema, não o demonstra.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="camadas">10. As três camadas: i não é imaginário</h2>
+<p><strong>Objeto:</strong> o corpo ℂ — pares ordenados de reais com as duas operações da seção 3.
+Nada nele é fantasmagórico: (0, 1) é um ponto do plano tão concreto quanto (1, 0), e i² = −1 é um
+teorema de aritmética de pares, não um ato de fé. <strong>Representação:</strong> “a + bi” é uma
+notação para o par (a, b); “r(cos θ + i sen θ)” é outra, boa para multiplicar; o vetor desenhado é uma
+terceira. O nome “imaginário” é um fóssil de representação: Bombelli operava essas quantidades em 1572
+(“più di meno”), Descartes as batizou <em>imaginaires</em> como quem desconfia, e o nome pegou antes
+de Wessel, Argand e Gauss desenharem o plano (1797–1831) e dissolverem o mistério — a régua do manual
+(§2.1) diz que confundir o batismo com o objeto é erro de camada. Quem chama i de “impossível” está
+descrevendo a reta, não o i. <strong>Observação:</strong> os pixels e os floats. Neste capítulo a
+camada de observação quase mente duas vezes, e as duas estão registradas: o erro |z<sub>k</sub>ⁿ − w|
+do explorador nunca é zero em float (as raízes exatas existem — Teorema 9 — mas cos e sen de máquina
+são aproximações); e o Arg de máquina, colado no corte, decide o lado por arredondamento — o oráculo
+registra pares a distância 10⁻¹⁵ do semieixo negativo em que a soma dos argumentos “erra” por 2π
+inteiros (caso adversarial A4 em <code>audit/edge-cases.md</code>). A lei dos conjuntos
+(arg como conjunto) não erra; o representante de máquina, sim — camadas.</p>
+<!-- ============================================================ -->
+<h2 id="exercicios">11. Exercícios</h2>
+<p>Cinco níveis, do socrático ao impossível-por-enquanto (E20 do manual). Regra de uso: tente antes de
+abrir o gabarito — mas <em>abra sempre</em>, mesmo quando acertar; o gabarito é a segunda metade do
+exercício. Os N4 não têm solução aqui — têm a razão exata pela qual ainda não têm, e o endereço onde
+terão.</p>
+
+<h3>Nível 0 — Socráticos</h3>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.1</span>
+  <p>“√4 = ±2” — a frase está certa ou errada? E o que exatamente você está chamando de √ ao
+  respondê-la?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Como se escreve nas escolas, está errada — e o erro é instrutivo. Em ℝ, o símbolo √ é definido
+    como <em>a raiz não negativa</em>: √4 = 2, ponto. A equação x² = 4, essa sim, tem duas soluções,
+    x = 2 e x = −2. A frase “√4 = ±2” confunde a <strong>função</strong> (que devolve um valor, por
+    convenção declarada) com a <strong>equação</strong> (que tem um conjunto de soluções). São camadas
+    diferentes: a convenção é uma escolha de representante; o conjunto é o objeto.</p>
+    <p>O capítulo inteiro mora nessa distinção. Em ℂ, a equação zⁿ = w tem n soluções (Teorema 9) e
+    <em>não existe</em> convenção natural única — o semieixo positivo, que em ℝ oferecia um
+    representante canônico, não tem análogo que funcione para todo w sem pagar o corte da seção 7.
+    Quem escreve ⁿ√w em ℂ precisa dizer qual raiz quis — ou aceitar que escreveu um conjunto.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.2</span>
+  <p>i é “imaginário”: existe menos que √2? Responda usando a definição da seção 3 — e diga o que o
+  par (0, 1) tem de diferente do par (√2, 0).</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Nada de existência falta a i. Pela construção, i <em>é</em> o par ordenado (0, 1) — um ponto do
+    plano, tão bem definido quanto (√2, 0), que é como √2 mora em ℂ. As operações sobre pares foram
+    definidas sem nenhum passo de fé; i² = −1 é uma conta: (0,1)·(0,1) = (0·0 − 1·1, 0·1 + 1·0) =
+    (−1, 0). Se √2 existe (e o Capítulo 1 construiu a reta completa onde ele mora), então o par
+    (0, 1) existe pelo mesmo direito.</p>
+    <p>A diferença real entre os dois pares é <em>posicional</em>: (√2, 0) está na cópia de ℝ dentro
+    de ℂ (o eixo real), e (0, 1) está fora dela. “Imaginário” registra o susto histórico de sair do
+    eixo, não uma deficiência do objeto. O nome sobreviveu ao susto — os nomes fazem isso; a seção 10
+    chama esse fóssil pelo nome de camada: é um acidente de <em>representação</em>, e o objeto não
+    tem culpa do batismo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.3</span>
+  <p>Sem fazer conta com pares: por que i⁴ = 1 <em>tem</em> que valer, se i é o quarto de volta? E que
+  fato geométrico é i² = −1?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Multiplicar por i gira o plano um quarto de volta (Teorema 4 com θ = 90°; era a exigência (M2)
+    da construção, agora teorema). Quatro quartos de volta são uma volta completa — a identidade do
+    plano. Logo multiplicar por i⁴ é não fazer nada, e o único número que multiplica sem mexer é 1:
+    i⁴ = 1. Sem álgebra: a conclusão sai da geometria do círculo.</p>
+    <p>E i² = −1 é a frase “dois quartos de volta são meia-volta”: meia-volta é levar cada ponto ao
+    seu oposto, que é exatamente multiplicar por −1. A cadeia completa i, i² = −1, i³ = −i, i⁴ = 1
+    é o relógio de quatro horas das unidades de ℤ[i] (Teorema 12) — a primeira estrutura cíclica que
+    o capítulo encontra, e não será a última: as n raízes de 1 do Teorema 9 são o relógio de n horas.</p>
+  </details>
+</div>
+
+<h3>Nível 1 — Básicos, com as mãos no plano</h3>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.1</span>
+  <p>Calcule (2 + i)(1 + 3i) pela regra da seção 3. Depois confira o Teorema 6 nos números: normas
+  (5, 10 e o produto) e ângulos (some 26,57° + 71,57° e compare com o ângulo do produto).</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Regra: (ac − bd, ad + bc) com (a,b) = (2,1), (c,d) = (1,3): parte real 2·1 − 1·3 = −1; parte
+    imaginária 2·3 + 1·1 = 7. Produto: <strong>−1 + 7i</strong>. Normas: N(2+i) = 4 + 1 = 5;
+    N(1+3i) = 1 + 9 = 10; N(−1+7i) = 1 + 49 = 50 = 5·10 ✓ — a identidade dos dois quadrados
+    (Teorema 2) fechando exata, em inteiros, sem nenhum seno.</p>
+    <p>Ângulos: 2 + i aponta para 26,57° (tg = 1/2); 1 + 3i para 71,57° (tg = 3); soma 98,13°. O
+    produto −1 + 7i está no segundo quadrante com tg = 7/(−1): ângulo 180° − 81,87° = 98,13° ✓. Os
+    dois lados do Teorema 6 conferidos com quatro contas de escola. Note o bônus: 50 = 5·10 é a
+    identidade de Brahmagupta fabricando 50 = 1² + 7² a partir de 5 = 1² + 2² e 10 = 1² + 3² — a
+    porta do Capítulo 2 rangendo dentro de um exercício N1.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.2</span>
+  <p>Encontre as duas raízes quadradas de i pela forma polar, e confira uma delas elevando ao
+  quadrado.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>i tem módulo 1 e argumento 90°. Teorema 9 com n = 2, s = 1, φ = 90°: módulo das raízes
+    1^(1/2) = 1; ângulos (90° + 360°k)/2 para k = 0, 1: <strong>45° e 225°</strong>. As raízes:
+    z₀ = cos 45° + i·sen 45° = (√2/2)(1 + i) e z₁ = −z₀ (225° é 45° + meia-volta). Duas raízes,
+    antípodas — o “polígono” de n = 2.</p>
+    <p>Conferência de z₀: ((√2/2)(1+i))² = (2/4)·(1+i)² = (1/2)·(1 + 2i + i²) = (1/2)·(2i) = i ✓.
+    Repare no que <em>não</em> aconteceu: nenhuma das duas raízes é “a” √i — nada as distingue
+    estruturalmente (a “principal” é escolha de ramo, seção 7). E note o gosto do resultado: a raiz
+    do quarto de volta é o oitavo de volta — extrair raiz quadrada divide o ângulo por 2, como o
+    Teorema 9 manda.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.3</span>
+  <p>Desenhe as três raízes cúbicas de 8 e verifique que formam um triângulo equilátero: calcule o
+  lado.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>8 tem módulo 8 e argumento 0°. Raízes cúbicas: módulo 8^(1/3) = 2, ângulos 0°, 120°, 240°:
+    z₀ = 2; z₁ = 2(cos 120° + i sen 120°) = −1 + √3·i; z₂ = −1 − √3·i. Só uma é real — a que a
+    convenção escolar chama ∛8 e apresenta como única; as outras duas ficavam invisíveis da reta.</p>
+    <p>O lado: |z₀ − z₁| = |2 − (−1 + √3 i)| = |3 − √3 i| = √(9 + 3) = √12 = <strong>2√3 ≈
+    3,464</strong>. Por simetria (os três arcos são iguais — 120° cada), os outros dois lados medem o
+    mesmo: equilátero, inscrito no círculo de raio 2, com um vértice em 2. Conferência independente
+    pela corda: lado = 2·r·sen(60°) = 2·2·(√3/2) = 2√3 ✓ — a trigonometria da seção 2 e o Teorema 9
+    contando a mesma história. (Atenção de instrumento: o explorador da seção 6.4 limita |w| a 4,
+    então 8 não cabe no controle — o desenho fiel deste exercício se faz no papel, e é bom que se
+    faça; no explorador, o análogo visível é |w| = 1, n = 3: o triângulo equilátero das raízes
+    cúbicas da unidade, de lado √3.)</p>
+  </details>
+</div>
+
+<h3>Nível 2 — Intermediários</h3>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.1</span>
+  <p>Prove que a conjugação respeita as operações: o conjugado de z + w é z̄ + w̄ e o conjugado de
+  z·w é z̄·w̄. Deduza de novo, agora em uma linha, que N(zw) = N(z)N(w).</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Soma: com z = a + bi, w = c + di, z + w = (a+c) + (b+d)i, cujo conjugado é (a+c) − (b+d)i =
+    (a − bi) + (c − di) = z̄ + w̄. Produto: zw = (ac − bd) + (ad + bc)i, cujo conjugado é
+    (ac − bd) − (ad + bc)i. Por outro lado, z̄·w̄ = (a − bi)(c − di) = (ac − (−b)(−d)) +
+    (a(−d) + (−b)c)i = (ac − bd) − (ad + bc)i. Iguais ✓. (Geometricamente: conjugar é espelhar no
+    eixo real, e espelhar antes ou depois de girar-escalar dá no mesmo desde que o giro também se
+    espelhe — é isso que as contas dizem.)</p>
+    <p>A linha prometida: N(zw) = (zw)·conj(zw) = z·w·z̄·w̄ = (z z̄)(w w̄) = N(z)·N(w) — usando a
+    multiplicatividade da conjugação recém-provada e a comutatividade do corpo. A identidade de
+    Brahmagupta (Teorema 2), que na rota braçal custa oito termos e um cancelamento, aqui custa uma
+    troca de ordem. Estrutura barateia conta — é o argumento de venda da álgebra, e este exercício é
+    o recibo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.2</span>
+  <p>Execute o algoritmo da divisão (Teorema 13) para z = 7 + 2i e d = 2 + i: encontre q e r, e
+  verifique N(r) &lt; N(d). Depois experimente d = 1 + i e z = 5: o que o resto diz sobre a paridade
+  gaussiana?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Primeira divisão: z/d = (7 + 2i)(2 − i)/N(2+i) = (14 − 7i + 4i − 2i²)/5 = (16 − 3i)/5 =
+    3,2 − 0,6i. Arredondando cada coordenada: q = 3 − i. Resto: r = z − qd = (7 + 2i) − (3 − i)(2 + i)
+    = (7 + 2i) − (6 + 3i − 2i − i²) = (7 + 2i) − (7 + i) = i. N(r) = 1 &lt; 5 = N(d) ✓ — e o resto
+    ficou até abaixo da cota N(d)/2 = 2,5 do teorema.</p>
+    <p>Segunda: 5/(1 + i) = 5(1 − i)/2 = 2,5 − 2,5i — empate duplo no arredondamento! Qualquer
+    vizinho serve (o teorema avisou); tome q = 2 − 2i: r = 5 − (2 − 2i)(1 + i) = 5 − (2 + 2i − 2i −
+    2i²) = 5 − 4 = 1, com N(1) = 1 &lt; 2 ✓ (q = 3 − 3i daria r = 5 − (3 − 3i)(1+i) = 5 − 6 = −1,
+    igualmente válido). O resto não nulo diz: 1 + i <em>não divide</em> 5 — assim como “resto 1 na
+    divisão por 2” diz que 5 é ímpar em ℤ. De fato 1 + i é o análogo gaussiano do 2 (é o primo de
+    norma 2, Teorema 17b), e “ser divisível por 1 + i” é a paridade de ℤ[i]: a + bi é “par” ⟺ a + b
+    é par — confira: (1+i) | (a+bi) ⟺ 2 | N? não… ⟺ (a+bi)(1−i)/2 ∈ ℤ[i] ⟺ (a+b) + (b−a)i tem
+    coordenadas pares ⟺ a + b par (pois a + b e b − a têm a mesma paridade). 5 tem 5 + 0 ímpar:
+    “ímpar gaussiano”, como o resto anunciou.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.3</span>
+  <p>Fatore 2, 5 e 13 em primos gaussianos, e verifique cada fator pelo critério da norma
+  (Teorema 17a). Em particular, mostre que 2 = −i·(1 + i)² — por que o 2 é o primo “esquisito” de
+  ℤ[i]?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>5 = (2 + i)(2 − i): expandindo, 4 − 2i + 2i − i² = 5 ✓; cada fator tem norma 5, primo racional
+    ⟹ primo gaussiano (Teorema 17a). 13 = (3 + 2i)(3 − 2i) = 9 + 4 = 13 ✓, fatores de norma 13,
+    primos. São os casos p ≡ 1 (mod 4) do Teorema 17d: o primo racional se parte em um par conjugado,
+    e as partes (2, 1) e (3, 2) são exatamente os pares (a, b) do Teorema 16 — fatorar em ℤ[i]
+    <em>é</em> decompor em dois quadrados.</p>
+    <p>O 2: (1 + i)² = 1 + 2i + i² = 2i, logo −i·(1 + i)² = −i·2i = −2i² = 2 ✓. Diferente de 5 e 13,
+    o 2 não se parte em dois primos <em>distintos</em>: seus dois fatores são associados
+    (1 − i = −i·(1 + i)), e ele é unidade vezes um <em>quadrado</em> de primo — o análogo gaussiano
+    de um primo que “ramifica”. Por isso o 2 fica fora da dicotomia mod 4 do Teorema 16 e se resolve
+    à mão (2 = 1² + 1², com a = b — o único primo cuja decomposição repete quadrado; a unicidade de
+    E3.1 vale com a ≤ b). Os três destinos — partir (p ≡ 1), permanecer (p ≡ 3), ramificar (p = 2) —
+    são a coluna “destino” da tabela do experimento 9.8.</p>
+  </details>
+</div>
+
+<h3>Nível 3 — Difíceis</h3>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.1</span>
+  <p>Prove a conjectura C1 do pré-registro: um primo p = a² + b² (com 0 &lt; a ≤ b) admite
+  <strong>uma única</strong> decomposição em dois quadrados. Ferramentas permitidas: a identidade de
+  Brahmagupta nas suas duas formas e o lema de Euclides em ℤ.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Antes de tudo, gcd(a, b) = 1: um divisor comum d teria d² | a² + b² = p, e p primo só admite
+    d = 1. Suponha agora duas decomposições: p = a² + b² = c² + d², ambas com a ≤ b, c ≤ d,
+    todos positivos, gcd(a,b) = gcd(c,d) = 1.</p>
+    <p><strong>Passo 1 — p divide um dos produtos cruzados.</strong>
+    (ac + bd)(ac − bd) = a²c² − b²d² = a²c² + a²d² − a²d² − b²d² = a²(c² + d²) − d²(a² + b²) =
+    a²p − d²p = p(a² − d²). Logo p | (ac + bd)(ac − bd), e p primo divide um dos fatores (lema de
+    Euclides em ℤ — o Elo 3 da seção 9.3, uma dimensão abaixo).</p>
+    <p><strong>Passo 2 — as duas formas de Brahmagupta.</strong> Multiplicando as decomposições:
+    p² = (a² + b²)(c² + d²) = (ac + bd)² + (ad − bc)² = (ac − bd)² + (ad + bc)² — a mesma identidade,
+    com os dois emparelhamentos de sinais (Teorema 2 aplicado a z·w e a z·w̄).</p>
+    <p><strong>Passo 3 — caso p | ac − bd.</strong> Da segunda forma, (ad + bc)² = p² − (ac − bd)²;
+    como p² | (ac − bd)² neste caso, p² divide (ad + bc)², logo p | ad + bc. Dividindo a segunda
+    forma por p²: ((ac − bd)/p)² + ((ad + bc)/p)² = 1 em inteiros — um dos quadrados é 0. Como
+    ad + bc &gt; 0, resta ac − bd = 0, isto é, ac = bd. Então a | bd; com gcd(a, b) = 1, a | d;
+    escreva d = a·e — de ac = bd vem c = b·e; mas gcd(c, d) = 1 força e = 1: <strong>c = b e
+    d = a</strong>. Com as ordenações a ≤ b e c ≤ d, isso dá {a, b} = {c, d} com os papéis trocados —
+    a ≤ b e c = b ≥ d = a: mesma decomposição escrita ao contrário; as ordenações então coincidem.</p>
+    <p><strong>Passo 4 — caso p | ac + bd.</strong> Simétrico com a primeira forma: p | ad − bc… — da
+    primeira forma, (ad − bc)² = p² − (ac + bd)², e p² | (ac + bd)² dá p | ad − bc; dividindo por p²,
+    ((ac + bd)/p)² + ((ad − bc)/p)² = 1, e como ac + bd &gt; 0 o valor é ac + bd = p com ad = bc;
+    então a | bc, gcd(a,b) = 1 ⟹ a | c, c = a·f, d = b·f, gcd(c,d) = 1 ⟹ f = 1: <strong>c = a,
+    d = b</strong> — a mesma decomposição, na mesma ordem. ∎</p>
+    <p>Nos dois casos, {a, b} = {c, d}: a decomposição é única. O oráculo confirma em domínio
+    exaustivo (I8: todos os p &lt; 50000 têm exatamente uma decomposição com a ≤ b) — e confirma o
+    contraste do pré-registro: 65 = 1² + 8² = 4² + 7² tem duas, porque 65 = 5·13 não é primo e as
+    duas ordens de Brahmagupta fabricam decomposições diferentes. A unicidade é privilégio de primo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.2</span>
+  <p>Feche o ciclo do Capítulo 2: prove que um primo ímpar p é hipotenusa de alguma terna pitagórica
+  primitiva se e somente se p ≡ 1 (mod 4). (Use a parametrização de Euclides citada no Cap. 2 e o
+  Teorema 16.)</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><strong>(⟸)</strong> Seja p ≡ 1 (mod 4). Pelo Teorema 16, p = a² + b² com a &lt; b (a = b é
+    impossível: 2a² = p ímpar). Tome u = b, v = a: u &gt; v ≥ 1; gcd(u, v) = 1 (E3.1, passo zero); e
+    u, v têm paridades opostas (se ambas ímpares, a² + b² ≡ 2 mod 4 ≠ 1; se ambas pares, gcd ≥ 2).
+    O par (u, v) é legítimo para Euclides, e a terna (u² − v², 2uv, u² + v²) é primitiva com
+    hipotenusa u² + v² = p ✓.</p>
+    <p><strong>(⟹)</strong> Se p é hipotenusa primitiva, a parametrização de Euclides (material
+    clássico citado no Cap. 2, lema de X.28–29) escreve p = u² + v²: p é soma de dois quadrados, e
+    pela volta do Teorema 16, p ≢ 3 (mod 4); sendo ímpar, p ≡ 1 (mod 4) ✓. (Alternativa sem citar a
+    volta: o lema modular do Cap. 2 — quadrados mod 4 ∈ {0, 1} — dá o mesmo em uma linha; é
+    literalmente a mesma conta.)</p>
+    <p>O que este exercício fecha: no Capítulo 2, as hipotenusas R = 5, 13, 25, 41, … da família do
+    ímpar eram soma de dois quadrados <em>por construção</em> (R = u² + v²), e a congruência
+    R ≡ 1 (mod 4) era necessidade sem volta. Agora a caracterização é completa e vale para todo primo:
+    ser ≡ 1 (mod 4), ser soma de dois quadrados e ser hipotenusa primitiva são o mesmo destino
+    aritmético, visto de três alturas — congruência, norma, geometria. A porta não só abriu: virou
+    corredor.</p>
+  </details>
+</div>
+
+<h3>Nível 4 — Impossíveis por enquanto</h3>
+<p>Sem gabarito — de propósito. Cada enunciado é honesto; o que segue em cada caixa é a razão exata da
+impossibilidade atual e o endereço onde ela cai.</p>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.1</span>
+  <!-- door-exp:start -->
+  <div data-door-exp="true">
+  <p>Prove a identidade e<sup>iπ</sup> + 1 = 0.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Repare que o enunciado inteiro mora dentro de uma caixa de porta fechada — é a única outra
+    aparição da notação proibida neste capítulo, e é proibida exatamente porque <em>nenhum dos seus
+    símbolos centrais existe ainda no tratado</em>. Este capítulo construiu i, π chegou pelo
+    Capítulo 1, 0 e 1 são os neutros do corpo — mas “e” elevado a expoente <em>complexo</em> não é
+    uma operação que alguém tenha definido: elevar a expoente inteiro é multiplicar repetido; a
+    expoente racional, é o Teorema 9 escolhendo raiz; a expoente <em>imaginário</em> não é nada, até
+    que a exponencial seja reconstruída por séries de potências (Cap. 10) e a igualdade
+    e<sup>iθ</sup> = cos θ + i·sen θ seja demonstrada — aí a identidade vira a avaliação θ = π do
+    operador de rotação deste capítulo: meia-volta aplicada ao 1, caindo em −1. O Capítulo 12 existe
+    para percorrer essa cadeia símbolo a símbolo. O que este capítulo já entregou dela: o i, a
+    rotação, e a meia-volta como multiplicação por −1 — a geometria inteira da identidade, à espera
+    da análise.</p>
+  </details>
+  </div>
+  <!-- door-exp:end -->
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.2</span>
+  <p>O fosso gaussiano: partindo de 1 + i e pisando só em primos gaussianos, com passos de comprimento
+  no máximo k, dá para caminhar até o infinito? Existe um k que baste?</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Este é um <strong>problema aberto</strong> — não deste tratado: da matemática. (Formulado por
+    Basil Gordon em 1962, popularizado como “Gaussian moat problem”.) O que se sabe é negativo e
+    computacional: para passos pequenos (até √26, cômputos dos anos 2000) a caminhada morre num
+    “fosso” sem primos; ninguém provou que <em>todo</em> k acaba num fosso, nem exibiu um k que
+    atravesse. Compare com o eixo real: lá a resposta é conhecida — há lacunas arbitrariamente longas
+    entre primos consecutivos (n! + 2, …, n! + n é um deserto de comprimento n − 1), logo nenhum
+    passo limitado atravessa. No plano há <em>mais espaço para desviar</em>, e é exatamente essa
+    liberdade bidimensional que ninguém sabe domar: as ferramentas deste capítulo classificam quem é
+    primo gaussiano (Teorema 17), mas dizer onde eles <em>rareiam</em> exige teoria analítica da
+    densidade de primos — território explicitamente fora do primeiro ciclo (§11 do manual), e em
+    parte fora do estado da arte. Fica como o primeiro enunciado do tratado cuja porta não tem data:
+    é honesto registrar que existem perguntas assim a três teoremas da escola.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.3</span>
+  <p>Prove o teorema fundamental da álgebra: todo polinômio não constante com coeficientes em ℂ tem
+  ao menos uma raiz em ℂ.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>O Teorema 9 é o caso zⁿ − w deste enunciado — e a distância entre os dois é um oceano. Para
+    zⁿ = w, a forma polar resolveu <em>explicitamente</em>: raízes construídas, contadas, desenhadas.
+    Para um polinômio geral, não há fórmula polar; toda prova conhecida usa uma ferramenta de
+    <em>análise</em> ou <em>topologia</em> que o tratado ainda não construiu: ou o mínimo de |P(z)|
+    num disco compacto existe e é atingido (compacidade + continuidade — o aparato ε-δ do Cap. 6
+    esticado a duas dimensões), ou séries de potências e o crescimento da exponencial (Cap. 10), ou
+    o argumento de enlaçamento — a curva P(círculo grande) dá n voltas em torno de 0 e a curva
+    P(círculo minúsculo) dá zero, e algo entre elas precisa cruzar a origem: contar voltas é
+    exatamente a multivalência do argumento da seção 7 tornada <em>contínua ao longo de caminhos</em>,
+    que é a teoria que a escolha de ramo deste capítulo adiou (recobrimentos — segundo ciclo, §11).
+    Endereço: reaberta quando o Cap. 10 entregar séries e o aparato de convergência — ou no segundo
+    ciclo, pela rota topológica. Até lá, o tratado sabe extrair todas as raízes de zⁿ − w e nenhuma
+    de z⁵ + z + 1.</p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="horizonte">12. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> o operador cos θ + i·sen θ transforma soma de ângulos em
+  produto — a assinatura funcional de uma exponencial. <em>Que função é essa?</em> O capítulo provou
+  tudo o que ela faz e nada do que ela é; a resposta exige séries de potências e é o núcleo do
+  Cap. 10.</li>
+  <li><strong>Porta fechada → Cap. 10/12:</strong> a notação exponencial da caixa da seção 8 e o
+  logaritmo complexo formal; a identidade de Euler como consequência, não ícone (E4.1).</li>
+  <li><strong>Porta reaberta ← Cap. 2:</strong> soma de dois quadrados — cumprida (Teorema 16;
+  caracterização das hipotenusas em E3.2).</li>
+  <li><strong>Herança imediata:</strong> rotação e fase ficam disponíveis para a ponte musical do
+  Cap. 5 (produção) e para Fourier (Cap. 11); ℤ[i] é o primeiro anel do tratado onde a fatoração
+  precisou ser <em>reconstruída</em> — o molde para levar a sério “primo” fora de ℤ.</li>
+  <li><strong>Fora deste ciclo:</strong> superfícies de Riemann e recobrimentos (as folhas do
+  argumento como espaço); densidade de primos gaussianos (E4.2).</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: auditado sob gate v0, validado sob gate v1, aguardando integração e
+  veredito.</strong> Oráculo triplo executado em 28/07/2026 com artefatos em <code>audit/</code>:
+  derivação simbólica S1–S12 (<code>symbolic-check.md</code>); verificação numérica independente por
+  rotas duplas — pares exatos em Fraction × matrizes 2×2 para o corpo, De Moivre × potência iterada
+  para raízes, critério da norma × busca bruta para primos gaussianos, e domínio exaustivo p &lt;
+  50000 para dois quadrados (<code>numeric-check.json</code>); casos adversariais — w = 0 degenerado,
+  divisão por zero recusada, p = 2, invariância por unidades, pares colados no corte do ramo
+  (<code>edge-cases.md</code>). Auditoria de gate v0 completa por viewport: interação conferida
+  contra cômputo independente, teclado, overflow, canvases pintados (leitura de todos os pixels),
+  contenção da notação e-elevado-a-iθ verificada (zero ocorrências fora das caixas de porta),
+  screenshots desktop e iPhone inspecionados. Gate v1: <code>verify-claims.mjs</code> sem achados.</p>
+  <p><strong>Conjecturas do pré-registro.</strong> C1 (unicidade da decomposição) — confirmada,
+  provada em E3.1, testemunha exaustiva I8; C2 (o fatorial-testemunha fabrica a decomposição via mdc
+  gaussiano) — confirmada, provada na caixa 9.6, testemunha I9; C3 (soma das raízes é zero) —
+  confirmada, Teorema 10, testemunha I4; C4 (critério da norma fora dos eixos) — confirmada,
+  Teorema 17e, testemunha I10; C5 (defeito do ramo em {−2π, 0, 2π}) — confirmada, Teorema 11,
+  testemunha I5. Nenhuma autópsia foi necessária nesta rodada; o registro prospectivo permanece em
+  <code>conjecturas.md</code>.</p>
+  <p><strong>Pendências declaradas:</strong> fixação de edições de referência dos materiais clássicos
+  (Bombelli, Wessel/Argand/Gauss, Gauss <em>Disquisitiones</em>/ℤ[i], Fermat–Euler, Wilson–Lagrange)
+  em <code>sources.md</code>; decisão de tag pelo leitor primário via sessão-coordenadora; a
+  dependência <code>door: true</code> para o Cap. 2 deve ser revista (removido o marcador de porta)
+  quando o Cap. 2 receber tag; fatoração única completa de ℤ[i] enunciada como consequência
+  disponível, não desenvolvida (antienciclopedismo — os três elos bastaram).</p>
+  <p>MATH3us.md · Capítulo 7 · território virgem · release: nenhuma (pronto para veredito).</p>
+</footer>
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 7 — Complex numbers. Three laboratories.
+ *
+ * Layer discipline (manual §2.1):
+ *  - STATUS/TABLE values: float64 where geometry demands it (moduli,
+ *    angles), exact small-int arithmetic where possible (norms of the
+ *    lattice, two-squares search). The chapter text (section 10)
+ *    records where the observation layer can lie; the oracle carries
+ *    the exact/bounded verification.
+ *  - CANVAS drawing: DEVICE coordinates only (no giant ctx transforms)
+ *    — render lesson inherited from Chapter 1.
+ * ============================================================ */
+
+const $ = (id) => document.getElementById(id);
+const fmt = (x, d = 2) => x.toLocaleString("pt-BR",
+  { minimumFractionDigits: d, maximumFractionDigits: d });
+const DEG = 180 / Math.PI;
+
+/* ---------- shared drawing helpers (device coordinates) ---------- */
+function drawAxes(ctx, W, H, cx, cy, sc) {
+  ctx.strokeStyle = "#b9ab8a"; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, cy); ctx.lineTo(W, cy);
+  ctx.moveTo(cx, 0); ctx.lineTo(cx, H);
+  ctx.stroke();
+  // unit ticks
+  ctx.fillStyle = "#4c443a"; ctx.font = "10px Georgia, serif";
+  const step = sc < 18 ? 5 : 1;
+  for (let t = step; t * sc < Math.max(cx, W - cx); t += step) {
+    for (const s of [-1, 1]) {
+      ctx.beginPath(); ctx.moveTo(cx + s * t * sc, cy - 3); ctx.lineTo(cx + s * t * sc, cy + 3); ctx.stroke();
+    }
+  }
+}
+function drawVec(ctx, cx, cy, sc, re, im, color, label) {
+  const x = cx + re * sc, y = cy - im * sc;
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y); ctx.stroke();
+  // arrowhead
+  const ang = Math.atan2(cy - y, x - cx), ah = 7;
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x - ah * Math.cos(ang - 0.4), y + ah * Math.sin(ang - 0.4));
+  ctx.lineTo(x - ah * Math.cos(ang + 0.4), y + ah * Math.sin(ang + 0.4));
+  ctx.closePath(); ctx.fill();
+  ctx.font = "13px Georgia, serif";
+  ctx.fillText(label, x + 6, y - 6);
+}
+
+/* ================= laboratory A: multiplication ================= */
+const cvM = $("cv-mult"), ctxM = cvM.getContext("2d");
+function labState() {
+  const za = +$("za").value, zb = +$("zb").value;
+  const wa = +$("wa").value, wb = +$("wb").value;
+  const pa = za * wa - zb * wb, pb = za * wb + zb * wa;
+  return { za, zb, wa, wb, pa, pb };
+}
+function renderMult() {
+  const s = labState();
+  $("za-val").textContent = fmt(s.za, 1); $("zb-val").textContent = fmt(s.zb, 1);
+  $("wa-val").textContent = fmt(s.wa, 1); $("wb-val").textContent = fmt(s.wb, 1);
+  const W = cvM.width, H = cvM.height, cx = W / 2, cy = H / 2;
+  const maxC = Math.max(1.4, Math.abs(s.za), Math.abs(s.zb), Math.abs(s.wa),
+    Math.abs(s.wb), Math.abs(s.pa), Math.abs(s.pb));
+  const sc = Math.min(cx, cy) / (maxC * 1.12);
+  ctxM.clearRect(0, 0, W, H);
+  drawAxes(ctxM, W, H, cx, cy, sc);
+  ctxM.strokeStyle = "#c9bda3"; ctxM.lineWidth = 1;
+  ctxM.beginPath(); ctxM.arc(cx, cy, sc, 0, 2 * Math.PI); ctxM.stroke();
+  drawVec(ctxM, cx, cy, sc, s.za, s.zb, "#1c5e3c", "z");
+  drawVec(ctxM, cx, cy, sc, s.wa, s.wb, "#1e4a6e", "w");
+  drawVec(ctxM, cx, cy, sc, s.pa, s.pb, "#8a3318", "z·w");
+
+  const Nz = s.za * s.za + s.zb * s.zb, Nw = s.wa * s.wa + s.wb * s.wb;
+  const Np = s.pa * s.pa + s.pb * s.pb;
+  const az = Math.atan2(s.zb, s.za) * DEG, aw = Math.atan2(s.wb, s.wa) * DEG;
+  const ap = Math.atan2(s.pb, s.pa) * DEG;
+  let defect = az + aw - ap;                    // snap to −360/0/360
+  defect = Math.round(defect / 360) * 360;
+  const degenerate = Nz === 0 || Nw === 0;
+  $("leitura-mult").textContent = degenerate
+    ? "z = 0 ou w = 0: produto 0 — argumento indefinido (arg 0 não existe; seção 7). " +
+      "Módulos: |z|·|w| = 0 = |z·w|, o Teorema 6 vale no colapso."
+    : "z = " + fmt(s.za, 1) + " + " + fmt(s.zb, 1) + "i  |  w = " + fmt(s.wa, 1) +
+      " + " + fmt(s.wb, 1) + "i  |  z·w = " + fmt(s.pa, 2) + " + " + fmt(s.pb, 2) + "i  ||  " +
+      "|z|·|w| = " + fmt(Math.sqrt(Nz) * Math.sqrt(Nw), 4) + " ≟ |z·w| = " + fmt(Math.sqrt(Np), 4) +
+      "  ||  ângulos: " + fmt(az, 2) + "° + " + fmt(aw, 2) + "° = " + fmt(az + aw, 2) +
+      "° ≟ " + fmt(ap, 2) + "° (defeito de ramo: " + fmt(defect, 0) + "°)";
+
+  const tb = $("tabela-mult-corpo");
+  tb.innerHTML = "";
+  const rows = [["z", s.za, s.zb], ["w", s.wa, s.wb], ["z·w", s.pa, s.pb]];
+  for (const [name, re, im] of rows) {
+    const N = re * re + im * im;
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + name + "</td><td>" + fmt(re, 2) + "</td><td>" + fmt(im, 2) +
+      "</td><td>" + fmt(N, 2) + "</td><td>" + fmt(Math.sqrt(N), 4) + "</td><td>" +
+      (N === 0 ? "—" : fmt(Math.atan2(im, re) * DEG, 2)) + "</td>";
+    tb.appendChild(tr);
+  }
+  const trChk = document.createElement("tr");
+  trChk.innerHTML = "<td>N(z)·N(w)</td><td colspan=\"2\">≟ N(z·w)</td><td>" +
+    fmt(Nz * Nw, 2) + "</td><td colspan=\"2\">" + fmt(Np, 2) +
+    (Math.abs(Nz * Nw - Np) < 1e-9 ? " ✓" : " ✗") + "</td>";
+  tb.appendChild(trChk);
+}
+for (const id of ["za", "zb", "wa", "wb"])
+  $(id).addEventListener("input", renderMult);
+$("btn-quarter").addEventListener("click", () => {
+  $("wa").value = "0"; $("wb").value = "1"; renderMult();
+});
+$("btn-spin").addEventListener("click", () => {
+  // w <- i·w = (-Im w, Re w), clamped to slider range
+  const wa = +$("wa").value, wb = +$("wb").value;
+  $("wa").value = String(Math.max(-4, Math.min(4, -wb)));
+  $("wb").value = String(Math.max(-4, Math.min(4, wa)));
+  renderMult();
+});
+$("btn-mult-reset").addEventListener("click", () => {
+  $("za").value = "2"; $("zb").value = "1";
+  $("wa").value = "1"; $("wb").value = "3";
+  renderMult();
+});
+
+/* ================= laboratory B: n-th roots ================= */
+const cvR = $("cv-roots"), ctxR = cvR.getContext("2d");
+let rootK = 0;
+function rootsState() {
+  const s = +$("w-mod").value;
+  const phi = +$("w-arg").value;          // degrees
+  const n = +$("n-idx").value;
+  return { s, phi, n };
+}
+function computeRoots(s, phiDeg, n) {
+  const r = Math.pow(s, 1 / n);
+  const roots = [];
+  for (let k = 0; k < n; k++) {
+    const aDeg = (phiDeg + 360 * k) / n;
+    const a = aDeg / DEG;
+    const re = r * Math.cos(a), im = r * Math.sin(a);
+    // independent check: iterated multiplication (NOT de Moivre)
+    let xr = 1, xi = 0;
+    for (let j = 0; j < n; j++) {
+      const nr = xr * re - xi * im, ni = xr * im + xi * re;
+      xr = nr; xi = ni;
+    }
+    const wRe = s * Math.cos(phiDeg / DEG), wIm = s * Math.sin(phiDeg / DEG);
+    const err = Math.hypot(xr - wRe, xi - wIm);
+    roots.push({ k, aDeg, re, im, err });
+  }
+  return { r, roots };
+}
+function renderRoots() {
+  const { s, phi, n } = rootsState();
+  $("w-mod-val").textContent = fmt(s, 1);
+  $("w-arg-val").textContent = String(phi);
+  $("n-idx-val").textContent = String(n);
+  if (rootK >= n) rootK = 0;
+  const W = cvR.width, H = cvR.height, cx = W / 2, cy = H / 2;
+  ctxR.clearRect(0, 0, W, H);
+
+  if (s === 0) {
+    const sc = Math.min(cx, cy) / 1.4;
+    drawAxes(ctxR, W, H, cx, cy, sc);
+    ctxR.fillStyle = "#8a3318";
+    ctxR.beginPath(); ctxR.arc(cx, cy, 5, 0, 2 * Math.PI); ctxR.fill();
+    ctxR.font = "13px Georgia, serif";
+    ctxR.fillText("w = 0: raiz única z = 0 (degenerado)", cx - 120, cy - 14);
+    $("leitura-roots").textContent =
+      "w = 0: caso degenerado declarado — z^" + n + " = 0 tem uma única solução, z = 0 " +
+      "(|z|^" + n + " = 0 força |z| = 0). O polígono colapsa num ponto; o Teorema 9 exige w ≠ 0.";
+    $("tabela-roots-corpo").innerHTML =
+      "<tr><td>—</td><td>—</td><td>0</td><td>0</td><td>0</td></tr>";
+    return;
+  }
+
+  const { r, roots } = computeRoots(s, phi, n);
+  const wRe = s * Math.cos(phi / DEG), wIm = s * Math.sin(phi / DEG);
+  const maxC = Math.max(r, s, 0.8);
+  const sc = Math.min(cx, cy) / (maxC * 1.15);
+  drawAxes(ctxR, W, H, cx, cy, sc);
+  // circle of radius r
+  ctxR.strokeStyle = "#26221a"; ctxR.lineWidth = 1.4;
+  ctxR.beginPath(); ctxR.arc(cx, cy, r * sc, 0, 2 * Math.PI); ctxR.stroke();
+  // polygon
+  if (n >= 2) {
+    ctxR.strokeStyle = "#b9ab8a"; ctxR.lineWidth = 1.2;
+    ctxR.setLineDash([5, 4]);
+    ctxR.beginPath();
+    roots.forEach((z, idx) => {
+      const x = cx + z.re * sc, y = cy - z.im * sc;
+      idx === 0 ? ctxR.moveTo(x, y) : ctxR.lineTo(x, y);
+    });
+    ctxR.closePath(); ctxR.stroke();
+    ctxR.setLineDash([]);
+  }
+  // w marker
+  ctxR.fillStyle = "#1e4a6e";
+  ctxR.beginPath(); ctxR.arc(cx + wRe * sc, cy - wIm * sc, 4.5, 0, 2 * Math.PI); ctxR.fill();
+  ctxR.font = "13px Georgia, serif";
+  ctxR.fillText("w", cx + wRe * sc + 7, cy - wIm * sc - 5);
+  // roots
+  roots.forEach((z) => {
+    const x = cx + z.re * sc, y = cy - z.im * sc;
+    ctxR.fillStyle = z.k === rootK ? "#8a3318" : "#1c5e3c";
+    ctxR.beginPath(); ctxR.arc(x, y, z.k === rootK ? 6 : 4, 0, 2 * Math.PI); ctxR.fill();
+    ctxR.fillText("z" + z.k, x + 6, y - 4);
+  });
+
+  const zk = roots[rootK];
+  $("leitura-roots").textContent =
+    "w = " + fmt(wRe, 3) + " + " + fmt(wIm, 3) + "i (|w| = " + fmt(s, 1) + ", arg " + phi +
+    "°)  ||  " + n + (n === 1 ? " raiz" : " raízes distintas") + ", módulo comum |w|^(1/" + n +
+    ") = " + fmt(r, 4) + ", passo angular 360°/" + n + " = " + fmt(360 / n, 1) + "°  ||  " +
+    "contador de multivalência: k = " + rootK + " de {0, …, " + (n - 1) + "}; z_k = " +
+    fmt(zk.re, 4) + " + " + fmt(zk.im, 4) + "i; verificação por potência iterada: |z_k^" + n +
+    " − w| = " + zk.err.toExponential(1);
+  const tb = $("tabela-roots-corpo");
+  tb.innerHTML = "";
+  roots.forEach((z) => {
+    const tr = document.createElement("tr");
+    if (z.k === rootK) tr.className = "atual";
+    tr.innerHTML = "<td>" + z.k + "</td><td>" + fmt(z.aDeg, 1) + "</td><td>" + fmt(z.re, 4) +
+      "</td><td>" + fmt(z.im, 4) + "</td><td>" + z.err.toExponential(1) + "</td>";
+    tb.appendChild(tr);
+  });
+}
+for (const id of ["w-mod", "w-arg", "n-idx"])
+  $(id).addEventListener("input", () => { if (id === "n-idx") rootK = 0; renderRoots(); });
+$("btn-next-root").addEventListener("click", () => {
+  const { s, n } = rootsState();
+  if (s === 0) return;
+  rootK = (rootK + 1) % n;
+  renderRoots();
+});
+
+/* ================= laboratory C: the Z[i] lattice ================= */
+const cvL = $("cv-lattice"), ctxL = cvL.getContext("2d");
+const LAT = 12;
+function isPrime(m) {
+  if (m < 2) return false;
+  for (let d = 2; d * d <= m; d++) if (m % d === 0) return false;
+  return true;
+}
+// Gaussian primality via Theorem 17 (criterion verified against brute
+// force by the oracle, invariant I10 — the drawing applies the theorem)
+function isGaussPrime(a, b) {
+  if (a === 0 && b === 0) return false;
+  if (a === 0 || b === 0) {
+    const q = Math.abs(a + b);           // the nonzero coordinate
+    return isPrime(q) && q % 4 === 3;
+  }
+  return isPrime(a * a + b * b);
+}
+const PRIMES = [];
+for (let m = 2; m < 200; m++) if (isPrime(m)) PRIMES.push(m);
+function twoSquares(p) {
+  for (let a = 1; a * a * 2 <= p; a++) {
+    const b2 = p - a * a, b = Math.round(Math.sqrt(b2));
+    if (b * b === b2) return [a, b];
+  }
+  return null;
+}
+function renderLattice() {
+  const idx = +$("p-idx").value;
+  const p = PRIMES[idx];
+  $("p-idx-val").textContent = String(p);
+  const W = cvL.width, H = cvL.height, cx = W / 2, cy = H / 2;
+  const sc = (Math.min(W, H) / 2 - 14) / LAT;
+  ctxL.clearRect(0, 0, W, H);
+  drawAxes(ctxL, W, H, cx, cy, sc);
+  const dec = twoSquares(p);
+  const hi = new Set();
+  if (dec) {
+    const [a, b] = dec;
+    for (const [x, y] of [[a, b], [b, a]])
+      for (const sx of [1, -1]) for (const sy of [1, -1])
+        if (Math.abs(x) <= LAT && Math.abs(y) <= LAT) hi.add((sx * x) + "," + (sy * y));
+  }
+  for (let a = -LAT; a <= LAT; a++) {
+    for (let b = -LAT; b <= LAT; b++) {
+      const x = cx + a * sc, y = cy - b * sc;
+      if (isGaussPrime(a, b)) {
+        ctxL.fillStyle = "#8a3318";
+        ctxL.fillRect(x - 3, y - 3, 6, 6);
+      } else {
+        ctxL.fillStyle = "#c9bda3";
+        ctxL.fillRect(x - 1, y - 1, 2, 2);
+      }
+      if (hi.has(a + "," + b)) {
+        ctxL.strokeStyle = "#1c5e3c"; ctxL.lineWidth = 2;
+        ctxL.beginPath(); ctxL.arc(x, y, 6.5, 0, 2 * Math.PI); ctxL.stroke();
+      }
+    }
+  }
+  let msg;
+  if (p === 2) {
+    msg = "p = 2 ≡ 2 (mod 4): o caso especial — 2 = 1² + 1² = N(1 + i); em ℤ[i], 2 ramifica: " +
+      "2 = −i·(1 + i)². Pontos ±1 ± i em destaque.";
+  } else if (p % 4 === 1) {
+    msg = "p = " + p + " ≡ 1 (mod 4): acende — " + p + " = " + dec[0] + "² + " + dec[1] +
+      "² (Teorema 16; decomposição única, E3.1). Em ℤ[i], p se parte: " + p + " = (" + dec[0] +
+      " + " + dec[1] + "i)(" + dec[0] + " − " + dec[1] + "i). Os 8 pontos de norma p estão em destaque.";
+  } else {
+    msg = "p = " + p + " ≡ 3 (mod 4): provadamente escuro — quadrados mod 4 pertencem a {0, 1}, " +
+      "logo a² + b² nunca é ≡ 3 (mod 4): nenhum ponto do reticulado tem norma " + p +
+      ". Em ℤ[i], " + p + " permanece primo (Teorema 17c) — ele está no mapa, sobre os eixos.";
+  }
+  $("leitura-lattice").textContent = msg;
+
+  const tb = $("tabela-lattice-corpo");
+  tb.innerHTML = "";
+  for (const q of PRIMES) {
+    if (q >= 100) break;
+    const d = twoSquares(q);
+    const tr = document.createElement("tr");
+    if (q === p) tr.className = "atual";
+    const destiny = q === 2 ? "ramifica: −i(1+i)²"
+      : (q % 4 === 1 ? "parte-se: (" + d[0] + "+" + d[1] + "i)(" + d[0] + "−" + d[1] + "i)"
+                     : "permanece primo");
+    tr.innerHTML = "<td>" + q + "</td><td>" + (q % 4) + "</td><td>" +
+      (d ? d[0] + "² + " + d[1] + "²" : "—") + "</td><td>" + destiny + "</td>";
+    tb.appendChild(tr);
+  }
+}
+$("p-idx").addEventListener("input", renderLattice);
+$("btn-next-prime").addEventListener("click", () => {
+  const el = $("p-idx");
+  el.value = String((+el.value + 1) % PRIMES.length);
+  renderLattice();
+});
+
+renderMult();
+renderRoots();
+renderLattice();
+</script>
+</body>
+</html>

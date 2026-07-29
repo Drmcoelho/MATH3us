@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capítulo 6 — As Patologias · Do Número ao Contínuo</title>
+<style>
+  :root{
+    --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --in-color:#1c5e3c; --out-color:#8a3318; --circle-color:#26221a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
+  }
+  main{max-width:54rem; margin:0 auto; padding:2.5rem 1.25rem 5rem}
+  header.chapter{border-bottom:3px double var(--rule); padding-bottom:1.5rem; margin-bottom:2rem}
+  .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
+  h1{font-size:2.2rem; margin:.3rem 0 .4rem; font-weight:normal}
+  h2{font-size:1.45rem; margin:2.8rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
+  h3{font-size:1.12rem; margin:1.8rem 0 .5rem}
+  .tipo{display:inline-block; border:1px solid var(--accent); color:var(--accent);
+    padding:.1rem .6rem; font-size:.85rem; font-variant:small-caps; letter-spacing:.1em}
+  .pergunta{
+    background:var(--box); border-left:4px solid var(--accent);
+    padding:1rem 1.25rem; margin:1.5rem 0; font-style:italic;
+  }
+  .divisa{
+    text-align:center; font-variant:small-caps; letter-spacing:.12em;
+    margin:2.2rem 0; color:var(--accent);
+  }
+  .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa .rotulo{font-variant:small-caps; letter-spacing:.1em; font-size:.85rem; color:var(--accent); display:block; margin-bottom:.4rem}
+  .porta{border-style:dashed}
+  .formula{
+    text-align:center; margin:1.2rem 0; padding:.6rem .5rem; font-size:1.12rem;
+    overflow-x:auto;
+  }
+  .prova{border-left:3px solid var(--rule); padding-left:1.1rem; margin:1rem 0}
+  .qed{float:right; color:var(--ink-soft)}
+  figure{margin:1.6rem 0}
+  figcaption{font-size:.92rem; color:var(--ink-soft); margin-top:.5rem}
+  .painel{
+    border:1px solid var(--box-edge); background:#fffdf7; padding:1rem; margin:1.2rem 0;
+  }
+  canvas{background:#fffdf7; border:1px solid var(--rule); max-width:100%; height:auto}
+  .controles{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.9rem 0}
+  button{
+    font-family:inherit; font-size:1rem; padding:.45rem 1rem; cursor:pointer;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  }
+  button:hover{background:var(--accent); border-color:var(--accent)}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent)}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  label{font-size:.95rem}
+  input[type=range]{vertical-align:middle}
+  .leitura{
+    font-family:'Courier New',monospace; font-size:.98rem; background:var(--box);
+    padding:.6rem .8rem; margin:.8rem 0; border:1px solid var(--box-edge);
+  }
+  .legenda-cores{font-size:.92rem; margin:.4rem 0}
+  .sw{display:inline-block; width:.85em; height:.85em; margin-right:.3em; vertical-align:baseline; border:1px solid var(--ink)}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+  caption{text-align:left; font-size:.92rem; color:var(--ink-soft); margin-bottom:.4rem}
+  th,td{border:1px solid var(--rule); padding:.35rem .6rem; text-align:right; font-family:'Courier New',monospace}
+  th{background:var(--box); font-family:Georgia,serif; text-align:center}
+  .tabela-scroll{overflow-x:auto}
+  .destaque{color:var(--accent); font-weight:bold}
+  .exercicio{margin:1.4rem 0; padding-left:1.1rem; border-left:3px solid var(--box-edge)}
+  .exercicio .nivel{font-variant:small-caps; letter-spacing:.08em; font-size:.82rem; color:var(--accent)}
+  details.gab{margin:.6rem 0 0; background:var(--box); border:1px solid var(--box-edge); padding:.55rem .9rem}
+  details.gab summary{cursor:pointer; font-variant:small-caps; letter-spacing:.06em; color:var(--accent)}
+  details.gab summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  details.gab[open]{padding-bottom:.8rem}
+  footer.estado{border-top:3px double var(--rule); margin-top:3.5rem; padding-top:1.5rem; font-size:.95rem; color:var(--ink-soft)}
+  ul.compacta li{margin:.25rem 0}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+
+<header class="chapter">
+  <span class="kicker">Do Número ao Contínuo · Parte II</span>
+  <h1>Capítulo 6 — As Patologias</h1>
+  <p><span class="tipo">território virgem</span></p>
+  <p class="pergunta">Quanto do que "se vê" num gráfico sobrevive à formalização? Existe função cujo gráfico
+  computacional oculte <strong>exatamente a propriedade investigada</strong> — e, se existe, o que resta da
+  frase "dá para ver"?
+  <br><small>Pergunta registrada em 28/07/2026, antes do desenvolvimento (<code>conjecturas.md</code>).</small></p>
+</header>
+
+<!-- ============================================================ -->
+<h2 id="por-que">1. Por que este território</h2>
+<p>Este capítulo declara sua assimetria sem disfarce (§1.2 do manual): <strong>não há sítio arqueológico
+aqui</strong>. Nenhuma das funções deste capítulo foi intuída, conjecturada ou redescoberta pelo autor antes do
+tratado. Dirichlet publicou a sua em 1829; Thomae, em 1875; Weierstrass apresentou o primeiro monstro contínuo
+sem derivada em 1872; Takagi construiu o seu em 1901, e van der Waerden o reencontrou em 1930. O que existe é
+uma <em>falha prevista</em> — a confiança excessiva na imagem e na intuição de regularidade — e um capítulo
+construído deliberadamente para destruí-la antes que ela custe caro nos capítulos seguintes.</p>
+<p>O Capítulo 1 já mostrou os olhos desistindo antes dos números: na lupa em 1×, os três traços do cerco
+fundem-se em n ≈ 48, dezenas de linhas antes de a tabela entregar os dígitos de Arquimedes. Mas lá a imagem
+mentia apenas por <em>impaciência</em> — a convergência era real, só chegava depois. Aqui a mentira é de outra
+espécie: funções para as quais o gráfico não é impaciente, é <strong>estruturalmente incapaz</strong>. O que o
+Capítulo 1 construiu — a linguagem ε, o princípio do supremo, a disciplina das três camadas — é exatamente o
+que este capítulo usa; por isso ele depende do Capítulo 1 e de nenhum outro.</p>
+<p>Quatro proposições visualmente plausíveis serão destruídas, cada uma por um teorema:</p>
+<ul class="compacta">
+  <li><em>"Toda função tem um gráfico que dá para desenhar."</em> — Dirichlet: descontínua em <strong>todos</strong> os pontos.</li>
+  <li><em>"Se é contínua num ponto, é contínua perto dele."</em> — Thomae: contínua exatamente nos irracionais, descontínua em todos os racionais.</li>
+  <li><em>"Contínua é quase diferenciável: alisa sob zoom."</em> — Takagi: contínua em toda parte, diferenciável em parte alguma.</li>
+  <li><em>"ℚ é denso, logo não falta nada."</em> — o conjunto {x ∈ ℚ : x² &lt; 2} não tem supremo em ℚ: denso e furado.</li>
+</ul>
+<p>E, atravessando as quatro, a quinta — a mais perigosa, porque é sobre o instrumento e não sobre o objeto:
+<em>o gráfico computacional pode ocultar exatamente a propriedade investigada</em>. O experimento da seção 2
+não ilustra essa tese; ele a <strong>comete</strong>, na frente do leitor, com aviso prévio.</p>
+<p class="divisa">O experimento sugere. A demonstração obriga.</p>
+
+<!-- ============================================================ -->
+<h2 id="experimento">2. O experimento: o traçador mentiroso</h2>
+<p>Abaixo, um traçador de gráficos comum: 640 colunas de pixels, uma amostra por coluna, uma janela centrada
+em √2/2 ≈ 0,7071 cuja largura o cursor de zoom divide por 2 a cada passo. Ele traça três funções — as três
+serão definidas com todo o rigor nas seções 4 e 5; por ora, use o traçador como se usa qualquer um: olhando.
+A pergunta a fazer em cada gráfico não é "o que estou vendo?", e sim <strong>"o que esta imagem está me
+impedindo de ver?"</strong></p>
+
+<div class="painel">
+  <figure style="margin:0">
+    <canvas id="cv-plot" width="640" height="320"
+      aria-label="Traçador de gráficos com 640 colunas de pixels e janela de zoom centrada em raiz de dois sobre dois. Traça a função escolhida pelos botões: Dirichlet em modo amostrado (uma reta na altura um, porque toda amostra float é racional) ou em modo ideal (duas retas, nas alturas zero e um); Thomae (pontos isolados na altura um sobre q para cada fração reduzida p sobre q da janela); ou a soma parcial de Takagi com o número de termos do cursor. A linha de status abaixo e as tabelas adiante contêm os mesmos dados em forma numérica."></canvas>
+    <figcaption>O traçador. A escolha da função, o modo de Dirichlet, o zoom e os termos de Takagi estão nos
+    controles; a linha de status diz, a cada traço, o que os pixels afirmam — e o que eles calam.</figcaption>
+  </figure>
+  <div class="controles" role="group" aria-label="Escolha da função traçada">
+    <button id="btn-dirichlet" type="button" aria-pressed="true">Dirichlet</button>
+    <button id="btn-thomae" type="button" aria-pressed="false">Thomae</button>
+    <button id="btn-takagi" type="button" aria-pressed="false">Takagi</button>
+  </div>
+  <div class="controles">
+    <button id="btn-amostrado" type="button" aria-pressed="true">modo amostrado (o que a máquina faz)</button>
+    <button id="btn-ideal" type="button" aria-pressed="false">modo ideal (o que o objeto contém)</button>
+  </div>
+  <div class="controles">
+    <label for="zoom">Zoom (largura da janela = 2<sup>−z</sup>):
+      <input type="range" id="zoom" min="0" max="20" value="0" step="1" aria-describedby="zoom-desc">
+      <span id="zoom-val">z = 0</span>
+    </label>
+    <span id="zoom-desc" class="visually-hidden">Expoente z do zoom; a janela em torno de raiz de dois sobre dois tem largura dois elevado a menos z.</span>
+    <label for="termos">Termos de Takagi N:
+      <input type="range" id="termos" min="1" max="30" value="4" aria-describedby="termos-desc">
+      <span id="termos-val">N = 4</span>
+    </label>
+    <span id="termos-desc" class="visually-hidden">Número de termos da soma parcial de Takagi, de um a trinta.</span>
+  </div>
+  <p class="leitura" id="leitura" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-amostras">
+  <caption>Seis amostras da coluna de pixels — os valores exatos que a máquina realmente segura. Toda amostra
+  em ponto flutuante é uma fração p/2<sup>k</sup> (lema da seção 7); a coluna D(x) resulta constante igual a 1.
+  A tabela atualiza com a janela do traçador.</caption>
+  <thead>
+    <tr><th scope="col">amostra x (como a tela mostra)</th><th scope="col">o mesmo x, exato</th>
+    <th scope="col">racional?</th><th scope="col">D(x)</th></tr>
+  </thead>
+  <tbody id="tabela-amostras-corpo"></tbody>
+</table>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-farey">
+  <caption>Os pontos "visíveis" de Thomae em [0, 1]: frações reduzidas p/q com q ≤ Q, altura 1/q. A contagem
+  Φ(Q) é computada aqui na página (peneira de totientes) e conferida pelo oráculo com uma contagem
+  independente por mdc. A comparação com 3Q²/π² é a conjectura C2 do pré-registro.</caption>
+  <thead>
+    <tr><th scope="col">Q</th><th scope="col">Φ(Q) (contagem exata)</th><th scope="col">3Q²/π²</th>
+    <th scope="col">desvio relativo</th></tr>
+  </thead>
+  <tbody id="tabela-farey-corpo"></tbody>
+</table>
+</div>
+
+<h3 id="sonda">2.1 A sonda diádica</h3>
+<p>O segundo instrumento não desenha a função de Takagi: mede seus <em>declives</em>. Para cada profundidade
+m, existe um único intervalo diádico I<sub>m</sub> = [j/2<sup>m</sup>, (j+1)/2<sup>m</sup>] contendo o ponto
+escolhido, e o declive da soma sobre I<sub>m</sub> é um <strong>inteiro</strong> S<sub>m</sub> (lema da seção
+5.8 — a sonda o computa pelos dígitos binários de j, e o oráculo confere por avaliação exata da soma). Se a
+função tivesse derivada no ponto, S<sub>m</sub> teria de convergir. Observe o que S<sub>m</sub> faz.</p>
+
+<div class="painel">
+  <figure style="margin:0">
+    <canvas id="cv-sonda" width="640" height="240"
+      aria-label="Gráfico de degraus da sequência de declives diádicos S índice m da função de Takagi no ponto escolhido pelos botões, para m de um até o valor do cursor de profundidade. No ponto zero a sequência cresce como a reta S igual a m; no ponto um terço ela alterna entre um e zero para sempre; no float de raiz de dois sobre dois ela oscila sem convergir. A tabela adiante contém os mesmos valores em forma numérica."></canvas>
+    <figcaption>A sonda: S<sub>m</sub> contra m. Convergir é a única coisa que esta sequência não sabe fazer —
+    o passo |S<sub>m+1</sub> − S<sub>m</sub>| = 1 é obrigatório (seção 5.8).</figcaption>
+  </figure>
+  <div class="controles" role="group" aria-label="Escolha do ponto sondado">
+    <button id="btn-x0" type="button" aria-pressed="true">x = 0</button>
+    <button id="btn-x13" type="button" aria-pressed="false">x = 1/3</button>
+    <button id="btn-xf" type="button" aria-pressed="false">x = float(√2/2)</button>
+  </div>
+  <div class="controles">
+    <label for="m-slider">Profundidade m:
+      <input type="range" id="m-slider" min="1" max="52" value="12" aria-describedby="m-desc">
+      <span id="m-val">m = 12</span>
+    </label>
+    <span id="m-desc" class="visually-hidden">Profundidade diádica m, de um a cinquenta e dois; o intervalo sondado tem largura dois elevado a menos m.</span>
+  </div>
+  <p class="leitura" id="leitura-sonda" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabela-scroll">
+<table id="tabela-sonda">
+  <caption>Os declives diádicos S<sub>m</sub> no ponto escolhido: as primeiras profundidades e a atual. j é o
+  índice do intervalo diádico I<sub>m</sub> que contém o ponto; S<sub>m</sub> é o declive exato de T sobre
+  I<sub>m</sub> (inteiro — seção 5.8).</caption>
+  <thead>
+    <tr><th scope="col">m</th><th scope="col">j (I<sub>m</sub> = [j/2<sup>m</sup>, (j+1)/2<sup>m</sup>])</th>
+    <th scope="col">S<sub>m</sub> (declive)</th><th scope="col">|S<sub>m</sub> − S<sub>m−1</sub>|</th></tr>
+  </thead>
+  <tbody id="tabela-sonda-corpo"></tbody>
+</table>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">O que este experimento não prova</span>
+  <p style="margin:0">Nada — e neste capítulo o aviso é mais grave que de costume. O traçador produz
+  <em>observações</em> (§2.1 do manual), e as observações aqui não são apenas imprecisas: são
+  <strong>estruturalmente cegas</strong>. O modo amostrado de Dirichlet não erra por pouco — ele não consegue,
+  em princípio, tocar um único ponto onde D vale 0 (lema da seção 7). A sonda, por sua vez, só alcança m = 52
+  porque além disso a própria representação do ponto se esgota. Os teoremas das seções 4–5 não refinam essas
+  imagens; eles as <em>desmentem</em>.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="padroes">3. Os padrões</h2>
+<p>Use os controles antes de continuar. Quatro regularidades devem ter aparecido.</p>
+<p><strong>Padrão 1 — Dirichlet amostrada é uma reta; Dirichlet ideal são duas; nenhuma das imagens muda com
+o zoom.</strong> No modo amostrado, as 640 amostras devolvem 1, em toda janela de 2⁰ a 2⁻²⁰ — a tabela de
+amostras mostra por quê: cada x amostrado é, exatamente, uma fração p/2<sup>k</sup>. No modo ideal, as duas
+retas se pintam inteiras em toda janela. As duas imagens discordam <em>em todos os pixels da metade de
+baixo</em>, e nenhum zoom as reconcilia.</p>
+<p><strong>Padrão 2 — os pontos visíveis de Thomae são contáveis e escasseiam; os de continuidade não
+aparecem nunca.</strong> A tabela Φ(Q) cresce como Q² (com a constante 3/π² — conjectura C2), mas todo ponto
+desenhado é um ponto de <em>descontinuidade</em>. Os pontos onde Thomae é contínua moram todos na altura 0 e
+não acendem pixel algum, em Q nenhum, em zoom nenhum.</p>
+<p><strong>Padrão 3 — a soma parcial de Takagi alisa sob zoom; os declives não deixam.</strong> Com N termos,
+o gráfico em janela mais fina que 2<sup>−N</sup> vira um segmento de reta — literalmente, não por limitação
+de tela (seção 5.8: a soma parcial é linear por partes nessa escala). Mas suba N e a rugosidade volta, sempre,
+na mesma proporção.</p>
+<p><strong>Padrão 4 — a sonda nunca assenta.</strong> Em x = 0, S<sub>m</sub> = m: a coluna cresce como uma
+reta. Em x = 1/3, alterna 1, 0, 1, 0. No float de √2/2, vagueia — e não do jeito que o pré-registro apostou:
+a conjectura C5 previa alternância frequente de sinal, e o oráculo mediu três eras longas de um lado só
+(2 mudanças de sinal em 52 passos; <strong>C5 refutada</strong>, autópsia em <code>conjecturas.md</code> —
+a metade de magnitude, max |S| ≤ 12, segurou com máximo 9). Em todos os casos o passo é exatamente 1 — a
+sequência muda de valor em <em>toda</em> profundidade, mas mudar de valor não é mudar de lado.</p>
+<p>Os padrões 1 e 2 são afirmações sobre infinitos pontos que imagem nenhuma contém; o 3 e o 4, sobre todas
+as escalas de uma vez. Nenhum experimento fecha essa distância. É aqui que a teoria deixa de ser opcional.</p>
+
+<!-- ============================================================ -->
+<h2 id="enunciados">4. Do padrão ao enunciado</h2>
+<p>Primeiro, os objetos — definidos, não desenhados. Em todo o capítulo, "racional" significa p/q com
+p ∈ ℤ, q ∈ ℕ, q ≥ 1; "reduzida" significa mdc(p, q) = 1; todo racional não nulo tem uma única forma
+reduzida com q ≥ 1, e 0 = 0/1.</p>
+
+<div class="caixa">
+  <span class="rotulo">Definição (função de Dirichlet, 1829)</span>
+  <p class="formula" style="margin:.4rem 0">D(x) = 1 se x ∈ ℚ;&nbsp;&nbsp; D(x) = 0 se x ∉ ℚ.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Definição (função de Thomae, 1875)</span>
+  <p class="formula" style="margin:.4rem 0">T<sub>h</sub>(p/q) = 1/q na forma reduzida;&nbsp;&nbsp;
+  T<sub>h</sub>(x) = 0 se x ∉ ℚ.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Definição (continuidade num ponto — a linguagem ε-δ)</span>
+  <p id="continuidade-def">Uma função f : A → ℝ é <strong>contínua em a ∈ A</strong> quando, para todo
+  ε &gt; 0, existe δ &gt; 0 tal que</p>
+  <p class="formula">x ∈ A e |x − a| &lt; δ &nbsp;⟹&nbsp; |f(x) − f(a)| &lt; ε.</p>
+  <p style="margin:0">É a irmã da linguagem ε-N do Capítulo 1: lá, "depois de N, o erro fica menor que ε";
+  aqui, "mais perto que δ, a imagem fica mais perto que ε". <em>Descontínua em a</em> é a negação: existe um
+  ε₀ &gt; 0 tal que, para todo δ, alguém a menos de δ de a tem imagem a pelo menos ε₀ de f(a).</p>
+</div>
+
+<p>Agora os enunciados que os padrões sugerem — e note como cada um nega exatamente uma frase que a imagem
+tornava plausível:</p>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado A (Dirichlet)</span>
+  <p style="margin:0">D é descontínua em <strong>todo</strong> ponto de ℝ.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado B (Thomae)</span>
+  <p style="margin:0">T<sub>h</sub> é descontínua em todo racional e <strong>contínua em todo
+  irracional</strong> — o conjunto de continuidade e o de descontinuidade são ambos densos em ℝ.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado C (Takagi, 1901)</span>
+  <p style="margin:0">A função T(x) = Σ<sub>k≥0</sub> s(2<sup>k</sup>x)/2<sup>k</sup> — com s(x) a distância
+  de x ao inteiro mais próximo, desenhada e destrinchada na seção 5.7 — é contínua em todos os pontos de ℝ e
+  diferenciável em <strong>nenhum</strong>.</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado D (Teorema do Valor Intermediário)</span>
+  <p style="margin:0">Se f : [a, b] → ℝ é contínua e u está entre f(a) e f(b), então existe c ∈ [a, b] com
+  f(c) = u. — E o enunciado gêmeo, que o capítulo faz questão de provar junto: <strong>em ℚ isso é
+  falso</strong> (seção 5.12).</p>
+</div>
+
+<div class="caixa">
+  <span class="rotulo">Enunciado E (o buraco de ℚ)</span>
+  <p style="margin:0">O conjunto A = {x ∈ ℚ : x² &lt; 2} é não vazio e limitado superiormente <em>em ℚ</em>,
+  mas <strong>não possui supremo em ℚ</strong>. Densidade não compra completude.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="provas">5. As provas</h2>
+<p>A ordem é a das dependências: primeiro a cunha (√2), depois as duas densidades — que são a munição de
+Dirichlet e de Thomae —, depois Takagi em três lemas, depois o TVI e, por fim, o buraco de ℚ, que devolve o
+capítulo ao princípio do supremo de onde ele partiu.</p>
+
+<h3 id="cunha-sqrt2">5.1 A cunha clássica: √2 é irracional</h3>
+<p>Neste capítulo, "√2" designa o número real positivo cujo quadrado é 2 — sua existência em ℝ é exatamente o
+que a seção 5.12 mostrará que ℚ não sabe fornecer, e em ℝ ela decorre do princípio do supremo (o supremo do
+conjunto A do Enunciado E; a verificação de que esse supremo tem quadrado 2 é o mesmo cálculo da seção 5.12,
+lido em ℝ). O que se prova aqui é que tal número não é fração.</p>
+<div class="prova">
+  <p><strong>Teorema.</strong> Nenhum racional tem quadrado 2.</p>
+  <p><strong>Prova.</strong> Suponha p/q reduzida com (p/q)² = 2, isto é, p² = 2q². Então p² é par. Se p fosse
+  ímpar, p² seria ímpar (produto de ímpares); logo p é par: p = 2m. Substituindo, 4m² = 2q², ou seja,
+  q² = 2m² — e o mesmo argumento força q par. Mas então p e q são ambos pares, e a fração não era reduzida.
+  Contradição.<span class="qed">∎</span></p>
+</div>
+<p>Uma linha de paridade, e ela vai carregar metade do capítulo: a densidade dos irracionais (5.4), a
+descontinuidade de Thomae nos racionais (5.6), a falha do TVI em ℚ e o buraco de ℚ (5.12) — todos apoiam o pé
+exatamente aqui.</p>
+
+<h3 id="arquimediana">5.2 A propriedade arquimediana — importando o supremo do Capítulo 1</h3>
+<div class="prova">
+  <p><strong>Teorema.</strong> ℕ não é limitado superiormente em ℝ. Consequência: para todo ε &gt; 0 existe
+  n ∈ ℕ com 1/n &lt; ε.</p>
+  <p><strong>Prova.</strong> Suponha ℕ limitado superiormente. Pelo princípio do supremo (importado no
+  Capítulo 1, seção 5.3 de lá), existiria s = sup ℕ. Como s − 1 &lt; s, o número s − 1 não é cota superior:
+  existe n ∈ ℕ com n &gt; s − 1. Mas então n + 1 ∈ ℕ e n + 1 &gt; s — e s não era cota superior. Contradição.
+  Para a consequência: dado ε &gt; 0, o número 1/ε não é cota superior de ℕ; tome n &gt; 1/ε e inverta:
+  1/n &lt; ε.<span class="qed">∎</span></p>
+</div>
+<p>Repare no desenho epistemológico: a afirmação "existem naturais arbitrariamente grandes" parece gratuita —
+e não é. Ela é <em>equivalente a uma propriedade de ℝ</em>, não de ℕ: existem corpos ordenados onde ela falha.
+O tratado a compra pagando com o supremo, e declara a compra.</p>
+
+<h3 id="densidade-q">5.3 Primeira densidade: entre dois reais mora um racional</h3>
+<div class="prova">
+  <p><strong>Teorema.</strong> Se x &lt; y são reais, existe racional r com x &lt; r &lt; y.</p>
+  <p><strong>Prova.</strong> Pela seção 5.2, existe n ∈ ℕ com 1/n &lt; y − x. Considere o conjunto
+  M = {m ∈ ℤ : m &gt; nx}. Ele é não vazio (de novo 5.2: algum natural excede nx; se nx &lt; 0, o próprio 0
+  serve) e é limitado inferiormente (por nx). Um conjunto não vazio de inteiros limitado inferiormente tem
+  <em>menor elemento</em> — este é o princípio da boa ordenação, o fato aritmético básico de que uma descida
+  em ℤ que não pode cruzar um piso para em algum degrau; o capítulo o usa declaradamente, como os capítulos
+  2–4 usaram a divisão euclidiana. Seja m o menor elemento de M. Então m &gt; nx e, pela minimalidade,
+  m − 1 ≤ nx. Das duas:</p>
+  <p class="formula">nx &lt; m ≤ nx + 1 &lt; nx + n(y − x) = ny,</p>
+  <p>onde a desigualdade do meio usou 1 &lt; n(y − x). Dividindo por n:
+  x &lt; m/n &lt; y — e m/n é o racional prometido.<span class="qed">∎</span></p>
+</div>
+
+<h3 id="densidade-irr">5.4 Segunda densidade: entre dois reais mora um irracional</h3>
+<div class="prova">
+  <p><strong>Teorema.</strong> Se x &lt; y são reais, existe irracional w com x &lt; w &lt; y.</p>
+  <p><strong>Prova.</strong> Aplique a seção 5.3 ao par x − √2 &lt; y − √2: existe racional r com
+  x − √2 &lt; r &lt; y − √2. Some √2 em tudo:</p>
+  <p class="formula">x &lt; r + √2 &lt; y.</p>
+  <p>O número w = r + √2 é irracional: se fosse uma fração, então √2 = w − r seria diferença de duas frações —
+  uma fração —, contradizendo 5.1. <span class="qed">∎</span></p>
+</div>
+<p>As duas densidades juntas dizem: <strong>todo intervalo aberto não vazio de ℝ, por menor que seja, contém
+racionais e irracionais</strong>. Cada coluna de pixels do traçador é um intervalo desses. Guarde isso.</p>
+
+<h3 id="dirichlet-prova">5.5 Prova do Enunciado A: Dirichlet cai em todos os pontos</h3>
+<div class="prova">
+  <p><strong>Prova.</strong> Seja a ∈ ℝ qualquer. Tome ε₀ = 1/2 e seja δ &gt; 0 arbitrário. O intervalo
+  (a − δ, a + δ) contém um racional r (seção 5.3) e um irracional w (seção 5.4).</p>
+  <p>Se a é racional, D(a) = 1; escolha x = w: |x − a| &lt; δ e |D(x) − D(a)| = |0 − 1| = 1 ≥ ε₀.</p>
+  <p>Se a é irracional, D(a) = 0; escolha x = r: |x − a| &lt; δ e |D(x) − D(a)| = |1 − 0| = 1 ≥ ε₀.</p>
+  <p>Em ambos os casos, nenhum δ realiza a definição de continuidade para ε = 1/2. Logo D é descontínua em a —
+  e a era qualquer.<span class="qed">∎</span></p>
+</div>
+<p>O teorema é curto porque as densidades fizeram o trabalho. E ele destrói a primeira proposição plausível:
+D não tem gráfico desenhável — não por falta de tinta, mas porque <em>qualquer</em> vizinhança de
+<em>qualquer</em> ponto contém a função saltando a distância 1. O modo ideal do traçador (duas retas) é uma
+convenção para indicar isso; o modo amostrado (uma reta) é o que uma máquina consegue; o objeto não é nenhum
+dos dois.</p>
+
+<h3 id="thomae-prova">5.6 Prova do Enunciado B: Thomae, a régua que decide continuidade ponto a ponto</h3>
+<div class="prova">
+  <p><strong>Parte 1 — descontinuidade em todo racional.</strong> Seja a = p/q reduzida, de modo que
+  T<sub>h</sub>(a) = 1/q &gt; 0. Tome ε₀ = 1/q. Para qualquer δ &gt; 0, o intervalo (a − δ, a + δ) contém um
+  irracional w (seção 5.4), e |T<sub>h</sub>(w) − T<sub>h</sub>(a)| = |0 − 1/q| = 1/q ≥ ε₀. Logo
+  T<sub>h</sub> é descontínua em a.<span class="qed">∎</span></p>
+</div>
+<div class="prova">
+  <p><strong>Parte 2 — continuidade em todo irracional: o argumento da finitude dos denominadores
+  pequenos.</strong> Seja a irracional e ε &gt; 0. O plano, dito antes da execução: os únicos pontos capazes
+  de violar a margem ε são os racionais de valor T<sub>h</sub> ≥ ε — isto é, de denominador
+  <em>pequeno</em> —, e vamos contar que eles são poucos e manter todos à distância.</p>
+  <p><em>Passo 1 (quem são os violadores).</em> Pela seção 5.2, escolha um inteiro Q com Q &gt; 1/ε. Se um
+  racional reduzido p/q tem q &gt; Q, então T<sub>h</sub>(p/q) = 1/q &lt; 1/Q &lt; ε: inofensivo. Os únicos
+  pontos com T<sub>h</sub> ≥ ε têm denominador q ≤ Q.</p>
+  <p><em>Passo 2 (eles são finitos perto de a).</em> Considere o conjunto F das frações reduzidas p/q com
+  q ≤ Q dentro do intervalo (a − 1, a + 1). Para cada q fixado, a condição a − 1 &lt; p/q &lt; a + 1 encaixa
+  p num intervalo de comprimento 2q, que contém no máximo 2q + 1 inteiros; somando sobre q = 1, …, Q, o
+  conjunto F é finito — tem no máximo Q(Q + 2) elementos, e o que importa é só isto: <strong>finito</strong>.</p>
+  <p><em>Passo 3 (a distância mínima é positiva).</em> O ponto a é irracional, logo a ∉ F: cada elemento de F
+  está a distância estritamente positiva de a. Um conjunto <em>finito</em> de números positivos tem mínimo
+  positivo — é aqui, e só aqui, que a finitude do Passo 2 é usada, e ela é insubstituível: um ínfimo de
+  infinitos positivos pode ser 0. Defina</p>
+  <p class="formula">δ = min { |a − r| : r ∈ F } &gt; 0, &nbsp;e, se F for vazio, δ = 1.</p>
+  <p><em>Passo 4 (o δ funciona).</em> Seja x com |x − a| &lt; δ (podemos supor também |x − a| &lt; 1,
+  encolhendo δ se preciso). Se x é irracional, T<sub>h</sub>(x) = 0 e |T<sub>h</sub>(x) − T<sub>h</sub>(a)| =
+  0 &lt; ε. Se x é racional, sua forma reduzida p/q está em (a − 1, a + 1) mas <em>não</em> em F — pois todos
+  os pontos de F distam ≥ δ de a. Pela definição de F, isso força q &gt; Q, e então</p>
+  <p class="formula">|T<sub>h</sub>(x) − T<sub>h</sub>(a)| = 1/q &lt; 1/Q &lt; ε.</p>
+  <p>Em qualquer caso a margem ε é respeitada: T<sub>h</sub> é contínua em a.<span class="qed">∎</span></p>
+</div>
+<p>Numericamente, o δ é <em>calculável</em> — e o oráculo do capítulo o calcula. Exemplo verificado
+(invariante I2 de <code>audit/numeric-check.json</code>): em a = √2/2 com ε = 1/10, os violadores têm q ≤ 10,
+o mais próximo é 7/10, e δ = |√2/2 − 7/10| ≈ 0,0071068 funciona; com ε = 1/1000, o mais próximo vira
+408/577 e δ ≈ 0,0000010619. O 577/408 reaparecerá na seção 5.12 vindo de outra estrada — não é coincidência,
+é a aproximação racional de √2 trabalhando dos dois lados do balcão.</p>
+<p>O Enunciado B destrói a segunda proposição plausível: continuidade <em>não</em> é propriedade de regiões —
+é propriedade de pontos. Thomae é contínua em cada irracional sem ser contínua em nenhum intervalo em volta
+dele: o conjunto de continuidade e o de descontinuidade se entrelaçam densos, e o gráfico não tem como
+mostrar isso — os pontos de continuidade moram todos na altura 0, apagados.</p>
+
+<h3 id="takagi-continua">5.7 Takagi, parte 1: a serra, a soma e a continuidade</h3>
+<p>Antes da fórmula, o desenho — a regra da casa (E22): objeto geométrico entra nomeado e desenhado antes de
+entrar em fórmula.</p>
+<figure>
+  <canvas id="cv-serra" width="640" height="150"
+    aria-label="Gráfico da função serra s de x, a distância de x ao inteiro mais próximo: uma onda triangular periódica que vale zero em todos os inteiros, sobe com declive um até valer meio nos meios-inteiros, e desce com declive menos um até o inteiro seguinte. Estão marcados os pontos zero, meio, um, um e meio e dois no eixo horizontal e a altura máxima meio."></canvas>
+  <figcaption><strong>A serra</strong> s(x) = distância de x ao inteiro mais próximo. Vale 0 nos inteiros,
+  1/2 nos meios-inteiros; entre eles, sobe e desce com declive ±1. É o único ingrediente geométrico de toda a
+  seção — nenhuma trigonometria participa deste capítulo.</figcaption>
+</figure>
+<div class="prova">
+  <p><strong>Lema (a serra é 1-Lipschitz, logo contínua).</strong> Para todos x, y ∈ ℝ:
+  |s(x) − s(y)| ≤ |x − y|.</p>
+  <p><strong>Prova.</strong> s(x) = min<sub>n∈ℤ</sub> |x − n|, e o mínimo é atingido (só dois inteiros
+  competem). Seja n<sub>y</sub> um inteiro que realiza s(y). Então
+  s(x) ≤ |x − n<sub>y</sub>| ≤ |x − y| + |y − n<sub>y</sub>| = |x − y| + s(y), ou seja,
+  s(x) − s(y) ≤ |x − y|. Trocando os papéis de x e y, também s(y) − s(x) ≤ |x − y|.<span class="qed">∎</span></p>
+  <p>Em particular, tomando δ = ε na definição da seção 4, s é contínua em todo ponto. E 0 ≤ s ≤ 1/2 em
+  toda a reta.</p>
+</div>
+<div class="caixa">
+  <span class="rotulo">Definição (função de Takagi, 1901; redescoberta por van der Waerden, 1930)</span>
+  <p class="formula" style="margin:.4rem 0">T(x) = Σ<sub>k=0</sub><sup>∞</sup> s(2<sup>k</sup>x)/2<sup>k</sup></p>
+  <p style="margin:0">Serras cada vez mais finas (período 2<sup>−k</sup>) e cada vez mais baixas (altura
+  2<sup>−k−1</sup>), empilhadas. A soma <em>existe</em> em cada x pelo aparato do próprio tratado: as somas
+  parciais são crescentes em N (termos ≥ 0) e limitadas por Σ 2<sup>−k−1</sup> ≤ 1, logo convergem pelo
+  teorema da convergência monótona do Capítulo 1. Até aqui, nada foi importado.</p>
+</div>
+<p>O que o tratado ainda <em>não</em> sabe fazer é o passo seguinte: cada soma parcial é contínua (soma
+finita de contínuas — composição e soma preservam continuidade pelo argumento ε-δ padrão), mas continuidade
+<strong>não sobrevive automaticamente ao limite</strong>. É um fato famoso e será construído com calma no
+Capítulo 10; usá-lo em silêncio seria dívida escondida. A importação, então, é declarada:</p>
+<div class="caixa porta">
+  <span class="rotulo">Importado — teste M de Weierstrass + continuidade do limite uniforme (porta fechada → Capítulo 10)</span>
+  <p style="margin:0">Se |f<sub>k</sub>(x)| ≤ M<sub>k</sub> para todo x, e Σ M<sub>k</sub> converge, então
+  Σ f<sub>k</sub> converge <em>uniformemente</em>; e um limite uniforme de funções contínuas é contínuo.
+  — Citado como teorema clássico, exatamente como o Capítulo 1 importou o princípio do supremo. A maquinaria
+  de convergência uniforme é o coração do Capítulo 10 (a fábrica de funções); a porta reabre lá. Aqui, com
+  M<sub>k</sub> = 2<sup>−k−1</sup> e Σ M<sub>k</sub> = 1, o teste entrega:</p>
+  <p class="formula" style="margin:.6rem 0 0"><strong>T é contínua em todos os pontos de ℝ.</strong></p>
+</div>
+<p>Contexto clássico, citado sem prova: o primeiro monstro publicado foi o de Weierstrass (1872), uma série de
+cossenos amortecidos — contínua em toda parte, diferenciável em nenhuma. A prova da não diferenciabilidade
+daquela função exige estimativas finas da própria maquinaria de séries que este tratado só constrói no
+Capítulo 10 — e cos, aqui, nem sequer foi definido com rigor (será redefinido por séries lá). Por isso este
+capítulo trabalha com Takagi: a <em>continuidade</em> custa uma importação declarada, mas a
+<em>não diferenciabilidade</em> — a parte que destrói a intuição — sai inteira com aritmética binária, sem
+nada escondido. É a divisão honesta de trabalho: o que se importa está no quadro acima; o que se prova começa
+agora.</p>
+
+<h3 id="takagi-declives">5.8 Takagi, parte 2: o lema dos declives diádicos</h3>
+<p>Um <em>intervalo diádico de profundidade m</em> é I = [j/2<sup>m</sup>, (j+1)/2<sup>m</sup>], com j ∈ ℤ.
+O <em>declive</em> de uma função g sobre I é [g((j+1)/2<sup>m</sup>) − g(j/2<sup>m</sup>)] / 2<sup>−m</sup> —
+o quociente de diferenças dos extremos.</p>
+<div class="prova">
+  <p><strong>Lema.</strong> O declive de T sobre qualquer intervalo diádico I de profundidade m é o inteiro</p>
+  <p class="formula">S<sub>m</sub>(j) = ε<sub>0</sub> + ε<sub>1</sub> + ⋯ + ε<sub>m−1</sub>, &nbsp;com cada
+  ε<sub>k</sub> ∈ {+1, −1},</p>
+  <p>onde ε<sub>k</sub> = +1 se o k-ésimo dígito binário de j (lido do mais significativo para o menos, com
+  j escrito em m dígitos) é 0, e ε<sub>k</sub> = −1 se é 1. Consequências imediatas:</p>
+  <p>(a) <em>filhos:</em> as duas metades de I têm declives S<sub>m</sub>(j) + 1 (esquerda) e
+  S<sub>m</sub>(j) − 1 (direita); em particular os declives das metades diferem por exatamente 2, em toda
+  escala — <strong>a rugosidade não se dilui</strong> (conjectura C4 do pré-registro, agora teorema);</p>
+  <p>(b) <em>em x = 0:</em> j = 0 tem todos os dígitos 0, logo [T(2<sup>−m</sup>) − T(0)]/2<sup>−m</sup> =
+  S<sub>m</sub>(0) = m — o declive diádico na origem <strong>diverge linearmente</strong> (conjectura C3,
+  agora teorema);</p>
+  <p>(c) <em>soma parcial:</em> a soma parcial T<sub>N</sub> (N termos) é <em>linear</em> em cada intervalo
+  diádico de profundidade N — é exatamente o alisamento que o traçador mostra sob zoom fundo.</p>
+  <p><strong>Prova.</strong> Escreva T = Σ<sub>k</sub> t<sub>k</sub> com t<sub>k</sub>(x) =
+  s(2<sup>k</sup>x)/2<sup>k</sup>, e meça o incremento de cada termo entre os extremos de I.</p>
+  <p><em>Termos fundos (k ≥ m) somem.</em> Nos extremos, 2<sup>k</sup>·(j/2<sup>m</sup>) = j·2<sup>k−m</sup>
+  e 2<sup>k</sup>·((j+1)/2<sup>m</sup>) = (j+1)·2<sup>k−m</sup> são <em>inteiros</em> (k − m ≥ 0), e a serra
+  vale 0 em inteiros. Incremento do termo: 0 − 0 = 0. (É também por isso que T é <em>exatamente
+  computável</em> em pontos diádicos: a série vira soma finita — o oráculo explora isso.)</p>
+  <p><em>Termos rasos (k &lt; m) são retas.</em> O intervalo 2<sup>k</sup>I = [j/2<sup>m−k</sup>,
+  (j+1)/2<sup>m−k</sup>] tem comprimento 2<sup>k−m</sup> ≤ 1/2, e seus extremos são múltiplos consecutivos de
+  2<sup>k−m</sup>. Os meios-inteiros e os inteiros também são múltiplos de 2<sup>k−m</sup> (pois
+  2<sup>k−m</sup> divide 1/2); portanto 2<sup>k</sup>I não cruza nenhum deles no interior: o intervalo cabe
+  inteiro numa das rampas da serra. Na rampa de subida, s tem declive +1; na de descida, −1. Qual rampa? A de
+  subida é [ℓ, ℓ + 1/2] (parte fracionária &lt; 1/2), e a parte fracionária de j/2<sup>m−k</sup> é menor que
+  1/2 exatamente quando o dígito binário de peso 1/2 de j/2<sup>m−k</sup> é 0 — que é o dígito de j na
+  posição m − k − 1 (contando do menos significativo), isto é, o k-ésimo dígito da janela de m dígitos, lido
+  de cima. Assim t<sub>k</sub>(x) = s(2<sup>k</sup>x)/2<sup>k</sup> é linear sobre I com declive
+  (2<sup>k</sup>·ε<sub>k</sub>)/2<sup>k</sup> = ε<sub>k</sub>.</p>
+  <p><em>Montagem.</em> O incremento de T sobre I é a soma dos incrementos dos termos (a série converge em
+  cada ponto, e o incremento de cada termo fundo é 0; a soma dos rasos é finita):
+  ΔT = Σ<sub>k&lt;m</sub> ε<sub>k</sub>·2<sup>−m</sup>. Dividindo por 2<sup>−m</sup>, o declive é
+  Σ<sub>k&lt;m</sub> ε<sub>k</sub> = S<sub>m</sub>(j).</p>
+  <p><em>Consequências.</em> (a) O filho esquerdo de I é o intervalo de profundidade m + 1 e índice 2j: seus
+  m + 1 dígitos são os de j seguidos de um 0, logo S<sub>m+1</sub>(2j) = S<sub>m</sub>(j) + 1; o direito tem
+  índice 2j + 1, dígito novo 1, e S<sub>m+1</sub>(2j+1) = S<sub>m</sub>(j) − 1. (b) Com j = 0, todos os
+  ε<sub>k</sub> = +1 e T(0) = 0 (serra de inteiro), logo o declive sobre [0, 2<sup>−m</sup>] é m. (c) Para
+  T<sub>N</sub> sobre um intervalo de profundidade N, os termos k &lt; N são lineares e não há termos fundos:
+  soma finita de funções lineares é linear.<span class="qed">∎</span></p>
+</div>
+<p>Este lema é a sonda da seção 2.1, agora com certidão: o que ela plota é S<sub>m</sub>, calculado pelos
+dígitos binários de j — e o oráculo confirma cada valor <em>pela outra rota</em>, avaliando a soma finita
+exata de T nos extremos diádicos com aritmética de frações (invariante I3). Duas rotas independentes, mesma
+tabela de inteiros.</p>
+
+<h3 id="lema-aperto">5.9 Takagi, parte 3: o lema do aperto</h3>
+<p>Falta o elo entre "os declives diádicos não convergem" e "não existe derivada". <em>Derivada</em> aqui tem
+a definição usual: f é diferenciável em x se o quociente [f(y) − f(x)]/(y − x) tem limite quando y → x, no
+sentido ε-δ da seção 4 aplicado à função quociente. O elo é este lema, e ele vale para qualquer função:</p>
+<div class="prova">
+  <p><strong>Lema (do aperto).</strong> Seja f diferenciável em x, e sejam [a<sub>m</sub>, b<sub>m</sub>]
+  intervalos com a<sub>m</sub> ≤ x ≤ b<sub>m</sub>, a<sub>m</sub> &lt; b<sub>m</sub> e
+  b<sub>m</sub> − a<sub>m</sub> → 0. Então os declives de f sobre [a<sub>m</sub>, b<sub>m</sub>] convergem
+  para f′(x).</p>
+  <p><strong>Prova.</strong> Dado ε &gt; 0, a diferenciabilidade em x fornece δ &gt; 0 com</p>
+  <p class="formula">|f(y) − f(x) − f′(x)(y − x)| ≤ ε·|y − x| &nbsp;sempre que |y − x| &lt; δ.</p>
+  <p>(Para y = x a desigualdade é 0 ≤ 0.) Se b<sub>m</sub> − a<sub>m</sub> &lt; δ, então tanto
+  |b<sub>m</sub> − x| quanto |x − a<sub>m</sub>| são menores que δ, e o numerador do declive se decompõe
+  em torno de x:</p>
+  <p class="formula">f(b<sub>m</sub>) − f(a<sub>m</sub>) − f′(x)(b<sub>m</sub> − a<sub>m</sub>) =
+  [f(b<sub>m</sub>) − f(x) − f′(x)(b<sub>m</sub> − x)] − [f(a<sub>m</sub>) − f(x) − f′(x)(a<sub>m</sub> − x)].</p>
+  <p>Em valor absoluto, isso é ≤ ε(b<sub>m</sub> − x) + ε(x − a<sub>m</sub>) = ε(b<sub>m</sub> − a<sub>m</sub>).
+  Dividindo por b<sub>m</sub> − a<sub>m</sub>: o declive dista no máximo ε de f′(x), para todo m grande.
+  <span class="qed">∎</span></p>
+  <p>Note a hipótese exata: x pode ser um dos extremos (a<sub>m</sub> ≤ x ≤ b<sub>m</sub> permite igualdade)
+  — vai ser preciso, porque um ponto diádico é extremo dos seus próprios intervalos.</p>
+</div>
+
+<h3 id="takagi-nao-diferenciavel">5.10 Takagi, parte 4: diferenciável em nenhum ponto</h3>
+<div class="prova">
+  <p><strong>Teorema (Enunciado C, metade final).</strong> T não é diferenciável em ponto algum de ℝ.</p>
+  <p><strong>Prova.</strong> Fixe x ∈ ℝ. Para cada m, seja j<sub>m</sub> = ⌊2<sup>m</sup>x⌋, o único inteiro
+  com j<sub>m</sub> ≤ 2<sup>m</sup>x &lt; j<sub>m</sub> + 1; o intervalo diádico
+  I<sub>m</sub> = [j<sub>m</sub>/2<sup>m</sup>, (j<sub>m</sub>+1)/2<sup>m</sup>] contém x e tem comprimento
+  2<sup>−m</sup> → 0.</p>
+  <p><em>Os intervalos encaixam.</em> De j<sub>m</sub> ≤ 2<sup>m</sup>x &lt; j<sub>m</sub> + 1 segue
+  2j<sub>m</sub> ≤ 2<sup>m+1</sup>x &lt; 2j<sub>m</sub> + 2, logo j<sub>m+1</sub> = ⌊2<sup>m+1</sup>x⌋ é
+  2j<sub>m</sub> ou 2j<sub>m</sub> + 1: I<sub>m+1</sub> é uma das duas metades de I<sub>m</sub>.</p>
+  <p><em>Os declives brigam.</em> Pelo lema 5.8(a), o declive S<sub>m+1</sub> sobre I<sub>m+1</sub> difere do
+  declive S<sub>m</sub> sobre I<sub>m</sub> por exatamente 1:
+  |S<sub>m+1</sub> − S<sub>m</sub>| = 1 para <strong>todo</strong> m.</p>
+  <p><em>O xeque-mate.</em> Suponha T diferenciável em x. Pelo lema do aperto (5.9, com
+  a<sub>m</sub> = j<sub>m</sub>/2<sup>m</sup> ≤ x ≤ b<sub>m</sub>), S<sub>m</sub> → T′(x). Toda sequência
+  convergente é de Cauchy: para ε = 1/2 existiria M com |S<sub>m+1</sub> − S<sub>m</sub>| &lt; 1/2 para
+  m ≥ M. Mas o passo é 1, sempre. Contradição — não existe T′(x).<span class="qed">∎</span></p>
+</div>
+<p>Releia o tamanho do estrago. O quociente de diferenças de T, medido em intervalos diádicos cada vez mais
+finos em torno de <em>qualquer</em> ponto, é uma sequência de <em>inteiros que muda de valor em todo
+passo</em>. Em x = 0 ele sobe a escada 1, 2, 3, …, m (a sonda mostra a reta); em x = 1/3 ele bate entre 0 e 1
+para sempre; num ponto "genérico" ele passeia. Convergir — a única coisa que a derivada exigiria — é a única
+coisa que ele não sabe fazer. E ainda assim T é contínua: o terceiro enunciado plausível ("contínua alisa sob
+zoom") está morto. O gráfico da soma parcial, que <em>de fato</em> alisa (lema 5.8c), mente sobre T
+precisamente na propriedade investigada.</p>
+
+<h3 id="tvi-prova">5.11 Prova do Enunciado D: o TVI — e por que os gráficos pareciam confiáveis</h3>
+<p>Primeiro um lema de uma linha, que é a alma local do teorema:</p>
+<div class="prova">
+  <p id="preservacao-sinal"><strong>Lema (preservação de sinal).</strong> Se g é contínua em c e g(c) &gt; 0,
+  existe δ &gt; 0 tal que g(x) &gt; 0 para todo x do domínio com |x − c| &lt; δ. (Simetricamente para
+  g(c) &lt; 0.)</p>
+  <p><strong>Prova.</strong> Aplique a definição com ε = g(c)/2 &gt; 0: existe δ com
+  |g(x) − g(c)| &lt; g(c)/2 sempre que |x − c| &lt; δ. Então g(x) &gt; g(c) − g(c)/2 = g(c)/2 &gt; 0.
+  <span class="qed">∎</span></p>
+</div>
+<div class="prova">
+  <p><strong>Teorema (TVI).</strong> f : [a, b] → ℝ contínua, u entre f(a) e f(b). Então existe c ∈ [a, b]
+  com f(c) = u.</p>
+  <p><strong>Prova.</strong> Caso f(a) &lt; u &lt; f(b): troque f por g = f − u (contínua; g(a) &lt; 0 &lt;
+  g(b)) e procure um zero de g. Caso f(a) &gt; u &gt; f(b): use g = u − f. Casos de igualdade: c = a ou
+  c = b servem. Resta o coração: g contínua em [a, b], g(a) &lt; 0 &lt; g(b) ⟹ g tem zero.</p>
+  <p>Seja A = {x ∈ [a, b] : g(x) &lt; 0}. A é não vazio (a ∈ A) e limitado por b. Pelo <strong>princípio do
+  supremo</strong> (Capítulo 1), existe c = sup A ∈ [a, b]. Trilema sobre g(c):</p>
+  <p>— Se g(c) &gt; 0: a preservação de sinal dá δ com g &gt; 0 em (c − δ, c + δ) ∩ [a, b]. Nenhum elemento
+  de A pode estar em (c − δ, c]; como todos são ≤ c, todos são ≤ c − δ — e c − δ seria cota superior menor
+  que a menor. Contradição.</p>
+  <p>— Se g(c) &lt; 0: primeiro, c &lt; b (pois g(b) &gt; 0). A preservação de sinal dá δ com g &lt; 0 em
+  (c − δ, c + δ) ∩ [a, b]; tome t entre c e min(c + δ, b). Então g(t) &lt; 0, logo t ∈ A com t &gt; c — e c
+  não era cota superior. Contradição.</p>
+  <p>Resta g(c) = 0, isto é, f(c) = u.<span class="qed">∎</span></p>
+</div>
+<p><strong>O ponto epistemológico</strong>, que é o motivo de o TVI morar neste capítulo: o TVI é o teorema
+que os gráficos sempre "provaram" com o lápis — a curva que sai de baixo e chega em cima <em>tem</em> de
+cruzar a linha, porque o lápis não sai do papel. É por isso que gráficos parecem confiáveis: para a pergunta
+específica "cruza ou não cruza?", feita a uma função <em>contínua</em>, sobre <em>ℝ</em>, a imagem responde
+certo — e o TVI é o certificado. Mas olhe as duas hipóteses do certificado. Sem continuidade, nada cruza
+coisa alguma (Dirichlet salta a linha 1/2 em todos os pontos sem tocá-la). E sem completude o lápis fura o
+papel: em ℚ, a função g(x) = x² − 2 é contínua em [1, 2] ∩ ℚ, com g(1) = −1 &lt; 0 &lt; 2 = g(2) — e
+<strong>não tem zero</strong>, porque o zero teria quadrado 2, e a seção 5.1 proíbe. O TVI falha em ℚ
+exatamente onde ℚ é furado; a prova acima usou o supremo porque <em>tinha</em> de usar: a seção 5.12 mostra
+que a hipótese não é decorativa. A confiança no gráfico termina onde terminam as duas hipóteses — e as
+patologias deste capítulo moram, todas, do lado de fora.</p>
+<p style="font-size:.92rem; color:var(--ink-soft)">Nota (citada, sem prova): a recíproca visual também
+falha em ℝ — a propriedade do valor intermediário <em>não</em> caracteriza continuidade. Derivadas sempre a
+possuem mesmo quando descontínuas (teorema de Darboux, 1875); a prova exige o teorema do valor extremo, não
+construído neste ciclo. Fica citado no ledger e fechado: cruzar todas as linhas não é ser contínua.</p>
+
+<h3 id="buraco-q">5.12 Prova do Enunciado E: denso e furado — o buraco de ℚ</h3>
+<p>ℚ é denso em si mesmo (entre dois racionais, a média). A seção 5.3 provou mais: denso em ℝ. A intuição
+sussurra que um conjunto assim "não deixa buracos". O teorema final mostra o buraco — e o exibe com
+testemunhas explícitas, não por absurdo abstrato.</p>
+<div class="prova">
+  <p><strong>Teorema.</strong> A = {x ∈ ℚ : x² &lt; 2} é não vazio, limitado superiormente em ℚ, e não tem
+  supremo em ℚ.</p>
+  <p><strong>Prova.</strong> 1 ∈ A; e todo x ∈ A satisfaz x &lt; 2 (se x ≥ 2, então x² ≥ 2x ≥ 4 &gt; 2),
+  logo 2 é cota superior racional. Suponha agora que r ∈ ℚ seja a <em>menor</em> cota superior. De 1 ∈ A vem
+  r ≥ 1 &gt; 0. Pela seção 5.1, r² ≠ 2. Restam dois casos, e cada um produz uma testemunha explícita.</p>
+  <p><em>Caso r² &gt; 2 — desce mais um degrau.</em> Defina a testemunha</p>
+  <p class="formula">r′ = r/2 + 1/r ∈ ℚ, &nbsp;com&nbsp; r′² − 2 = (r² − 2)²/(4r²) &gt; 0
+  &nbsp;e&nbsp; r − r′ = (r² − 2)/(2r) &gt; 0.</p>
+  <p>(As duas identidades são álgebra direta: expanda r′² = r²/4 + 1 + 1/r² e subtraia 2; o oráculo as
+  confere simbolicamente e em frações exatas — invariante I6.) Então r′ &lt; r e r′² &gt; 2; e r′ é cota
+  superior: se x ∈ A tivesse x &gt; r′ &gt; 0, então x² &gt; r′² &gt; 2 — impossível. Uma cota menor que a
+  menor: contradição.</p>
+  <p><em>Caso r² &lt; 2 — então nem cota era.</em> Defina a testemunha</p>
+  <p class="formula">t = (2r + 2)/(r + 2) ∈ ℚ, &nbsp;com&nbsp; t − r = (2 − r²)/(r + 2) &gt; 0
+  &nbsp;e&nbsp; t² − 2 = 2(r² − 2)/(r + 2)² &lt; 0.</p>
+  <p>Então t ∈ A e t &gt; r: o próprio r não era cota superior. Contradição.</p>
+  <p>Os dois casos caem, e r² = 2 é proibido: não existe menor cota superior em ℚ.<span class="qed">∎</span></p>
+</div>
+<p>As testemunhas em ação, com números (todos exatos, conferidos pelo oráculo): descendo pelas cotas,
+3/2 ↦ 17/12 ↦ 577/408, com quadrados excedendo 2 por 1/4, 1/144, 1/166464; subindo por dentro de A,
+1 ↦ 4/3 ↦ 7/5, com quadrados faltando 2/9, depois 1/25. As duas escadas se aproximam uma da outra tanto
+quanto se queira — e o ponto de encontro <strong>não é um racional</strong>. Esse ponto que falta é
+exatamente o que o princípio do supremo garante em ℝ: lá, sup A existe e seu quadrado é 2 (se fosse &gt; 2 ou
+&lt; 2, as mesmas testemunhas r′ e t — que funcionam para qualquer real positivo — dariam a mesma
+contradição). A máquina inteira do Capítulo 1 — sequência monótona limitada converge — morre em ℚ por este
+buraco: a escada 3/2, 17/12, 577/408, … é decrescente e limitada <em>em ℚ</em>, e não converge para racional
+nenhum. Densidade não era o que sustentava o cerco de Arquimedes. Era completude. Sempre foi.</p>
+<p style="font-size:.92rem; color:var(--ink-soft)">O 577/408 desta escada e o 408/577 da seção 5.6 são o
+mesmo par de inteiros dos dois lados do espelho x ↦ 1/x: aproximar √2 e aproximar √2/2 = 1/√2 é o mesmo
+ofício. O estudo sistemático desse ofício — por que <em>estes</em> pares, com que erro, com que optimalidade
+— é o Capítulo 5 (frações contínuas), que na ordem de leitura veio antes, mas na ordem de produção colherá
+daqui a vacina contra gráficos.</p>
+
+<!-- ============================================================ -->
+<h2 id="arquitetura">6. Arquitetura: o que se provou, o que se importou</h2>
+<p>O capítulo prometeu (§1.5 do manual) localizar a incerteza em vez de diluí-la. O balanço, item a item:</p>
+<div class="caixa">
+  <span class="rotulo">Provado aqui, completo</span>
+  <ul class="compacta" style="margin:0">
+    <li>√2 irracional (5.1); propriedade arquimediana a partir do supremo (5.2); densidade de ℚ (5.3) e de ℝ∖ℚ (5.4);</li>
+    <li>Dirichlet descontínua em todo ponto (5.5); Thomae contínua exatamente nos irracionais (5.6);</li>
+    <li>a serra é 1-Lipschitz; T existe ponto a ponto pela convergência monótona do Cap. 1 (5.7);</li>
+    <li>lema dos declives diádicos, com C3 e C4 promovidas a teorema (5.8); lema do aperto (5.9); <strong>T não diferenciável em ponto algum</strong> (5.10);</li>
+    <li>preservação de sinal e TVI a partir do supremo; falha do TVI em ℚ (5.11); o buraco de ℚ com testemunhas explícitas (5.12).</li>
+  </ul>
+</div>
+<div class="caixa porta">
+  <span class="rotulo">Importado, declarado, com porta</span>
+  <ul class="compacta" style="margin:0">
+    <li><strong>Princípio do supremo</strong> — importado pelo Capítulo 1; este capítulo o usa (5.2, 5.11) e mostra seu preço (5.12).</li>
+    <li><strong>Teste M de Weierstrass + continuidade do limite uniforme</strong> — citados em 5.7; porta fechada → <strong>Capítulo 10</strong>, onde a convergência uniforme é construída. Único ponto do capítulo em que uma prova se apoia em teorema não demonstrado no tratado.</li>
+    <li><strong>Função original de Weierstrass (1872)</strong> — contexto histórico citado, sem prova e sem uso; sua análise exige o maquinário do Cap. 10 e o próprio cos redefinido por séries.</li>
+    <li><strong>Teorema de Darboux (1875)</strong> — nota citada em 5.11, sem prova e sem uso.</li>
+    <li><strong>Boa ordenação de ℤ limitado inferiormente</strong> — princípio aritmético básico, usado declaradamente em 5.3 (como a divisão euclidiana nos Caps. 2–4).</li>
+  </ul>
+</div>
+<p>Se a lista de importações crescesse em silêncio, o capítulo viraria bibliografia. Ela tem cinco itens, os
+cinco declarados, um único carregando peso de prova (o teste M) — e com endereço de reabertura.</p>
+
+<!-- ============================================================ -->
+<h2 id="camadas">7. As três camadas: quando a observação mente por construção</h2>
+<p>O manual (§2.1) separa <strong>objeto</strong>, <strong>representação</strong> e
+<strong>observação</strong>. Este capítulo é o lugar do tratado onde as três camadas se descolam ao máximo —
+e o traçador da seção 2 foi construído para exibir o descolamento, não para escondê-lo. A peça central é um
+lema que parece piada e não é:</p>
+<div class="prova">
+  <p id="floats-racionais"><strong>Lema (toda amostra é racional).</strong> Todo número de máquina em ponto
+  flutuante binário finito (IEEE-754, qualquer precisão) é da forma M·2<sup>E</sup> com M, E inteiros —
+  portanto racional.</p>
+  <p><strong>Prova.</strong> É a definição do formato: um float finito é sinal × mantissa inteira × potência
+  inteira de 2. Uma fração de inteiros com denominador potência de 2 é um racional.<span class="qed">∎</span></p>
+</div>
+<p>Consequências, em cascata. A tela que "mostra 0,1" segura, de fato, 3602879701896397/2<sup>55</sup> — um
+racional que <em>não é</em> 1/10 (Capítulo 4: 1/10 nem termina em base 2). O traçador que amostra a função de
+Dirichlet obtém D = 1 em <em>todas</em> as amostras, em <em>todas</em> as janelas — não porque amostrou
+pouco, mas porque <strong>o conjunto dos pontos que a máquina consegue nomear tem interseção vazia com o
+conjunto que decide a pergunta</strong>. A descontinuidade total de D vive no diálogo entre racionais e
+irracionais; a observação só escuta um dos lados. O oráculo registra o caso adversarial: 4096 floats
+varridos, 4096 racionais, imperfeição <em>computacional</em> na taxonomia do manual (§2.3) — não é bug, não
+tem conserto por refinamento; refinar a amostra multiplica testemunhas do mesmo lado.</p>
+<p>O mesmo descolamento, nas outras duas funções. Em Thomae, a observação desenha exatamente os pontos de
+<em>descontinuidade</em> (frações de denominador pequeno) e apaga todos os de continuidade — o gráfico mostra
+o oposto do que enuncia o teorema. Em Takagi, a soma parcial N é <em>de verdade</em> lisa na escala
+2<sup>−N</sup> (lema 5.8c): a mentira não está nos pixels, está na inferência "o que vale para T<sub>30</sub>
+vale para T". E a sonda diádica para em m = 52 não por preguiça: além de 52 bits, o próprio ponto sondado
+— um float — esgota seus dígitos, e a sequência S<sub>m</sub> do float passa a divergir como a de um racional
+diádico (dígitos 0 para sempre: S<sub>m</sub> cresce como reta), <em>diferente</em> do S<sub>m</sub> do
+irracional √2/2 que ele representava. A observação não degrada a resposta: <strong>troca a pergunta</strong>.</p>
+<div class="caixa">
+  <span class="rotulo">Síntese do capítulo (tese das camadas, agora com provas)</span>
+  <p style="margin:0">O gráfico computacional pode ocultar exatamente a propriedade investigada: a
+  descontinuidade de Dirichlet (invisível para amostras racionais — lema acima), a continuidade de Thomae
+  (moradora da altura zero, pixel nenhum), a rugosidade de Takagi (real em T, ausente em toda soma parcial
+  vista fundo o bastante). Em cada caso, a propriedade não estava <em>além da resolução</em>: estava
+  <em>fora do alcance da camada de observação</em>, por construção. "Dá para ver" não é um argumento;
+  daqui em diante, no tratado, é um alerta. — Síntese autoral no âmbito deste tratado; prioridade histórica
+  não estabelecida.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="exercicios">8. Exercícios</h2>
+<p>Cinco níveis, do socrático ao impossível-por-enquanto (E20 do manual). A regra de sempre: tente antes de
+abrir o gabarito, e abra sempre — o gabarito é a segunda metade do exercício. Os N4 não têm solução aqui: têm
+a razão exata pela qual ainda não têm, e o endereço onde terão.</p>
+
+<h3>Nível 0 — Socráticos</h3>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.1</span>
+  <p>Você desenha o gráfico de uma função no papel, sem tirar o lápis. Que propriedades matemáticas você
+  acabou de <em>assumir</em> sobre a função, sem perceber?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Pelo menos duas, e são exatamente as duas hipóteses do TVI. Primeiro: <em>continuidade</em> — o lápis
+    que não sai do papel não sabe saltar, então tudo que você desenha é contínuo; Dirichlet e Thomae já são
+    indesenháveis. Segundo, mais escondida: <em>completude do domínio</em> — o papel não tem buracos, a reta
+    ℚ tem (seção 5.12). Se o domínio fosse ℚ, o traço de x² − 2 atravessaria a altura 0 sem que exista ponto
+    de travessia.</p>
+    <p>E há uma terceira, a mais sutil: você assumiu que o traço tem <em>direção</em> em cada ponto — que
+    ampliando o suficiente, o desenho vira quase uma reta. A seção 5.10 mostra que continuidade não compra
+    isso: Takagi é desenhável no sentido de contínua, e não "alisa" em escala nenhuma. O lápis é um pacote de
+    teoremas não declarados. O exercício da honestidade é declará-los.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.2</span>
+  <p>"O conjunto ℚ é denso: entre dois racionais sempre há outro. Então não falta nada nele." Onde exatamente
+  esse raciocínio quebra?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Na palavra "então". Densidade diz: <em>entre</em> dois pontos há um terceiro — é uma propriedade sobre
+    pares. Completude diz: toda subida limitada tem um teto exato (supremo) — é uma propriedade sobre
+    <em>conjuntos infinitos inteiros</em>. São perguntas diferentes, e a seção 5.12 exibe o contraexemplo:
+    A = {x ∈ ℚ : x² &lt; 2} é feito só de racionais, cercado por racionais de todos os lados (densidade
+    intacta!), e ainda assim a menor cota superior não existe em ℚ — cada cota racional tem outra menor
+    (3/2, 17/12, 577/408, …), como uma escada descendo para um degrau que não está lá.</p>
+    <p>A moral socrática: "não falta nada" precisa dizer <em>que tipo de coisa</em> não falta. Não faltam
+    vizinhos (densidade). Faltam limites (completude). O cerco de Arquimedes precisava do segundo.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N0 · E0.3</span>
+  <p>O traçador da seção 2, no modo amostrado, desenhou a função de Dirichlet como uma reta na altura 1.
+  Aumentar a resolução — 10 vezes mais amostras, 1000 vezes, um trilhão — melhoraria a imagem?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Não — e entender <em>por que não</em> é entender a diferença entre erro de precisão e cegueira
+    estrutural. Cada amostra nova é um float novo; todo float é racional (lema da seção 7); em racional, D
+    vale 1. Um trilhão de amostras são um trilhão de testemunhas <em>do mesmo lado do tribunal</em>. O
+    conjunto dos pontos onde D vale 0 — os irracionais, que são "quase todos" os reais — tem interseção
+    vazia com o conjunto dos pontos que qualquer máquina de precisão finita consegue nomear.</p>
+    <p>Compare com o Capítulo 1: lá, mais lados do polígono melhoravam de verdade a aproximação — o erro era
+    de <em>quantidade</em> e diminuía. Aqui o erro é de <em>categoria</em>: a observação amostra a camada
+    errada do objeto. O manual (§2.3) chama isso de imperfeição computacional, e a lição operacional é: antes
+    de refinar um experimento, pergunte se o instrumento alcança a propriedade — refinar um instrumento cego
+    produz cegueira mais nítida.</p>
+  </details>
+</div>
+
+<h3>Nível 1 — Básicos</h3>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.1</span>
+  <p>Calcule T<sub>h</sub>(3/4), T<sub>h</sub>(6/8), T<sub>h</sub>(0,5), T<sub>h</sub>(7) e
+  T<sub>h</sub>(√2/2). Qual dos cinco é uma pegadinha, e por quê?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>T<sub>h</sub>(3/4) = 1/4 (já reduzida). T<sub>h</sub>(6/8): <strong>a pegadinha</strong> — 6/8 não
+    está reduzida; o valor é atribuído à forma reduzida 3/4, logo T<sub>h</sub>(6/8) = 1/4, e não 1/8. A
+    função come o <em>número</em>, não o <em>numeral</em> (Capítulo 4: a distinção inteira mora aí). Uma
+    implementação que esquecesse de reduzir daria 1/8 e estaria calculando outra função — nem bem definida,
+    aliás, porque 6/8 = 3/4 receberia dois valores. O oráculo do capítulo testa exatamente esse caso
+    adversarial.</p>
+    <p>T<sub>h</sub>(0,5) = T<sub>h</sub>(1/2) = 1/2. T<sub>h</sub>(7) = T<sub>h</sub>(7/1) = 1/1 = 1 —
+    inteiros são o "pico" da função. T<sub>h</sub>(√2/2) = 0: irracional (se √2/2 = p/q então √2 = 2p/q seria
+    racional, contra 5.1). Cinco avaliações, três lições: reduzir primeiro, inteiros valem 1, irracionais
+    valem 0.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.2</span>
+  <p>Encontre, com prova de uma linha cada: (a) um racional entre 0,70710 e √2/2; (b) um irracional entre
+  0,7071 e 0,7072. (√2/2 ≈ 0,70710678…)</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>(a) 0,707106 serve: é racional (decimal finito = fração com denominador potência de 10), e
+    0,70710 &lt; 0,707106 &lt; 0,70710678… = √2/2. Não precisa de teoria nenhuma além de comparar dígitos —
+    e essa é a lição: a densidade de ℚ (seção 5.3) formaliza um truque que a notação decimal já sabia fazer:
+    truncar mais fundo.</p>
+    <p>(b) Compare dígitos: 0,7071 &lt; 0,70710678… &lt; 0,7072 — o próprio √2/2 mora no intervalo, e é
+    irracional pelo argumento de E1.1. E se o intervalo não contivesse nenhum irracional "famoso"? A receita
+    da seção 5.4 fabrica um sob medida: pegue um racional r do interior, afastado das bordas, e some √2/n com
+    n grande o bastante (por exemplo 0,70715 + √2/10⁶) — irracional porque racional + irracional é irracional
+    (senão √2 = n·(soma − r) seria racional), e dentro do intervalo porque o deslocamento √2/10⁶ &lt; 0,0000015
+    é menor que a folga até a borda. As duas densidades não são teoremas de existência etérea: são
+    <em>receitas</em>, e o oráculo do capítulo as executa com certificado exato (invariante I1).</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N1 · E1.3</span>
+  <p>Desenhe (à mão!) as somas parciais T₁ e T₂ de Takagi no intervalo [0, 1] e calcule T₂ nos pontos
+  k/8, k = 0, …, 8. Confira com o traçador em N = 2.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>T₁ = s(x): a tenda — sobe de (0, 0) até (1/2, 1/2), desce até (1, 0). T₂ = s(x) + s(2x)/2: soma-se à
+    tenda grande uma tenda de altura 1/4 e período 1/2. Nos oitavos:</p>
+    <p class="formula">T₂(0) = 0; T₂(1/8) = 1/8 + 1/8 = 1/4; T₂(1/4) = 1/4 + 1/4 = 1/2; T₂(3/8) = 3/8 + 1/8 = 1/2;
+    T₂(1/2) = 1/2 + 0 = 1/2;</p>
+    <p>e por simetria (T₂(1 − x) = T₂(x), herdada da simetria de cada serra): T₂(5/8) = 1/2, T₂(3/4) = 1/2,
+    T₂(7/8) = 1/4, T₂(1) = 0.</p>
+    <p>Entre os pontos calculados não há surpresa escondida: pelo lema 5.8c com N = 2, T₂ é linear em cada
+    intervalo diádico de largura 1/4, então ligar os valores de 0, 1/4, 1/2, 3/4 e 1 por segmentos <em>é</em>
+    o gráfico exato. Resultado: um trapézio — sobe com declive 2 em [0, 1/4] (dígitos 00, declive
+    S₂ = +1+1 = 2), fica <strong>constante na altura 1/2</strong> em todo o trecho [1/4, 3/4] (dígitos 01 e
+    10: declives +1−1 = 0 e −1+1 = 0) e desce com declive −2 em [3/4, 1] (dígitos 11). Verificação
+    independente num ponto interno: T₂(5/16) = 5/16 + s(5/8)/2 = 5/16 + 3/16 = 1/2 ✓.</p>
+    <p>A moral, dupla. O platô mostra a soma parcial <em>apagando</em> estrutura: T₂ é constante num trecho
+    onde T oscila (os declives de T ali têm S₂ = 0, mas S₃ já vale ±1 — confira na sonda). E os quatro
+    declives 2, 0, 0, −2 são o lema 5.8 em miniatura, calculável no papel. <em>Calcular</em> T₂ é fácil;
+    <em>concluir de T₂ algo sobre T</em> é exatamente o erro que a seção 7 batizou de troca de pergunta.</p>
+  </details>
+</div>
+
+<h3>Nível 2 — Intermediários</h3>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.1</span>
+  <p>Execute a prova da seção 5.6 com números: para a = √2/2 e ε = 1/10, liste os violadores possíveis
+  (frações com T<sub>h</sub> ≥ 1/10 perto de a), ache o mais próximo e produza um δ explícito que funciona.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>ε = 1/10 ⟹ Q = 10: os violadores são as frações reduzidas de denominador ≤ 10. Perto de
+    √2/2 ≈ 0,70710678: os candidatos por denominador são 1/2 (longe), 2/3 ≈ 0,6667, 3/4 = 0,75,
+    5/7 ≈ 0,714285, <strong>7/10 = 0,7</strong>, 5/8 = 0,625, 7/9 ≈ 0,778 … O mais próximo é 7/10, a
+    distância |√2/2 − 7/10| ≈ 0,0071068 (verificado pelo oráculo, invariante I2; segundo colocado:
+    5/7, a ≈ 0,0072). Então δ = 0,007 funciona: qualquer x com |x − √2/2| &lt; 0,007 ou é irracional
+    (T<sub>h</sub> = 0) ou é fração de denominador ≥ 11 (T<sub>h</sub> ≤ 1/11 &lt; 1/10).</p>
+    <p>Duas observações que o cálculo ensina e o enunciado esconde. Primeira: o δ <em>depende brutalmente</em>
+    de a — para a = 0,7 + 10⁻⁹ (racional pertíssimo de 7/10), nenhum δ dessa ordem serve, porque o próprio
+    7/10 mora dentro. Segunda: apertando ε, o δ desaba — para ε = 1/1000 o violador mais próximo já é
+    408/577 e δ ≈ 1,06·10⁻⁶. Continuidade em irracional, sim; mas uma continuidade histérica, recalibrada
+    ponto a ponto. É exatamente o que "contínua nos irracionais, descontínua nos racionais" significa quando
+    se paga em números.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.2</span>
+  <p>Prove que T(1/3) = 2/3 — o valor exato, com a série inteira, sem importar nada além do que o capítulo
+  já tem.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p><em>Passo 1: as serras em 1/3.</em> 2<sup>k</sup>/3 tem parte fracionária 1/3 (k par) ou 2/3 (k
+    ímpar) — indução: 2·(1/3) = 2/3 e 2·(2/3) = 4/3 ≡ 1/3. Em ambos os casos a distância ao inteiro mais
+    próximo é 1/3: s(2<sup>k</sup>/3) = 1/3 para todo k.</p>
+    <p><em>Passo 2: a série vira geométrica.</em> T(1/3) = Σ<sub>k≥0</sub> (1/3)/2<sup>k</sup> =
+    (1/3)·Σ<sub>k≥0</sub> 2<sup>−k</sup>. A soma parcial de Σ 2<sup>−k</sup> é 2 − 2<sup>−N+1</sup>
+    (multiplique por 2 e cancele, ou indução), crescente e limitada por 2; pelo teorema da convergência
+    monótona (Capítulo 1) converge, e converge para 2: dado ε, 2<sup>−N+1</sup> &lt; ε para N grande
+    (seção 5.2 dá o N). Logo T(1/3) = (1/3)·2 = <strong>2/3</strong>.</p>
+    <p><em>Moral.</em> O ponto 1/3 é especial: todas as serras o veem à mesma altura 1/3, o máximo do
+    empilhamento coerente — e de fato 2/3 é o valor máximo de T (fato clássico que não provaremos; a sonda
+    sugere por que: os declives em 1/3 alternam 1, 0, 1, 0 — subida líquida nula, cume). O oráculo confere
+    T(1/3) = 2/3 por soma parcial exata em frações com cota de cauda (invariante I4). Note o contraste com a
+    seção 5.8: em pontos <em>diádicos</em> a série termina sozinha; em 1/3 ela é infinita mas geométrica; num
+    irracional, nem isso — três regimes de computabilidade para a mesma fórmula.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N2 · E2.3</span>
+  <p>Na sonda diádica, o ponto x = 5/8 (diádico) tem S₃ = −1 e depois S<sub>m</sub> = m − 4 para m ≥ 3 —
+  crescendo para sempre. Prove essa fórmula e explique o que ela diz sobre T perto dos diádicos.</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>5/8 = 0,101₂. Para m ≥ 3, o índice do intervalo diádico que contém 5/8 (com 5/8 como extremo
+    esquerdo!) é j<sub>m</sub> = 5·2<sup>m−3</sup>: os dígitos são 101 seguidos de m − 3 zeros. Pelo lema
+    5.8, S<sub>m</sub> = (−1 + 1 − 1) + (m − 3)·(+1) = m − 4. Conferindo: S₃ = −1, S₄ = 0, S₅ = 1, … — a
+    sonda mostra a reta subindo com um degrau de atraso em relação à de x = 0.</p>
+    <p>O que isso diz: em <em>todo</em> ponto diádico, os dígitos acabam em zeros, logo S<sub>m</sub> cresce
+    como m + constante — o declive diádico à direita de um diádico diverge para +∞. (À esquerda, por
+    simetria da construção, diverge o quociente com sinal trocado — o gráfico de T faz uma "quina
+    infinitamente íngreme" em cada diádico, um em cada escala.) Os diádicos são densos (entre dois reais há
+    um diádico — mesma prova da seção 5.3 com n potência de 2); então T tem um conjunto denso de pontos de
+    declive explodindo, e ainda assim é contínua em todos eles. A intuição "contínua = declive
+    comportado" não sobrevive nem numa vizinhança que seja.</p>
+  </details>
+</div>
+
+<h3>Nível 3 — Difíceis</h3>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.1</span>
+  <p>Refine a seção 5.6: prove que T<sub>h</sub> não é diferenciável em <em>nenhum</em> irracional (mesmo
+  sendo contínua em todos eles). Sugestão: aproxime o irracional a por racionais de denominador controlado —
+  a densidade da seção 5.3 dá m/n com |a − m/n| &lt; 1/n… quão pequeno o denominador consegue ser?</p>
+  <details class="gab"><summary>Gabarito</summary>
+    <p>Seja a irracional. A prova da seção 5.3, lida com atenção, entrega mais do que densidade: para cada n,
+    o menor m com m &gt; na satisfaz na &lt; m ≤ na + 1, logo o racional m/n cumpre
+    <strong>0 &lt; m/n − a ≤ 1/n</strong> (desigualdade estrita à esquerda porque a é irracional). Chame
+    r<sub>n</sub> = m/n; então r<sub>n</sub> → a.</p>
+    <p>Suponha T<sub>h</sub> diferenciável em a. O quociente por esses racionais:
+    [T<sub>h</sub>(r<sub>n</sub>) − T<sub>h</sub>(a)]/(r<sub>n</sub> − a) = T<sub>h</sub>(r<sub>n</sub>)/(r<sub>n</sub> − a).
+    Agora T<sub>h</sub>(r<sub>n</sub>) ≥ 1/n (o denominador reduzido de m/n divide n, logo é ≤ n, e o valor
+    de Thomae é o inverso do denominador reduzido) e 0 &lt; r<sub>n</sub> − a ≤ 1/n; então o quociente é
+    ≥ (1/n)/(1/n) = <strong>1</strong>, para todo n. Pela sequência irracional w<sub>n</sub> → a (seção 5.4
+    em intervalos encolhendo), o quociente vale 0 sempre. Duas sequências de aproximação, dois limites (≥ 1 e
+    = 0) — a derivada teria de ser ambos. Contradição.<span class="qed">∎</span></p>
+    <p>Moral dupla. Primeira: continuidade num ponto não compra nem a <em>possibilidade</em> de derivada — o
+    conjunto de continuidade de Thomae (todos os irracionais!) não contém um único ponto de
+    diferenciabilidade. Segunda: a chave foi <em>quantificar</em> a densidade (aproximar com denominador ≤ n
+    custa erro ≤ 1/n) — transformar um teorema de existência num teorema com taxa. Essa taxa é o começo da
+    teoria de aproximação diofantina, que é exatamente o motor do Capítulo 5.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N3 · E3.2</span>
+  <p>O TVI usou o supremo, e a seção 5.12 mostrou que em ℚ ele falha. Feche o triângulo: prove que o TVI
+  (enunciado para todo intervalo [a, b] e toda contínua) <em>implica</em> o princípio do supremo para
+  conjuntos limitados da forma A = {x : x² &lt; c}, c &gt; 1 — isto é, use o TVI como axioma e produza a
+  raiz quadrada que ℚ não tinha.</p>
+  <details class="gab"><summary>Gabarito (guiado — termine você)</summary>
+    <p>Assuma o TVI. Tome f(x) = x² − c em [1, c] (com c &gt; 1): f é contínua (polinômio; prove com ε-δ:
+    |x² − y²| = |x + y||x − y| ≤ 2c|x − y| no intervalo — a constante de Lipschitz 2c faz o δ = ε/2c), com
+    f(1) = 1 − c &lt; 0 e f(c) = c² − c = c(c − 1) &gt; 0. O TVI entrega w ∈ (1, c) com w² = c.</p>
+    <p>Agora mostre que esse w é o supremo de A = {x : x² &lt; c}: (i) w é cota superior — se x &gt; w &gt; 0
+    então x² &gt; w² = c, logo x ∉ A; (ii) nada menor é cota — se y &lt; w, tome qualquer t com
+    y &lt; t &lt; w (média); então t² &lt; w² = c, logo t ∈ A e t &gt; y. Portanto sup A = w, existindo.</p>
+    <p>Conclusão do triângulo: supremo ⟹ TVI (seção 5.11); TVI ⟹ existência de raízes ⟹ supremos de
+    conjuntos quadráticos (este exercício); e ℚ não tem nenhum dos dois (seção 5.12 + falha do TVI em ℚ). Os
+    dois princípios não são vizinhos: são <em>o mesmo compromisso</em> com a inexistência de buracos, vestido
+    de análise ou de ordem. (A equivalência plena TVI ⟺ completude, em corpos ordenados gerais, é verdadeira
+    e fica como leitura para o segundo ciclo — o que você provou é o caso que este capítulo precisava.)</p>
+  </details>
+</div>
+
+<h3>Nível 4 — Impossíveis por enquanto</h3>
+<p>Sem solução — de propósito. Cada caixa diz por que ainda não dá, e onde vai dar.</p>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.1</span>
+  <p>Thomae é contínua exatamente nos irracionais. Construa a peça simétrica: uma função contínua exatamente
+  nos <strong>racionais</strong> — ou prove que não existe.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Não existe — e a razão é um teorema de <em>topologia</em>, não de contas. O conjunto de continuidade
+    de qualquer função é uma interseção enumerável de abertos (um "G<sub>δ</sub>": a interseção, sobre
+    ε = 1/n, dos pontos que têm vizinhança com oscilação &lt; 1/n); e ℚ <em>não</em> é um G<sub>δ</sub> — a
+    prova disso pede o teorema de Baire, que classifica o que interseções enumeráveis de abertos densos podem
+    fazer. Nada disso — oscilação, G<sub>δ</sub>, categoria de Baire — foi construído neste ciclo: topologia
+    geral está explicitamente adiada (§11 do manual). A porta é o <strong>segundo ciclo</strong>; quando
+    Baire chegar, este exercício terá três linhas. Até lá, fique com o espanto certo: a assimetria entre ℚ e
+    ℝ∖ℚ que este capítulo viu na prática (um pode carregar continuidade, o outro não) é um fato
+    <em>estrutural</em>, mais fundo que cardinalidade — os dois conjuntos são ambos densos, e mesmo assim não
+    são intercambiáveis.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.2</span>
+  <p>Os racionais de [0, 1] são densos. Qual é o <em>comprimento total</em> deles? Formule a pergunta com
+  rigor e responda.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>A resposta clássica é chocante: zero — os racionais de [0, 1] cabem, todos, dentro de uma coleção de
+    intervalos de comprimento total tão pequeno quanto se queira (cubra a n-ésima fração com um intervalo de
+    largura ε/2<sup>n</sup>; a soma geométrica dá ε). Denso <em>e</em> de comprimento nulo. Mas "comprimento
+    total de um conjunto arbitrário" é um conceito que precisa de <em>teoria da medida</em> — e o manual a
+    exclui explicitamente deste ciclo (E10, §11): foi a decisão que delimitou até o contrato de Fourier
+    (Cap. 11). A porta é o <strong>segundo ciclo</strong> (medida de Lebesgue). O que este capítulo já deixa
+    provado é o contraste que tornará a medida inevitável: densidade (5.3) não mede nada — um conjunto pode
+    estar em toda parte e não ocupar lugar nenhum.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <span class="nivel">N4 · E4.3</span>
+  <p>Prove que a função original de Weierstrass (1872) — a série de cossenos amortecidos citada na seção
+  5.7 — é contínua em toda parte e diferenciável em nenhuma.</p>
+  <details class="gab"><summary>Por que ainda não dá — e onde vai dar</summary>
+    <p>Dois bloqueios, em camadas. Primeiro: cos, neste tratado, ainda é um objeto geométrico (razão no
+    círculo, Cap. 0/1) — a função <em>analítica</em> cos, com suas estimativas de incremento e suas somas
+    trigonométricas, será construída por séries de potências no <strong>Capítulo 10</strong>. Segundo: mesmo
+    com cos em mãos, a prova de Weierstrass/Hardy exige exatamente o maquinário que o Cap. 10 fabrica —
+    convergência uniforme fina, e estimativas de blocos de séries que aqui não têm nem enunciado. Este
+    capítulo escolheu Takagi <em>porque</em> a serra faz com aritmética binária (seções 5.8–5.10) o que o
+    cosseno só faz com análise pesada. Quando o Cap. 10 reabrir a porta do teste M, este exercício será o
+    teste de fogo da fábrica: mesma estratégia da seção 5.10, ferramentas novas. A comparação das duas provas
+    — o que a serra deu de graça, o que o cosseno cobra — valerá o preço do capítulo.</p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="horizonte">9. Horizonte</h2>
+<ul class="compacta">
+  <li><strong>Pergunta inevitável:</strong> este capítulo mediu continuidade ponto a ponto e viu conjuntos de
+  continuidade estranhos (∅, ℝ∖ℚ, ℝ). Quais conjuntos são possíveis? A resposta exata (os G<sub>δ</sub>, E4.1)
+  pede topologia — e a pergunta "quão grande é um conjunto?" (E4.2) pede medida. As duas portas do segundo
+  ciclo já estão desenhadas, e foi este capítulo que as desenhou.</li>
+  <li><strong>Porta fechada → Cap. 10:</strong> teste M de Weierstrass, continuidade do limite uniforme, e a
+  função original de Weierstrass com prova completa (E4.3). Única dívida demonstrativa do capítulo, declarada
+  na seção 6.</li>
+  <li><strong>Porta aberta ← Cap. 1:</strong> o princípio do supremo, importado lá, pagou aqui três vezes:
+  arquimediana (5.2), TVI (5.11) e o contraste com o buraco de ℚ (5.12) — que é, afinal, a razão de o
+  Capítulo 1 ter precisado de ℝ.</li>
+  <li><strong>Vacina exportada → Cap. 5 (ordem de produção):</strong> o autor escreve a ponte musical já
+  desconfiando de gráficos; e as aproximações racionais quantificadas (E3.1, 408/577) são o aperitivo exato
+  das frações contínuas.</li>
+  <li><strong>Aviso exportado → Caps. 9–12:</strong> "dá para ver" deixou de ser argumento neste tratado.
+  A integral (Cap. 9) reencontrará Dirichlet e Thomae como testes de integrabilidade; Fourier (Cap. 11)
+  reencontrará a soma parcial que mente perto do salto (Gibbs). As patologias não são fim de linha: são o
+  controle de qualidade dos capítulos que vêm.</li>
+</ul>
+
+<footer class="estado">
+  <p><strong>Estado do capítulo: aberto — auditado sob gate v0, validado sob gate v1; aguarda veredito do
+  leitor primário e tag de release.</strong> Oráculo triplo executado em 28/07/2026 com artefatos em
+  <code>audit/</code> (invariantes I1–I8 + casos adversariais; conjecturas C1–C5 do pré-registro julgadas —
+  ver <code>conjecturas.md</code> e <code>claims.yml</code>). Auditoria de gate v0 completa: interação
+  verificada contra cômputo independente, teclado, overflow, autocontenção sem rede, screenshots desktop e
+  iPhone inspecionados pelo agente responsável.</p>
+  <p><strong>Refutação de C5 (28/07/2026, §1.3).</strong> A conjectura pré-registrada sobre os bits da
+  mantissa de √2/2 (alternância de sinal ≥ 3 em S₁…S₅₂) foi <strong>refutada pelo oráculo canônico</strong>
+  na primeira execução: 2 mudanças de sinal, três eras longas de um lado só; a cláusula de magnitude
+  (max |S| ≤ 12) segurou com máximo 9. Autópsia de cinco perguntas em <code>conjecturas.md</code> (apêndice;
+  o registro original permanece intacto); entrada <code>chapter-06.mantissa-walk-conjecture</code> no ledger.
+  Registrado, não apagado — é o pré-registro funcionando.</p>
+  <p><strong>Pendências declaradas (protocolo §9):</strong> (1) a identificação fina de sup A com "√2 usado
+  na seção 5.4" apoia-se no argumento das testemunhas lido em ℝ — a construção sistemática de raízes
+  quadradas reais (para todo c &gt; 0) fica para o TVI aplicado (E3.2) e será usada sem cerimônia nos
+  capítulos seguintes; (2) o valor máximo de T (= 2/3, mencionado no gabarito de E2.2) é citado sem prova e
+  sem uso; (3) as edições de referência dos textos clássicos (Dirichlet 1829, Thomae 1875, Weierstrass 1872,
+  Takagi 1901, van der Waerden 1930) estão em <code>sources.md</code> com estado declarado — nenhuma foi
+  consultada em original nesta sessão; (4) fica aberta (não bloqueante) a comparação quantitativa entre a
+  sonda diádica em floats e em racionais exatos além de m = 52 — a divergência das duas sequências está
+  <em>afirmada e explicada</em> na seção 7, e verificada pelo oráculo no caso do float de √2/2 (dígitos do
+  denominador 2⁵³ esgotados), mas não foi transformada em invariante geral.</p>
+  <p>MATH3us.md · Capítulo 6 · território virgem · sem release (tag do leitor primário pendente).</p>
+</footer>
+
+</main>
+
+<script>
+"use strict";
+/* ============================================================
+ * Chapter 6 — The Pathologies. The lying plotter + dyadic probe.
+ *
+ * Layer discipline (manual §2.1), declared in the page text:
+ *  - The SAMPLED Dirichlet mode is honest float sampling: every
+ *    sample is a float, hence rational, hence D = 1 (section 7).
+ *  - The IDEAL Dirichlet mode draws the two-line idealization that
+ *    NO sampling produces; justified by the density theorems.
+ *  - Thomae is drawn from exact fraction enumeration (p/q, q <= Qcap).
+ *  - Takagi partial sums are float evaluations (representation layer);
+ *    the dyadic probe values S_m are computed EXACTLY over BigInt and
+ *    cross-checked by the oracle via exact Fraction evaluation of T.
+ * ============================================================ */
+
+// --- pt-BR formatting -----------------------------------------
+function fmt(x, d) { return x.toFixed(d).replace(".", ","); }
+function fmtInt(n) { return Number(n).toLocaleString("pt-BR"); }
+
+// --- shared state ---------------------------------------------
+const CENTER = Math.sqrt(2) / 2;           // window center (a float, i.e. rational)
+let fn = "dirichlet";                       // dirichlet | thomae | takagi
+let dMode = "amostrado";                    // amostrado | ideal
+let zExp = 0;                               // window width = 2^-z
+let nTerms = 4;                             // Takagi partial-sum terms
+
+const cv = document.getElementById("cv-plot");
+const ctx = cv.getContext("2d");
+const W = cv.width, H = cv.height;
+const COL_PT = "#1c5e3c", COL_LINE = "#8a3318", COL_AXIS = "#c9bda3", COL_TXT = "#4c443a";
+
+function windowRange() {
+  const w = Math.pow(2, -zExp);
+  return { xmin: CENTER - w / 2, xmax: CENTER + w / 2, w };
+}
+
+// sawtooth: distance to nearest integer (float; representation layer)
+function saw(x) { return Math.abs(x - Math.round(x)); }
+function takagiPartial(x, N) {
+  let t = 0, p = 1;
+  for (let k = 0; k < N; k++) { t += saw(x * p) / p; p *= 2; }
+  return t;
+}
+function gcd(a, b) { while (b) { const t = a % b; a = b; b = t; } return a; }
+
+// exact float -> fraction p/2^k (for the samples table)
+function floatToDyadic(x) {
+  // decompose |x| = m * 2^e with m odd-ish integer; keep it simple & exact
+  let e = 0, y = Math.abs(x);
+  if (y === 0) return { num: "0", den: "1" };
+  while (!Number.isInteger(y) && e < 1100) { y *= 2; e++; }
+  let num = BigInt(y); let den = 1n << BigInt(e);
+  while (num % 2n === 0n && den > 1n) { num /= 2n; den /= 2n; }
+  return { num: (x < 0 ? "-" : "") + num.toString(), den: den.toString() };
+}
+
+// --- axes helper ----------------------------------------------
+function drawAxes(ymin, ymax, yTicks, tickDigits) {
+  ctx.clearRect(0, 0, W, H);
+  const mL = 52, mR = 12, mT = 12, mB = 30;
+  const pw = W - mL - mR, ph = H - mT - mB;
+  const { xmin, xmax } = windowRange();
+  const X = (x) => mL + pw * (x - xmin) / (xmax - xmin);
+  const Y = (v) => mT + ph * (1 - (v - ymin) / (ymax - ymin));
+  ctx.strokeStyle = COL_AXIS; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(mL, mT); ctx.lineTo(mL, mT + ph); ctx.lineTo(mL + pw, mT + ph); ctx.stroke();
+  ctx.font = "11px Georgia, serif"; ctx.fillStyle = COL_TXT;
+  const digits = Math.min(12, Math.max(4, zExp / 3 + 5));
+  ctx.fillText(fmt(xmin, digits), mL - 4, H - 8);
+  const xr = fmt(xmax, digits);
+  ctx.fillText(xr, mL + pw - ctx.measureText(xr).width, H - 8);
+  const td = tickDigits ?? 3;
+  for (const t of yTicks) {
+    ctx.fillText(fmt(t, td), 4, Y(t) + 4);
+    ctx.beginPath(); ctx.moveTo(mL - 3, Y(t)); ctx.lineTo(mL, Y(t)); ctx.stroke();
+  }
+  return { X, Y, mL, mT, pw, ph };
+}
+
+// --- the three plots ------------------------------------------
+function drawDirichlet() {
+  const g = drawAxes(-0.1, 1.1, [0, 1], 1);
+  const { xmin, w } = windowRange();
+  if (dMode === "amostrado") {
+    // one float sample per pixel column; every float is rational -> D = 1
+    ctx.fillStyle = COL_LINE;
+    for (let i = 0; i < 640; i++) {
+      const x = xmin + (i + 0.5) * w / 640;   // a float: rational by section 7
+      const D = 1;                             // D(rational) = 1, always
+      ctx.fillRect(g.mL + (g.pw * i) / 640, g.Y(D) - 1, Math.max(1, g.pw / 640), 2);
+    }
+    return { drawn: 640, note: "640 amostras float, 640 racionais, 0 irracionais — uma reta na altura 1" };
+  }
+  // ideal mode: every pixel column (a real interval) contains both kinds
+  ctx.fillStyle = COL_LINE; ctx.fillRect(g.mL, g.Y(1) - 1, g.pw, 2);
+  ctx.fillStyle = COL_PT; ctx.fillRect(g.mL, g.Y(0) - 1, g.pw, 2);
+  return { drawn: 2, note: "duas retas ideais (densidades 5.3–5.4); nenhuma amostragem produz esta imagem" };
+}
+
+function drawThomae() {
+  const g = drawAxes(-0.06, 1.06, [0, 0.5, 1], 1);
+  const { xmin, xmax, w } = windowRange();
+  // adaptive denominator cap: expected count ~ (3/pi^2) Q^2 w  <= ~6000
+  const Qcap = Math.max(100, Math.min(4000, Math.floor(Math.sqrt(12000 / w))));
+  let drawn = 0;
+  ctx.fillStyle = COL_PT;
+  for (let q = 1; q <= Qcap; q++) {
+    const pLo = Math.ceil(q * xmin), pHi = Math.floor(q * xmax);
+    for (let p = pLo; p <= pHi; p++) {
+      if (gcd(Math.abs(p), q) !== 1) continue;
+      const x = p / q, y = 1 / q;
+      ctx.fillRect(g.X(x) - 1, g.Y(y) - 1, 2.4, 2.4);
+      drawn++;
+    }
+  }
+  return { drawn, Qcap, note: `q ≤ ${fmtInt(Qcap)}: ${fmtInt(drawn)} pontos (todos de descontinuidade), alturas ≥ 1/${fmtInt(Qcap)}; pontos de continuidade visíveis: 0` };
+}
+
+function drawTakagi() {
+  const { xmin, w } = windowRange();
+  const xs = [], ys = [];
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i <= 640; i++) {
+    const x = xmin + i * w / 640;
+    const y = takagiPartial(x, nTerms);
+    xs.push(x); ys.push(y);
+    if (y < lo) lo = y; if (y > hi) hi = y;
+  }
+  if (hi - lo < 1e-12) { hi += 1e-12; lo -= 1e-12; }
+  const pad = (hi - lo) * 0.08;
+  const digits = Math.max(2, Math.min(10, Math.ceil(-Math.log10(Math.max(hi - lo, 1e-12))) + 3));
+  const g = drawAxes(lo - pad, hi + pad, [lo, hi], digits);
+  ctx.strokeStyle = COL_LINE; ctx.lineWidth = 1.7; ctx.beginPath();
+  for (let i = 0; i <= 640; i++) {
+    const px = g.X(xs[i]), py = g.Y(ys[i]);
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  const flat = w <= Math.pow(2, -nTerms);
+  return { lo, hi, flat,
+    note: `T_${nTerms} na janela: mín ${fmt(lo, 8)}, máx ${fmt(hi, 8)}` +
+      (flat ? ` — janela mais fina que 2^−${nTerms}: o traço é EXATAMENTE um segmento de reta (lema 5.8c) — da soma parcial, não de T` : "") };
+}
+
+// --- samples table (Dirichlet evidence) -----------------------
+function renderSamplesTable() {
+  const tb = document.getElementById("tabela-amostras-corpo");
+  tb.innerHTML = "";
+  const { xmin, w } = windowRange();
+  for (let i = 0; i < 6; i++) {
+    const x = xmin + (i + 0.5) * w / 6;
+    const f = floatToDyadic(x);
+    const shown = x.toPrecision(12).replace(".", ",");
+    const tr = document.createElement("tr");
+    const exact = f.den === "1" ? f.num : f.num + " / " + f.den;
+    tr.innerHTML = "<td>" + shown + "</td><td style='font-size:.8rem'>" + exact + "</td>" +
+      "<td>sim (p/2^k)</td><td>1</td>";
+    tb.appendChild(tr);
+  }
+}
+
+// --- Farey table (Thomae calibration; in-page totient sieve) --
+function totientSum(Q) {
+  const phi = new Array(Q + 1);
+  for (let i = 0; i <= Q; i++) phi[i] = i;
+  for (let p = 2; p <= Q; p++) {
+    if (phi[p] === p) for (let m = p; m <= Q; m += p) phi[m] -= Math.floor(phi[m] / p);
+  }
+  let s = 0; for (let q = 1; q <= Q; q++) s += phi[q];
+  return s;
+}
+function renderFareyTable() {
+  const tb = document.getElementById("tabela-farey-corpo");
+  tb.innerHTML = "";
+  for (const Q of [10, 100, 1000]) {
+    const c = totientSum(Q);
+    const approx = 3 * Q * Q / (Math.PI * Math.PI);
+    const dev = Math.abs(c - approx) / approx;
+    const approxBR = approx.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + fmtInt(Q) + "</td><td>" + fmtInt(c) + "</td><td>" + approxBR + "</td>" +
+      "<td>" + fmt(dev * 100, 3) + "%</td>";
+    tb.appendChild(tr);
+  }
+}
+
+// --- main plot render -----------------------------------------
+function renderPlot() {
+  let info;
+  if (fn === "dirichlet") info = drawDirichlet();
+  else if (fn === "thomae") info = drawThomae();
+  else info = drawTakagi();
+  const { w } = windowRange();
+  const st = "função: " + fn + (fn === "dirichlet" ? " (" + dMode + ")" : "") +
+    "  |  janela: centro √2/2, largura 2^−" + zExp + " = " + w.toExponential(2).replace(".", ",") +
+    (fn === "takagi" ? "  |  N = " + nTerms : "") +
+    "  |  " + info.note +
+    "  |  o teorema correspondente (seção " + (fn === "dirichlet" ? "5.5" : fn === "thomae" ? "5.6" : "5.10") +
+    ") afirma o que pixel nenhum mostra";
+  document.getElementById("leitura").textContent = st;
+  document.getElementById("zoom-val").textContent = "z = " + zExp;
+  document.getElementById("termos-val").textContent = "N = " + nTerms;
+  renderSamplesTable();
+  // mode buttons only meaningful for dirichlet
+  document.getElementById("btn-amostrado").disabled = fn !== "dirichlet";
+  document.getElementById("btn-ideal").disabled = fn !== "dirichlet";
+}
+
+// --- controls: plotter ----------------------------------------
+function setFn(name) {
+  fn = name;
+  for (const [id, key] of [["btn-dirichlet", "dirichlet"], ["btn-thomae", "thomae"], ["btn-takagi", "takagi"]]) {
+    document.getElementById(id).setAttribute("aria-pressed", String(key === fn));
+  }
+  renderPlot();
+}
+document.getElementById("btn-dirichlet").addEventListener("click", () => setFn("dirichlet"));
+document.getElementById("btn-thomae").addEventListener("click", () => setFn("thomae"));
+document.getElementById("btn-takagi").addEventListener("click", () => setFn("takagi"));
+function setMode(m) {
+  dMode = m;
+  document.getElementById("btn-amostrado").setAttribute("aria-pressed", String(m === "amostrado"));
+  document.getElementById("btn-ideal").setAttribute("aria-pressed", String(m === "ideal"));
+  renderPlot();
+}
+document.getElementById("btn-amostrado").addEventListener("click", () => setMode("amostrado"));
+document.getElementById("btn-ideal").addEventListener("click", () => setMode("ideal"));
+document.getElementById("zoom").addEventListener("input", (e) => { zExp = Number(e.target.value); renderPlot(); });
+document.getElementById("termos").addEventListener("input", (e) => { nTerms = Number(e.target.value); renderPlot(); });
+
+/* ============================================================
+ * Dyadic probe: S_m computed EXACTLY over BigInt fractions.
+ * Presets: 0 = 0/1; 1/3; float(sqrt(2)/2) = 6369051672525773/2^53
+ * (the exact rational the machine holds — declared in section 7).
+ * S_m = (#zero bits - #one bits) among the m-bit window of
+ * j = floor(2^m * p / q); slope of T over I_m (lemma 5.8).
+ * ============================================================ */
+const PROBE_POINTS = {
+  x0:  { label: "0",            p: 0n, q: 1n },
+  x13: { label: "1/3",          p: 1n, q: 3n },
+  xf:  { label: "float(√2/2)",  p: 6369051672525773n, q: 9007199254740992n }, // 2^53
+};
+let probeKey = "x0";
+let probeM = 12;
+
+function slopesUpTo(pt, M) {
+  const out = [];
+  for (let m = 1; m <= M; m++) {
+    const j = ((1n << BigInt(m)) * pt.p) / pt.q;   // floor(2^m x), BigInt exact
+    let S = 0;
+    for (let b = 0; b < m; b++) {                   // all m bits of the window
+      S += ((j >> BigInt(b)) & 1n) === 0n ? 1 : -1;
+    }
+    out.push({ m, j, S });
+  }
+  return out;
+}
+
+const cvS = document.getElementById("cv-sonda");
+const ctxS = cvS.getContext("2d");
+function renderProbe() {
+  const pt = PROBE_POINTS[probeKey];
+  const rows = slopesUpTo(pt, probeM);
+  const Wp = cvS.width, Hp = cvS.height;
+  ctxS.clearRect(0, 0, Wp, Hp);
+  const mL = 46, mR = 12, mT = 12, mB = 28;
+  const pw = Wp - mL - mR, ph = Hp - mT - mB;
+  let lo = 0, hi = 1;
+  for (const r of rows) { lo = Math.min(lo, r.S); hi = Math.max(hi, r.S); }
+  const pad = Math.max(1, (hi - lo) * 0.12); lo -= pad; hi += pad;
+  const X = (m) => mL + pw * (m - 1) / Math.max(1, probeM - 1);
+  const Y = (v) => mT + ph * (1 - (v - lo) / (hi - lo));
+  // axes + zero line
+  ctxS.strokeStyle = COL_AXIS; ctxS.lineWidth = 1;
+  ctxS.beginPath(); ctxS.moveTo(mL, mT); ctxS.lineTo(mL, mT + ph); ctxS.lineTo(mL + pw, mT + ph); ctxS.stroke();
+  ctxS.setLineDash([3, 4]); ctxS.beginPath(); ctxS.moveTo(mL, Y(0)); ctxS.lineTo(mL + pw, Y(0)); ctxS.stroke();
+  ctxS.setLineDash([]);
+  ctxS.font = "11px Georgia, serif"; ctxS.fillStyle = COL_TXT;
+  ctxS.fillText("0", 4, Y(0) + 4);
+  ctxS.fillText(String(Math.round(hi - pad)), 4, Y(hi - pad) + 4);
+  ctxS.fillText(String(Math.round(lo + pad)), 4, Y(lo + pad) + 4);
+  ctxS.fillText("m", mL + pw / 2, Hp - 8);
+  ctxS.fillText("1", X(1) - 3, mT + ph + 14);
+  if (probeM > 1) ctxS.fillText(String(probeM), X(probeM) - 8, mT + ph + 14);
+  // steps
+  ctxS.strokeStyle = COL_LINE; ctxS.lineWidth = 1.8; ctxS.beginPath();
+  rows.forEach((r, i) => {
+    const x = X(r.m), y = Y(r.S);
+    i === 0 ? ctxS.moveTo(x, y) : ctxS.lineTo(x, y);
+  });
+  ctxS.stroke();
+  ctxS.fillStyle = COL_PT;
+  rows.forEach((r) => { ctxS.beginPath(); ctxS.arc(X(r.m), Y(r.S), 2.6, 0, 2 * Math.PI); ctxS.fill(); });
+
+  // table: first 12 rows + current
+  const tb = document.getElementById("tabela-sonda-corpo");
+  tb.innerHTML = "";
+  const shown = rows.slice(0, 12);
+  if (probeM > 12) shown.push(rows[rows.length - 1]);
+  let prevS = null;
+  const stepOf = (r) => (r.m === 1 ? "—" : String(Math.abs(r.S - rows[r.m - 2].S)));
+  for (const r of shown) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + r.m + "</td><td>" + r.j.toString() + "</td><td>" + r.S + "</td>" +
+      "<td>" + stepOf(r) + "</td>";
+    if (r.m === probeM) tr.style.background = "#efe7d3";
+    tb.appendChild(tr);
+    prevS = r.S;
+  }
+  const last = rows[rows.length - 1];
+  const behavior = probeKey === "x0" ? "S_m = m: diverge como uma reta (teorema 5.8b)"
+    : probeKey === "x13" ? "S_m alterna 1, 0, 1, 0: nunca converge (passo obrigatório 1)"
+    : "S_m oscila sem convergir, em 3 eras longas de um só lado (C5 refutada no oráculo: só 2 mudanças de sinal — autópsia em conjecturas.md)";
+  document.getElementById("leitura-sonda").textContent =
+    "x = " + pt.label + "  |  m = " + probeM + "  |  j = " + last.j.toString() +
+    "  |  S_m = " + last.S + "  |  " + behavior;
+  document.getElementById("m-val").textContent = "m = " + probeM;
+}
+function setProbe(key) {
+  probeKey = key;
+  for (const id of ["x0", "x13", "xf"]) {
+    document.getElementById("btn-" + id).setAttribute("aria-pressed", String(id === key));
+  }
+  renderProbe();
+}
+document.getElementById("btn-x0").addEventListener("click", () => setProbe("x0"));
+document.getElementById("btn-x13").addEventListener("click", () => setProbe("x13"));
+document.getElementById("btn-xf").addEventListener("click", () => setProbe("xf"));
+document.getElementById("m-slider").addEventListener("input", (e) => { probeM = Number(e.target.value); renderProbe(); });
+
+/* ============================================================
+ * Static figure: the sawtooth s(x), drawn and NAMED before the
+ * Takagi formula (E22 discipline). Device coordinates.
+ * ============================================================ */
+(function drawSaw() {
+  const c = document.getElementById("cv-serra");
+  const g = c.getContext("2d");
+  const Ws = c.width, Hs = c.height;
+  const mL = 40, mR = 16, mT = 14, mB = 26;
+  const pw = Ws - mL - mR, ph = Hs - mT - mB;
+  const x0 = -0.25, x1 = 2.25;
+  const X = (x) => mL + pw * (x - x0) / (x1 - x0);
+  const Y = (y) => mT + ph * (1 - y / 0.62);
+  g.clearRect(0, 0, Ws, Hs);
+  g.strokeStyle = COL_AXIS; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(mL, Y(0)); g.lineTo(mL + pw, Y(0)); g.stroke();
+  g.setLineDash([3, 4]); g.beginPath(); g.moveTo(mL, Y(0.5)); g.lineTo(mL + pw, Y(0.5)); g.stroke(); g.setLineDash([]);
+  g.font = "12px Georgia, serif"; g.fillStyle = COL_TXT;
+  g.fillText("1/2", 8, Y(0.5) + 4);
+  for (const t of [0, 0.5, 1, 1.5, 2]) {
+    g.beginPath(); g.moveTo(X(t), Y(0)); g.lineTo(X(t), Y(0) + 4); g.strokeStyle = COL_AXIS; g.stroke();
+    g.fillText(String(t).replace(".", ","), X(t) - 8, Hs - 6);
+  }
+  g.strokeStyle = COL_LINE; g.lineWidth = 2;
+  g.beginPath();
+  let first = true;
+  for (let x = x0; x <= x1 + 1e-9; x += 0.005) {
+    const y = Math.abs(x - Math.round(x));
+    const px = X(x), py = Y(y);
+    first ? g.moveTo(px, py) : g.lineTo(px, py);
+    first = false;
+  }
+  g.stroke();
+  g.fillStyle = COL_PT;
+  for (const t of [0, 1, 2]) { g.beginPath(); g.arc(X(t), Y(0), 3, 0, 2 * Math.PI); g.fill(); }
+  g.fillStyle = "#26221a";
+  g.fillText("s(x)", X(0.5) + 8, Y(0.5) - 6);
+})();
+
+// --- boot -----------------------------------------------------
+renderFareyTable();
+renderPlot();
+renderProbe();
+</script>
+</body>
+</html>
