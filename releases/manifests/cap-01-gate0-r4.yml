@@ -1,0 +1,29 @@
+release: cap-01-gate0-r4
+chapter: 1
+content_revision: 4
+gate_version: 1
+commit: c34a7ab
+previous_release: cap-01-gate0-r3
+date: 2026-07-28
+primary_reader_verdict: given 2026-07-28 ("PR e merge" to the D6/D7 execution; AUDIT.md D7)
+notes: >
+  Editorial revision per amendment E9: PR #18 applied the E22/E23
+  retrofit (navigation, SEO head, collapsible footer) after release
+  r3. Re-audited in the governance reconciliation (PR #23, frozen at
+  this commit): oracle 13/13 including the rebuild invariants I9-I13,
+  gate v0 audit complete on both viewports, gate v1 ledger valid
+  (15 claims). No mathematical content changed; the ledger is
+  unchanged from r3.
+audit:
+  oracle_report: caps/01-exaustao/audit/numeric-check.json
+  interaction_report: caps/01-exaustao/audit/interaction-report.json
+  symbolic_check: caps/01-exaustao/audit/symbolic-check.md
+  edge_cases: caps/01-exaustao/audit/edge-cases.md
+  screenshots:
+    - caps/01-exaustao/audit/desktop.png
+    - caps/01-exaustao/audit/iphone.png
+tag_status: >
+  Annotated tag cap-01-gate0-r4 -> c34a7ab created locally in the
+  working session; pushing tags is refused by this session's git proxy
+  (branch pushes only). The remote tag must be created by the
+  repository owner - consolidated command block in AUDIT.md section 1.
