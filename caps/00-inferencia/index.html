@@ -452,9 +452,9 @@ do capítulo aplicado ao seu próprio átomo: <strong>a cunha aprisionada entre 
   provamos, 1 − cos θ = 2·sen²(θ/2), sai
   <span class="formula" style="display:block">ρ<sub>2n</sub> = √((1 + ρ<sub>n</sub>)/2).</span>
   Isto é: a razão da geração 2n se obtém da razão da geração n por duas operações elementares — média com 1,
-  depois raiz. Passar de n a 2n indefinidamente é uma máquina de duplicação: dado o triângulo (a terna 3-4-5,
-  digamos, para n = 4) ela fabrica sozinha todos os polígonos 8, 16, 32, … apenas com aritmética e uma raiz
-  quadrada. O capítulo tem a peça, mas se proibiu de girá-la — pôr essa máquina para rodar até o fim é
+  depois raiz. Passar de n a 2n indefinidamente é uma máquina de duplicação: dada a razão de partida
+  (ρ₄ = cos(π/4) = √2/2 para o quadrado, digamos), ela fabrica sozinha as razões de todos os polígonos
+  8, 16, 32, … apenas com aritmética e uma raiz quadrada. O capítulo tem a peça, mas se proibiu de girá-la — pôr essa máquina para rodar até o fim é
   perseguir um limite, e limite é exatamente a linguagem vetada aqui. <em>Porta: Capítulo 1.</em></p>
 </aside>
 
@@ -749,18 +749,22 @@ sob erro δ. Nenhum valor foi inventado: cada número abaixo sai das mesmas fór
 <div class="exercicio">
   <p><span class="nivel">N1 · básico (jogo)</span></p>
   <h3>11.3 — O decodificador de polígonos</h3>
-  <p>Um instrumento perfeito (erro δ = 0) mede a razão r/R e você tem de nomear o polígono. Decodifique estas
+  <p>Um instrumento mede a razão r/R e mostra cinco casas decimais — o único erro é o do arredondamento,
+  δ ≤ 5·10⁻⁶. Você tem de nomear o polígono. Decodifique estas
   quatro leituras: <strong>0,5</strong> · <strong>0,70711</strong> · <strong>0,80902</strong> ·
   <strong>0,86603</strong>. Depois, uma quinta leitura chega: <strong>0,45</strong>. O que o decodificador
   responde a ela?</p>
   <details class="gabarito">
     <summary>Gabarito</summary>
-    <p>A chave inversa é n = π / arccos(r/R), do Enunciado E(i) — inverta cos(π/n) = ρ e isole n. Rodando:</p>
+    <p>A chave inversa é n = π / arccos(r/R), do Enunciado E(i) — inverta cos(π/n) = ρ e isole n. As leituras
+    são arredondamentos, então a chave devolve números <em>quase</em> inteiros (3,9999…, 5,0000…); mas a
+    janela de erro δ ≤ 5·10⁻⁶ é estreita demais para conter dois inteiros — a monotonia do Enunciado D garante
+    que só um n é compatível com cada leitura, e é ele que o decodificador nomeia. Rodando:</p>
     <ul class="compacta">
-      <li>0,5 → arccos = 60° = π/3 → n = <strong>3</strong> (triângulo equilátero);</li>
-      <li>0,70711 (isto é √2/2) → 45° = π/4 → n = <strong>4</strong> (quadrado);</li>
-      <li>0,80902 → 36° = π/5 → n = <strong>5</strong> (pentágono);</li>
-      <li>0,86603 (isto é √3/2) → 30° = π/6 → n = <strong>6</strong> (hexágono).</li>
+      <li>0,5 (valor exato de ρ₃) → arccos = 60° = π/3 → n = <strong>3</strong> (triângulo equilátero);</li>
+      <li>0,70711 (arredondamento de √2/2 = 0,7071067…) → 45° = π/4 → n = <strong>4</strong> (quadrado);</li>
+      <li>0,80902 (arredondamento de cos 36° = 0,8090169…) → 36° = π/5 → n = <strong>5</strong> (pentágono);</li>
+      <li>0,86603 (arredondamento de √3/2 = 0,8660254…) → 30° = π/6 → n = <strong>6</strong> (hexágono).</li>
     </ul>
     <p>Repare que as leituras crescem e os n crescem junto: é a monotonia do Enunciado D funcionando como
     tabela de decodificação. Já a quinta leitura, 0,45, o decodificador <strong>recusa</strong>: está abaixo
@@ -853,7 +857,7 @@ sob erro δ. Nenhum valor foi inventado: cada número abaixo sai das mesmas fór
 <footer class="estado">
   <details class="meta-editorial">
   <summary>Metadados editoriais e de auditoria</summary>
-  <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Pré-registro
+  <p><strong>Estado do capítulo: fechado — release cap-00-gate0-r1 (gate v1).</strong> Decisão D1 exercida pelo leitor primário em 28/07/2026; manifest em <code>releases/manifests/cap-00-gate0-r1.yml</code>; segundo capítulo fechado do tratado, validado também pelo gate v1 (<code>verify-claims.mjs</code>, 16 claims). Pré-registro
   commitado antes do desenvolvimento (<code>conjecturas.md</code>, C0.1–C0.8). Oráculo triplo executado
   em 28/07/2026 com artefatos em <code>audit/</code> (12 invariantes, três implementações independentes,
   casos adversariais; a primeira execução refutou a afirmação do texto sobre n = 170 no exemplo
@@ -861,11 +865,12 @@ sob erro δ. Nenhum valor foi inventado: cada número abaixo sai das mesmas fór
   como invariantes obrigatórios). Auditoria de gate v0 completa (<code>tools/audit-ch00.mjs</code>):
   interação dos dois laboratórios, teclado, overflow, canvases, fórmulas textuais, autocontenção sem
   rede, screenshots desktop e iPhone inspecionados. Pendências declaradas: busca bibliográfica de
-  prioridade para os sanduíches G–H e a formulação inferencial (<code>sources.md</code>); decisão de tag
-  <code>cap-00-gate0-r1</code> pelo leitor primário.</p>
-  <p>MATH3us.md · Capítulo 0 · território virgem · release: nenhuma (pronto para tag).</p>
-  <p>28/07/2026 — Aplicação retroativa da E23 (regime visual: figuras, caixas de curiosidade e segredo),
-  seção de exercícios E20 e navegação entre capítulos. Conteúdo matemático anterior inalterado.</p>
+  prioridade para os sanduíches G–H e a formulação inferencial (<code>sources.md</code>).</p>
+  <p>MATH3us.md · Capítulo 0 · território virgem · release: cap-00-gate0-r1.</p>
+  <p><strong>28/07/2026 — Retrofit pós-release (cap-00-gate0-r1):</strong> aplicação retroativa da E23
+  (regime visual: figuras, caixas de curiosidade e segredo), seção de exercícios E20 e navegação entre
+  capítulos. Nenhum caractere do conteúdo matemático fechado foi alterado; esta nota é o registro exigido
+  pela proibição de reescrita silenciosa.</p>
   </details>
 </footer>
 

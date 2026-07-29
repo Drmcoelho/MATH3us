@@ -1,7 +1,7 @@
 {
   "chapter": 1,
   "script": "tools/oracle.py",
-  "code_commit": "bc2ea1f",
+  "code_commit": "1773b98",
   "date": "2026-07-28",
   "environment": "python 3.11.15, stdlib only, linux",
   "implementations": {
@@ -48,6 +48,37 @@
       "abs_dev_from_0.25": 1.1968481761215344e-11,
       "passed": true,
       "note": "independent numeric witness for chapter-01.gap-ratio-quarter (proved in-chapter on 2026-07-28 via exact factorization, symbolic-check S6; originally preregistered as conjecture C4)"
+    },
+    "I9_area_identities": {
+      "tolerance": 5e-15,
+      "worst_abs_diff": 8.881784197001252e-16,
+      "passed": true
+    },
+    "I10_area_inherits_semiperimeter": {
+      "tolerance": "1e-55 (Decimal-60 rounding)",
+      "worst_abs_diff": 1e-59,
+      "passed": true
+    },
+    "I11_double_siege_chain": {
+      "passed": true
+    },
+    "I12_gap_identity_and_ratio_two": {
+      "identity_worst_abs": 4.9e-60,
+      "ratio_dev_from_2_at_k16": 3.191592146253439e-11,
+      "passed": true,
+      "note": "ratio -> 2 is a THEOREM in-chapter (section 7.5); this is its independent witness"
+    },
+    "I13_duality_constants_support": {
+      "relative_devs_at_deep_k": {
+        "n2_pi_minus_a": 6.036177167826018e-26,
+        "n2_b_minus_pi": 1.152219839002108e-25,
+        "n2_pi_minus_Ain": 5.761099195098458e-26,
+        "n2_Aout_minus_pi": 1.152219839002108e-25
+      },
+      "consistency_identity_1_abs": 0.0,
+      "consistency_identity_2_abs": 9.944631243788485e-61,
+      "passed": true,
+      "note": "SUPPORT for preregistered conjecture R5, not proof; the four individual constants await chapter 10 expansions. The two consistency identities are exact algebra, proved in-chapter."
     }
   },
   "all_passed": true,

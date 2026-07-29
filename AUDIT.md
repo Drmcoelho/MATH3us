@@ -7,9 +7,12 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 28/07/2026 · pós-merge dos PRs #8 (prólogo), #9 (Caps. 2–4) e
-#10 (reauditoria do Cap. 0 sobre o estado integrado, `73caa07`) ·
-reconciliação da sessão-coordenadora: tabela completa 0–4 e Decisão D4.
+**Fotografia:** 28/07/2026 · D1, D2′, D3 e **D5 exercidas** — a
+reconstrução geométrica do Cap. 1 (PR #17, `947aa80`) está liberada como
+`cap-01-gate0-r3` (manifest commitado; tag local criada). **Quatro tags
+remotas pendentes do proprietário** (o proxy dos agentes recusa push de
+tags): `cap-01-gate0-r1` → `f049091`, `cap-00-gate0-r1` → `73caa07`,
+`cap-01-gate0-r2` → `73caa07`, `cap-01-gate0-r3` → `947aa80`.
 
 ---
 
@@ -17,21 +20,39 @@ reconciliação da sessão-coordenadora: tabela completa 0–4 e Decisão D4.
 
 | Cap. | Título | Pré-registro | Oráculo triplo | Gate v0 | Ledger | Release |
 |---|---|---|---|---|---|---|
-| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **nenhuma — aguarda Decisão D1** |
-| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido; `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r1** (`085e494`); correções pós-release neste merge — **aguarda Decisão D2′ (r2)** |
+| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **cap-00-gate0-r1** (`73caa07`, D1 exercida 28/07; tag remota pendente do proprietário) |
+| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido (15 claims, gate v1; inclui a 1ª dependência entre capítulos: cunha do Cap. 0); `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r3** (`947aa80`, D5 exercida 28/07; quatro tags remotas pendentes do proprietário) |
 | 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
 | 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
 | 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
 | 5–12 | — | contrato editorial no manual | — | — | — | previstos |
 
-Nenhum item vigente do §10 está pendente para os Capítulos 0–4 **exceto as
-tags de release** — que o manual reserva, deliberadamente, a um ato humano.
+Nenhum item vigente do §10 está pendente para os Capítulos 0–4 exceto:
+**as quatro tags remotas** (0 e 1: decisões já exercidas, falta só o push do
+proprietário — bloco abaixo) e **as decisões D4** (Caps. 2–4, travadas até
+o gate v2 existir e rodar).
+
+```
+# push das tags remotas (proprietário; uma vez só):
+git fetch origin main
+git tag -a cap-01-gate0-r1 f049091 -m "chapter 1 release: gate v0, content revision 1" 2>/dev/null || true
+git tag -a cap-00-gate0-r1 73caa07 -m "chapter 0 release: gate v1, content revision 1" 2>/dev/null || true
+git tag -a cap-01-gate0-r2 73caa07 -m "chapter 1 release: content revision 2" 2>/dev/null || true
+git tag -a cap-01-gate0-r3 947aa80 -m "chapter 1 release: geometric rebuild, content revision 3" 2>/dev/null || true
+git push origin cap-01-gate0-r1 cap-00-gate0-r1 cap-01-gate0-r2 cap-01-gate0-r3
+```
 
 ---
 
 ## 2. Decisões pendentes do leitor primário
 
-### D1 — Tag de release do Capítulo 0: `cap-00-gate0-r1`
+### D1 — Tag de release do Capítulo 0: `cap-00-gate0-r1` — **EXERCIDA** (28/07/2026)
+
+**Registro da execução.** "Ok" do leitor primário ao plano; tag local
+anotada `cap-00-gate0-r1` → `73caa07`; manifest em
+`releases/manifests/cap-00-gate0-r1.yml`; rodapé do capítulo e índice do
+tratado atualizados. **Pendente apenas a tag remota** (ato do proprietário —
+comando abaixo; o proxy dos agentes recusa push de tags).
 
 **O que é.** O ato que fecha o capítulo (§1.7, §10): uma tag Git **imutável**
 apontando para o commit auditado. Depois dela, qualquer correção de conteúdo
@@ -72,7 +93,12 @@ A tag `cap-01-gate0-r1` foi criada no main (`085e494`, manifest em
 teorema, a refutação de C5 (autópsia em `conjecturas.md`) e o tooling de
 gate v1. Decisão registrada; nada mais pendente sob este número.
 
-### D2′ — Revisão r2 do Capítulo 1: `cap-01-gate0-r2`
+### D2′ — Revisão r2 do Capítulo 1: `cap-01-gate0-r2` — **EXERCIDA** (28/07/2026)
+
+**Registro da execução.** Mesmo ato ("Ok"): tag local anotada
+`cap-01-gate0-r2` → `73caa07`; manifest em
+`releases/manifests/cap-01-gate0-r2.yml`; rodapé e índice atualizados.
+**Pendente apenas a tag remota** (proprietário).
 
 **Por que existe.** A integração do merge (PR #8) trouxe ao Capítulo 1
 correções de conteúdo **posteriores à tag r1**: a constante da folga de
@@ -89,9 +115,21 @@ manifest com `content_revision: 2`.
 **Interação com a D3.** Inalterada: a reconstrução geométrica futura seria
 r3 (ou a r2 pode esperar a reconstrução, a critério editorial).
 
-### D3 — Reabertura do Capítulo 1: a reconstrução geométrica sobre a cunha
+### D3 — Reabertura do Capítulo 1 — **EXERCIDA** (28/07/2026)
 
-**O que é.** Pendência editorial registrada em E21 (MATH3us.md §3, §13; emenda nascida "E20" em branch paralela e renumerada na integração pela colisão com a E20 dos exercícios) e no
+**Registro da execução.** "Sim" do leitor primário; pré-registro R1–R5
+commitado antes do desenvolvimento (`1773b98`); seção 7 do capítulo
+construída (cunha → identidades de área → herança A⁻₂ₙ = aₙ → cadeia do
+duplo cerco → razão das folgas → 2 → dualidade R5 com porta ao Cap. 10);
+laboratório gráfico de dois modos e tabelas de áreas/erros normalizados;
+oráculo estendido (I9–I13, 13/13); auditoria gate v0 com novos checks
+(herança visível no DOM, gráfico pintado nos dois modos); gate v1 com 15
+claims — incluindo a primeira aresta entre capítulos do grafo de
+dependências (`chapter-01.wedge-closed-forms` → `chapter-00.fundamental-triangle`).
+O item C4/C5 já havia saído do escopo (resolvido no main). Segue o registro
+original do escopo:
+
+**O que era.** Pendência editorial registrada em E21 (MATH3us.md §3, §13; emenda nascida "E20" em branch paralela e renumerada na integração pela colisão com a E20 dos exercícios) e no
 `sources.md` do Capítulo 0: reconstruir o Capítulo 1 em torno do triângulo
 fundamental R, r, L/2 e dos **dois cercos** — por perímetro e por área.
 Escopo fixado pelo documento fundador de 28/07/2026 (crítica do leitor
@@ -113,9 +151,17 @@ primário, verbatim em `caps/00-inferencia/sources.md`):
 **Estado.** Não iniciada. O Capítulo 0 já fornece o átomo (a cunha) e o zoom
 normalizado legítimo; a reconstrução os importa em vez de recriá-los.
 
-**Opções em aberto:** (a) reconstruir já; (b) taggear D1 e D2′ primeiro e
-reconstruir como revisão seguinte; (c) adiar com prioridade explícita para a
-ordem de produção (§5: os Capítulos 2–4 já estão em produção no main).
+*(Opções originais superadas pela execução; o caminho realizado foi (b):
+tags D1/D2′ primeiro, reconstrução como revisão seguinte.)*
+
+### D5 — Tag de revisão r3 do Capítulo 1: `cap-01-gate0-r3` — **EXERCIDA** (28/07/2026)
+
+**Registro da execução.** "PR and merge" do leitor primário; tag local
+anotada `cap-01-gate0-r3` → `947aa80` (merge do PR #17, estado auditado:
+oráculo 13/13, gate v0 completo, gate v1 15 claims); manifest em
+`releases/manifests/cap-01-gate0-r3.yml` (`content_revision: 3`,
+`previous_release: cap-01-gate0-r2`); rodapé e índice atualizados.
+**Pendente apenas a tag remota** (bloco consolidado do proprietário, §1).
 
 ### D4 — Tags de release dos Capítulos 2–4 (Onda 1)
 
@@ -133,15 +179,20 @@ fechamento. Ordem obrigatória de execução:
 
 1. **D1** (`cap-00-gate0-r1` em `73caa07`) — 2º fechamento; gate v1 já
    executado sobre o ledger (16 claims), sem pendência;
-2. **coordenadora entrega o gate v2** e o executa sobre os Caps. 2–4 (com a
-   reauditoria E9 dos já fechados);
-3. **só então** as tags dos Caps. 2–4, nomeadas sob o gate que de fato
-   validou cada release:
+2. ~~coordenadora entrega o gate v2~~ — **ENTREGUE e executado em
+   28/07/2026** (`tools/bundle.mjs` + `tools/validate-release.mjs`) sobre
+   os Caps. 0–4, reauditoria E9 incluída: cinco capítulos aprovados,
+   bundles byte-idênticos (todos já autocontidos), zero requisições
+   externas, zero erros (relatórios em `caps/*/audit/bundle-report.json` e
+   `release-validation.json`; registro §5);
+3. as tags dos Caps. 2–4, nomeadas sob o gate que de fato validou cada
+   release, apontando o commit de merge do PR do gate v2 (substituir
+   abaixo; ver §5):
 
 ```
-git tag -a cap-02-gate2-r1 <commit-do-gate-v2> -m "chapter 2 release: gate v2, content revision 1"
-git tag -a cap-03-gate2-r1 <commit-do-gate-v2> -m "chapter 3 release: gate v2, content revision 1"
-git tag -a cap-04-gate2-r1 <commit-do-gate-v2> -m "chapter 4 release: gate v2, content revision 1"
+git tag -a cap-02-gate2-r1 19d2bc3 -m "chapter 2 release: gate v2, content revision 1"
+git tag -a cap-03-gate2-r1 19d2bc3 -m "chapter 3 release: gate v2, content revision 1"
+git tag -a cap-04-gate2-r1 19d2bc3 -m "chapter 4 release: gate v2, content revision 1"
 git push origin cap-02-gate2-r1 cap-03-gate2-r1 cap-04-gate2-r1
 ```
 
@@ -206,6 +257,11 @@ Os incidentes são dados (§12 do manual). Detalhes nos artefatos citados.
 | 28/07/2026 | `tools/oracle-ch00.py` | 0 | pós-PR #9 (`a7a41c1`) | re-execução sobre o estado integrado: 12/12 | `caps/00-inferencia/audit/numeric-check.json` |
 | 28/07/2026 | `tools/audit-ch00.mjs` | 0 | pós-PR #9 (`a7a41c1`) | re-execução (fecha a lacuna: o run anterior antecedia a nota E21 e o ajuste do ledger): 31/31 | `caps/00-inferencia/audit/interaction-report.json` |
 | 28/07/2026 | `tools/verify-claims.mjs` | 0 | pós-PR #9 (`a7a41c1`) | 16 claims válidos | saída no commit desta reauditoria |
+| 28/07/2026 | `tools/oracle.py` (I1–I13) | 1 | reconstrução D3 | 13/13 + casos extremos (I9–I13 novos: identidades de área, herança exata, cadeia, razão → 2, suporte à dualidade em k = 40) | `caps/01-exaustao/audit/numeric-check.json` |
+| 28/07/2026 | `tools/audit.mjs` | 1 | reconstrução D3 | aprovado com novos checks: 3 canvases, tabelas de áreas/normalizada espelhando estado, herança visível no DOM, gráfico pintado nos dois modos | `caps/01-exaustao/audit/interaction-report.json` |
+| 28/07/2026 | `tools/verify-claims.mjs` | 1 | reconstrução D3 | 15 claims válidos; 1ª dependência entre capítulos resolvida contra release do Cap. 0 | saída no commit da reconstrução |
+| 28/07/2026 | `tools/bundle.mjs` (gate v2) | 0–4 | pós-PR #12 (`870af23`) | cinco bundles produzidos, todos byte-idênticos ao fonte (autocontenção já satisfeita) | `caps/*/audit/bundle-report.json` |
+| 28/07/2026 | `tools/validate-release.mjs` (gate v2) | 0–4 | pós-PR #12 (`870af23`) | estático + dinâmico aprovados: zero cargas remotas, zero requisições, zero erros, documento pintado — reauditoria E9 dos Caps. 0–1 incluída | `caps/*/audit/release-validation.json` |
 
 ---
 

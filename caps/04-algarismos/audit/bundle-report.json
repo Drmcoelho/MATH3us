@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "04-algarismos",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "870af23",
+  "date": "2026-07-28",
+  "bundle_path": "releases/bundles/04-algarismos.html",
+  "bundle_sha256": "3ebfa2365a846c1e9efbee4dbf8b594ca29ef891eb4e362ac7cc3460e66cb3c1",
+  "source_sha256": "3ebfa2365a846c1e9efbee4dbf8b594ca29ef891eb4e362ac7cc3460e66cb3c1",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}

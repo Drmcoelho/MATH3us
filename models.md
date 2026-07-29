@@ -138,3 +138,11 @@ do 3º capítulo arma o gate v2 (tabela de gatilhos, §4).
 obrigatórios a partir do fechamento do segundo capítulo (§1.7).
 Dependência do validador: `js-yaml` (obrigatória) e `ajv` (opcional),
 resolvidas via `node_modules` ou `NODE_PATH`.
+
+**Gate v2 pronto (antecipado, 28/07/2026):** `tools/bundle.mjs`
+(empacotamento; bundles regeneráveis em `releases/bundles/`, ignorados
+pelo git; identidade registrada em `caps/*/audit/bundle-report.json`) e
+`tools/validate-release.mjs` (autocontenção estática + dinâmica).
+Executados sobre os Caps. 0–4: aprovados, com reauditoria E9 dos
+capítulos fechados sob gate anterior. Dependência: `playwright` via
+`NODE_PATH` (navegador em `/opt/pw-browsers/chromium` ou `PW_CHROMIUM`).

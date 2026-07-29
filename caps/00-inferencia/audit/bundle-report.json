@@ -1,0 +1,13 @@
+{
+  "chapter_dir": "00-inferencia",
+  "script": "tools/bundle.mjs",
+  "gate": "v2",
+  "code_commit": "870af23",
+  "date": "2026-07-28",
+  "bundle_path": "releases/bundles/00-inferencia.html",
+  "bundle_sha256": "71435def434f79a818a28d6f29607b8d97f01289bc3765a4343944e6899a8450",
+  "source_sha256": "71435def434f79a818a28d6f29607b8d97f01289bc3765a4343944e6899a8450",
+  "already_self_contained": true,
+  "inlined_local_refs": [],
+  "unresolved_local_refs": []
+}

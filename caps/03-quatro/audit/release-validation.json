@@ -1,0 +1,28 @@
+{
+  "chapter_dir": "03-quatro",
+  "script": "tools/validate-release.mjs",
+  "gate": "v2",
+  "code_commit": "3a45aa6",
+  "date": "2026-07-29",
+  "validated_file": "caps/03-quatro/index.html",
+  "bundle_used": false,
+  "checks": {
+    "static.no_remote_resource_loads": {
+      "passed": true
+    },
+    "dynamic.zero_network_requests": {
+      "passed": true
+    },
+    "dynamic.zero_console_or_page_errors": {
+      "passed": true
+    },
+    "dynamic.document_painted": {
+      "passed": true,
+      "detail": "body text length 16511"
+    }
+  },
+  "navigation_links": [],
+  "violations": [],
+  "external_requests": [],
+  "errors": []
+}
