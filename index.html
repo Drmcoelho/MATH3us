@@ -3,40 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tratado matemático auditável que reconstrói, demonstra, ilustra e exercita uma matemática já intuída, do número ao contínuo.">
+<link rel="canonical" href="https://drmcoelho.github.io/MATH3us/">
 <title>Do Número ao Contínuo — reconstrução formal de uma matemática já vivida</title>
 <style>
   :root{
     --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
-    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a;
+    --rule:#c9bda3; --box:#efe7d3; --box-edge:#b9ab8a; --white:#fffdf7;
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
     margin:0; background:var(--paper); color:var(--ink);
     font-family:Georgia,'Times New Roman',serif; line-height:1.65; font-size:1.05rem;
   }
-  main{max-width:50rem; margin:0 auto; padding:3rem 1.25rem 5rem}
+  a{color:var(--accent)}
+  a:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  .skip-link{position:absolute; left:-9999px; top:auto}
+  .skip-link:focus{left:1rem; top:1rem; z-index:20; background:var(--white); padding:.6rem .8rem; border:2px solid var(--accent)}
+  .topbar{border-bottom:1px solid var(--rule); background:var(--box)}
+  .topbar nav{max-width:50rem; margin:0 auto; padding:.7rem 1.25rem; display:flex; flex-wrap:wrap; gap:.8rem 1.2rem; align-items:center}
+  .topbar a{text-decoration:none}
+  main{max-width:50rem; margin:0 auto; padding:2.4rem 1.25rem 5rem}
   header.obra{border-bottom:3px double var(--rule); padding-bottom:1.8rem; margin-bottom:2.2rem; text-align:center}
   .kicker{font-variant:small-caps; letter-spacing:.14em; color:var(--accent); font-size:.9rem}
   h1{font-size:2.3rem; margin:.4rem 0 .3rem; font-weight:normal}
   .subtitulo{font-style:italic; color:var(--ink-soft)}
   h2{font-size:1.35rem; margin:2.6rem 0 .8rem; font-weight:normal; border-bottom:1px solid var(--rule); padding-bottom:.3rem}
-  a{color:var(--accent)}
-  a:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  h3{font-size:1.08rem; margin:1.2rem 0 .35rem}
   table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.97rem}
-  th,td{border:1px solid var(--rule); padding:.45rem .7rem; text-align:left}
+  th,td{border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; vertical-align:top}
   th{background:var(--box); font-weight:normal; font-variant:small-caps; letter-spacing:.06em}
   td.num{text-align:center; font-family:'Courier New',monospace; width:3.2rem}
   .estado{font-size:.85rem; font-variant:small-caps; letter-spacing:.08em; white-space:nowrap}
   .aberto{color:var(--accent)}
   .previsto{color:var(--ink-soft)}
   .caixa{border:1px solid var(--box-edge); background:var(--box); padding:1rem 1.25rem; margin:1.4rem 0}
+  .caixa-clara{border:1px solid var(--rule); background:var(--white); padding:1rem 1.25rem; margin:1.4rem 0}
+  .grade{display:grid; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); gap:1rem; margin:1.2rem 0}
+  .cartao{border:1px solid var(--box-edge); background:var(--white); padding:1rem}
+  .cartao p{margin:.35rem 0 0}
   .divisa{text-align:center; font-variant:small-caps; letter-spacing:.12em; margin:2rem 0; color:var(--accent)}
+  .fluxo{margin:1rem 0; padding-left:1.25rem}
+  .fluxo li{margin:.35rem 0}
+  .nota{font-size:.95rem; color:var(--ink-soft)}
   footer{border-top:3px double var(--rule); margin-top:3rem; padding-top:1.4rem; font-size:.92rem; color:var(--ink-soft)}
   .parte{font-variant:small-caps; letter-spacing:.1em; color:var(--ink-soft); font-size:.9rem}
+  @media (max-width:42rem){
+    body{font-size:1rem}
+    h1{font-size:1.9rem}
+    main{padding-top:1.8rem}
+    .tabela-scroll{overflow-x:auto}
+    table{min-width:42rem}
+  }
 </style>
 </head>
 <body>
-<main>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="topbar">
+  <nav aria-label="Navegação principal">
+    <strong>MATH3us</strong>
+    <a href="#como-ler">Como ler</a>
+    <a href="#metodo">Método</a>
+    <a href="#capitulos">Capítulos</a>
+    <a href="https://github.com/Drmcoelho/MATH3us/blob/main/MATH3us.md">Constituição</a>
+    <a href="https://github.com/Drmcoelho/MATH3us">Repositório</a>
+  </nav>
+</div>
+<main id="conteudo">
 
 <header class="obra">
   <span class="kicker">Tratado · repositório vivo</span>
@@ -44,15 +78,56 @@
   <p class="subtitulo">reconstrução formal de uma matemática já vivida</p>
 </header>
 
-<p>Este não é um curso, nem uma enciclopédia, nem um currículo. É uma biografia intelectual em andamento:
+<p>Este não é um curso convencional, nem uma enciclopédia, nem um currículo linear. É uma biografia intelectual em andamento:
 o registro da distância entre o que foi intuído, o que foi afirmado, o que era demonstrável e o que precisou
 ser reconstruído. Cada capítulo declara seu tipo — <strong>escavação</strong> de uma descoberta anterior ou
 <strong>território virgem</strong> — e nenhum resultado entra sem que sua proveniência, sua prova e seus
 limites estejam no ledger.</p>
 
+<p>Isso não impede uma leitura didática. Ao contrário: o tratado deve permitir que o leitor <strong>veja</strong>,
+<strong>teste</strong>, <strong>desconfie</strong>, <strong>demonstre</strong> e só então incorpore o resultado. O rigor
+não precisa ser um pedágio cobrado antes da intuição; pode ser a confirmação final de uma estrutura que já se tornou visível.</p>
+
 <p class="divisa">O experimento sugere. A demonstração obriga.</p>
 
-<h2>Capítulos</h2>
+<section id="como-ler" aria-labelledby="titulo-como-ler">
+<h2 id="titulo-como-ler">Como ler este tratado</h2>
+<div class="grade">
+  <article class="cartao">
+    <h3>Leitura intuitiva</h3>
+    <p>Comece pela pergunta, pelos desenhos, tabelas e laboratórios. Tente prever o resultado antes de abrir a prova.</p>
+  </article>
+  <article class="cartao">
+    <h3>Leitura formal</h3>
+    <p>Leia definições, enunciados, hipóteses e demonstrações na ordem. Verifique onde cada conclusão depende de cada premissa.</p>
+  </article>
+  <article class="cartao">
+    <h3>Leitura de auditoria</h3>
+    <p>Consulte estados, incidentes, decisões e manifests para distinguir o que está aberto, auditado e formalmente fechado.</p>
+  </article>
+</div>
+<div class="caixa-clara">
+  <strong>Regra prática.</strong> Em cada capítulo, percorra seis movimentos: pergunta → experimento → padrão → enunciado → prova → exercício.
+  Quando houver aplicação cotidiana pertinente, ela deve aparecer como consequência do conceito, não como enfeite motivacional.
+</div>
+</section>
+
+<section id="metodo" aria-labelledby="titulo-metodo">
+<h2 id="titulo-metodo">Método de entrega</h2>
+<ol class="fluxo">
+  <li><strong>Pergunta socrática:</strong> o leitor é colocado diante de uma tensão concreta antes de receber a fórmula.</li>
+  <li><strong>Representação:</strong> desenho, tabela, animação ou experimento torna a estrutura observável.</li>
+  <li><strong>Conjectura controlada:</strong> o padrão é nomeado sem ser confundido com prova.</li>
+  <li><strong>Formalização:</strong> definições, postulados importados, lemas e teoremas são explicitados.</li>
+  <li><strong>Demonstração:</strong> a conclusão é obrigada pelas hipóteses, com portas de erro e limites declarados.</li>
+  <li><strong>Transferência:</strong> exercícios graduados e aplicações mostram se o conceito foi realmente incorporado.</li>
+</ol>
+<p class="nota">A interface deve acompanhar essa metodologia: navegação anterior/próximo, retorno ao índice, sumário local, equivalentes textuais das figuras e rodapés editoriais subordinados à leitura principal.</p>
+</section>
+
+<section id="capitulos" aria-labelledby="titulo-capitulos">
+<h2 id="titulo-capitulos">Capítulos</h2>
+<div class="tabela-scroll">
 <table>
   <thead><tr><th scope="col">№</th><th scope="col">Capítulo</th><th scope="col">Estado</th></tr></thead>
   <tbody>
@@ -75,6 +150,8 @@ limites estejam no ledger.</p>
     <tr><td class="num">12</td><td>Síntese: e<sup>iπ</sup> + 1 = 0</td><td class="estado previsto">previsto</td></tr>
   </tbody>
 </table>
+</div>
+</section>
 
 <div class="caixa">
   <p style="margin:0"><strong>Estados.</strong> <em>Aberto</em>: o capítulo existe e é legível, mas ainda não
@@ -87,11 +164,11 @@ limites estejam no ledger.</p>
 <p>A doutrina completa — critério de corte, ledger epistemológico, gates de verificação, oráculo triplo,
 governança de emendas — está em
 <a href="https://github.com/Drmcoelho/MATH3us/blob/main/MATH3us.md">MATH3us.md</a>,
-o manual operacional do tratado (revisão 2, emendas E1–E22).</p>
+o manual operacional do tratado.</p>
 
 <footer>
-  <p>Matheus M. Coelho · repositório <a href="https://github.com/Drmcoelho/MATH3us">Drmcoelho/MATH3us</a> ·
-  linhagem atlas-artefato · cada release de capítulo é um HTML autocontido que funciona sem rede.</p>
+  <p><strong>MATH3us</strong> · Matheus M. Coelho · <a href="https://github.com/Drmcoelho/MATH3us">repositório e auditoria</a>.</p>
+  <p>Os metadados editoriais detalhados pertencem aos manifests e ao ledger; o rodapé visível permanece deliberadamente curto para não competir com a leitura.</p>
 </footer>
 
 </main>
