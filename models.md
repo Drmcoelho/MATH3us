@@ -112,9 +112,9 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 |---|---|---|---|
 | 0 | **integrado** (PR #8) — prólogo criado por E21; auditado v0 (oráculo 12/12, auditoria 31/31); gate v1 validado na integração; aguarda tag (Decisão D1, `AUDIT.md`) | claude/chapter-1-geometric-rebuild-uf3z1f → main | 28/07/2026 |
 | 1 | **fechado** — release cap-01-gate0-r1 (manifest em `releases/manifests/`; tag remota a criar pelo proprietário); revisão r2 pendente pelas correções pós-release (Decisão D2′, `AUDIT.md`) | coordenadora | 28/07/2026 — oráculo 8/8, auditoria 25/25 por viewport; re-executado pós-merge PR #8 |
-| 2 | **integrado** — auditado v0 (oráculo 10/10, auditoria 29/29); aguarda veredito do leitor primário para tag | wave1/cap-02 → coordenadora | 28/07/2026 |
-| 3 | **integrado** — auditado v0 (oráculo 7/7, auditoria 31/31); formato mínimo comprovado; aguarda veredito | wave1/cap-03 → coordenadora | 28/07/2026 |
-| 4 | **integrado** — auditado v0 (oráculo 9/9 com 27.986 expansões, auditoria 41/41); aguarda veredito | wave1/cap-04 → coordenadora | 28/07/2026 |
+| 2 | **fechado** — release cap-02-gate2-r1 (manifest, E23/D6) | wave1/cap-02 → coordenadora | 28/07/2026 |
+| 3 | **fechado** — release cap-03-gate2-r1 (manifest, E23/D6) | wave1/cap-03 → coordenadora | 28/07/2026 |
+| 4 | **fechado** — release cap-04-gate2-r1 (manifest, E23/D6) | wave1/cap-04 → coordenadora | 28/07/2026 |
 | 5 | previsto — Onda 3 (após 6 e 7, §5) | — | — |
 | 6 | **integrado** — auditado v0 (oráculo 8/8 + adversariais, auditoria 41/41); C5 do pré-registro refutada com autópsia; gate v1: 26 claims, zero achados | wave2/cap-06 → coordenadora | 29/07/2026 |
 | 7 | **integrado** — auditado v0 (oráculo 10/10; dois-quadrados exaustivo p < 50000; contenção de e^{iθ} auditada); gate v1: 24 claims, portas door:true para o Cap. 2 | wave2/cap-07 → coordenadora | 29/07/2026 |

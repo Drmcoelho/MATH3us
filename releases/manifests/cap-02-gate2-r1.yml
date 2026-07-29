@@ -1,0 +1,13 @@
+release: cap-02-gate2-r1
+chapter: 2
+content_revision: 1
+gate_version: 2
+commit: 19d2bc3
+previous_release: null
+date: 2026-07-29
+decision: D4 (AUDIT.md), executed by manifest per amendment E23 / decision D6
+audit:
+  oracle_report: caps/02-ternas/audit/numeric-check.json
+  interaction_report: caps/02-ternas/audit/interaction-report.json
+  bundle_report: caps/02-ternas/audit/bundle-report.json
+  release_validation: caps/02-ternas/audit/release-validation.json
