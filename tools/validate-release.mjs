@@ -51,7 +51,6 @@ const check = (name, passed, detail) => {
 const remote = /(?:https?:)?\/\/[^\s"'<>)]+/g;
 const loaders = [
   [/<(?:script|img|iframe|source|video|audio|embed|track)[^>]*\ssrc=["']((?:https?:)?\/\/[^"']+)["']/gi, 'src'],
-  [/<link[^>]*\shref=["']((?:https?:)?\/\/[^"']+)["']/gi, 'link href'],
   [/url\(\s*["']?((?:https?:)?\/\/[^"')]+)["']?\s*\)/gi, 'css url()'],
   [/@import\s+["']((?:https?:)?\/\/[^"']+)["']/gi, '@import'],
   [/\bfetch\(\s*["']((?:https?:)?\/\/[^"']+)["']/gi, 'fetch'],
@@ -63,6 +62,20 @@ for (const [re, kind] of loaders) {
   for (const m of html.matchAll(re)) {
     report.violations.push({ kind, ref: (m[1] ?? m[0]).slice(0, 200) });
   }
+}
+// <link> tags: only rels that trigger a fetch are violations. Pure-metadata
+// rels (canonical, alternate, license) declare facts about the page and load
+// nothing — the dynamic zero_network_requests leg is the proof either way.
+// A remote href with a loading rel, an unknown rel, or no rel at all still fails.
+const METADATA_RELS = new Set(['canonical', 'alternate', 'license']);
+for (const m of html.matchAll(/<link\b[^>]*>/gi)) {
+  const tag = m[0];
+  const href = tag.match(/\shref=["']((?:https?:)?\/\/[^"']+)["']/i);
+  if (!href) continue;
+  const rels = (tag.match(/\srel=["']([^"']+)["']/i)?.[1] ?? '')
+    .trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const metadataOnly = rels.length > 0 && rels.every(r => METADATA_RELS.has(r));
+  if (!metadataOnly) report.violations.push({ kind: 'link href', ref: href[1].slice(0, 200) });
 }
 for (const m of html.matchAll(/<a[^>]*\shref=["'](https?:\/\/[^"']+)["']/gi)) {
   report.navigation_links.push(m[1].slice(0, 200));

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Capítulo 3 — A Singularidade do Quatro · Do Número ao Contínuo</title>
+<meta name="description" content="Capítulo 3 de Do Número ao Contínuo: prova de que x+x = x·x = x^x só ocorre em x = 2, com valor 4 — classificação completa das coincidências em ℝ⁺.">
+<link rel="canonical" href="https://drmcoelho.github.io/MATH3us/caps/03-quatro/">
 <style>
   :root{
     --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
@@ -80,10 +82,20 @@
   ul.compacta li{margin:.25rem 0}
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
   sub,sup{line-height:0}
+  .box-curio,.box-segredo{border:1px solid var(--box-edge);background:var(--box);padding:1rem 1.2rem;margin:1.6rem 0;border-radius:4px}
+  .box-curio>h3,.box-segredo>h3{margin:0 0 .5rem;font-size:1rem;font-variant:small-caps;letter-spacing:.08em;color:var(--accent)}
+  .box-segredo{border-left:4px solid var(--accent)}
+  nav.capnav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.95rem;margin:1.5rem 0;padding:.6rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  nav.capnav a{color:var(--accent);text-decoration:none}
+  nav.capnav a:hover,nav.capnav a:focus{text-decoration:underline}
+  details.meta-editorial summary{cursor:pointer;font-variant:small-caps;letter-spacing:.08em;color:var(--ink-soft)}
+  details.meta-editorial summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
 <main>
+
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../02-ternas/">← Capítulo 2 — As Ternas do Ímpar</a><a href="../../">↑ Índice</a><a href="../04-algarismos/">Capítulo 4 — Os Algarismos Repetidos →</a></nav>
 
 <header class="chapter">
   <span class="kicker">Do Número ao Contínuo · Parte I</span>
@@ -173,6 +185,13 @@ a potência também duas — uma perto de x = 2 e outra, bem escondida, abaixo d
 <p><strong>Padrão 2 — o encontro triplo parece único.</strong> Só em x = 2 as três curvas passam juntas — altura 4.</p>
 <p><strong>Padrão 3 — perto de zero, a potência não desce.</strong> A soma e o produto morrem em 0; a curva de
 x<sup>x</sup> encosta em <em>1</em>. O canto inferior esquerdo do gráfico guarda uma porta (seção 6).</p>
+
+<aside class="box-curio" aria-label="Caixa de curiosidade"><h3>Curiosidade</h3><p>Antes de encostar em 1, a curva de x<sup>x</sup> mergulha: ela tem um <em>vale</em>. O fundo fica em
+x = 1/e ≈ 0,3679, onde x<sup>x</sup> vale e<sup>−1/e</sup> ≈ 0,6922 — confira na sonda: x = 0,37 dá
+x<sup>x</sup> ≈ 0,6922. Localizar esse fundo com rigor pede a derivada de x<sup>x</sup>, instrumento do
+Capítulo 9 em diante (e o próprio número e é construído no Capítulo 10); aqui o vale fica como observação que a
+sonda certifica ponto a ponto, não como teorema.</p></aside>
+
 <p>Os padrões 1 e 2 falam de <em>todos</em> os reais positivos — infinitos pontos que nenhuma sonda percorre.
 É aqui que a teoria deixa de ser opcional.</p>
 
@@ -211,6 +230,60 @@ do domínio: em x = 0 a expressão x<sup>x</sup> é exatamente a disputa 0⁰ (p
 <p>Repare: A, B e C têm conjuntos solução <em>diferentes</em> — {2}, {1, 2}, {r, 2}. As coincidências duplas são
 comuns e desarrumadas. O que D afirma é que a interseção das três é o que resta quando a desarrumação se cancela.</p>
 
+<figure>
+  <svg viewBox="0 0 640 420" role="img"
+    style="background:#fffdf7;border:1px solid var(--rule);max-width:100%;height:auto;display:block;margin:0 auto"
+    aria-label="Gráfico esquemático estático das três curvas na janela de 0 a 2,5 no eixo x e de 0 a 6,5 no eixo y: a reta y igual a x mais x, em tracejado longo verde; a parábola y igual a x vezes x, em tracejado curto vermelho; e a curva y igual a x elevado a x, em traço contínuo preto. Três encontros estão marcados com pontos e rótulos de texto: em x igual a r, aproximadamente 0,3463, a reta cruza a curva da potência; em x igual a 1 a parábola toca a curva da potência na altura 1; e em x igual a 2, marcado com anel duplo, as três curvas passam juntas na altura 4 — o encontro triplo dos enunciados A a D.">
+    <!-- eixos e marcações -->
+    <path d="M46,12 L46,388 L626,388" fill="none" stroke="#c9bda3" stroke-width="1"/>
+    <g stroke="#c9bda3" stroke-width="1">
+      <line x1="162" y1="388" x2="162" y2="392"/><line x1="278" y1="388" x2="278" y2="392"/>
+      <line x1="394" y1="388" x2="394" y2="392"/><line x1="510" y1="388" x2="510" y2="392"/>
+      <line x1="626" y1="388" x2="626" y2="392"/>
+      <line x1="42" y1="330.2" x2="46" y2="330.2"/><line x1="42" y1="272.3" x2="46" y2="272.3"/>
+      <line x1="42" y1="214.5" x2="46" y2="214.5"/><line x1="42" y1="156.6" x2="46" y2="156.6"/>
+      <line x1="42" y1="98.8" x2="46" y2="98.8"/><line x1="42" y1="40.9" x2="46" y2="40.9"/>
+    </g>
+    <g fill="#4c443a" font-family="Georgia,serif" font-size="12" text-anchor="middle">
+      <text x="162" y="404">0,5</text><text x="278" y="404">1</text><text x="394" y="404">1,5</text>
+      <text x="510" y="404">2</text><text x="626" y="404">2,5</text>
+    </g>
+    <g fill="#4c443a" font-family="Georgia,serif" font-size="12" text-anchor="end">
+      <text x="39" y="334">1</text><text x="39" y="276">2</text><text x="39" y="218">3</text>
+      <text x="39" y="160">4</text><text x="39" y="103">5</text><text x="39" y="45">6</text>
+    </g>
+    <!-- reta y = x + x (tracejado longo) -->
+    <line x1="46" y1="388" x2="626" y2="98.8" stroke="#1c5e3c" stroke-width="2.2" stroke-dasharray="10 6"/>
+    <!-- parábola y = x·x (tracejado curto) -->
+    <polyline fill="none" stroke="#8a3318" stroke-width="2.2" stroke-dasharray="3 4"
+      points="46,388 69.2,387.4 92.4,385.7 115.6,382.8 138.8,378.7 162,373.5 185.2,367.2 208.4,359.7 231.6,351 254.8,341.1 278,330.2 301.2,318 324.4,304.7 347.6,290.2 370.8,274.6 394,257.8 417.2,239.9 440.4,220.8 463.6,200.6 486.8,179.2 510,156.6 533.2,132.9 556.4,108 579.6,82 602.8,54.8 626,26.5"/>
+    <!-- curva y = x^x (traço contínuo) -->
+    <polyline fill="none" stroke="#26221a" stroke-width="2.6"
+      points="50.6,334.5 57.2,338 63.7,340.5 70.3,342.3 76.8,343.8 83.4,344.9 89.9,345.8 96.4,346.5 103,347 109.5,347.4 116.1,347.7 122.6,347.9 129.1,348 135.7,347.9 148.8,347.7 161.9,347.1 174.9,346.3 188,345.2 201.1,343.8 214.2,342.2 227.3,340.3 240.4,338.1 253.5,335.7 266.5,332.9 279.6,329.7 292.7,326.2 305.8,322.3 318.9,318 332,313.1 345,307.8 358.1,301.8 371.2,295.1 384.3,287.7 397.4,279.5 410.5,270.4 423.6,260.2 436.6,248.9 449.7,236.3 462.8,222.3 475.9,206.6 489,189.1 502.1,169.6 515.1,147.7 528.2,123.3 541.3,95.9 554.4,65.2 567.5,30.8 574,12"/>
+    <!-- nomes das curvas (identificação por texto, não só por cor) -->
+    <g font-family="Georgia,serif" font-size="14">
+      <text x="198" y="294" fill="#1c5e3c">x+x</text>
+      <text x="248" y="364" fill="#8a3318">x·x</text>
+      <text x="56" y="322" fill="#26221a">x^x</text>
+    </g>
+    <!-- encontros dois a dois -->
+    <circle cx="126.3" cy="347.9" r="4.5" fill="#26221a" stroke="#fffdf7" stroke-width="1.5"/>
+    <circle cx="278" cy="330.2" r="4.5" fill="#26221a" stroke="#fffdf7" stroke-width="1.5"/>
+    <!-- encontro triplo em (2, 4): anel duplo -->
+    <circle cx="510" cy="156.6" r="8" fill="none" stroke="#8a3318" stroke-width="2"/>
+    <circle cx="510" cy="156.6" r="3.2" fill="#26221a"/>
+    <g font-family="Georgia,serif" font-size="12.5" fill="#26221a">
+      <text x="52" y="368">x = r ≈ 0,3463</text>
+      <text x="288" y="348">x = 1</text>
+      <text x="500" y="132" text-anchor="end">x = 2 — encontro triplo (altura 4)</text>
+    </g>
+  </svg>
+  <figcaption>Figura estática — o mapa dos enunciados A–D. A reta x+x (tracejado longo), a parábola x·x
+  (tracejado curto) e a curva x<sup>x</sup> (traço contínuo) sobre 0 &lt; x ≤ 2,5. Encontros dois a dois:
+  x = r ≈ 0,3463 (reta ∩ potência, altura 2r ≈ 0,6926) e x = 1 (parábola ∩ potência, altura 1). Anel duplo:
+  o encontro triplo em x = 2, altura 4 — a singularidade do Enunciado D.</figcaption>
+</figure>
+
 <!-- ============================================================ -->
 <h2 id="provas">5. As provas</h2>
 
@@ -224,6 +297,21 @@ comuns e desarrumadas. O que D afirma é que a interseção das três é o que r
 <p>Note o método: <em>fatorar, nunca dividir</em>. Quem divide os dois lados por x “para simplificar” perde a raiz
 x = 0 sem perceber — aqui ela seria descartada pelo domínio de qualquer forma, mas o hábito cobra caro já na
 próxima prova.</p>
+
+<aside class="caixa" aria-label="Bloco de método">
+  <span class="rotulo">Por que dividir por um símbolo perigoso mata soluções</span>
+  <p style="margin:0 0 .4rem">Reforço em cinco passos, antes da prova que quase morre disso (5.2; a autópsia
+  completa está no exercício E2.1):</p>
+  <ol style="margin:0; padding-left:1.3rem">
+    <li>A equação B, após ln nos dois lados, é 2·ln x = x·ln x.</li>
+    <li>Tentação: dividir os dois lados por ln x e concluir x = 2, “solução única”.</li>
+    <li>Mas a divisão embute a hipótese silenciosa ln x ≠ 0 — isto é, x ≠ 1 — e ninguém a anunciou.</li>
+    <li>Fatorando em vez de dividir: (x − 2)·ln x = 0, e o produto nulo devolve x = 2 <em>ou</em> ln x = 0,
+    ou seja, x = 1.</li>
+    <li>A solução x = 1 existe de verdade (confira: 1² = 1 = 1¹) e a divisão a teria apagado sem nenhum aviso.
+    Fatorar preserva; dividir amputa.</li>
+  </ol>
+</aside>
 
 <h3 id="prova-b">5.2 Produto = potência (prova do Enunciado B)</h3>
 <div class="prova">
@@ -289,6 +377,15 @@ figurino da base dez: em base dois o mesmo objeto se escreve 100₂, em algarism
 idêntica. A singularidade é das <strong>equações</strong>, não do glifo. Quem responde “2+2 = 4 é só notação”
 confunde as camadas na direção oposta — e essa era a falha prevista do capítulo: a coincidência é estrutural;
 apenas o seu figurino é notacional.</p>
+
+<aside class="box-segredo" aria-label="Caixa de segredo oculto"><h3>Segredo oculto</h3><p>A dupla (2, 4) deste
+capítulo guarda mais uma igualdade, não enunciada até aqui: <strong>2⁴ = 4² = 16</strong>. O par (2, 4) resolve
+x<sup>y</sup> = y<sup>x</sup> com x ≠ y — e é o <em>único</em> par de inteiros positivos distintos que o faz.
+O mistério é verificável com as ferramentas deste capítulo: aplicando ln, a equação vira (ln x)/x = (ln y)/y —
+dois números diferentes onde a mesma função repete valor. A forma dessa função, que sobe até um pico e depois
+desce, decide quantos pares existem; e o pico fica exatamente em x = e, o número cuja construção rigorosa este
+capítulo não possui. <em>Porta: Capítulo 10.</em></p></aside>
+
 <div class="caixa porta">
   <span class="rotulo">Porta fechada — 0⁰ e o colapso em zero</span>
   <p style="margin:0">Com 0 no domínio, a soma e o produto coincidiriam de novo: 0+0 = 0·0 = 0. A tripla dependeria
@@ -309,6 +406,13 @@ apenas o seu figurino é notacional.</p>
   conjunto solução muda de natureza. Multivaloração e escolha de ramo são o <strong>Capítulo 7</strong>; a
   exponencial complexa, o 10.</p>
 </div>
+<aside class="box-curio" aria-label="Caixa de curiosidade"><h3>Curiosidade</h3><p>O objeto x<sup>x</sup> guarda
+uma pérola clássica, o “sonho do segundanista” (Johann Bernoulli, 1697): a área sob a curva de x<sup>−x</sup>
+entre 0 e 1 é exatamente a soma 1/1¹ + 1/2² + 1/3³ + 1/4⁴ + ⋯ ≈ 1,2913 — e a área sob o próprio x<sup>x</sup>,
+no mesmo intervalo, é a versão alternada 1/1¹ − 1/2² + 1/3³ − ⋯ ≈ 0,7834. A curva “mais forte das regras” se
+mede por uma soma de potências viradas contra si mesmas. Mas área sob curva é a integral do Capítulo 9, e somas
+infinitas são as séries do Capítulo 10: até lá a identidade fica em vitrine, não em uso.</p></aside>
+
 <div class="caixa porta">
   <span class="rotulo">Porta fechada — a torre continua (tetração)</span>
   <p style="margin:0">Depois de x+x, x·x, x<sup>x</sup>, a próxima regra da escada é x^(x^x). A unicidade
@@ -496,14 +600,21 @@ exercício. Os N4 não têm solução: têm a razão exata pela qual ainda não 
   interlúdio 0⁰ (E19).</li>
 </ul>
 
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../02-ternas/">← Capítulo 2 — As Ternas do Ímpar</a><a href="../../">↑ Índice</a><a href="../04-algarismos/">Capítulo 4 — Os Algarismos Repetidos →</a></nav>
+
 <footer class="estado">
-  <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Oráculo triplo executado em
-  28/07/2026 com artefatos em <code>audit/</code> (varredura inteira 1..10000 com curto-circuito exato documentado,
-  bissecção certificada de r a doze casas, casos adversariais 0, 1 e negativos). Auditoria de gate v0: interação,
-  teclado, overflow, autocontenção sem rede, screenshots desktop e iPhone inspecionados. Pendências declaradas:
-  mineração do sítio pessoal (<code>sources.md</code>); decisão de tag <code>cap-03-gate0-r1</code> pelo leitor
-  primário. Formato mínimo cumprido por contrato: nenhuma seção histórica ou filosófica sem função demonstrativa.</p>
-  <p>MATH3us.md · Capítulo 3 · escavação · release: nenhuma (pronto para tag).</p>
+  <details class="meta-editorial">
+    <summary>Metadados editoriais e de auditoria</summary>
+    <p><strong>Estado do capítulo: auditado sob gate v0, aguardando release.</strong> Oráculo triplo executado em
+    28/07/2026 com artefatos em <code>audit/</code> (varredura inteira 1..10000 com curto-circuito exato documentado,
+    bissecção certificada de r a doze casas, casos adversariais 0, 1 e negativos). Auditoria de gate v0: interação,
+    teclado, overflow, autocontenção sem rede, screenshots desktop e iPhone inspecionados. Pendências declaradas:
+    mineração do sítio pessoal (<code>sources.md</code>); decisão de tag <code>cap-03-gate0-r1</code> pelo leitor
+    primário. Formato mínimo cumprido por contrato: nenhuma seção histórica ou filosófica sem função demonstrativa.</p>
+    <p>MATH3us.md · Capítulo 3 · escavação · release: nenhuma (pronto para tag).</p>
+    <p>28/07/2026 — Aplicação retroativa da E23 (figura estática, bloco “símbolo perigoso”, caixas de curiosidade
+    e segredo), navegação entre capítulos e metadados de head. Conteúdo matemático anterior inalterado.</p>
+  </details>
 </footer>
 
 </main>

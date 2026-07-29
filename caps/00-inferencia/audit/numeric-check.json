@@ -1,8 +1,8 @@
 {
   "chapter": 0,
   "script": "tools/oracle-ch00.py",
-  "date": "2026-07-28",
-  "code_commit": "a7a41c1",
+  "date": "2026-07-29",
+  "code_commit": "e656cfb",
   "environment": "python 3.11.15, stdlib only, linux",
   "implementations": [
     "A: float64 stable forms (mirrors in-page JS)",

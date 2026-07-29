@@ -1,0 +1,52 @@
+# Creates release tags from committed manifests (MATH3us.md §1.7, E9).
+#
+# Doctrine: a tag is only ever created for a release whose manifest is
+# already committed in releases/manifests/ — i.e., a decision the primary
+# reader has exercised and recorded (AUDIT.md §2). This workflow is the
+# mechanical executor of those recorded decisions, explicitly authorized
+# by the author on 2026-07-29; agents' git proxies refuse tag pushes
+# (HTTP 403), the Actions GITHUB_TOKEN does not.
+#
+# Idempotent: existing tags are never moved or recreated (tags are
+# immutable). Manual trigger only — no schedule.
+name: create-release-tags
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create missing tags from manifests
+        run: |
+          set -e
+          git config user.name "math3us-release-bot"
+          git config user.email "noreply@github.com"
+          created=0; skipped=0; failed=0
+          for f in releases/manifests/*.yml; do
+            tag=$(sed -n 's/^release: *//p' "$f" | tr -d ' \r')
+            commit=$(sed -n 's/^commit: *//p' "$f" | tr -d ' \r')
+            if [ -z "$tag" ] || [ -z "$commit" ]; then
+              echo "SKIP $f — missing release or commit field"; failed=$((failed+1)); continue
+            fi
+            if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+              echo "skip $tag — already exists (immutable)"; skipped=$((skipped+1)); continue
+            fi
+            if ! git rev-parse -q --verify "$commit^{commit}" >/dev/null; then
+              echo "FAIL $tag — commit $commit not found in history"; failed=$((failed+1)); continue
+            fi
+            git tag -a "$tag" "$commit" -m "release $tag (manifest: $f)"
+            echo "created $tag -> $commit"
+            created=$((created+1))
+          done
+          git push origin --tags
+          echo "== created: $created, already existed: $skipped, problems: $failed =="
+          [ "$failed" -eq 0 ]
