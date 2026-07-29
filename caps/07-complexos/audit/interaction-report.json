@@ -1,0 +1,192 @@
+{
+  "chapter_dir": "/home/user/MATH3us/.claude/worktrees/agent-ab5f1e56bad991030/caps/07-complexos",
+  "script": "caps/07-complexos/audit.mjs",
+  "code_commit": "df8cfdd",
+  "date": "2026-07-29",
+  "gate": "v0",
+  "checks": {
+    "eitheta_notation_contained_in_door_boxes": {
+      "passed": true,
+      "detail": "regions=2, occurrences=5, outside=0"
+    },
+    "eitheta_no_plaintext_variant_outside": {
+      "passed": true,
+      "detail": "none"
+    },
+    "desktop.mult_product_vs_independent": {
+      "passed": true,
+      "detail": "row=[\"z·w\",\"5,00\",\"-5,00\",\"50,00\",\"7,0711\",\"-45,00\"]"
+    },
+    "desktop.mult_norm_identity_row": {
+      "passed": true,
+      "detail": "N(z)N(w)=50,00 check=50,00 ✓"
+    },
+    "desktop.mult_status_defect_zero_here": {
+      "passed": true,
+      "detail": "z = 3,0 + 1,0i  |  w = 1,0 + -2,0i  |  z·w = 5,00 + -5,00i  ||  |z|·|w| = 7,0711 ≟ |z·w| ="
+    },
+    "desktop.mult_reset_worked_example": {
+      "passed": true,
+      "detail": "z = 2,0 + 1,0i  |  w = 1,0 + 3,0i  |  z·w = -1,00 + 7,00i  ||  |z|·|w| = 7,0711 ≟ |z·w| = 7,0711  ||  ângulos: 26,57° + "
+    },
+    "desktop.mult_degenerate_zero_declared": {
+      "passed": true
+    },
+    "desktop.roots_count_and_z0_vs_independent": {
+      "passed": true,
+      "detail": "rows=5, z0=(1,1236, 0,2388)"
+    },
+    "desktop.roots_multivalence_counter": {
+      "passed": true,
+      "detail": "w = 1,000 + 1,732i (|w| = 2,0, arg 60°)  ||  5 raízes distintas, módulo comum |w|^(1/5) = 1,1487, passo angular 360°/5 ="
+    },
+    "desktop.roots_keyboard_next_k1": {
+      "passed": true
+    },
+    "desktop.roots_degenerate_w0_declared": {
+      "passed": true
+    },
+    "desktop.lattice_p13_decomposition": {
+      "passed": true,
+      "detail": "p = 13 ≡ 1 (mod 4): acende — 13 = 2² + 3² (Teorema 16; decomposição única, E3.1). Em ℤ[i], p se parte: 13 = (2 + 3i)(2 −"
+    },
+    "desktop.lattice_p19_provably_dark": {
+      "passed": true,
+      "detail": "p = 19 ≡ 3 (mod 4): provadamente escuro — quadrados mod 4 pertencem a {0, 1}, logo a² + b² nunca é ≡ 3 (mod 4): nenhum p"
+    },
+    "desktop.lattice_keyboard_next_prime": {
+      "passed": true
+    },
+    "desktop.lattice_table_25_primes_highlight": {
+      "passed": true,
+      "detail": "rows=25, cur=23"
+    },
+    "desktop.no_horizontal_overflow": {
+      "passed": true
+    },
+    "desktop.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0166, 0.0272, 0.0664"
+    },
+    "desktop.canvases_never_blank_across_range": {
+      "passed": true
+    },
+    "desktop.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=17, imgs=0"
+    },
+    "desktop.aria_live_regions_present": {
+      "passed": true,
+      "detail": "live=3"
+    },
+    "desktop.claims_proof_anchors_exist": {
+      "passed": true,
+      "detail": "all 32 anchors present"
+    },
+    "desktop.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=14, gabaritos=14"
+    },
+    "desktop.door_marked_regions_in_dom": {
+      "passed": true,
+      "detail": "doorBoxes=2"
+    },
+    "desktop.gabarito_toggle": {
+      "passed": true
+    },
+    "desktop.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "iphone.mult_product_vs_independent": {
+      "passed": true,
+      "detail": "row=[\"z·w\",\"5,00\",\"-5,00\",\"50,00\",\"7,0711\",\"-45,00\"]"
+    },
+    "iphone.mult_norm_identity_row": {
+      "passed": true,
+      "detail": "N(z)N(w)=50,00 check=50,00 ✓"
+    },
+    "iphone.mult_status_defect_zero_here": {
+      "passed": true,
+      "detail": "z = 3,0 + 1,0i  |  w = 1,0 + -2,0i  |  z·w = 5,00 + -5,00i  ||  |z|·|w| = 7,0711 ≟ |z·w| ="
+    },
+    "iphone.mult_reset_worked_example": {
+      "passed": true,
+      "detail": "z = 2,0 + 1,0i  |  w = 1,0 + 3,0i  |  z·w = -1,00 + 7,00i  ||  |z|·|w| = 7,0711 ≟ |z·w| = 7,0711  ||  ângulos: 26,57° + "
+    },
+    "iphone.mult_degenerate_zero_declared": {
+      "passed": true
+    },
+    "iphone.roots_count_and_z0_vs_independent": {
+      "passed": true,
+      "detail": "rows=5, z0=(1,1236, 0,2388)"
+    },
+    "iphone.roots_multivalence_counter": {
+      "passed": true,
+      "detail": "w = 1,000 + 1,732i (|w| = 2,0, arg 60°)  ||  5 raízes distintas, módulo comum |w|^(1/5) = 1,1487, passo angular 360°/5 ="
+    },
+    "iphone.roots_keyboard_next_k1": {
+      "passed": true
+    },
+    "iphone.roots_degenerate_w0_declared": {
+      "passed": true
+    },
+    "iphone.lattice_p13_decomposition": {
+      "passed": true,
+      "detail": "p = 13 ≡ 1 (mod 4): acende — 13 = 2² + 3² (Teorema 16; decomposição única, E3.1). Em ℤ[i], p se parte: 13 = (2 + 3i)(2 −"
+    },
+    "iphone.lattice_p19_provably_dark": {
+      "passed": true,
+      "detail": "p = 19 ≡ 3 (mod 4): provadamente escuro — quadrados mod 4 pertencem a {0, 1}, logo a² + b² nunca é ≡ 3 (mod 4): nenhum p"
+    },
+    "iphone.lattice_keyboard_next_prime": {
+      "passed": true
+    },
+    "iphone.lattice_table_25_primes_highlight": {
+      "passed": true,
+      "detail": "rows=25, cur=23"
+    },
+    "iphone.no_horizontal_overflow": {
+      "passed": true
+    },
+    "iphone.canvases_labeled_and_painted": {
+      "passed": true,
+      "detail": "0.0166, 0.0272, 0.0664"
+    },
+    "iphone.canvases_never_blank_across_range": {
+      "passed": true
+    },
+    "iphone.formulas_textual_no_images": {
+      "passed": true,
+      "detail": "formulas=17, imgs=0"
+    },
+    "iphone.aria_live_regions_present": {
+      "passed": true,
+      "detail": "live=3"
+    },
+    "iphone.claims_proof_anchors_exist": {
+      "passed": true,
+      "detail": "all 32 anchors present"
+    },
+    "iphone.exercises_with_gabaritos": {
+      "passed": true,
+      "detail": "exercicios=14, gabaritos=14"
+    },
+    "iphone.door_marked_regions_in_dom": {
+      "passed": true,
+      "detail": "doorBoxes=2"
+    },
+    "iphone.gabarito_toggle": {
+      "passed": true
+    },
+    "iphone.self_contained_no_network": {
+      "passed": true,
+      "detail": "only file:// requests"
+    },
+    "no_console_or_page_errors": {
+      "passed": true
+    }
+  },
+  "errors": [],
+  "all_passed": true
+}
