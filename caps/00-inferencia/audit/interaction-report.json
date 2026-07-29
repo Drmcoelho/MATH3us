@@ -1,8 +1,8 @@
 {
   "chapter_dir": "/home/user/MATH3us/caps/00-inferencia",
   "script": "tools/audit-ch00.mjs",
-  "code_commit": "a7a41c1",
-  "date": "2026-07-28",
+  "code_commit": "e656cfb",
+  "date": "2026-07-29",
   "gate": "v0",
   "checks": {
     "desktop.lab1_values_n96": {
@@ -47,7 +47,7 @@
     },
     "desktop.formulas_textual_no_images": {
       "passed": true,
-      "detail": "formulas=15, imgs=0"
+      "detail": "formulas=19, imgs=0"
     },
     "desktop.aria_live_regions_present": {
       "passed": true,
@@ -103,7 +103,7 @@
     },
     "iphone.formulas_textual_no_images": {
       "passed": true,
-      "detail": "formulas=15, imgs=0"
+      "detail": "formulas=19, imgs=0"
     },
     "iphone.aria_live_regions_present": {
       "passed": true,

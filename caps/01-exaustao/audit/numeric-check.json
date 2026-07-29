@@ -1,8 +1,8 @@
 {
   "chapter": 1,
   "script": "tools/oracle.py",
-  "code_commit": "1773b98",
-  "date": "2026-07-28",
+  "code_commit": "e656cfb",
+  "date": "2026-07-29",
   "environment": "python 3.11.15, stdlib only, linux",
   "implementations": {
     "A": "float64 mean recurrences (mirrors in-page JS)",
