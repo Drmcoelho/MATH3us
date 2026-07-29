@@ -11,6 +11,7 @@ Não é um curso, uma enciclopédia nem um currículo — é uma biografia intel
 ## Como o repositório se organiza
 
 - **[MATH3us.md](MATH3us.md)** — o manual operacional, constituição do tratado: doutrina, contratos editoriais dos capítulos, template, definição de capítulo fechado, registro de emendas.
+- **[architecture.md](architecture.md)** — arquitetura editorial e operacional de longo prazo: Volumes I–V, ondas e micro-ondas, dependências, portas, regime visual verificável e critérios de fechamento editorial.
 - **[AUDIT.md](AUDIT.md)** — estado de auditoria por capítulo e decisões reservadas ao leitor primário (tags de release, reaberturas).
 - **[ROADMAP.md](ROADMAP.md)** — roteiro operacional da produção multiagentes: fila de PRs, matriz de propriedade de arquivos, ondas restantes.
 - **[models.md](models.md)** — divisão da produção entre sessões-agente paralelas: ondas, pré-condições, protocolo de handoff.
