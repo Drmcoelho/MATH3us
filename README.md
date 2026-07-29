@@ -34,8 +34,8 @@ Fotografia conforme o [AUDIT.md](AUDIT.md) (28/07/2026):
 
 | Cap. | Título | Estado |
 |---|---|---|
-| 0 | A Inferência | Auditado (oráculo 12/12; gate v0 31/31; ledger válido sob gate v1, 16 claims) — aguarda tag de release (Decisão D1) |
-| 1 | A Exaustão | **Fechado** — release `cap-01-gate0-r1`; correções pós-release aguardam revisão r2 (Decisão D2′) |
+| 0 | A Inferência | **Fechado** — release `cap-00-gate0-r1`; exercícios/retrofit pós-release (PR #18) reauditados, aguardam revisão r2 (Decisão D6) |
+| 1 | A Exaustão | **Fechado** — release `cap-01-gate0-r3` (r2: correção do fator 2; r3: reconstrução geométrica D3); retrofit pós-release (PR #18) reauditado, aguarda revisão r4 (Decisão D7) |
 | 2 | As Ternas do Ímpar | Auditado (oráculo 10/10; gate v0 29/29; gate v1 zero achados) — aguarda tag (Decisão D4) |
 | 3 | A Singularidade do Quatro | Auditado (oráculo 7/7; gate v0 31/31; gate v1 zero achados) — aguarda tag (Decisão D4) |
 | 4 | Os Algarismos Repetidos | Auditado (oráculo 9/9; gate v0 41/41; gate v1 zero achados) — aguarda tag (Decisão D4) |
