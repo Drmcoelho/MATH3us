@@ -116,8 +116,8 @@ Todo agente de capítulo recebe, como primeiro comando da sua sessão:
 | 3 | **integrado** — auditado v0 (oráculo 7/7, auditoria 31/31); formato mínimo comprovado; aguarda veredito | wave1/cap-03 → coordenadora | 28/07/2026 |
 | 4 | **integrado** — auditado v0 (oráculo 9/9 com 27.986 expansões, auditoria 41/41); aguarda veredito | wave1/cap-04 → coordenadora | 28/07/2026 |
 | 5 | previsto — Onda 3 (após 6 e 7, §5) | — | — |
-| 6 | em produção — Onda 2 (agent-cap-06, worktree) | wave2/cap-06 | — |
-| 7 | em produção — Onda 2 (agent-cap-07, worktree) | wave2/cap-07 | — |
+| 6 | **integrado** — auditado v0 (oráculo 8/8 + adversariais, auditoria 41/41); C5 do pré-registro refutada com autópsia; gate v1: 26 claims, zero achados | wave2/cap-06 → coordenadora | 29/07/2026 |
+| 7 | **integrado** — auditado v0 (oráculo 10/10; dois-quadrados exaustivo p < 50000; contenção de e^{iθ} auditada); gate v1: 24 claims, portas door:true para o Cap. 2 | wave2/cap-07 → coordenadora | 29/07/2026 |
 | 8–12 | previstos | — | — |
 
 **Onda 1 concluída em 28/07/2026:** três agentes paralelos em worktrees,
