@@ -7,12 +7,14 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 28/07/2026 · **D6 e D7 exercidas** ("PR e merge" do leitor
-primário): as revisões editoriais pós-#18 estão liberadas — Cap. 0 em
-`cap-00-gate0-r2` e Cap. 1 em `cap-01-gate0-r4`, ambas congelando o commit
-da reconciliação reauditada (`c34a7ab`; o PR #22, posterior, só adiciona
-config de deploy e não toca capítulos). **Seis tags remotas pendentes do
-proprietário** (bloco abaixo).
+**Fotografia:** 29/07/2026 · **as seis tags remotas foram criadas** — o
+gargalo de tags está encerrado. Mecanismo: workflow `create-release-tags`
+(PR #25), que deriva tags dos manifests commitados (decisões já exercidas)
+via token do Actions, imune ao 403 do proxy dos agentes; autorização
+explícita do autor em 29/07. Caps. 0 e 1 estão **formalmente fechados**
+(§10): `cap-00-gate0-r1/r2`, `cap-01-gate0-r1/r2/r3/r4`, verificadas por
+`git ls-remote`. Releases futuras: commitar manifest → despachar o
+workflow.
 
 ---
 
@@ -20,29 +22,19 @@ proprietário** (bloco abaixo).
 
 | Cap. | Título | Pré-registro | Oráculo triplo | Gate v0 | Ledger | Release |
 |---|---|---|---|---|---|---|
-| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **cap-00-gate0-r2** (`c34a7ab`, D6 exercida 28/07; tags remotas pendentes do proprietário) |
-| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido (15 claims, gate v1; inclui a 1ª dependência entre capítulos: cunha do Cap. 0); `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r4** (`c34a7ab`, D7 exercida 28/07; tags remotas pendentes do proprietário) |
+| 0 | A Inferência | `conjecturas.md` commitado antes do desenvolvimento (`9f46b8f`) | 12/12 invariantes, 3 implementações independentes (canônico `31bc78c`; **re-executado pós-integração** sobre `a7a41c1`) | 31/31 checks, desktop + iPhone (**re-executado pós-integração** — a edição E21 e o ledger haviam mudado após o run de `c8221c7`; lacuna detectada pelo leitor primário e fechada) | `claims.yml` válido sob gate v1 (16 claims) | **cap-00-gate0-r2** (`c34a7ab`, D6 exercida; tag remota criada 29/07) |
+| 1 | A Exaustão | `conjecturas.md` (pré-desenvolvimento; C5 refutada com autópsia) | invariantes + adversariais; ¼ promovido a teorema via fatoração exata (main, `f770cc9`) | Re-executado pós-merge sobre o conteúdo integrado | `claims.yml` válido (15 claims, gate v1; inclui a 1ª dependência entre capítulos: cunha do Cap. 0); `correction_log` do fator 2 mesclado à promoção | **cap-01-gate0-r4** (`c34a7ab`, D7 exercida; tag remota criada 29/07) |
 | 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
 | 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
 | 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
 | 5–12 | — | contrato editorial no manual | — | — | — | previstos |
 
-Nenhum item vigente do §10 está pendente para os Capítulos 0–4 exceto:
-**as seis tags remotas** (todas as releases já decididas; falta só o push do
-proprietário — bloco abaixo) e **as decisões D4** (Caps. 2–4, aguardando o
-fechamento formal sob gate v2).
+Nenhum item vigente do §10 está pendente para os Capítulos 0 e 1 — tags
+remotas criadas em 29/07/2026. Resta apenas a **decisão D4** (Caps. 2–4):
+exercida ela, a coordenadora commita os três manifests e despacha o
+workflow `create-release-tags`.
 
-```
-# push das tags remotas (proprietário; uma vez só):
-git fetch origin main
-git tag -a cap-01-gate0-r1 f049091 -m "chapter 1 release: gate v0, content revision 1" 2>/dev/null || true
-git tag -a cap-00-gate0-r1 73caa07 -m "chapter 0 release: gate v1, content revision 1" 2>/dev/null || true
-git tag -a cap-01-gate0-r2 73caa07 -m "chapter 1 release: content revision 2" 2>/dev/null || true
-git tag -a cap-01-gate0-r3 947aa80 -m "chapter 1 release: geometric rebuild, content revision 3" 2>/dev/null || true
-git tag -a cap-00-gate0-r2 c34a7ab -m "chapter 0 release: exercises + editorial retrofit, content revision 2" 2>/dev/null || true
-git tag -a cap-01-gate0-r4 c34a7ab -m "chapter 1 release: editorial retrofit, content revision 4" 2>/dev/null || true
-git push origin cap-01-gate0-r1 cap-00-gate0-r1 cap-01-gate0-r2 cap-01-gate0-r3 cap-00-gate0-r2 cap-01-gate0-r4
-```
+(bloco de comandos removido — executado via workflow `create-release-tags` em 29/07/2026)
 
 ---
 
