@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Capítulo 0 — A Inferência · Do Número ao Contínuo</title>
+<meta name="description" content="Inferência sob erro δ: um polígono regular aprisionado entre suas duas circunferências — a cunha, a coroa, a razão r/R como portadora da forma e o limiar onde a medição para de decidir.">
+<link rel="canonical" href="https://drmcoelho.github.io/MATH3us/caps/00-inferencia/">
 <style>
   :root{
     --paper:#f7f2e7; --ink:#26221a; --ink-soft:#4c443a; --accent:#8a3318;
@@ -79,10 +81,30 @@
   ul.compacta li{margin:.25rem 0}
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
   sub,sup{line-height:0}
+  /* --- adições aditivas: regime visual E23, navegação, exercícios E20, rodapé recolhível --- */
+  .box-curio,.box-segredo{border:1px solid var(--box-edge);background:var(--box);padding:1rem 1.2rem;margin:1.6rem 0;border-radius:4px}
+  .box-curio>h3,.box-segredo>h3{margin:0 0 .5rem;font-size:1rem;font-variant:small-caps;letter-spacing:.08em;color:var(--accent)}
+  .box-segredo{border-left:4px solid var(--accent)}
+  nav.capnav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.95rem;margin:1.5rem 0;padding:.6rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  nav.capnav a{color:var(--accent);text-decoration:none}
+  nav.capnav a:hover,nav.capnav a:focus{text-decoration:underline}
+  svg.figura{max-width:100%;height:auto;background:#fffdf7;border:1px solid var(--rule)}
+  .exercicio{margin:2rem 0}
+  .exercicio .nivel{display:inline-block;border:1px solid var(--accent);color:var(--accent);
+    padding:.08rem .55rem;font-size:.8rem;font-variant:small-caps;letter-spacing:.1em;margin-right:.5rem}
+  .exercicio h3{margin:.5rem 0}
+  details.gabarito{margin:.9rem 0;border-left:3px solid var(--rule);padding-left:1.1rem}
+  details.gabarito>summary{cursor:pointer;font-variant:small-caps;letter-spacing:.08em;color:var(--accent);font-size:.9rem}
+  details.gabarito[open]>summary{margin-bottom:.5rem}
+  details.meta-editorial>summary{cursor:pointer;font-variant:small-caps;letter-spacing:.08em;
+    color:var(--ink-soft);font-size:.92rem}
+  details.meta-editorial[open]>summary{margin-bottom:.8rem}
 </style>
 </head>
 <body>
 <main>
+
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../../">↑ Índice</a><a href="../01-exaustao/">Capítulo 1 — A Exaustão →</a></nav>
 
 <header class="chapter">
   <span class="kicker">Do Número ao Contínuo · Prólogo</span>
@@ -133,9 +155,39 @@ de V. Três pontos, três segmentos:</p>
   em M, e Pitágoras dá R² = OM² + MV² = r² + (L/2)².<span class="qed">∎</span></p>
 </div>
 
+<p>Antes de nomear qualquer razão, a figura escolar do triângulo retângulo — <strong>fundação
+geométrica</strong> deste e de todo capítulo que use trigonometria (E22): a razão nasce do desenho, nunca
+da fórmula solta.</p>
+
+<figure>
+  <svg class="figura" viewBox="0 0 340 240" role="img"
+    aria-label="Triângulo retângulo com vértice O à esquerda embaixo, vértice M à direita embaixo e vértice V acima de M. O ângulo θ fica em O; o ângulo reto fica em M. O cateto horizontal de O a M é o cateto adjacente a θ e vale r. O cateto vertical de M a V é o cateto oposto a θ e vale L sobre 2. A hipotenusa de O a V vale R. As definições em razões aparecem em bloco de destaque logo abaixo da figura.">
+    <line x1="40" y1="195" x2="285" y2="195" style="stroke:var(--in-color);stroke-width:2.4"/>
+    <line x1="285" y1="195" x2="285" y2="50" style="stroke:var(--wedge-color);stroke-width:2.4"/>
+    <line x1="40" y1="195" x2="285" y2="50" style="stroke:var(--out-color);stroke-width:2.4"/>
+    <path d="M 270 195 L 270 180 L 285 180" style="fill:none;stroke:var(--poly-color);stroke-width:1.3"/>
+    <path d="M 74 195 A 34 34 0 0 0 69.3 177.7" style="fill:none;stroke:var(--poly-color);stroke-width:1.3"/>
+    <circle cx="40" cy="195" r="3" style="fill:var(--poly-color)"/>
+    <circle cx="285" cy="195" r="3" style="fill:var(--poly-color)"/>
+    <circle cx="285" cy="50" r="3" style="fill:var(--poly-color)"/>
+    <text x="24" y="200" style="font:italic 15px Georgia,serif;fill:var(--poly-color)">O</text>
+    <text x="291" y="208" style="font:italic 15px Georgia,serif;fill:var(--poly-color)">M</text>
+    <text x="291" y="48" style="font:italic 15px Georgia,serif;fill:var(--poly-color)">V</text>
+    <text x="80" y="186" style="font:italic 14px Georgia,serif;fill:var(--poly-color)">θ</text>
+    <text x="150" y="212" style="font:italic 14px Georgia,serif;fill:var(--in-color)">r (adjacente)</text>
+    <text x="291" y="128" style="font:italic 13px Georgia,serif;fill:var(--wedge-color)">L/2 (oposto)</text>
+    <text x="120" y="112" style="font:italic 14px Georgia,serif;fill:var(--out-color)">R (hipotenusa)</text>
+  </svg>
+  <figcaption>Fundação geométrica (E22): o triângulo da cunha, retângulo em M. Cateto adjacente ao ângulo
+  θ desenhado em verde (r), cateto oposto em azul (L/2), hipotenusa em vermelho (R). A cor apenas reforça o
+  rótulo textual — cada lado está nomeado.</figcaption>
+</figure>
+<p class="formula">sen θ = cateto oposto / hipotenusa, &nbsp;&nbsp;
+cos θ = cateto adjacente / hipotenusa, &nbsp;&nbsp; tg θ = cateto oposto / cateto adjacente.</p>
+
 <p>Chame de θ o semiângulo central da cunha (a volta inteira dividida em 2n partes; θ = π/n na notação
-que a caixa da seção 3 tornará precisa). As razões do triângulo retângulo ganham os nomes geométricos
-clássicos — <em>razões</em>, não séries, não funções analíticas:</p>
+que a caixa da seção 3 tornará precisa). Aplicadas ao triângulo OMV, as três razões ganham os nomes
+geométricos clássicos — <em>razões</em>, não séries, não funções analíticas:</p>
 <p class="formula">r/R = cos θ, &nbsp;&nbsp; (L/2)/R = sen θ, &nbsp;&nbsp; (L/2)/r = tg θ.</p>
 <p>A razão r/R receberá um nome próprio, porque este capítulo inteiro gira em torno dela:</p>
 <p class="formula">ρ<sub>n</sub> = r/R = cos(π/n).</p>
@@ -185,11 +237,56 @@ clássicos — <em>razões</em>, não séries, não funções analíticas:</p>
   interessa, nem as circunferências. É o <strong>par</strong> — e o que ele carrega de informação.</p>
 </div>
 
+<aside class="box-curio" aria-label="Caixa de curiosidade">
+  <h3>Curiosidade</h3>
+  <p>No hexágono regular (n = 6) o lado é <em>exatamente igual</em> ao raio da circunscrita. Não é
+  aproximação: pela cunha, r = R·cos(π/6) = R·(√3/2), e L = 2·√(R² − r²) = 2·√(R² − 3R²/4) =
+  2·(R/2) = <strong>R</strong>. É por isso que o compasso desenha o hexágono sem recalibrar a abertura —
+  a geometria da cunha explica o truque de sala de aula.</p>
+</aside>
+
 <!-- ============================================================ -->
 <h2 id="a-coroa">3. A coroa</h2>
 <p>Entre as duas circunferências há uma coroa circular de largura R − r, e o contorno do polígono mora
 inteiro dentro dela. Antes de medir a coroa, é preciso declarar com que régua se medem áreas de figuras
 circulares — e aqui o capítulo faz sua única convenção delicada.</p>
+
+<figure>
+  <svg class="figura" viewBox="0 0 340 300" role="img"
+    aria-label="Figura estática do cerco invertido, complementar ao painel interativo, mostrando um hexágono regular como exemplo. Duas circunferências concêntricas de centro O: a circunscrita (traço vermelho) passa pelos seis vértices, marcados com pontos cheios; a inscrita (traço verde) toca os seis pontos médios dos lados, marcados com pontos vazados. A região entre as duas circunferências, a coroa, aparece sombreada. Uma cunha fundamental O-M-V está destacada à direita, com a hipotenusa R até o vértice V, o cateto r até o ponto médio M e o cateto L sobre 2 subindo de M a V, e o ângulo reto marcado em M.">
+    <circle cx="150" cy="150" r="120" style="fill:rgba(138,51,24,.12);stroke:var(--out-color);stroke-width:2.2"/>
+    <circle cx="150" cy="150" r="104" style="fill:var(--paper);stroke:var(--in-color);stroke-width:2.2"/>
+    <path d="M 253.9 90 L 150 30 L 46.1 90 L 46.1 210 L 150 270 L 253.9 210 Z"
+      style="fill:none;stroke:var(--poly-color);stroke-width:1.7"/>
+    <path d="M 150 150 L 254 150 L 253.9 90 Z" style="fill:rgba(29,74,107,.16)"/>
+    <line x1="150" y1="150" x2="253.9" y2="90" style="stroke:var(--out-color);stroke-width:2"/>
+    <line x1="150" y1="150" x2="254" y2="150" style="stroke:var(--in-color);stroke-width:2"/>
+    <line x1="254" y1="150" x2="253.9" y2="90" style="stroke:var(--wedge-color);stroke-width:2"/>
+    <path d="M 242 150 L 242 138 L 254 138" style="fill:none;stroke:var(--poly-color);stroke-width:1.2"/>
+    <circle cx="253.9" cy="90" r="3.2" style="fill:var(--out-color)"/>
+    <circle cx="150" cy="30" r="3.2" style="fill:var(--out-color)"/>
+    <circle cx="46.1" cy="90" r="3.2" style="fill:var(--out-color)"/>
+    <circle cx="46.1" cy="210" r="3.2" style="fill:var(--out-color)"/>
+    <circle cx="150" cy="270" r="3.2" style="fill:var(--out-color)"/>
+    <circle cx="253.9" cy="210" r="3.2" style="fill:var(--out-color)"/>
+    <circle cx="254" cy="150" r="3.4" style="fill:var(--paper);stroke:var(--in-color);stroke-width:1.5"/>
+    <circle cx="202" cy="60" r="3.4" style="fill:var(--paper);stroke:var(--in-color);stroke-width:1.5"/>
+    <circle cx="98" cy="60" r="3.4" style="fill:var(--paper);stroke:var(--in-color);stroke-width:1.5"/>
+    <circle cx="46" cy="150" r="3.4" style="fill:var(--paper);stroke:var(--in-color);stroke-width:1.5"/>
+    <circle cx="98" cy="240" r="3.4" style="fill:var(--paper);stroke:var(--in-color);stroke-width:1.5"/>
+    <circle cx="202" cy="240" r="3.4" style="fill:var(--paper);stroke:var(--in-color);stroke-width:1.5"/>
+    <text x="136" y="164" style="font:italic 14px Georgia,serif;fill:var(--poly-color)">O</text>
+    <text x="258" y="164" style="font:italic 14px Georgia,serif;fill:var(--poly-color)">M</text>
+    <text x="258" y="88" style="font:italic 14px Georgia,serif;fill:var(--poly-color)">V</text>
+    <text x="196" y="112" style="font:italic 13px Georgia,serif;fill:var(--out-color)">R</text>
+    <text x="192" y="166" style="font:italic 13px Georgia,serif;fill:var(--in-color)">r</text>
+    <text x="259" y="122" style="font:italic 13px Georgia,serif;fill:var(--wedge-color)">L/2</text>
+    <text x="122" y="30" style="font:13px Georgia,serif;fill:var(--ink-soft)">coroa</text>
+  </svg>
+  <figcaption>Versão estática do cerco (hexágono, n = 6): a circunscrita beija os vértices (●), a inscrita
+  beija os pontos médios (○), e a coroa sombreada é onde o polígono inteiro vive. À direita, a cunha
+  fundamental O-M-V — o átomo repetido 2n vezes. O painel interativo acima faz esta figura variar com n.</figcaption>
+</figure>
 
 <div class="caixa">
   <span class="rotulo">Convenção (medida do ângulo pela área; o estatuto de π neste capítulo)</span>
@@ -221,6 +318,15 @@ circulares — e aqui o capítulo faz sua única convenção delicada.</p>
   varrer a coroa com o meio lado MV girando tangente à circunferência inscrita (o varrido tangencial de
   Mamikon). Fica como imagem, não como argumento: o argumento de uma linha acima basta e importa menos.</span></p>
 </div>
+
+<aside class="box-curio" aria-label="Caixa de curiosidade">
+  <h3>Curiosidade</h3>
+  <p>A identidade da coroa (área da coroa = área do círculo de raio L/2) não depende do valor de π: vale
+  para <em>qualquer</em> constante universal C de área. É a mesma indiferença que faz a "prova sem palavras"
+  de Mamikon funcionar — deslize o segmento MV mantendo-o tangente à circunferência interna, dando uma volta
+  completa, e a região varrida tem a área de um disco de raio igual ao comprimento do segmento, MV = L/2, sem
+  que ninguém precise saber quanto vale π. A forma engole a constante.</p>
+</aside>
 
 <p>A coroa também aprisiona a <em>área</em> do polígono. A cunha OMV tem área (1/2)·(L/2)·r; o polígono
 é 2n cunhas; logo A<sub>n</sub> = n·(L/2)·r. E como a circunferência inscrita cabe no polígono, que cabe
@@ -338,6 +444,19 @@ do capítulo aplicado ao seu próprio átomo: <strong>a cunha aprisionada entre 
   polígono de <em>2n</em> lados com o mesmo circunraio — a relação clássica da sagita. A largura da coroa
   de n é ditada pelo lado de 2n: as gerações conversam.</p>
 </div>
+
+<aside class="box-segredo" aria-label="Caixa de segredo oculto">
+  <h3>Segredo oculto</h3>
+  <p>O botão <em>Duplicar n</em> e o fator ρ<sub>2n</sub> que aparece no sanduíche do déficit escondem uma
+  <strong>recorrência</strong> que o capítulo usa sem nunca escrever. Da identidade do ângulo-metade que já
+  provamos, 1 − cos θ = 2·sen²(θ/2), sai
+  <span class="formula" style="display:block">ρ<sub>2n</sub> = √((1 + ρ<sub>n</sub>)/2).</span>
+  Isto é: a razão da geração 2n se obtém da razão da geração n por duas operações elementares — média com 1,
+  depois raiz. Passar de n a 2n indefinidamente é uma máquina de duplicação: dada a razão de partida
+  (ρ₄ = cos(π/4) = √2/2 para o quadrado, digamos), ela fabrica sozinha as razões de todos os polígonos
+  8, 16, 32, … apenas com aritmética e uma raiz quadrada. O capítulo tem a peça, mas se proibiu de girá-la — pôr essa máquina para rodar até o fim é
+  perseguir um limite, e limite é exatamente a linguagem vetada aqui. <em>Porta: Capítulo 1.</em></p>
+</aside>
 
 <h3>5.2 A folga é cúbica</h3>
 <div class="caixa">
@@ -571,7 +690,173 @@ suas circunferências — e a converterá de defeito em <em>método</em>.</p>
   julgamento definitivo das estabilizações.</li>
 </ul>
 
+<!-- ============================================================ -->
+<h2 id="exercicios">11. Exercícios</h2>
+<p>Cinco níveis (E20). Os quatro primeiros vêm com gabarito — que aqui é parte do argumento, não apêndice:
+está escrito devagar, como se explicasse a uma criança inteligente. O último não tem solução, de propósito:
+tem só a razão exata pela qual ainda não pode ser resolvido, e a porta por onde a resposta um dia entra.
+Todo exercício opera o aparato real do capítulo — cunha, coroa, a razão ρ = r/R, os sanduíches, a inferência
+sob erro δ. Nenhum valor foi inventado: cada número abaixo sai das mesmas fórmulas dos painéis.</p>
+
+<div class="exercicio">
+  <p><span class="nivel">N0 · socrático</span></p>
+  <h3>11.1 — O que uma circunferência sozinha sabe</h3>
+  <p>Você recebe <em>uma única</em> circunferência e a informação de que ela é a circunscrita de algum
+  polígono regular. Responda por partes: (a) você consegue dizer o <strong>tamanho</strong> do polígono?
+  (b) você consegue dizer <strong>quantos lados</strong> ele tem? (c) onde, então, mora a identidade do
+  polígono — a informação que diz "sou um pentágono, não um hexágono"?</p>
+  <details class="gabarito">
+    <summary>Gabarito</summary>
+    <p>(a) <strong>Sim.</strong> A circunferência tem um raio R, e R é a escala. Fixado R, o polígono não
+    pode ser maior nem menor do que a circunferência que o abraça pelos vértices.</p>
+    <p>(b) <strong>Não.</strong> Para <em>todo</em> n ≥ 3 existe um polígono regular de n lados inscrito
+    nessa mesma circunferência: basta marcar n vértices igualmente espaçados, e o lado será
+    L = 2R·sen(π/n). O triângulo (n = 3), o quadrado (n = 4), o hexágono (n = 6) — todos cabem na mesma
+    circunferência. Ela não os distingue. (O mesmo vale se lhe derem só a inscrita: qualquer n serve, com
+    L = 2r·tg(π/n). É o item (iii) do Enunciado E.)</p>
+    <p>(c) A identidade não está em nenhuma das duas circunferências isoladas — está na <strong>razão entre
+    elas</strong>. Só quando você tem <em>as duas</em>, inscrita e circunscrita do mesmo polígono, a razão
+    ρ = r/R = cos(π/n) fixa n. E ρ é invariante por semelhança: amplie tudo, R e r dobram juntos, ρ não se
+    move. A lição do capítulo em uma frase: <strong>escala é propriedade de um raio; forma é propriedade do
+    par</strong>. Uma circunferência carrega escala; a razão de duas carrega forma.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <p><span class="nivel">N0 · socrático</span></p>
+  <h3>11.2 — Por que a razão vive presa entre 1/2 e 1</h3>
+  <p>A razão ρ<sub>n</sub> = cos(π/n) nunca desce abaixo de 1/2 e nunca alcança 1. Responda com o aparato do
+  capítulo, sem apelar a limite: (a) por que 1/2 é o piso? (b) por que 1 é um teto que jamais se toca?
+  (c) se um instrumento lhe entregasse a medição r/R = 0,47, o que você pode afirmar imediatamente?</p>
+  <details class="gabarito">
+    <summary>Gabarito</summary>
+    <p>(a) O menor polígono regular é o triângulo, n = 3, e ρ₃ = cos(π/3) = cos 60° = <strong>1/2</strong>.
+    Pelo Enunciado D a sequência ρ<sub>n</sub> é <em>estritamente crescente</em> em n (quando n cresce, π/n
+    encolhe, e o cosseno de um ângulo menor é maior). Logo nenhum polígono tem razão menor que a do triângulo:
+    1/2 é o mínimo, atingido.</p>
+    <p>(b) Olhe a cunha: o triângulo OMV é retângulo em M, com cateto r e hipotenusa R. Cateto é sempre
+    <em>estritamente</em> menor que hipotenusa, porque o outro cateto — o meio lado L/2 — nunca é zero
+    (um polígono de verdade tem lado). Então r &lt; R sempre, ou seja ρ = r/R &lt; 1 <em>sempre</em>. O
+    valor 1 seria "L/2 = 0", um polígono sem lado, isto é, o círculo: fora do domínio n ≥ 3. Teto nunca
+    tocado.</p>
+    <p>(c) Que <strong>é falso</strong> que essas sejam as circunferências de um polígono regular:
+    0,47 &lt; 1/2 = ρ₃, e nenhum ρ<sub>n</sub> desce até aí. A hipótese é <em>refutada</em> na hora — e é
+    justamente essa falseabilidade (Enunciado E(ii)) que torna a razão uma informação séria, e não um
+    enfeite.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <p><span class="nivel">N1 · básico (jogo)</span></p>
+  <h3>11.3 — O decodificador de polígonos</h3>
+  <p>Um instrumento mede a razão r/R e mostra cinco casas decimais — o único erro é o do arredondamento,
+  δ ≤ 5·10⁻⁶. Você tem de nomear o polígono. Decodifique estas
+  quatro leituras: <strong>0,5</strong> · <strong>0,70711</strong> · <strong>0,80902</strong> ·
+  <strong>0,86603</strong>. Depois, uma quinta leitura chega: <strong>0,45</strong>. O que o decodificador
+  responde a ela?</p>
+  <details class="gabarito">
+    <summary>Gabarito</summary>
+    <p>A chave inversa é n = π / arccos(r/R), do Enunciado E(i) — inverta cos(π/n) = ρ e isole n. As leituras
+    são arredondamentos, então a chave devolve números <em>quase</em> inteiros (3,9999…, 5,0000…); mas a
+    janela de erro δ ≤ 5·10⁻⁶ é estreita demais para conter dois inteiros — a monotonia do Enunciado D garante
+    que só um n é compatível com cada leitura, e é ele que o decodificador nomeia. Rodando:</p>
+    <ul class="compacta">
+      <li>0,5 (valor exato de ρ₃) → arccos = 60° = π/3 → n = <strong>3</strong> (triângulo equilátero);</li>
+      <li>0,70711 (arredondamento de √2/2 = 0,7071067…) → 45° = π/4 → n = <strong>4</strong> (quadrado);</li>
+      <li>0,80902 (arredondamento de cos 36° = 0,8090169…) → 36° = π/5 → n = <strong>5</strong> (pentágono);</li>
+      <li>0,86603 (arredondamento de √3/2 = 0,8660254…) → 30° = π/6 → n = <strong>6</strong> (hexágono).</li>
+    </ul>
+    <p>Repare que as leituras crescem e os n crescem junto: é a monotonia do Enunciado D funcionando como
+    tabela de decodificação. Já a quinta leitura, 0,45, o decodificador <strong>recusa</strong>: está abaixo
+    de ρ₃ = 0,5, fora da faixa de qualquer polígono regular. Resposta honesta: "isto não são as duas
+    circunferências de um polígono regular". Vale conferir no <em>Laboratório de inferência</em> da seção 6 —
+    ele devolve exatamente esse veredito de refutação quando o intervalo cai abaixo de 0,5.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <p><span class="nivel">N2 · intermediário</span></p>
+  <h3>11.4 — O hexágono, medido inteiro</h3>
+  <p>Tome n = 6 e circunraio R = 1. Calcule, operando a cunha: (a) o apótema r; (b) o lado L; (c) a largura
+  da coroa R − r; (d) verifique numericamente a identidade da coroa (Enunciado B); (e) verifique o
+  aprisionamento por área (Enunciado C), computando a área A₆ do hexágono e comparando com C·r² e C·R²
+  (use C = π, a constante de área do capítulo).</p>
+  <details class="gabarito">
+    <summary>Gabarito</summary>
+    <p>(a) r = R·cos(π/6) = cos 30° = √3/2 ≈ <strong>0,86603</strong>.</p>
+    <p>(b) Pela cunha (Enunciado A), R² = r² + (L/2)², logo L = 2·√(R² − r²) = 2·√(1 − 3/4) = 2·(1/2) =
+    <strong>1</strong>. O lado do hexágono é igual ao raio — a curiosidade da seção 2, agora medida.</p>
+    <p>(c) R − r = 1 − √3/2 ≈ <strong>0,13397</strong>. É também R·(1 − ρ₆), o "déficit" vestido de comprimento.</p>
+    <p>(d) Coroa: C·R² − C·r² = π·(1 − 3/4) = <strong>π/4 ≈ 0,7854</strong>. Círculo de raio L/2 = 1/2:
+    C·(L/2)² = π·(1/4) = <strong>π/4</strong>. Iguais, como o Enunciado B promete — e note que o π se cancela
+    na comparação, exatamente por a identidade não depender do valor de C.</p>
+    <p>(e) A cunha OMV tem área (1/2)·(L/2)·r; o hexágono são 2n = 12 cunhas, logo
+    A₆ = n·(L/2)·r = 6·(1/2)·(√3/2) = 3√3/2 ≈ <strong>2,598</strong>. As cotas: C·r² = π·3/4 ≈ 2,356 e
+    C·R² = π ≈ 3,1416. E de fato 2,356 &lt; 2,598 &lt; 3,1416: o hexágono vive estritamente entre suas duas
+    circunferências, em área. Enunciado C confirmado neste caso.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <p><span class="nivel">N3 · difícil</span></p>
+  <h3>11.5 — A folga é sempre menor que o déficit</h3>
+  <p>Prove, usando <em>apenas</em> os dois sanduíches do capítulo (Enunciados G e H) e a monotonia
+  (Enunciado D) — nada de limite — que para todo n ≥ 3
+  <span class="formula" style="display:block">g<sub>n</sub> = ρ<sub>n+1</sub> − ρ<sub>n</sub>
+  &nbsp;&lt;&nbsp; 1 − ρ<sub>n</sub>.</span>
+  Depois explique, em uma frase, por que essa desigualdade é a causa estrutural da <em>janela crepuscular</em>
+  da seção 6.</p>
+  <details class="gabarito">
+    <summary>Gabarito</summary>
+    <p>Precisamos comparar a folga (por cima) com o déficit (por baixo). Os sanduíches dão exatamente isso.</p>
+    <p><strong>Folga, por cima (Enunciado H):</strong> g<sub>n</sub> &lt; π²/n³.</p>
+    <p><strong>Déficit, por baixo (Enunciado G):</strong> 1 − ρ<sub>n</sub> &gt; (π²/2n²)·ρ<sub>2n</sub>².
+    Agora minore ρ<sub>2n</sub>: como n ≥ 3, temos 2n ≥ 6, e pela monotonia (Enunciado D)
+    ρ<sub>2n</sub> ≥ ρ₆ = cos(π/6) = √3/2, logo ρ<sub>2n</sub>² ≥ 3/4. Substituindo:
+    1 − ρ<sub>n</sub> &gt; (π²/2n²)·(3/4) = 3π²/(8n²).</p>
+    <p><strong>O elo que fecha a corrente.</strong> Basta ver que π²/n³ ≤ 3π²/(8n²). Cancelando π²/n²
+    dos dois lados, isso é 1/n ≤ 3/8, ou seja n ≥ 8/3 = 2,666…, verdadeiro para todo n ≥ 3. Encadeando:
+    <span class="formula" style="display:block">g<sub>n</sub> &lt; π²/n³ &nbsp;≤&nbsp; 3π²/(8n²)
+    &nbsp;&lt;&nbsp; 1 − ρ<sub>n</sub>.</span>
+    A desigualdade do meio usou só aritmética; as duas de fora, só os sanduíches provados. Nenhuma palavra
+    de limite. <span class="qed">∎</span></p>
+    <p><strong>Por que isso é a janela crepuscular.</strong> Separar dois polígonos vizinhos exige resolver
+    a folga g<sub>n</sub>; separar um polígono do círculo exige resolver o déficit 1 − ρ<sub>n</sub>. Como
+    a folga é <em>menor</em>, ela é a primeira a afogar quando a precisão δ piora: some a distinção entre
+    n e n+1 (ambiguidade) enquanto ainda sobra folga para excluir o círculo — e é precisamente esse intervalo
+    de δ, "sei que é polígono, não sei qual", que o Enunciado K batiza de janela crepuscular.</p>
+  </details>
+</div>
+
+<div class="exercicio">
+  <p><span class="nivel">N4 · impossível por enquanto</span></p>
+  <h3>11.6 — Os dois π são o mesmo π</h3>
+  <p>Este capítulo definiu π como a <strong>constante de área</strong> do disco: a área do disco de raio ϱ é
+  π·ϱ², e π é o dobro da área de meio disco unitário (a convenção da seção 3). Mas você conhece π por outro
+  caminho — o <strong>perímetro</strong>: a circunferência de raio ϱ tem comprimento 2π·ϱ. Prove que a
+  constante de área e a constante de perímetro são <em>o mesmo número</em>.</p>
+  <div class="caixa porta">
+    <span class="rotulo">Por que ainda não dá — e por onde entra</span>
+    <p style="margin:0 0 .6rem">Tudo o que este capítulo importou fala de <strong>área</strong>: semelhança,
+    monotonia da área sob inclusão, medida do ângulo pela área varrida. Com essas ferramentas jamais tocamos
+    o <strong>comprimento de uma curva</strong>. Comparar perímetros sob inclusão já exigiria o postulado de
+    convexidade de Arquimedes (o capítulo o evita de propósito — é por isso que consegue vir antes do
+    Capítulo 1); e identificar a constante de área com a de perímetro exige mais ainda: definir comprimento
+    de arco e mostrar que ele produz o mesmo π. Não há, no aparato deste prólogo, sequer uma definição de
+    "comprimento de uma linha curva" — logo a igualdade não é difícil de provar aqui, é
+    <em>inexprimível</em> aqui.</p>
+    <p style="margin:0"><strong>Porta: Capítulo 9</strong> (A Integral como Erro Somado), onde o comprimento
+    de arco nasce como integral e a identificação das duas constantes vira teorema — usando a linguagem de
+    limite que o Capítulo 1 constrói primeiro. O próprio capítulo já declara essa porta fechada na convenção
+    da seção 3.</p>
+  </div>
+</div>
+
+<nav class="capnav" aria-label="Navegação entre capítulos"><a href="../../">↑ Índice</a><a href="../01-exaustao/">Capítulo 1 — A Exaustão →</a></nav>
+
 <footer class="estado">
+  <details class="meta-editorial">
+  <summary>Metadados editoriais e de auditoria</summary>
   <p><strong>Estado do capítulo: fechado — release cap-00-gate0-r1 (gate v1).</strong> Decisão D1 exercida pelo leitor primário em 28/07/2026; manifest em <code>releases/manifests/cap-00-gate0-r1.yml</code>; segundo capítulo fechado do tratado, validado também pelo gate v1 (<code>verify-claims.mjs</code>, 16 claims). Pré-registro
   commitado antes do desenvolvimento (<code>conjecturas.md</code>, C0.1–C0.8). Oráculo triplo executado
   em 28/07/2026 com artefatos em <code>audit/</code> (12 invariantes, três implementações independentes,
@@ -582,6 +867,11 @@ suas circunferências — e a converterá de defeito em <em>método</em>.</p>
   rede, screenshots desktop e iPhone inspecionados. Pendências declaradas: busca bibliográfica de
   prioridade para os sanduíches G–H e a formulação inferencial (<code>sources.md</code>).</p>
   <p>MATH3us.md · Capítulo 0 · território virgem · release: cap-00-gate0-r1.</p>
+  <p><strong>28/07/2026 — Retrofit pós-release (cap-00-gate0-r1):</strong> aplicação retroativa da E23
+  (regime visual: figuras, caixas de curiosidade e segredo), seção de exercícios E20 e navegação entre
+  capítulos. Nenhum caractere do conteúdo matemático fechado foi alterado; esta nota é o registro exigido
+  pela proibição de reescrita silenciosa.</p>
+  </details>
 </footer>
 
 </main>
