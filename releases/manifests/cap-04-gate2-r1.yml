@@ -1,0 +1,13 @@
+release: cap-04-gate2-r1
+chapter: 4
+content_revision: 1
+gate_version: 2
+commit: 19d2bc3
+previous_release: null
+date: 2026-07-29
+decision: D4 (AUDIT.md), executed by manifest per amendment E23 / decision D6
+audit:
+  oracle_report: caps/04-algarismos/audit/numeric-check.json
+  interaction_report: caps/04-algarismos/audit/interaction-report.json
+  bundle_report: caps/04-algarismos/audit/bundle-report.json
+  release_validation: caps/04-algarismos/audit/release-validation.json

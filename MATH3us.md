@@ -147,6 +147,17 @@ previous_release: cap-01-gate1-r1
 
 Revisão matemática e reauditoria infraestrutural nunca se confundem.
 
+**Manifest como registro canônico de release (E23).** O ato de release é o
+commit do manifest em `releases/manifests/`, apontando o hash do commit
+auditado — a imutabilidade é garantida pelo histórico Git: manifest nunca se
+edita; revisão gera novo manifest com `previous_release`. As tags Git da
+convenção acima ficam **dispensadas** por decisão do leitor primário
+(29/07/2026; o ambiente de agentes não pode empurrá-las e o proprietário
+optou por não mantê-las manualmente). Se algum dia criadas, devem seguir a
+convenção e apontar exatamente o commit do manifest correspondente — mas sua
+ausência não mantém capítulo algum aberto. Referências a "tag" nas seções
+§7 e §10 leem-se, desde E23, como "manifest de release".
+
 **Acessibilidade funcional mínima (E4, refinada por E14).** Em dois níveis:
 
 *Figura simples:* `aria-label` ou legenda textual suficiente.
@@ -480,7 +491,7 @@ matheus-tratado/
 
 **Regras estruturais**
 
-- Um capítulo corresponde a um diretório; um capítulo fechado, a uma tag de release imutável na convenção da §1.7.
+- Um capítulo corresponde a um diretório; um capítulo fechado, a um manifest de release na convenção da §1.7 (E23).
 - `conjecturas.md` é criado antes de `index.html`. O pré-registro recebe commit separado.
 - `claims.yml` é legível por máquina; validado por schema a partir do gate v1.
 - `sources.md` registra origem, escopo e estado de cada material utilizado.
@@ -663,7 +674,7 @@ Um capítulo só pode receber release quando:
 - a acessibilidade funcional mínima (§1.7) foi verificada no nível adequado a cada figura;
 - a release foi efetivamente vista;
 - existe pergunta-horizonte;
-- a tag de release, imutável e na convenção da §1.7, aponta para o commit auditado.
+- o manifest de release, imutável por histórico e na convenção da §1.7 (E23), aponta para o commit auditado.
 
 A ausência de qualquer item vigente mantém o capítulo aberto.
 
@@ -739,4 +750,5 @@ Regras: emendas são **atômicas** — uma decisão por emenda; emendas nunca s�
 | E20 | 28/07/2026 | pr-05 | §6.1 | — | Exercícios como elemento obrigatório do template, em cinco níveis (N0 socrático → N4 porta-fechada); gabarito robusto obrigatório em N0–N3; N4 sem solução, com a porta e a razão da impossibilidade atual declaradas |
 | E21 | 28/07/2026 | — | §3, §5 | — | Capítulo 0 (A Inferência) criado como Prólogo: duas circunferências e um polígono; cunha fundamental; inferência sob erro por desigualdades, sem linguagem de limite; π entra como constante de área (identificação perimetral: porta → Cap. 9); numeração 1–12 inalterada; reconstrução geométrica do Cap. 1 sobre a cunha registrada como pendência editorial. Nota de integração: nascida como "E20" em branch paralela à E20 dos exercícios; renumerada para E21 na integração — a colisão fica registrada, não reescrita |
 | E22 | 28/07/2026 | — | §6.1 | — | Fundação geométrica visual: diretiva do autor — todo uso de trigonometria precedido da figura do triângulo retângulo com as definições escolares formais em razões (sen = oposto/hipotenusa, cos = adjacente/hipotenusa, tg = oposto/adjacente); objetos geométricos desenhados e nomeados antes de entrarem em fórmula; aplicação retroativa registrada como pendência editorial dos capítulos integrados |
+| E23 | 29/07/2026 | — | §1.7, §7, §10 | corrige E9 (mecanismo) | Manifest como registro canônico de release; tags Git dispensadas por decisão do leitor primário (proxy de agentes recusa push de tags; proprietário optou por não mantê-las) — imutabilidade via histórico; ausência de tag não mantém capítulo aberto |
 | E23 | 28/07/2026 | — | §6.1 | complementa E22; modula §1.9 e §1.11 | Regime visual "gibi rigoroso": diretiva do autor — o capítulo é conduzido pela imagem, não ilustrado por ela; todo objeto, enunciado central e demonstração acompanhados de elemento gráfico (canvas, SVG inline ou diagrama), sob pena de violação de template; fórmulas centrais em bloco de destaque, abundantes, respeitando E4/E14 (MathML/textual) e E9 (sem CDN); prosa encurtada — não descreve o que a figura mostra, justifica o que a figura não prova; dois boxes regulares: Caixa de curiosidade (ancorada, nos termos da §1.11) e Caixa de segredo oculto (porta trancada em box, com destino declarado); aplicação retroativa como pendência editorial, prioridade máxima ao Cap. 4 (zero elementos gráficos na data da emenda) |

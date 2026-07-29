@@ -7,14 +7,12 @@
 > Atualizado em toda sessão que altera estado de auditoria; a fotografia
 > abaixo vale para o commit indicado.
 
-**Fotografia:** 29/07/2026 · **as seis tags remotas foram criadas** — o
-gargalo de tags está encerrado. Mecanismo: workflow `create-release-tags`
-(PR #25), que deriva tags dos manifests commitados (decisões já exercidas)
-via token do Actions, imune ao 403 do proxy dos agentes; autorização
-explícita do autor em 29/07. Caps. 0 e 1 estão **formalmente fechados**
-(§10): `cap-00-gate0-r1/r2`, `cap-01-gate0-r1/r2/r3/r4`, verificadas por
-`git ls-remote`. Releases futuras: commitar manifest → despachar o
-workflow.
+**Fotografia:** 29/07/2026 · **D6 exercida** (tags remotas dispensadas —
+emenda E23: o manifest é o registro canônico de release; nenhuma tag remota
+será criada e nenhum capítulo fica aberto por ausência dela) · **D4
+executada por manifests** (`cap-02-gate2-r1`, `cap-03-gate2-r1`,
+`cap-04-gate2-r1` → `19d2bc3`) · Onda 2 integrada (Caps. 6 e 7, PR #28);
+releases dos Caps. 6–7 aguardam veredito do leitor primário.
 
 ---
 
@@ -236,6 +234,20 @@ a nota da Onda 1 condiciona o disparo ao fechamento formal de 2–4 — critéri
 mais estrito, a arbitrar pelo leitor primário junto com esta decisão.
 
 ---
+
+### D6 — Dispensa das tags remotas — **EXERCIDA** (29/07/2026)
+
+**Registro da execução.** Palavra do leitor primário: "Esquece as tags e
+documente isto". Emenda **E23** commitada no manual (§1.7, §7, §10): o
+manifest em `releases/manifests/` é o registro canônico e imutável-por-
+histórico de cada release; as tags Git da convenção ficam dispensadas.
+Motivo: o proxy dos ambientes de agente recusa push de tags e o
+proprietário optou por não mantê-las manualmente. Consequências: todos os
+itens "tag remota pendente" deste arquivo ficam **superados** (os blocos de
+comando permanecem no histórico como registro, não como pendência); a
+Decisão D4 executa-se pelo commit dos três manifests `cap-0N-gate2-r1`
+apontando `19d2bc3`, nomeados sob o gate v2 que validou cada release.
+Adiamento não se disfarçou de esquecimento: está documentado (§6.3).
 
 ## 3. Pendências declaradas, não bloqueantes
 
