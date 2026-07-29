@@ -27,7 +27,9 @@ workflow.
 | 2 | As Ternas do Ímpar | `conjecturas.md` commitado antes do desenvolvimento (`31c97eb`) | 10/10 — ímpares n ∈ [3, 20001], pares adversariais recusados com testemunha, n = 10⁶+1 exato em bignum | 29/29 checks, desktop + iPhone | 15 claims, gate v1 zero achados; contrato de 7 itens completo; síntese autoral tipada à parte (E6) | **nenhuma — aguarda Decisão D4** |
 | 3 | A Singularidade do Quatro | `conjecturas.md` commitado antes do desenvolvimento (`1ba84fe`) | 7/7 — conjuntos-solução por pares; raiz oculta r ≈ 0,3463 certificada por troca de sinal em Decimal-50 | 31/31 checks, primeira execução | 10 claims, gate v1 zero achados; formato mínimo comprovado (~65% do Cap. 1) | **nenhuma — aguarda Decisão D4** |
 | 4 | Os Algarismos Repetidos | `conjecturas.md` commitado antes do desenvolvimento (`45568c2`) | 9/9 — duas implementações independentes concordam em 27.986 expansões, bases {2,3,7,10,12,16,60}, d ≤ 2000 | 41/41 checks; sem canvas por decisão de projeto (a máquina de estados é a visualização) | 16 claims, gate v1 zero achados | **nenhuma — aguarda Decisão D4** |
-| 5–12 | — | contrato editorial no manual | — | — | — | previstos |
+| 6 | As Patologias | `conjecturas.md` commitado antes do desenvolvimento (`e9ef1b0`); **C5 refutada com autópsia** (passeio de mantissa: 2 trocas de sinal < 3) | 8/8 invariantes + 7/7 adversariais, aritmética exata (Fraction); incidente do próprio oráculo (bug de escala em I2) registrado | 41/41 checks, desktop + iPhone; 3 defeitos visuais achados e corrigidos na inspeção do agente | 26 claims, gate v1 zero achados; deps simples ao Cap. 1 (fechado) | **nenhuma — aguarda decisão** |
+| 7 | ℂ | `conjecturas.md` commitado antes do desenvolvimento (`0b423d3`); C1–C5 confirmadas | 10/10 invariantes; dois-quadrados exaustivo nos 5133 primos p < 50000; Wilson + divisão em ℤ[i] com 3000 amostras exatas | aprovado nos dois viewports; contenção de e^{iθ} auditada (5 ocorrências, 0 fora das caixas de porta; 1 vazamento pego no run 1 e corrigido — registrado) | 24 claims, gate v1 zero achados; 3 deps `door: true` ao Cap. 2 (aberto) | **nenhuma — aguarda decisão** |
+| 5, 8–12 | — | contrato editorial no manual | — | — | — | previstos |
 
 Nenhum item vigente do §10 está pendente para os Capítulos 0 e 1 — tags
 remotas criadas em 29/07/2026. Resta apenas a **decisão D4** (Caps. 2–4):
@@ -286,6 +288,9 @@ Os incidentes são dados (§12 do manual). Detalhes nos artefatos citados.
 | 28/07/2026 | `tools/verify-claims.mjs` | 0 e 1 | reconciliação pós-PR #18 | 16 e 15 claims válidos | saída no commit da reconciliação |
 | 28/07/2026 | `tools/bundle.mjs` (gate v2) | 0–4 | pós-PR #12 (`870af23`) | cinco bundles produzidos, todos byte-idênticos ao fonte (autocontenção já satisfeita) | `caps/*/audit/bundle-report.json` |
 | 28/07/2026 | `tools/validate-release.mjs` (gate v2) | 0–4 | pós-PR #12 (`870af23`) | estático + dinâmico aprovados: zero cargas remotas, zero requisições, zero erros, documento pintado — reauditoria E9 dos Caps. 0–1 incluída | `caps/*/audit/release-validation.json` |
+| 29/07/2026 | `caps/06-patologias/oracle.py` + `audit.mjs` | 6 | `95ed8ad` | oráculo 8/8 (run 1 falhou por bug do próprio oráculo, corrigido e registrado); auditoria 41/41 | `caps/06-patologias/audit/` |
+| 29/07/2026 | `caps/07-complexos/oracle.py` + `audit.mjs` | 7 | `df8cfdd` | oráculo 10/10 primeira execução; auditoria com check de contenção e^{iθ} (run 1 pegou 1 vazamento, corrigido) | `caps/07-complexos/audit/` |
+| 29/07/2026 | `tools/verify-claims.mjs` | 6 e 7 | integração Onda 2 | 26 + 24 claims válidos, zero achados | saída no commit de integração |
 
 ---
 
